@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <title>Lupa Password</title>
+</head>
+
+<body>
+    <header>
+        <h3>Formulir Lupa PAssword</h3>
+    </header>
+
+    <form action="tampildata.php" method="POST">
+
+        <p>
+            <label for="nim">NIM: </label>
+            <input type="text" name="nim" autocomplete="off" placeholder="tuliskan NIM anda disini" />
+        </p>
+        <p>
+            <label for="nama">Nama: </label>
+            <input type="text" name="nama" autocomplete="off" placeholder="tuliskan Nama anda disini" />
+        </p>
+        <p>
+            <label for="tgllhr">Tanggal Lahir: </label>
+            <input type="date" name="tgllhr" value="2000-12-31" />
+        </p>
+        <p>
+        <label><strong>Ketikkan kode yang anda lihat:</strong></label><br />
+        <input type="text" name="captcha" />
+        <p><br />
+            <img src="captcha.php?rand=<?php echo rand(); ?>" id='captcha_image'>
+        </p>
+        <p>Tulisan tidak terbaca?<a href='javascript: refreshCaptcha();'>klik disini</a> untuk ganti tulisan
+        </p>
+
+            <input type="submit" value="Cek" name="cek" />
+            <div class="g-recaptcha" data-sitekey="6LcoouMUAAAAAFF2kKm9tNVcu9cVDDx1ljMfQHe2"></div>
+        </p>
+
+    </form>
+    <script>
+    //Refresh Captcha
+    function refreshCaptcha(){
+        var img = document.images['captcha_image'];
+        img.src = img.src.substring(
+            0,img.src.lastIndexOf("?")
+            )+"?rand="+Math.random()*1000;
+    }
+    </script>
+    </body>
+</html>
