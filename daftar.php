@@ -1,3 +1,8 @@
+<?php
+require('system/dbconn.php');
+require('system/myfunc.php');
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -20,8 +25,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<?php include 'system/dbconn.php'; ?>
-
 <body class="hold-transition register-page">
 	<div class="register-box">
 		<div class="register-logo">
@@ -31,7 +34,18 @@
 		<div class="card">
 			<div class="card-body register-card-body">
 				<p class="login-box-msg">Pendaftaran Pengguna Baru</p>
-
+				<?php
+				if (isset($_GET['pesan'])) {
+					if ($_GET['pesan'] == "registered") {
+				?>
+						<div class="alert alert-danger alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>ERROR!</strong> NIM / NIP / NIPT terdaftar
+						</div>
+				<?php
+					}
+				}
+				?>
 				<form action="reg.php" method="POST">
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="Nama" name="nama" required>
@@ -76,7 +90,7 @@
 							}
 							?>
 						</select>
-						<small>Pilih prodi anda, khusus staf fakultas pilih SAINTEK</small>
+						<small style="color:red">KHUSUS staf fakultas pilih SAINTEK</small>
 					</div>
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="username" name="username" required>
