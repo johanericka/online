@@ -30,10 +30,9 @@
 
 		<div class="card">
 			<div class="card-body register-card-body">
-				<p class="login-box-msg">Pendaftaran pengguna baru</p>
+				<p class="login-box-msg">Pendaftaran Pengguna Baru</p>
 
 				<form action="reg.php" method="POST">
-					<label>Nama</label>
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="Nama" name="nama">
 						<div class="input-group-append">
@@ -42,7 +41,6 @@
 							</div>
 						</div>
 					</div>
-					<label>NIM / NIPT</label>
 					<div class="input-group mb-3">
 						<input type="number" class="form-control" placeholder="NIM / NIPT" name="nipt">
 						<div class="input-group-append">
@@ -51,7 +49,6 @@
 							</div>
 						</div>
 					</div>
-					<label>No. HP</label>
 					<div class="input-group mb-3">
 						<input type="number" class="form-control" placeholder="no HP aktif" name="nohp">
 						<div class="input-group-append">
@@ -61,7 +58,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label>Program Studi</label>
 						<select class="form-control" name="jurusan">
 							<?php
 							$query = mysqli_query($dbsurat, "SELECT * FROM jurusan GROUP BY jurusan");
@@ -72,9 +68,8 @@
 							}
 							?>
 						</select>
-						<small><i>Untuk staf fakultas pilih SAINTEK</i></small>
+						<small>Pilih prodi anda, khusus staf fakultas pilih SAINTEK</small>
 					</div>
-					<label>Username</label>
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="username" name="username">
 						<div class="input-group-append">
@@ -83,12 +78,25 @@
 							</div>
 						</div>
 					</div>
-					<label>Password</label>
 					<div class="input-group mb-3">
 						<input type="password" class="form-control" placeholder="password" name="password">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<?php
+						$angka1 = rand(1, 5);
+						$angka2 = rand(1, 5);
+						$kunci = $angka1 + $angka2;
+						?>
+						Berapakah <?= $angka1; ?> ditambah <?= $angka2; ?>
+						<input type="number" class="form-control" placeholder="" name="jawaban">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-question"></span>
 							</div>
 						</div>
 					</div>
