@@ -96,16 +96,18 @@
 					<input type="checkbox" onclick="myFunction()"> Tampilkan Password
 					<div class="row">
 						<!-- /.col -->
-						<div class="col-4">
+						<div class="col-12">
 							<button type="submit" class="btn btn-primary btn-block">Masuk</button>
 						</div>
 						<!-- /.col -->
 					</div>
 				</form>
 				<br />
-
 				<p class="mb-0" align="center">
-					<a href="https://elearning.uin-malang.ac.id/lupa" class="text-center" target="_blank">Lupa Password ? Klik disini</a>
+					<a href="daftar.php" class="text-center" target="_blank"> DAFTAR PENGGUNA BARU DISINI </a>
+				</p>
+				<p class="mb-0" align="center">
+					<small><a href="lupa/index.php" class="text-center" target="_blank">Lupa Password ? Klik disini</a></small>
 				</p>
 
 			</div>
