@@ -34,7 +34,7 @@
 
 				<form action="reg.php" method="POST">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Nama" name="nama">
+						<input type="text" class="form-control" placeholder="Nama" name="nama" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -42,7 +42,7 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="number" class="form-control" placeholder="NIM / NIPT" name="nipt">
+						<input type="number" class="form-control" placeholder="NIM / NIPT" name="nipt" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -50,10 +50,18 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="number" class="form-control" placeholder="no HP aktif" name="nohp">
+						<input type="number" class="form-control" placeholder="no HP aktif" name="nohp" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-phone"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="email" class="form-control" placeholder="e-Mail" name="email" required>
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
 							</div>
 						</div>
 					</div>
@@ -71,7 +79,7 @@
 						<small>Pilih prodi anda, khusus staf fakultas pilih SAINTEK</small>
 					</div>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="username" name="username">
+						<input type="text" class="form-control" placeholder="username" name="username" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -79,7 +87,7 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="password" class="form-control" placeholder="password" name="password">
+						<input type="password" class="form-control" placeholder="password" name="password" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
@@ -93,7 +101,10 @@
 						$kunci = $angka1 + $angka2;
 						?>
 						Berapakah <?= $angka1; ?> ditambah <?= $angka2; ?>
-						<input type="number" class="form-control" placeholder="" name="jawaban">
+						<input type="hidden" name="kunci" value="<?= $kunci; ?>">
+						<input type="number" class="form-control" placeholder="" name="jawaban" required>
+
+
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-question"></span>
