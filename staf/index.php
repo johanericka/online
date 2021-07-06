@@ -30,7 +30,7 @@ $lokasi = "coming soon ...";
 <!-- cek session -->
 <?php
 session_start();
-if ($_SESSION['status'] != "login") {
+if ($_SESSION['hakakses'] != "tendik") {
 	header("location:../index.php?pesan=belum_login");
 }
 ?>

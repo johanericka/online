@@ -28,7 +28,7 @@
 		<!-- /.login-logo -->
 		<div class="card">
 			<div class="card-body login-card-body">
-				<p class="login-box-msg">Silahkan masuk menggunakan ID SIAKAD</p>
+				<p class="login-box-msg">User Login</p>
 				<?php
 				if (isset($_GET['pesan'])) {
 					if ($_GET['pesan'] == "gagal") {
@@ -72,13 +72,20 @@
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<strong>ERROR! </strong> Anda tidak memiliki akses
 						</div>
+					<?php
+					} else if ($_GET['pesan'] == "antibot") {
+					?>
+						<div class="alert alert-danger alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>ERROR! </strong> penjumlahan salah
+						</div>
 				<?php
 					}
 				}
 				?>
 				<form action="auth.php" method="post">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="ID SIAKAD" name="username">
+						<input type="text" class="form-control" placeholder="Username" name="username" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -86,14 +93,29 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="password" id="myInput" class="form-control" placeholder="Password" name="password">
+						<input type="password" id="myInput" class="form-control" placeholder="Password" name="password" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
 							</div>
 						</div>
 					</div>
-					<input type="checkbox" onclick="myFunction()"> Tampilkan Password
+					<!--<input type="checkbox" onclick="myFunction()"> Tampilkan Password-->
+					<?php
+					$angka1 = rand(1, 5);
+					$angka2 = rand(1, 5);
+					$kunci = $angka1 + $angka2;
+					?>
+					<div class="input-group mb-3">
+						Berapakah <?= $angka1; ?> ditambah <?= $angka2; ?> ?
+						<input type="hidden" name="kunci" value="<?= $kunci; ?>">
+						<input type="number" id="myInput" class="form-control" placeholder="" name="antibot" required>
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-question"></span>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<!-- /.col -->
 						<div class="col-12">
