@@ -52,11 +52,12 @@
 							<strong>ERROR!</strong> Anda belum login!!
 						</div>
 					<?php
-					} else if ($_GET['pesan'] == "duplicate") {
+					} else if ($_GET['pesan'] == "registered") {
 					?>
 						<div class="alert alert-danger alert-dismissible fade show">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>ERROR!</strong> username telah digunakan!!
+							<strong>ERROR!</strong> Anda telah terdaftar<br />
+							Klik Lupa Password apabila anda lupa password
 						</div>
 					<?php
 					} else if ($_GET['pesan'] == "success") {

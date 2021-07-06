@@ -1,50 +1,29 @@
 <?php
-	// menghubungkan dengan koneksi
-	include 'system/dbconn.php';
-	
-  //input security check
-  function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
+require ('system/dbconn.php');
 
-	
+$nama = mysqli_real_escape_string($dbsurat, $_POST['nama']);
+$nip = mysqli_real_escape_string($dbsurat, $_POST['nip']);
+$nohp = mysqli_real_escape_string($dbsurat, $_POST['nohp']);
+$email = mysqli_real_escape_string($dbsurat, $_POST['email']);
+$jurusan = mysqli_real_escape_string($dbsurat, $_POST['jurusan']);
+$fakultas = "Sains dan Teknologi";
+$username = mysqli_real_escape_string($dbsurat, $_POST['username']);
+$password = mysqli_real_escape_string($dbsurat, $_POST['password']);
+$kunci = mysqli_real_escape_string($dbsurat, $_POST['kunci']);
+$jawaban = mysqli_real_escape_string($dbsurat, $_POST['jawaban']);
 
-	// menangkap data yang dikirim dari form
-	$nama = mysqli_real_escape_string($dbsurat,$_POST['nama']);
-	$nipt = mysqli_real_escape_string($dbsurat,$_POST['nipt']);
-	$nohp = mysqli_real_escape_string($dbsurat,$_POST['nohp']);
-	$kdjurusan = mysqli_real_escape_string($dbsurat,$_POST['jurusan']);
-	$kdfakultas = "Sains dan Teknologi";
-	$username = mysqli_real_escape_string($dbsurat,$_POST['username']);
-	$password = mysqli_real_escape_string($dbsurat,$_POST['password']);
-	$password2 = test_input($_POST['password2']);
-	
-	echo "Nama =".$nama."<br/>";
-	echo "NIPT =".$nipt."<br/>";
-	echo "No HP =".$nohp."<br/>";
-	echo "Jurusan =".$kdjurusan."<br/>";
-	echo "Fakultas =".$kdfakultas."<br/>";
-	echo "username = ".$username."<br/>";
-	echo "Password = ".$password."<br/>";
-
-	if ( !isset($_POST['username'], $_POST['password']) ) {
-	  exit('Isikan User ID & Password anda');
-  };
-	
-	
-	$query = mysqli_query($dbsurat,"select * from pengguna where nipt = '$nipt' or username = '$username'");
-	$jmldata = mysqli_num_rows($query);
-	if ($jmldata > 0){
-		header("location:index.php?pesan=duplicate");
-	}else{
-		$query2 = mysqli_query($dbsurat,"INSERT INTO pengguna (nama, nip, nohp, jurusan, fakultas, username, password)
-													 VALUES ('$nama','$nipt','$nohp','$kdjurusan','$kdfakultas','$username','$password')");
-		$jmldata2 = mysqli_num_rows($query2);
-	};
-	
-	header("location:index.php?pesan=success");
-	
-?>
+if ($kunci == $jawaban) {
+	$stmt = $dbsurat->prepare('SELECT nip FROM pengguna WHERE nip=? ');
+    $stmt->bind_param('s', $nip);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $jhasil = $result->num_rows;
+    if ($jhasil > 0) {
+        header('location:daftar.php?pesan=registered');
+} else {
+    $hakakses = 'mahasiswa';
+	$stmt = $dbsurat->prepare('INSERT INTO pengguna (nama, nip, nohp, email, jurusan, fakultas, user, pass,hakakses) VALUES(?,?,?,?,?,?,?,?,?)');
+    $stmt->bind_param("sssssssss", $nama,$nip,$nohp,$email,$jurusan,$fakultas,$username,$password,$hakakses);
+    $stmt->execute();
+    header("location:index.php?pesan=success");
+};

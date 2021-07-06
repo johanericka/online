@@ -42,7 +42,7 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="number" class="form-control" placeholder="NIM / NIPT" name="nipt" required>
+						<input type="number" class="form-control" placeholder="NIM / NIP / NIPT" name="nip" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -71,7 +71,7 @@
 							$query = mysqli_query($dbsurat, "SELECT * FROM jurusan GROUP BY jurusan");
 							while ($data = mysqli_fetch_array($query)) {
 							?>
-								<option value="<?php echo $data['jurusan']; ?>"><?php echo $data['jurusan']; ?></option>
+								<option value="<?= $data['jurusan']; ?>"><?= $data['jurusan']; ?></option>
 							<?php
 							}
 							?>
