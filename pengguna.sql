@@ -327,7 +327,7 @@ INSERT INTO `pengguna` (`no`, `nama`, `nip`, `nohp`, `email`, `jurusan`, `fakult
 	(1308, 'M. SYAIKHUDIN,M.PdI', '61034', NULL, NULL, 'Matematika', 'Sains dan Teknologi', '61034', '123456', 'dosen', NULL),
 	(1321, 'ANGGA DWI MULYANTO,M.Si', '198908132019031012', NULL, NULL, 'Matematika', 'Sains dan Teknologi', '61036', '12345678', 'dosen', NULL),
 	(1358, 'HENI WIDAYANI,M.Si', '19901006201802012229', NULL, NULL, 'Matematika', 'Sains dan Teknologi', '61039', '610391', 'dosen', NULL),
-	(1359, 'JOHAN ERICKA WAHYU PRAKASA,M.Kom', '198312132019031004', NULL, NULL, 'Teknik Informatika', 'Sains dan Teknologi', '65026', 'ENCRYPTED', 'dosen', NULL),
+	(1359, 'JOHAN ERICKA WAHYU PRAKASA,M.Kom', '198312132019031004', '081234567890', 'johan@uin-malang.ac.id', 'Teknik Informatika', 'Sains dan Teknologi', '65026', 'rahasia', 'dosen', 'd813c0c21922b9f1bd833a35f4073d56'),
 	(1377, 'UTIYA HIKMAH,S.Si., M.Si', '19880605201802012242', NULL, NULL, 'Fisika', 'Sains dan Teknologi', '64018', '123456', 'dosen', NULL),
 	(1411, 'ZULAIKHA,M.Si', '61040', NULL, NULL, 'Matematika', 'Sains dan Teknologi', '61040', 'rahadika', 'dosen', NULL),
 	(1412, 'FAJAR ROHMAN HARIRI,M.Kom', '198905152018011001', NULL, NULL, 'Teknik Informatika', 'Sains dan Teknologi', '65024', '152346ok', 'dosen', NULL),
@@ -6455,8 +6455,7 @@ INSERT INTO `pengguna` (`no`, `nama`, `nip`, `nohp`, `email`, `jurusan`, `fakult
 	(34190, 'DINI KRISTIANTI', '200605220015', NULL, 'kristian.dini01@gmail.com', 'Magister Informatika', 'Sains dan Teknologi', '200605220015', '1028711852', 'mahasiswa', NULL),
 	(34193, 'KURNIAWATI', '200605220016', NULL, 'nia08kurnia@gmail.com', 'Magister Informatika', 'Sains dan Teknologi', '200605220016', '2089416357', 'mahasiswa', NULL),
 	(34194, 'RIFQI MUHAMAD SABILAL KARIM ', '19610111', NULL, 'muhammadrifqi144@gmail.com', 'Matematika', 'Sains dan Teknologi', '19610111', '3756889824', 'mahasiswa', NULL),
-	(34195, 'aku', '1234567890', '08123456789', 'aku@disini.saja', 'Teknik Informatika', 'Sains dan Teknologi', 'aku', 'aku', 'mahasiswa', NULL),
-	(34196, 'johan ericka', '0713128301', '081234302099', 'johanericka@gmail.com', 'Teknik Informatika', 'Sains dan Teknologi', 'johanericka', 'rahasia', 'mahasiswa', '98f0f9c56a69dafab8bcd2c9b5c96c99');
+	(34195, 'aku', '1234567890', '08123456789', 'aku@disini.saja', 'Teknik Informatika', 'Sains dan Teknologi', 'aku', 'aku', 'mahasiswa', NULL);
 /*!40000 ALTER TABLE `pengguna` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
