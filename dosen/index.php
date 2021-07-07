@@ -12,6 +12,21 @@ require('../system/dbconn.php');
 require('../system/myfunc.php');
 ?>
 
+<?php
+//cek apabila ada data user kurang lengkap lempar ke update profile
+$stmt = $dbsurat->prepare('SELECT * FROM pengguna WHERE nip=?');
+$stmt->bind_param('s', $nip);
+$stmt->execute();
+$result = $stmt->get_result();
+$dhasil = $result->fetch_assoc();
+$nohp = $dhasil['nohp'];
+$email = $dhasil['email'];
+if ($nohp == null or $email == null) {
+	header("location:userprofile-tampil.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 

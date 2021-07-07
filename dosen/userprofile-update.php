@@ -28,4 +28,6 @@ if ($kunci == $jawaban) {
     $stmt->bind_param("ssssssssss", $nama, $nip, $nohp, $email, $jurusan, $fakultas, $username, $password, $token, $nip);
     $stmt->execute();
     header("location:index.php?pesan=success");
+} else {
+    header("location:userprofile-tampil.php?pesan=token");
 }

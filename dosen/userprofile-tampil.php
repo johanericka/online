@@ -36,7 +36,7 @@ $nip = $_SESSION['nip'];
 
         <div class="card">
             <div class="card-body register-card-body">
-                <p class="login-box-msg">Update User Profile</p>
+                <p class="login-box-msg">Mohon lengkapi data anda</p>
                 <?php
                 if (isset($_GET['pesan'])) {
                     if ($_GET['pesan'] == "gagal") {
@@ -44,6 +44,13 @@ $nip = $_SESSION['nip'];
                         <div class="alert alert-danger alert-dismissible fade show">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong>ERROR!</strong> UPDATE data gagal
+                        </div>
+                    <?php
+                    } elseif ($_GET['pesan'] == "token") {
+                    ?>
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>ERROR!</strong> penjumlahan salah
                         </div>
                 <?php
                     }
@@ -54,16 +61,13 @@ $nip = $_SESSION['nip'];
                 $stmt->bind_param('s', $nip);
                 $stmt->execute();
                 $result = $stmt->get_result();
-                $jhasil = $result->num_rows;
-                if ($jhasil > 0) {
-                    $dhasil = $result->fetch_assoc();
-                    $nama = $dhasil['nama'];
-                    $nip = $dhasil['nip'];
-                    $nohp = $dhasil['nohp'];
-                    $email = $dhasil['email'];
-                    $jurusan = $dhasil['jurusan'];
-                    $user = $dhasil['user'];
-                }
+                $dhasil = $result->fetch_assoc();
+                $nama = $dhasil['nama'];
+                $nip = $dhasil['nip'];
+                $nohp = $dhasil['nohp'];
+                $email = $dhasil['email'];
+                $jurusan = $dhasil['jurusan'];
+                $user = $dhasil['user'];
                 ?>
                 <form action="userprofile-update.php" method="POST">
                     <label>Nama</label>
