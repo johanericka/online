@@ -60,18 +60,18 @@ if ($nohp == null or $email == null) {
 
 		<!-- Main Sidebar Container -->
 		<?php
-		//require('sidebar.php');
+		require('sidebar2.php');
 		?>
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
-			<a href="" class="brand-link">
+			<a href="#" class="brand-link">
 				<img src="../system/uin-malang-logo.png" alt="UIN Malang" class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">UIN Malang</span>
 			</a>
 
 			<!-- Sidebar -->
 			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
+				<!-- Sidebar user (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 					<div class="info">
 						<a href="#" class="d-block"><?php echo $nama; ?></a>
@@ -82,21 +82,22 @@ if ($nohp == null or $email == null) {
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="userprofile-tampil.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Profile User
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
+						<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
 						<li class="nav-item">
 							<a href="index.php" class="nav-link">
 								<i class="nav-icon fas fa-tv"></i>
 								<p>
 									Dashboard
-									<span class="right badge badge-danger"></span>
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="userprofile-tampil.php" class="nav-link">
+								<i class="nav-icon fas fa-user"></i>
+								<p>
+									Profile User
+									<span class="right badge badge-danger">New</span>
 								</p>
 							</a>
 						</li>
@@ -105,7 +106,6 @@ if ($nohp == null or $email == null) {
 								<i class="nav-icon fas fa-users"></i>
 								<p>
 									Mhs. Bimbingan
-									<span class="right badge badge-danger"></span>
 								</p>
 							</a>
 						</li>
@@ -114,16 +114,14 @@ if ($nohp == null or $email == null) {
 								<i class="nav-icon fas fa-envelope-open"></i>
 								<p>
 									Riwayat Surat
-									<span class="right badge badge-danger"></span>
 								</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="wfh-isi.php" class="nav-link">
-								<i class="nav-icon fas fa-envelope"></i>
+								<i class="nav-icon fas fa-home"></i>
 								<p>
 									Pengajuan WFH
-									<span class="right badge badge-danger"></span>
 								</p>
 							</a>
 						</li>
@@ -131,7 +129,6 @@ if ($nohp == null or $email == null) {
 						$qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$user'");
 						$jmldata = mysqli_num_rows($qoperator);
 						if ($jmldata == 1) {
-
 						?>
 							<li class="nav-item has-treeview menu-close">
 								<a href="#" class="nav-link">
@@ -185,20 +182,20 @@ if ($nohp == null or $email == null) {
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/online/doc/se276-2021.pdf" target="_blank" class="nav-link">
+									<a href="../doc/se276-2021.pdf" target="_blank" class="nav-link">
 										<i class="far fa-file-pdf"></i>
-										<p>SE Rektor UIN Malang</p>
+										<p>SE Rektor</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/online/doc/panduandosen.pdf" target="_blank" class="nav-link">
+									<a href="../doc/panduandosen.pdf" target="_blank" class="nav-link">
 										<i class="far fa-file-pdf"></i>
 										<p>Panduan Pengajuan WFH</p>
 									</a>
 								</li>
 								<?php if ($user == '62007') { ?>
 									<li class="nav-item">
-										<a href="http://saintek.uin-malang.ac.id/online/doc/panduankajur.pdf" target="_blank" class="nav-link">
+										<a href="../doc/panduankajur.pdf" target="_blank" class="nav-link">
 											<i class="far fa-file-pdf"></i>
 											<p>Panduan Verifikasi WFH</p>
 										</a>
@@ -209,11 +206,10 @@ if ($nohp == null or $email == null) {
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link">
+							<a href="https://wa.me/6281234302099" class="nav-link" target="_blank">
 								<i class="nav-icon fas fa-question-circle"></i>
 								<p>
 									Bantuan
-									<span class="right badge badge-danger"></span>
 								</p>
 							</a>
 						</li>
@@ -260,337 +256,342 @@ if ($nohp == null or $email == null) {
 			?>
 			<!-- pengajuan surat mahasiswa -->
 			<section class="content">
-				<!-- Default box -->
-				<div class="card card-warning">
-					<div class="card-header">
-						<h3 class="card-title">Pengajuan Surat Mahasiswa </h3>
-						<!-- card minimize -->
-						<div class="card-tools">
-							<!-- This will cause the card to maximize when clicked 
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<!-- Default box -->
+							<div class="card card-warning">
+								<div class="card-header">
+									<h3 class="card-title">Pengajuan Surat Mahasiswa </h3>
+									<!-- card minimize -->
+									<div class="card-tools">
+										<!-- This will cause the card to maximize when clicked 
 							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-							<!-- This will cause the card to collapse when clicked -->
-							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-							<!-- This will cause the card to be removed when clicked
+										<!-- This will cause the card to collapse when clicked -->
+										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+										<!-- This will cause the card to be removed when clicked
 							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-						</div>
-					</div>
-					<!-- /.card-header -->
-					<?php $no = 1; ?>
-					<div class="card-body p-0">
-						<!-- /.card-header -->
-						<div class="card-body">
-							<table class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th width="5%" style="text-align:center">No</th>
-										<th width="10%" style="text-align:center">NIM</th>
-										<th style="text-align:center">Nama</th>
-										<th style="text-align:center">Surat</th>
-										<th width="10%" colspan="2" style="text-align:center">Aksi</th>
-									</tr>
-								</thead>
-								<tbody>
+									</div>
+								</div>
+								<!-- /.card-header -->
+								<?php $no = 1; ?>
+								<div class="card-body p-0">
+									<!-- /.card-header -->
+									<div class="card-body">
+										<table class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th width="5%" style="text-align:center">No</th>
+													<th width="10%" style="text-align:center">NIM</th>
+													<th style="text-align:center">Nama</th>
+													<th style="text-align:center">Surat</th>
+													<th width="10%" colspan="2" style="text-align:center">Aksi</th>
+												</tr>
+											</thead>
+											<tbody>
 
-									<!-- PKL Koordinator-->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE validatorkoor='$user' AND validasikoordinator = 0");
-									$jmldata = mysqli_num_rows($query);
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['id'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = 'Ijin PKL';
-										$validasikoordinator = $data['validasikoordinator'];
-										$validasijurusan = $data['validasijurusan'];
-										$validasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- PKL Koordinator-->
 												<?php
-												if ($validasikoordinator == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE validatorkoor='$user' AND validasikoordinator = 0");
+												$jmldata = mysqli_num_rows($query);
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['id'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin PKL';
+													$validasikoordinator = $data['validasikoordinator'];
+													$validasijurusan = $data['validasijurusan'];
+													$validasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="pkl-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($validasikoordinator == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="pkl-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /. PKL koordinator-->
+												<!-- /. PKL koordinator-->
 
-									<!-- ijin lab -->
-									<?php
-									$query = mysqli_query($dbsurat, "select * from ijinlab where validatordosen='$user' AND validasidosen = 0");
-									$jmldata = mysqli_num_rows($query);
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['no'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = 'Ijin Penggunaan Laboratorium';
-										$verifikasidosen = $data['validasidosen'];
-										$verifikasijurusan = $data['validasijurusan'];
-										$verifikasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- ijin lab -->
 												<?php
-												if ($verifikasidosen == 0) {
+												$query = mysqli_query($dbsurat, "select * from ijinlab where validatordosen='$user' AND validasidosen = 0");
+												$jmldata = mysqli_num_rows($query);
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penggunaan Laboratorium';
+													$verifikasidosen = $data['validasidosen'];
+													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="lab-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasidosen == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="lab-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /.ijin lab -->
+												<!-- /.ijin lab -->
 
-									<!-- ijin penelitian -->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validatordosen='$user' AND validasidosen = 0");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['id'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = 'Ijin Penelitian';
-										$verifikasidosen = $data['validasidosen'];
-										$verifikasijurusan = $data['validasijurusan'];
-										$verifikasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- ijin penelitian -->
 												<?php
-												if ($verifikasidosen == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validatordosen='$user' AND validasidosen = 0");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['id'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penelitian';
+													$verifikasidosen = $data['validasidosen'];
+													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="ijinpenelitian-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasidosen == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="ijinpenelitian-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /.ijin penelitian -->
+												<!-- /.ijin penelitian -->
 
-									<!-- peminjaman alat -->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validatordosen='$user' AND validasidosen = 0");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['id'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = 'Ijin Peminjaman Alat';
-										$verifikasidosen = $data['validasidosen'];
-										$verifikasijurusan = $data['validasijurusan'];
-										$verifikasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- peminjaman alat -->
 												<?php
-												if ($verifikasidosen == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validatordosen='$user' AND validasidosen = 0");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['id'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Peminjaman Alat';
+													$verifikasidosen = $data['validasidosen'];
+													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="peminjamanalat-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasidosen == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="peminjamanalat-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /peminjaman alat -->
+												<!-- /peminjaman alat -->
 
-									<!-- Observasi -->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validatordosen='$user' AND validasidosen = 0");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['id'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = 'Ijin Observasi';
-										$verifikasidosen = $data['validasidosen'];
-										$verifikasijurusan = $data['validasijurusan'];
-										$verifikasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- Observasi -->
 												<?php
-												if ($verifikasidosen == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validatordosen='$user' AND validasidosen = 0");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['id'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Observasi';
+													$verifikasidosen = $data['validasidosen'];
+													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="observasi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasidosen == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="observasi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /Observasi -->
+												<!-- /Observasi -->
 
-									<!-- pengambilandata -->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validatordosen='$user' AND validasidosen = 0");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['id'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = 'Ijin Pengambilan Data';
-										$verifikasidosen = $data['validasidosen'];
-										$verifikasijurusan = $data['validasijurusan'];
-										$verifikasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- pengambilandata -->
 												<?php
-												if ($verifikasidosen == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validatordosen='$user' AND validasidosen = 0");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['id'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Pengambilan Data';
+													$verifikasidosen = $data['validasidosen'];
+													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="pengambilandata-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasidosen == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="pengambilandata-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /pengambilandata -->
+												<!-- /pengambilandata -->
 
-									<!-- Surat Keterangan -->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validatordosen='$user' AND validasidosen is null");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['id'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = $data['jenissurat'];
-										$verifikasidosen = $data['validasidosen'];
-										$verifikasijurusan = $data['validasijurusan'];
-										$verifikasifakultas = $data['validasifakultas'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- Surat Keterangan -->
 												<?php
-												if ($verifikasidosen == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validatordosen='$user' AND validasidosen is null");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['id'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = $data['jenissurat'];
+													$verifikasidosen = $data['validasidosen'];
+													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasifakultas = $data['validasifakultas'];
 												?>
-													<a class="btn btn-info btn-sm" href="suket-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasidosen == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="suket-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /Surat Keterangan -->
+												<!-- /Surat Keterangan -->
 
-									<!-- SKPI as Dosen PA -->
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user' AND verifikasi1=0 GROUP BY nim");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['no'];
-										$nim = $data['nim'];
-										$nama = $data['nama'];
-										$surat = "Surat Keterangan Pendamping Ijazah";
-										$verifikasi1 = $data['verifikasi1'];
-										$verifikasi2 = $data['verifikasi2'];
-										$verifikasi3 = $data['verifikasi3'];
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php echo $nim; ?></td>
-											<td><?php echo $nama; ?></td>
-											<td><?php echo $surat; ?></td>
-											<td>
+												<!-- SKPI as Dosen PA -->
 												<?php
-												if ($verifikasi1 == 0) {
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user' AND verifikasi1=0 GROUP BY nim");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = "Surat Keterangan Pendamping Ijazah";
+													$verifikasi1 = $data['verifikasi1'];
+													$verifikasi2 = $data['verifikasi2'];
+													$verifikasi3 = $data['verifikasi3'];
 												?>
-													<a class="btn btn-info btn-sm" href="skpi-tampil.php?nim=<?php echo mysqli_real_escape_string($dbsurat, $nim); ?>">
-														<i class="fas fa-search">
-														</i>
-														Lihat
-													</a>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasi1 == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="skpi-tampil.php?nim=<?php echo mysqli_real_escape_string($dbsurat, $nim); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
 												<?php
-												};
+													$no++;
+												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-									<!-- /SKPI as Dosen PA -->
-
-								</tbody>
-							</table>
+												<!-- /SKPI as Dosen PA -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -598,168 +599,174 @@ if ($nohp == null or $email == null) {
 
 			<!-- data pengajuan pribadi -->
 			<section class="content">
-				<!-- Default box -->
-				<div class="card card-primary">
-					<div class="card-header">
-						<h3 class="card-title">Rencana Kerja dan Surat Tugas <i>Work From Home</i></h3>
-						<!-- card minimize -->
-						<div class="card-tools">
-							<!-- This will cause the card to maximize when clicked 
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<!-- Default box -->
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">Rencana Kerja dan Surat Tugas <i>Work From Home</i></h3>
+									<!-- card minimize -->
+									<div class="card-tools">
+										<!-- This will cause the card to maximize when clicked 
 							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-							<!-- This will cause the card to collapse when clicked -->
-							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-							<!-- This will cause the card to be removed when clicked
+										<!-- This will cause the card to collapse when clicked -->
+										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+										<!-- This will cause the card to be removed when clicked
 							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-						</div>
-					</div>
-					<!-- /.card-header -->
-					<?php $no = 1; ?>
-					<div class="card-body p-0">
-						<!-- /.card-header -->
-						<div class="card-body">
-							<table id="example2" class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>Mulai WFH</th>
-										<th>Akhir WFH</th>
-										<th>Rencana Kerja</th>
-										<th>Surat Tugas</th>
-										<th>Aksi</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE iduser='$user' ORDER BY tglwfh1 DESC");
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['no'];
-										$tglwfh1 = $data['tglwfh1'];
-										$tglwfh2 = $data['tglwfh2'];
-										$tglwfh3 = $data['tglwfh3'];
-										$tglwfh4 = $data['tglwfh4'];
-										$tglwfh5 = $data['tglwfh5'];
-										$verifikasijurusan = $data['verifikasijurusan'];
-										$verifikasifakultas = $data['verifikasifakultas'];
-										if (date($tglwfh5) != 0) {
-											$wfhselesai = $tglwfh5;
-										} else {
-											if (date($tglwfh4) != 0) {
-												$wfhselesai = $tglwfh4;
-											} else {
-												if (date($tglwfh3) != 0) {
-													$wfhselesai = $tglwfh3;
-												} else {
-													if (date($tglwfh2) != 0) {
-														$wfhselesai = $tglwfh2;
+									</div>
+								</div>
+								<!-- /.card-header -->
+								<?php $no = 1; ?>
+								<div class="card-body p-0">
+									<!-- /.card-header -->
+									<div class="card-body">
+										<table id="example2" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th width="5%">No</th>
+													<th>Mulai WFH</th>
+													<th>Akhir WFH</th>
+													<th>Rencana Kerja</th>
+													<th>Surat Tugas</th>
+													<th>Aksi</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE iduser='$user' ORDER BY tglwfh1 DESC");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$tglwfh1 = $data['tglwfh1'];
+													$tglwfh2 = $data['tglwfh2'];
+													$tglwfh3 = $data['tglwfh3'];
+													$tglwfh4 = $data['tglwfh4'];
+													$tglwfh5 = $data['tglwfh5'];
+													$verifikasijurusan = $data['verifikasijurusan'];
+													$verifikasifakultas = $data['verifikasifakultas'];
+													if (date($tglwfh5) != 0) {
+														$wfhselesai = $tglwfh5;
+													} else {
+														if (date($tglwfh4) != 0) {
+															$wfhselesai = $tglwfh4;
+														} else {
+															if (date($tglwfh3) != 0) {
+																$wfhselesai = $tglwfh3;
+															} else {
+																if (date($tglwfh2) != 0) {
+																	$wfhselesai = $tglwfh2;
+																}
+															}
+														}
 													}
-												}
-											}
-										}
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php if (date($tglwfh1) != 0) {
-													echo tgl_indo($tglwfh1);
-												}  ?>
-											</td>
-											<td><?php echo tgl_indo($wfhselesai); ?>
-											</td>
-											<td>
-												<?php
-												if ($verifikasijurusan == 0) {
 												?>
-													<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														<!--Lihat-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan == 1) {
-												?>
-													<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print">
-														</i>
-														<!--Cetak-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan == 2) {
-												?>
-													<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-times">
-														</i>
-														<!--Cek-->
-													</a>
-												<?php
-												};
-												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php if (date($tglwfh1) != 0) {
+																echo tgl_indo($tglwfh1);
+															}  ?>
+														</td>
+														<td><?php echo tgl_indo($wfhselesai); ?>
+														</td>
+														<td>
+															<?php
+															if ($verifikasijurusan == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	<!--Lihat-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasijurusan == 1) {
+															?>
+																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-print">
+																	</i>
+																	<!--Cetak-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasijurusan == 2) {
+															?>
+																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-times">
+																	</i>
+																	<!--Cek-->
+																</a>
+															<?php
+															};
+															?>
 
 
-											</td>
-											<td>
+														</td>
+														<td>
+															<?php
+															if ($verifikasijurusan < 2 and $verifikasifakultas == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	<!--Lihat-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasijurusan < 2 and $verifikasifakultas == 1) {
+															?>
+																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-print">
+																	</i>
+																	<!--Cetak-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasijurusan < 2 and $verifikasifakultas == 2) {
+															?>
+																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-times">
+																	</i>
+																	<!--Cek-->
+																</a>
+															<?php
+															};
+															?>
+														</td>
+														<td>
+															<?php
+															if ($verifikasijurusan == 2 or $verifikasifakultas == 2) {
+															?>
+																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-trash">
+																	</i>
+																</a>
+															<?php
+															}
+															?>
+														</td>
+													</tr>
 												<?php
-												if ($verifikasijurusan < 2 and $verifikasifakultas == 0) {
-												?>
-													<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														<!--Lihat-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan < 2 and $verifikasifakultas == 1) {
-												?>
-													<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print">
-														</i>
-														<!--Cetak-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan < 2 and $verifikasifakultas == 2) {
-												?>
-													<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-times">
-														</i>
-														<!--Cek-->
-													</a>
-												<?php
-												};
-												?>
-											</td>
-											<td>
-												<?php
-												if ($verifikasijurusan == 2 or $verifikasifakultas == 2) {
-												?>
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-trash">
-														</i>
-													</a>
-												<?php
+													$no++;
 												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-								</tbody>
-							</table>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.card-body -->
+								</div>
+								<!-- /.card -->
+								<!-- /.content -->
+							</div>
 						</div>
-						<!-- /.card-body -->
 					</div>
-					<!-- /.card -->
-					<!-- /.content -->
 				</div>
 			</section>
 		</div>
@@ -820,6 +827,5 @@ if ($nohp == null or $email == null) {
 		});
 	</script>
 </body>
-
 
 </html>
