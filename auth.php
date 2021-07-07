@@ -22,13 +22,11 @@ if ($kunci == $antibot) {
         $jurusan = $dhasil['jurusan'];
         $hakakses = $dhasil['hakakses'];
 
-        $_SESSION['hakakses'] = $hakakses;
         $_SESSION['user'] = $username;
         $_SESSION['nama'] = $nama;
         $_SESSION['nip'] = $nip;
         $_SESSION['jurusan'] = $nama;
-
-
+        $_SESSION['hakakses'] = $hakakses;
 
         if ($hakakses == 'dosen') {
             header('location:dosen/index.php');

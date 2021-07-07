@@ -47,6 +47,7 @@ require('system/myfunc.php');
 				}
 				?>
 				<form action="reg.php" method="POST">
+					<label>Nama</label>
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="Nama" name="nama" required>
 						<div class="input-group-append">
@@ -55,6 +56,7 @@ require('system/myfunc.php');
 							</div>
 						</div>
 					</div>
+					<label>NIM / NIP / NIPT</label>
 					<div class="input-group mb-3">
 						<input type="number" class="form-control" placeholder="NIM / NIP / NIPT" name="nip" required>
 						<div class="input-group-append">
@@ -63,6 +65,7 @@ require('system/myfunc.php');
 							</div>
 						</div>
 					</div>
+					<label>No. HP / WhatsApp</label>
 					<div class="input-group mb-3">
 						<input type="number" class="form-control" placeholder="no HP aktif" name="nohp" required>
 						<div class="input-group-append">
@@ -71,6 +74,7 @@ require('system/myfunc.php');
 							</div>
 						</div>
 					</div>
+					<label>e-Mail</label>
 					<div class="input-group mb-3">
 						<input type="email" class="form-control" placeholder="e-Mail" name="email" required>
 						<div class="input-group-append">
@@ -79,6 +83,7 @@ require('system/myfunc.php');
 							</div>
 						</div>
 					</div>
+					<label>Program Studi</label>
 					<div class="form-group">
 						<select class="form-control" name="jurusan">
 							<?php
@@ -92,14 +97,16 @@ require('system/myfunc.php');
 						</select>
 						<small style="color:red">KHUSUS staf fakultas pilih SAINTEK</small>
 					</div>
+					<label>ID SIAKAD</label>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="username" name="username" required>
+						<input type="text" class="form-control" placeholder="ID SIAKAD" name="username" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
 							</div>
 						</div>
 					</div>
+					<label>Password</label>
 					<div class="input-group mb-3">
 						<input type="password" class="form-control" placeholder="password" name="password" required>
 						<div class="input-group-append">

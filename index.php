@@ -85,14 +85,16 @@
 				}
 				?>
 				<form action="auth.php" method="post">
+					<label>ID SIAKAD</label>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Username" name="username" required>
+						<input type="text" class="form-control" placeholder="ID SIAKAD" name="username" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
 							</div>
 						</div>
 					</div>
+					<label>Password</label>
 					<div class="input-group mb-3">
 						<input type="password" id="myInput" class="form-control" placeholder="Password" name="password" required>
 						<div class="input-group-append">
