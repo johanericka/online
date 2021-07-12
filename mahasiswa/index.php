@@ -1,49 +1,36 @@
+<?php
+session_start();
+if ($_SESSION['hakakses'] != "mahasiswa") {
+	header("location:../index.php?pesan=noaccess");
+}
+require('../system/dbconn.php');
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
+$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SAINTEK Online | Mahasiswa</title>
+	<title>SAINTEK Digital Services</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="../system/plugins/fontawesome-free/css/all.min.css">
-	<!-- Ionicons -->
-	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<!-- overlayScrollbars -->
+	<!-- DataTables -->
+	<link rel="stylesheet" href="../system/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="../system/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="../system/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	<!-- Theme style -->
 	<link rel="stylesheet" href="../system/dist/css/adminlte.min.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['hakakses'] != "mahasiswa") {
-	header("location:../index.php?pesan=noaccess");
-}
-?>
-
-<?php
-$iduser = mysqli_real_escape_string($dbsurat, $_SESSION['iduser']);
-$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nim']);
-$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
-$status = mysqli_real_escape_string($dbsurat, $_SESSION['status']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
-$jabatan = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
-$role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
-?>
 
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
@@ -60,297 +47,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="UIN Malang" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIM : <?php echo $nim; ?></a>
-						<a href="#" class="d-block">Jurusan : <?php echo $jurusan; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item has-treeview menu-close">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fa fa-envelope"></i>
-								<p>
-									Pengajuan Surat
-									<i class="right fas fa-angle-left"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<!-- ijin penggunaan lab -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' AND keterangan IS NULL");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="lab-isi1.php" class="nav-link">
-											<i class="nav-icon fas fa-flask"></i>
-											<p>
-												Ijin Penggunaan Lab.
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-								<!-- surat keterangan -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE nim='$nim' AND keterangan IS NULL");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="suket-isi.php" class="nav-link">
-											<i class="nav-icon fas fa-id-card"></i>
-											<p>
-												Surat Keterangan
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-								<!-- surat pengantar PKL -->
-								<?php
-								$qpkl = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota='$iduser'");
-								$dpkl = mysqli_fetch_array($qpkl);
-								$nimketua = $dpkl['nimketua'];
-
-								$qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND validasifakultas=0");
-								$jpkl2 = mysqli_num_rows($qpkl2);
-								if ($jpkl2 == 0) {
-								?>
-									<li class="nav-item">
-										<a href="pkl-isilampiran.php" class="nav-link">
-											<i class="nav-icon fas fa-users"></i>
-											<p>
-												Surat Pengantar PKL
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-								<!-- surat permohonan cetak KHS -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM cetakkhs WHERE nim='$nim' AND keterangan IS NULL");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="cetakkhs-isi.php" class="nav-link">
-											<i class="nav-icon fa fa-file"></i>
-											<p>
-												Surat Keterangan Cetak KHS
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-								<!-- surat ijin penelitian -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE nim='$nim' AND keterangan IS NULL");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="ijinpenelitian-isi.php" class="nav-link">
-											<i class="nav-icon fa fa-search"></i>
-											<p>
-												Ijin Penelitian
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-								<!-- surat ijin observasi -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM observasianggota WHERE nimanggota='$iduser'");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata > 0) {
-									$dobservasi = mysqli_fetch_array($query);
-									$nimketua = $dobservasi['nimketua'];
-
-									$qobservasi = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE nim='$nimketua' AND validasifakultas=0");
-									$jobservasi = mysqli_num_rows($qobservasi);
-									if ($jobservasi == 0) {
-								?>
-										<li class="nav-item">
-											<a href="observasi-isi.php" class="nav-link">
-												<i class="nav-icon fa fa-edit"></i>
-												<p>
-													Ijin Observasi
-													<span class="right badge badge-danger"></span>
-												</p>
-											</a>
-										</li>
-									<?php
-									}
-								} else {
-									?>
-									<li class="nav-item">
-										<a href="observasi-isi.php" class="nav-link">
-											<i class="nav-icon fa fa-edit"></i>
-											<p>
-												Ijin Observasi
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-								<!-- permohonan peminjaman alat -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE nim='$nim' AND keterangan IS NULL");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="peminjamanalat-isi.php" class="nav-link">
-											<i class="nav-icon fa fa-wrench"></i>
-											<p>
-												Peminjaman Alat
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-								<!-- permohonan pengambilan data -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE nim='$nim' AND keterangan IS NULL");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="pengambilandata-isi.php" class="nav-link">
-											<i class="nav-icon fa fa-table"></i>
-											<p>
-												Pengambilan Data
-												<span class="right badge badge-danger"></span>
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-								<!-- permohonan SKPI -->
-								<?php
-								$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim='$nim' AND verifikasi3=0 ");
-								$cekdata = mysqli_num_rows($query);
-								if ($cekdata == 0) {
-								?>
-									<li class="nav-item">
-										<a href="skpi-isi.php" class="nav-link">
-											<i class="nav-icon fas fa-graduation-cap"></i>
-											<p>
-												Pengajuan SKPI
-											</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-
-							</ul>
-						</li>
-
-						<li class="nav-item has-treeview menu-close">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fa fa-file-pdf"></i>
-								<p>
-									Dokumen
-									<i class="right fas fa-angle-left"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<!--
-								<li class="nav-item">
-									<a href="https://saintek.uin-malang.ac.id/wfh/doc/SOPIjinLayananLaboratorium.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>SOP Ijin Layanan Lab.</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://saintek.uin-malang.ac.id/wfh/doc/PemberitahuanKegiatanPKL.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>Pemberitahuan Kegiatan PKL</p>
-									</a>
-								</li>
-								-->
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="notifikasi-isi.php" class="nav-link">
-								<i class="nav-icon fas fa-bullhorn"></i>
-								<p>
-									Kirim Notifikasi
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="mailto:saintekonline@gmail.com" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-window-close"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php require('sidebar.php'); ?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -386,7 +83,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 					<div class="card-body p-0">
 						<!-- /.card-header -->
 						<div class="card-body">
-							<table id="example1" class="table table-bordered table-striped">
+							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th width="5%" style="text-align:center">No</th>
@@ -396,10 +93,9 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 									</tr>
 								</thead>
 								<tbody>
-
 									<!-- ijin lab -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$iduser'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim'");
 									$jmldata = mysqli_num_rows($query);
 									while ($data = mysqli_fetch_array($query)) {
 										$nodata = $data['no'];
@@ -536,7 +232,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- Ijin PKL -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota = '$iduser'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota = '$nim'");
 									$dquery = mysqli_num_rows($query);
 									if ($dquery > 0) {
 										while ($data = mysqli_fetch_array($query)) {
@@ -640,7 +336,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- Surat Keterangan -->
 									<?php
-									$data = mysqli_query($dbsurat, "select * from suket where nim = '" . $iduser . "'");
+									$data = mysqli_query($dbsurat, "select * from suket where nim = '" . $nim . "'");
 									$cek = mysqli_num_rows($data);
 									while ($q = mysqli_fetch_array($data)) {
 										$nodata = $q['id'];
@@ -658,7 +354,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 										<tr>
 											<td><?php echo $no++; ?></td>
 											<td><?php echo $q['jenissurat']; ?></td>
-											<?php if (isset($_SESSION['iduser'])) : ?>
+											<?php if (isset($_SESSION['nim'])) : ?>
 												<td>
 													<!-- dosen pembimbing -->
 													<?php
@@ -738,7 +434,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- Permohonan Cetak KHS -->
 									<?php
-									$data = mysqli_query($dbsurat, "select * from cetakkhs where nim = '$iduser'");
+									$data = mysqli_query($dbsurat, "select * from cetakkhs where nim = '$nim'");
 									$cek = mysqli_num_rows($data);
 									while ($q = mysqli_fetch_array($data)) {
 										$nodata = $q['id'];
@@ -816,7 +512,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- ijin penelitian -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE nim = '$iduser'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE nim = '$nim'");
 									$cek = mysqli_num_rows($query);
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['id'];
@@ -913,7 +609,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- peminjaman alat -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE nim = '$iduser'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE nim = '$nim'");
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['id'];
 										$nim = $q['nim'];
@@ -1010,7 +706,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- pengambilan data -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE nim = '$iduser'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE nim = '$nim'");
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['id'];
 										$nim = $q['nim'];
@@ -1106,7 +802,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- ijin observasi -->
 									<?php
-									$qobservasi = mysqli_query($dbsurat, "SELECT * FROM observasianggota where nimanggota='$iduser'");
+									$qobservasi = mysqli_query($dbsurat, "SELECT * FROM observasianggota where nimanggota='$nim'");
 									$jobservasi = mysqli_num_rows($qobservasi);
 									if ($jobservasi > 0) {
 										$dobservasi = mysqli_fetch_array($qobservasi);
@@ -1209,7 +905,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 
 									<!-- SKPI -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$iduser'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim'");
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['no'];
 										$verifikasi1 = $q['verifikasi1'];
@@ -1287,7 +983,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 												<?php
 												if ($verifikasi3 == 1) {
 												?>
-													<a class="btn btn-success" href="skpi-tampil.php?iduser=<?php echo $iduser; ?>">
+													<a class="btn btn-success" href="skpi-tampil.php?nim=<?php echo $nim; ?>">
 														<i class="fas fa-eye"></i>
 													</a>
 												<?php
@@ -1299,7 +995,7 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 												if ($verifikasi3 <> 1) {
 												?>
 													<!-- hapus -->
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="skpi-hapus.php?iduser=<?php echo $iduser; ?>">
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="skpi-hapus.php?nim=<?php echo $nim; ?>">
 														<i class="fas fa-trash"></i> Hapus
 													</a>
 												<?php
@@ -1340,37 +1036,42 @@ $role = mysqli_real_escape_string($dbsurat, $_SESSION['role']);
 	<script src="../system/plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
 	<script src="../system/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- DataTables  & Plugins -->
+	<script src="../system/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="../system/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../system/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="../system/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+	<script src="../system/plugins/jszip/jszip.min.js"></script>
+	<script src="../system/plugins/pdfmake/pdfmake.min.js"></script>
+	<script src="../system/plugins/pdfmake/vfs_fonts.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../system/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../system/dist/js/demo.js"></script>
-</body>
 
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	if (isset($tanggal)) {
-		$pecahkan = explode('-', $tanggal);
-		return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-	}
-}
-?>
-
-<!-- namadosen -->
-<?php
-function namadosen($conn, $iddosen)
-{
-	require_once('../system/dbconn.php');
-	$qdosen = mysqli_query($conn, "SELECT nama FROM useraccount2 WHERE kode=$iddosen");
-	$ddosen = mysqli_fetch_array($qdosen);
-	$nama = $ddosen['nama'];
-	return $nama;
-}
-
-?>
+	<script>
+		$(function() {
+			$("#example1").DataTable({
+				"responsive": true,
+				"lengthChange": false,
+				"autoWidth": false,
+				"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+			}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+			$('#example2').DataTable({
+				"paging": true,
+				"lengthChange": false,
+				"searching": false,
+				"ordering": true,
+				"info": true,
+				"autoWidth": false,
+				"responsive": true,
+			});
+		});
+	</script>
 
 </html>

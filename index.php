@@ -110,7 +110,7 @@
 					$kunci = $angka1 + $angka2;
 					?>
 					<div class="input-group mb-3">
-						Berapakah <?= $angka1; ?> ditambah <?= $angka2; ?> ?
+						Berapakah <b><?= $angka1; ?> ditambah <?= $angka2; ?> </b> ?
 						<input type="hidden" name="kunci" value="<?= $kunci; ?>">
 						<input type="number" id="myInput" class="form-control" placeholder="" name="antibot" required>
 						<div class="input-group-append">

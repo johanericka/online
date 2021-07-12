@@ -25,7 +25,7 @@ if ($kunci == $antibot) {
         $_SESSION['user'] = $username;
         $_SESSION['nama'] = $nama;
         $_SESSION['nip'] = $nip;
-        $_SESSION['jurusan'] = $nama;
+        $_SESSION['jurusan'] = $jurusan;
         $_SESSION['hakakses'] = $hakakses;
 
         if ($hakakses == 'dosen') {
