@@ -46,7 +46,7 @@
                         if ($cekdata == 0) {
                         ?>
                             <li class="nav-item">
-                                <a href="lab-isi.php" class="nav-link">
+                                <a href="ijinlab-isi.php" class="nav-link">
                                     <i class="nav-icon fas fa-flask"></i>
                                     <p>
                                         Ijin Penggunaan Lab.
