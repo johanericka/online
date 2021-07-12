@@ -74,8 +74,8 @@ if ($nohp == null or $email == null) {
 				<!-- Sidebar user (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
+						<a href="#" class="d-block"><?= $nama; ?></a>
+						<a href="#" class="d-block">NIP : <?= $nip; ?></a>
 					</div>
 				</div>
 
@@ -553,39 +553,43 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user' AND verifikasi1=0 GROUP BY nim");
-												while ($data = mysqli_fetch_array($query)) {
-													$nodata = $data['no'];
-													$nim = $data['nim'];
-													$nama = $data['nama'];
-													$surat = "Surat Keterangan Pendamping Ijazah";
-													$verifikasi1 = $data['verifikasi1'];
-													$verifikasi2 = $data['verifikasi2'];
-													$verifikasi3 = $data['verifikasi3'];
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user'AND verifikasi1=0 GROUP BY nim");
+												$jdata = mysqli_num_rows($query);
+												if ($jdata > 0) {
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$nim = $data['nim'];
+														$nama = $data['nama'];
+														$surat = "Surat Keterangan Pendamping Ijazah";
+														$verifikasi1 = $data['verifikasi1'];
+														$verifikasi2 = $data['verifikasi2'];
+														$verifikasi3 = $data['verifikasi3'];
 												?>
-													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
-														<td>
-															<?php
-															if ($verifikasi1 == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="skpi-tampil.php?nim=<?php echo mysqli_real_escape_string($dbsurat, $nim); ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
-																</a>
-															<?php
-															};
-															?>
-														</td>
-													</tr>
+														<tr>
+															<td><?php echo $no; ?></td>
+															<td><?php echo $nim; ?></td>
+															<td><?php echo $nama; ?></td>
+															<td><?php echo $surat; ?></td>
+															<td>
+																<?php
+																if ($verifikasi1 == 0) {
+																?>
+																	<a class="btn btn-info btn-sm" href="skpi-tampil.php?nim=<?php echo mysqli_real_escape_string($dbsurat, $nim); ?>">
+																		<i class="fas fa-search">
+																		</i>
+																		Lihat
+																	</a>
+																<?php
+																};
+																?>
+															</td>
+														</tr>
 												<?php
-													$no++;
+														$no++;
+													}
 												}
 												?>
+
 												<!-- /SKPI as Dosen PA -->
 											</tbody>
 										</table>

@@ -1,7 +1,7 @@
 <?php
 //$dbsurat = mysqli_connect("10.10.7.91:3306", "surat", "surat2020", "surat");
 //$dbsurat = mysqli_connect("localhost", "surat", "surat2020", "surat");
-$dbsurat = mysqli_connect("127.0.0.1", "johanericka", "rahasia", "surat");
+$dbsurat = mysqli_connect("127.0.0.1", "johanericka", "rahasia", "onlinev2");
 // Check connection
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
