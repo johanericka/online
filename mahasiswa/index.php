@@ -4,6 +4,7 @@ if ($_SESSION['hakakses'] != "mahasiswa") {
 	header("location:../index.php?pesan=noaccess");
 }
 require('../system/dbconn.php');
+require('../system/myfunc.php');
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
@@ -95,7 +96,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 								<tbody>
 									<!-- ijin lab -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' and validator1 <> ''");
 									$jmldata = mysqli_num_rows($query);
 									while ($data = mysqli_fetch_array($query)) {
 										$nodata = $data['no'];
@@ -103,15 +104,15 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 										$nim = $data['nim'];
 										$nama = $data['nama'];
 										$surat = 'Ijin Penggunaan Laboratorium';
-										$validatordosen = $data['validatordosen'];
-										$validasidosen = $data['validasidosen'];
-										$tglvalidasidosen = tgl_indo($data['tglvalidasidosen']);
-										$validasijurusan = $data['validasijurusan'];
-										$validatorjurusan = $data['validatorjurusan'];
-										$tglvalidasijurusan = tgl_indo($data['tglvalidasijurusan']);
-										$validasifakultas = $data['validasifakultas'];
-										$validatorfakultas = $data['validatorfakultas'];
-										$tglvalidasifakultas = tgl_indo($data['tglvalidasifakultas']);
+										$validator1 = $data['validator1'];
+										$validasi1 = $data['validasi1'];
+										$tglvalidasi1 = tgl_indo($data['tglvalidasi1']);
+										$validasi2 = $data['validasi2'];
+										$validator2 = $data['validator2'];
+										$tglvalidasi2 = tgl_indo($data['tglvalidasi2']);
+										$validasi3 = $data['validasi3'];
+										$validator3 = $data['validator3'];
+										$tglvalidasi3 = tgl_indo($data['tglvalidasi3']);
 										$keterangan = $data['keterangan'];
 
 									?>
@@ -121,18 +122,18 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 											<td>
 												<!-- dosen pembimbing -->
 												<?php
-												echo $validatordosen;
-												if ($validasidosen == 0) {
+												echo $validator1;
+												if ($validasi1 == 0) {
 												?>
-													Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validatordosen); ?><br />
+													Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?><br />
 												<?php
-												} elseif ($validasidosen == 1) {
+												} elseif ($validasi1 == 1) {
 												?>
-													Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validatordosen); ?> <br />
+													Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> <br />
 												<?php
 												} else {
 												?>
-													Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validatordosen); ?> dengan alasan <?= $keterangan; ?><br />
+													Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <?= $keterangan; ?><br />
 												<?php
 												};
 												?>
@@ -140,15 +141,15 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 												<?php
 												if ($validasijurusan == 0) {
 												?>
-													Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?><br />
+													Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?><br />
 												<?php
 												} elseif ($validasijurusan == 1) {
 												?>
-													Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?> <br />
+													Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> <br />
 												<?php
 												} else {
 												?>
-													Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?> dengan alasan <?= $keterangan; ?><br />
+													Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <?= $keterangan; ?><br />
 												<?php
 												};
 												?>
@@ -156,15 +157,15 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 												<?php
 												if ($validasifakultas == 0) {
 												?>
-													Menunggu verifikasi Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validatorfakultas); ?><br />
+													Menunggu verifikasi Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?><br />
 												<?php
 												} elseif ($validasifakultas == 1) {
 												?>
-													Telah disetujui Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validatorfakultas); ?> <br />
+													Telah disetujui Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> <br />
 												<?php
 												} else {
 												?>
-													Ditolak oleh Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validatorfakultas); ?> dengan alasan <?= $keterangan; ?><br />
+													Ditolak oleh Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> dengan alasan <?= $keterangan; ?><br />
 												<?php
 												};
 												?>

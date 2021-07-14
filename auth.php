@@ -13,9 +13,7 @@ if ($kunci == $antibot) {
     $stmt->execute();
     $result = $stmt->get_result();
     $jhasil = $result->num_rows;
-    echo $jhasil;
-    echo $username;
-    echo $password;
+
     if ($jhasil > 0) {
         $dhasil = $result->fetch_assoc();
         $nama = $dhasil['nama'];

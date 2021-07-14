@@ -10,10 +10,10 @@ function tgl_indo($tanggal)
     }
 }
 
-function namadosen($conn, $iddosen)
+function namadosen($conn, $user)
 {
     require_once('../system/dbconn.php');
-    $qdosen = mysqli_query($conn, "SELECT nama FROM useraccount2 WHERE kode=$iddosen");
+    $qdosen = mysqli_query($conn, "SELECT * FROM pengguna WHERE user=$user");
     $ddosen = mysqli_fetch_array($qdosen);
     $nama = $ddosen['nama'];
     return $nama;

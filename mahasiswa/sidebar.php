@@ -41,7 +41,7 @@
                     <ul class="nav nav-treeview">
                         <!-- ijin penggunaan lab -->
                         <?php
-                        $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' AND keterangan IS NULL");
+                        $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' AND validator1=''");
                         $cekdata = mysqli_num_rows($query);
                         if ($cekdata == 0) {
                         ?>

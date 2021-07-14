@@ -8,7 +8,21 @@ $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+
+//cek kalo sudah mengisi data maka lanjut ke upload lampiran
+$status = -1;
+$stmt = $dbsurat->prepare("SELECT * FROM ijinlab WHERE nim=? AND status=?");
+$stmt->bind_param("si", $nim, $status);
+$stmt->execute();
+$result = $stmt->get_result();
+$jhasil = $result->num_rows;
+if ($jhasil > 0) {
+    $dhasil = $result->fetch_array();
+    $nodata = $dhasil['no'];
+    header("location:ijinlab-isi2.php?nodata=30");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -57,6 +71,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h3>Pengajuan Ijin Penggunaan Laboratorium</h3>
+                            <?= $jhasil; ?>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -75,7 +90,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="lab-simpan.php">
+                                    <form role="form" method="POST" action="ijinlab-isi1-simpan.php">
                                         <label>Nama </label><br />
                                         <input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
                                         <br />

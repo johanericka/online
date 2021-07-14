@@ -8,6 +8,10 @@ $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+
+if (isset($_GET['nodata'])) {
+    $nodata = $_GET['nodata'];
+};
 ?>
 
 <!DOCTYPE html>
@@ -135,11 +139,11 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                         <form action="ijinlab-upload.php" method="post" enctype="multipart/form-data">
                                             <label>Lampiran</label>
                                             <select class="custom-select form-control-border" name="lampiran">
-                                                <option value="lampiran-1" selected>Lampiran-1 Hasil screening COVID-19</option>
-                                                <option value="lampiran-4">Lampiran-4 Karantina Mandiri</option>
-                                                <option value="lampiran-5">Lampiran-5 Kesanggupan menerapkan protokol kesehatan</option>
-                                                <option value="lampiran-6">Lampiran-6 Kesanggupan dosen mengawasi mahasiswa</option>
-                                                <option value="lampiran-7">Lampiran-7 Kesediaan Karantina Mandiri</option>
+                                                <option value="lamp1" selected>Lampiran-1 Hasil screening COVID-19</option>
+                                                <option value="lamp4">Lampiran-4 Karantina Mandiri</option>
+                                                <option value="lamp5">Lampiran-5 Kesanggupan menerapkan protokol kesehatan</option>
+                                                <option value="lamp6">Lampiran-6 Kesanggupan dosen mengawasi mahasiswa</option>
+                                                <option value="lamp7">Lampiran-7 Kesediaan Karantina Mandiri</option>
                                             </select>
                                             <br />
                                             <br />
@@ -194,9 +198,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-success btn-block" disabled> <i class="fa fa-upload" aria-hidden="true"></i> Ajukan </button>
-
                                 </div>
-
                             </div>
                             <!-- /.card pilihan lab-->
                             <!-- footer -->
