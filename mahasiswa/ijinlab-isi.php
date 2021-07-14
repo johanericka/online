@@ -141,11 +141,11 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                         <label>Waktu Penggunaan </label><small style="color:red"><i>*</i></small>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     Tgl. Mulai
                                                     <input type="date" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     Tgl. Selesai
                                                     <input type="date" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
                                                 </div>
@@ -155,7 +155,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                         <br />
                                         <br />
                                         <input type="hidden" name="nodata" value="<?php echo $nodata; ?>" />
-                                        <button type="submit" class="btn btn-success btn-block"> <i class="fa fa-arrow-right"></i> Selanjutnya <i class="fa fa-arrow-right"></i></button>
+                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data saya benar')"> <i class=" fa fa-arrow-right"></i> Selanjutnya <i class="fa fa-arrow-right"></i></button>
                                     </form>
                                 </div>
 
