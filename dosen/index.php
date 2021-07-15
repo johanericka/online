@@ -63,7 +63,6 @@ if ($nohp == null or $email == null) {
 		<?php
 		require('sidebar.php');
 		?>
-
 		<!-- ./Main Sidebar Container -->
 
 		<!-- Content Wrapper. Contains page content -->
@@ -186,9 +185,8 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasi1 == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="lab-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
+																<a class="btn btn-info btn-sm" href="ijinlab-dosbing-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search"></i>
 																	Lihat
 																</a>
 															<?php
