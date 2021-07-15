@@ -19,7 +19,7 @@ $jhasil = $result->num_rows;
 if ($jhasil > 0) {
     $dhasil = $result->fetch_array();
     $nodata = $dhasil['no'];
-    header("location:ijinlab-isi2.php?nodata=30");
+    header("location:ijinlab-isi2.php?nodata=$nodata");
 }
 ?>
 
@@ -170,7 +170,7 @@ if ($jhasil > 0) {
                                         <br />
                                         <br />
                                         <input type="hidden" name="nodata" value="<?php echo $nodata; ?>" />
-                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data saya benar')"> <i class=" fa fa-arrow-right"></i> Selanjutnya <i class="fa fa-arrow-right"></i></button>
+                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class=" fa fa-arrow-right"></i> Selanjutnya <i class="fa fa-arrow-right"></i></button>
                                     </form>
                                 </div>
 

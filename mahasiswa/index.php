@@ -90,13 +90,13 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 										<th width="5%" style="text-align:center">No</th>
 										<th style="text-align:center">Surat</th>
 										<th style="text-align:center">Status</th>
-										<th width="15%" colspan="2" style="text-align:center">Aksi</th>
+										<th width="15%" style="text-align:center">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 									<!-- ijin lab -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' and validator1 <> ''");
+									$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim'");
 									$jmldata = mysqli_num_rows($query);
 									while ($data = mysqli_fetch_array($query)) {
 										$nodata = $data['no'];
@@ -114,110 +114,98 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 										$validator3 = $data['validator3'];
 										$tglvalidasi3 = tgl_indo($data['tglvalidasi3']);
 										$keterangan = $data['keterangan'];
+										$statuspengajuan = $data['statuspengajuan'];
 
 									?>
 										<tr>
 											<td><?php echo $no; ?></td>
 											<td><?php echo $surat; ?></td>
 											<td>
-												<!-- dosen pembimbing -->
+												<!-- data belum lengkap -->
 												<?php
-												echo $validator1;
-												if ($validasi1 == 0) {
+												if ($statuspengajuan == -1) {
 												?>
-													Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?><br />
-												<?php
-												} elseif ($validasi1 == 1) {
-												?>
-													Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> <br />
+													<p style="color:red">Data belum lengkap</p>
 												<?php
 												} else {
 												?>
-													Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <?= $keterangan; ?><br />
-												<?php
-												};
-												?>
-												<!-- ketua jurusan -->
-												<?php
-												if ($validasijurusan == 0) {
-												?>
-													Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?><br />
-												<?php
-												} elseif ($validasijurusan == 1) {
-												?>
-													Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> <br />
-												<?php
-												} else {
-												?>
-													Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <?= $keterangan; ?><br />
-												<?php
-												};
-												?>
-												<!-- WD-1 -->
-												<?php
-												if ($validasifakultas == 0) {
-												?>
-													Menunggu verifikasi Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?><br />
-												<?php
-												} elseif ($validasifakultas == 1) {
-												?>
-													Telah disetujui Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> <br />
-												<?php
-												} else {
-												?>
-													Ditolak oleh Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> dengan alasan <?= $keterangan; ?><br />
-												<?php
-												};
-												?>
-											</td>
-											<td>
-												<?php
-												if ($validasifakultas == 1) {
-												?>
-													<a class="btn btn-success btn-sm" href="lab-cetak.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print">
-														</i>
-														Cetak Surat Ijin
-													</a>
+													<!-- dosen pembimbing -->
 													<?php
-												} else {
-													if ($validasidosen > 1 or $validasijurusan > 1 or $validasifakultas > 1) {
+													if ($validasi1 == 0) {
 													?>
-														<a class="btn btn-danger btn-sm" href="lab-tampil2.php?nodata=<?php echo $nodata; ?>">
-															<i class="fas fa-times">
-															</i>
-															Cek
-														</a>
+														Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?><br />
+													<?php
+													} elseif ($validasi1 == 1) {
+													?>
+														Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> <br />
 													<?php
 													} else {
 													?>
-														<a class="btn btn-info btn-sm" href="lab-tampil2.php?nodata=<?php echo $nodata; ?>">
-															<i class="fas fa-search">
-															</i>
-															Lihat
-														</a>
+														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <?= $keterangan; ?><br />
+													<?php
+													};
+													?>
+													<!-- ketua jurusan -->
+													<?php
+													if ($validasi2 == 0) {
+													?>
+														Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?><br />
+													<?php
+													} elseif ($validasi2 == 1) {
+													?>
+														Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <?= $keterangan; ?><br />
+													<?php
+													};
+													?>
+													<!-- WD-1 -->
+													<?php
+													if ($validasi3 == 0) {
+													?>
+														Menunggu verifikasi Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?><br />
+													<?php
+													} elseif ($validasi3 == 1) {
+													?>
+														Telah disetujui Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak oleh Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> dengan alasan <?= $keterangan; ?><br />
 												<?php
 													}
-												}
+												};
 												?>
 											</td>
 											<td>
 												<?php
-												if ($validasifakultas != 1) {
+												if ($statuspengajuan == -1) {
+												?>
+													<a class="btn btn-info btn-sm" href="ijinlab-isi2.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-file"></i>
+														Lengkapi
+													</a>
+												<?php
+												} elseif ($statuspengajuan == 1) {
+												?>
+													<a class="btn btn-success btn-sm" href="lab-cetak.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-print"></i>
+														Cetak Surat Ijin
+													</a>
+												<?php
+												} elseif ($statuspengajuan == 0) {
+												?>
+													<a class="btn btn-secondary btn-sm" disabled>
+														<i class="fas fa-spinner"></i>
+														Dalam proses
+													</a>
+												<?php
+												} elseif ($statuspengajuan == 2) {
 												?>
 													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="lab-hapus.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-trash"></i> Hapus
-													</a>
-												<?php
-												}
-												?>
-												<?php
-												if ($validasifakultas == 1) {
-												?>
-													<a class="btn btn-success btn-sm" href="lab-cetakidcard.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print">
-														</i>
-														Cetak ID Card
 													</a>
 												<?php
 												}

@@ -4,6 +4,7 @@ if ($_SESSION['hakakses'] != "mahasiswa") {
     header("location:../index.php?pesan=noaccess");
 }
 require('../system/dbconn.php');
+require('../system/myfunc.php');
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
@@ -71,6 +72,61 @@ if (isset($_GET['nodata'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
+                            <?php
+                            if (isset($_GET['pesan'])) {
+                                if ($_GET['pesan'] == "gagal") {
+                            ?>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>ERROR!</strong> Upload file gagal
+                                    </div>
+                                <?php
+                                } else if ($_GET['pesan'] == "filesize") {
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>ERROR! </strong> ukuran file terlalu besar
+                                    </div>
+                                <?php
+                                } else if ($_GET['pesan'] == "extention") {
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>ERROR! </strong> format file harus JPG/JPEG
+                                    </div>
+                                <?php
+                                } else if ($_GET['pesan'] == "registered") {
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>ERROR!</strong> Anda telah terdaftar<br />
+                                        Klik Lupa Password apabila anda lupa password
+                                    </div>
+                                <?php
+                                } else if ($_GET['pesan'] == "success") {
+                                ?>
+                                    <div class="alert alert-success alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>BERHASIL! </strong> upload file berhasil
+                                    </div>
+                                <?php
+                                } else if ($_GET['pesan'] == "noaccess") {
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>ERROR! </strong> Anda tidak memiliki akses
+                                    </div>
+                                <?php
+                                } else if ($_GET['pesan'] == "antibot") {
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>ERROR! </strong> penjumlahan salah
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
                             <!-- card lampiran -->
                             <div class="card">
                                 <div class="card-header">
@@ -151,53 +207,100 @@ if (isset($_GET['nodata'])) {
                                             <br />
                                             <input type="file" name="fileToUpload" id="fileToUpload">
                                             <br />
-                                            <small style="color:red">Format file JPG</small>
+                                            <small style="color:red">Format file JPG/JPEG ukuran maksimal 1MB</small>
                                             <br />
                                             <br />
                                             <input type="hidden" name="nim" value="<?= $nim; ?>">
+                                            <input type="hidden" name="nodata" value="<?= $nodata; ?>">
                                             <button type="submit" class="btn btn-primary btn-block" value="Upload Lampiran" name="submit"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
                                         </form>
                                     </div>
+                                    <!-- tampilkan gambar yang di upload -->
+                                    <?php
+                                    $stmt = $dbsurat->prepare("SELECT * FROM ijinlab WHERE no=?");
+                                    $stmt->bind_param("i", $nodata);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    $dhasil = $result->fetch_assoc();
+                                    $lamp1 = $dhasil['lamp1'];
+                                    $lamp4 = $dhasil['lamp4'];
+                                    $lamp5 = $dhasil['lamp5'];
+                                    $lamp6 = $dhasil['lamp6'];
+                                    $lamp7 = $dhasil['lamp7'];
+                                    ?>
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col">
                                                 <?php
-                                                $namafile = 'noimage.gif';
+                                                if ($lamp1 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp1;
+                                                }
                                                 ?>
                                                 <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
                                                 <p class="text-center">Lampiran-1</p>
                                             </div>
                                             <div class="col">
                                                 <?php
-                                                $namafile = 'noimage.gif';
+                                                if ($lamp4 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp4;
+                                                }
                                                 ?>
                                                 <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
                                                 <p class="text-center">Lampiran-4</p>
                                             </div>
                                             <div class="col">
                                                 <?php
-                                                $namafile = 'noimage.gif';
+                                                if ($lamp5 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp5;
+                                                }
                                                 ?>
                                                 <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
                                                 <p class="text-center">Lampiran-5</p>
                                             </div>
                                             <div class="col">
                                                 <?php
-                                                $namafile = 'noimage.gif';
+                                                if ($lamp6 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp6;
+                                                }
                                                 ?>
                                                 <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
                                                 <p class="text-center">Lampiran-6</p>
                                             </div>
                                             <div class="col">
                                                 <?php
-                                                $namafile = 'noimage.gif';
+                                                if ($lamp7 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp7;
+                                                }
                                                 ?>
                                                 <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
                                                 <p class="text-center">Lampiran-7</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-success btn-block" disabled> <i class="fa fa-upload" aria-hidden="true"></i> Ajukan </button>
+                                    <form action="ijinlab-final.php" method="post">
+                                        <input type="hidden" name="nodata" value="<?= $nodata; ?>">
+                                        <?php
+                                        if ($lamp1 <> '' and $lamp4 <> '' and $lamp5 <> '' and $lamp6 <> '' and $lamp7 <> '') {
+                                        ?>
+                                            <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa lampiran yang saya upload adalah benar')"> <i class="fa fa-upload" aria-hidden="true"></i> Ajukan </button>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <button type="submit" class="btn btn-success btn-block" disabled> <i class="fa fa-upload" aria-hidden="true"></i> Ajukan </button>
+                                        <?php
+                                        }
+                                        ?>
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.card pilihan lab-->
