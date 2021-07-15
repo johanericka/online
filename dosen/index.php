@@ -61,175 +61,9 @@ if ($nohp == null or $email == null) {
 
 		<!-- Main Sidebar Container -->
 		<?php
-		require('sidebar2.php');
+		require('sidebar.php');
 		?>
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="#" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="UIN Malang" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
 
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional) -->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?= $nama; ?></a>
-						<a href="#" class="d-block">NIP : <?= $nip; ?></a>
-						<a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-tv"></i>
-								<p>
-									Dashboard
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="userprofile-tampil.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Profile User
-									<span class="right badge badge-danger">New</span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="bimbingan-tampil.php" class="nav-link">
-								<i class="nav-icon fas fa-users"></i>
-								<p>
-									Mhs. Bimbingan
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="datasurat-tampil.php" class="nav-link">
-								<i class="nav-icon fas fa-envelope-open"></i>
-								<p>
-									Riwayat Surat
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="wfh-isi.php" class="nav-link">
-								<i class="nav-icon fas fa-home"></i>
-								<p>
-									Pengajuan WFH
-								</p>
-							</a>
-						</li>
-						<?php
-						$qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$user'");
-						$jmldata = mysqli_num_rows($qoperator);
-						if ($jmldata == 1) {
-						?>
-							<li class="nav-item has-treeview menu-close">
-								<a href="#" class="nav-link">
-									<i class="nav-icon fas fa-graduation-cap"></i>
-									<p>
-										SKPI
-										<i class="right fas fa-angle-left"></i>
-									</p>
-								</a>
-								<ul class="nav nav-treeview">
-									<li class="nav-item">
-										<a href="skpi-rekap.php" class="nav-link">
-											<i class="nav-icon fas fa-graduation-cap"></i>
-											<p>
-												Rekap Pengajuan SKPI
-												<!--<span class="right badge badge-danger">BARU</span>-->
-											</p>
-										</a>
-									</li>
-								</ul>
-								<ul class="nav nav-treeview">
-									<li class="nav-item">
-										<a href="skpi-isi.php" class="nav-link">
-											<i class="nav-icon fas fa-graduation-cap"></i>
-											<p>
-												Isi data SKPI
-											</p>
-										</a>
-									</li>
-								</ul>
-							</li>
-						<?php
-						}
-						?>
-						<li class="nav-item">
-							<a href="notifikasi-isi.php" class="nav-link">
-								<i class="nav-icon fas fa-bullhorn"></i>
-								<p>
-									Kirim Notifikasi
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item has-treeview menu-close">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fa fa-file"></i>
-								<p>
-									Dokumen
-									<i class="right fas fa-angle-left"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="../doc/se276-2021.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>SE Rektor</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="../doc/panduandosen.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>Panduan Pengajuan WFH</p>
-									</a>
-								</li>
-								<?php if ($user == '62007') { ?>
-									<li class="nav-item">
-										<a href="../doc/panduankajur.pdf" target="_blank" class="nav-link">
-											<i class="far fa-file-pdf"></i>
-											<p>Panduan Verifikasi WFH</p>
-										</a>
-									</li>
-								<?php
-								}
-								?>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link" target="_blank">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-window-close"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
 		<!-- ./Main Sidebar Container -->
 
 		<!-- Content Wrapper. Contains page content -->
@@ -332,16 +166,16 @@ if ($nohp == null or $email == null) {
 
 												<!-- ijin lab -->
 												<?php
-												$query = mysqli_query($dbsurat, "select * from ijinlab where validatordosen='$user' AND validasidosen = 0");
+												$query = mysqli_query($dbsurat, "select * from ijinlab where validator1='$nip' AND validasi1 = 0");
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
 													$nim = $data['nim'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
-													$verifikasidosen = $data['validasidosen'];
-													$verifikasijurusan = $data['validasijurusan'];
-													$verifikasifakultas = $data['validasifakultas'];
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?php echo $no; ?></td>
@@ -350,7 +184,7 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $surat; ?></td>
 														<td>
 															<?php
-															if ($verifikasidosen == 0) {
+															if ($verifikasi1 == 0) {
 															?>
 																<a class="btn btn-info btn-sm" href="lab-tampil.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-search">
@@ -555,7 +389,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user'AND verifikasi1=0 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user'AND verifikasi1=0");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {

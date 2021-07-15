@@ -14,6 +14,7 @@
             <div class="info">
                 <a href="#" class="d-block"><?php echo $nama; ?></a>
                 <a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
+                <a href="#" class="d-block">Jabatan : <?php echo strtoupper($jabatan); ?></a>
             </div>
         </div>
 
