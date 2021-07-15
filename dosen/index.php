@@ -5,6 +5,7 @@ $nip = $_SESSION['nip'];
 $nama = $_SESSION['nama'];
 $jurusan = $_SESSION['jurusan'];
 $hakakses = $_SESSION['hakakses'];
+$jabatan = $_SESSION['jabatan'];
 if ($_SESSION['hakakses'] != "dosen") {
 	header("location:../index.php?pesan=noaccess");
 }
@@ -76,6 +77,7 @@ if ($nohp == null or $email == null) {
 					<div class="info">
 						<a href="#" class="d-block"><?= $nama; ?></a>
 						<a href="#" class="d-block">NIP : <?= $nip; ?></a>
+						<a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>
 					</div>
 				</div>
 

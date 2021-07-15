@@ -23,11 +23,25 @@ if ($kunci == $antibot) {
         $jurusan = $dhasil['jurusan'];
         $hakakses = $dhasil['hakakses'];
 
+        //cari jabatan
+        $stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE nip=?");
+        $stmt->bind_param("s", $nip);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $jhasil = $result->num_rows;
+        if ($jhasil == 1) {
+            $dhasil = $result->fetch_array();
+            $jabatan = $dhasil['kdjabatan'];
+        } else {
+            $jabatan = $hakakses;
+        };
+
         $_SESSION['user'] = $username;
         $_SESSION['nama'] = $nama;
         $_SESSION['nip'] = $nip;
         $_SESSION['jurusan'] = $jurusan;
         $_SESSION['hakakses'] = $hakakses;
+        $_SESSION['jabatan'] = $jabatan;
 
         if ($hakakses == 'dosen') {
             header('location:dosen/index.php');
@@ -37,7 +51,7 @@ if ($kunci == $antibot) {
             header('location:mahasiswa/index.php');
         }
     } else {
-        //header('location:index.php?pesan=gagal');
+        header('location:index.php?pesan=gagal');
     }
 } else {
     header('location:index.php?pesan=antibot');

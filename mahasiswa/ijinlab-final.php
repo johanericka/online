@@ -44,8 +44,8 @@ $nipwd1 = $dhasil['nip'];
 
 //update pengajuan masukkan data dosen, kaprodi & wd-1
 $status = 0;
-$stmt = $dbsurat->prepare("UPDATE ijinlab SET validator1=?, validator2=?, validator3=?,statuspengajuan=? WHERE no=?");
-$stmt->bind_param("sssii", $nipdosen, $nipkaprodi, $nipwd1, $status, $nodata);
+$stmt = $dbsurat->prepare("UPDATE ijinlab SET tanggal=?, validator1=?, validator2=?, validator3=?,statuspengajuan=? WHERE no=?");
+$stmt->bind_param("ssssii", $tanggal, $nipdosen, $nipkaprodi, $nipwd1, $status, $nodata);
 $stmt->execute();
 
-header("location:index.php&pesan=success");
+header("location:index.php");
