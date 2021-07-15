@@ -192,7 +192,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 												?>
 													<a class="btn btn-success btn-sm" href="lab-cetak.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-print"></i>
-														Cetak Surat Ijin
+														Cetak
 													</a>
 												<?php
 												} elseif ($statuspengajuan == 0) {

@@ -41,9 +41,10 @@
                     <ul class="nav nav-treeview">
                         <!-- ijin penggunaan lab -->
                         <?php
-                        $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' AND validator1=''");
-                        $cekdata = mysqli_num_rows($query);
-                        if ($cekdata == 0) {
+                        $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim'");
+                        $dijinlab = mysqli_fetch_array($query);
+                        $statuspengajuan = $dijinlab['statuspengajuan'];
+                        if ($statuspengajuan > 0) {
                         ?>
                             <li class="nav-item">
                                 <a href="ijinlab-isi1.php" class="nav-link">

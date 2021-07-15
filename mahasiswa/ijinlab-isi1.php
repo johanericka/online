@@ -10,9 +10,9 @@ $jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 //cek kalo sudah mengisi data maka lanjut ke upload lampiran
-$status = -1;
-$stmt = $dbsurat->prepare("SELECT * FROM ijinlab WHERE nim=? AND status=?");
-$stmt->bind_param("si", $nim, $status);
+$statuspengajuan = -1;
+$stmt = $dbsurat->prepare("SELECT * FROM ijinlab WHERE nim=? AND statuspengajuan=?");
+$stmt->bind_param("si", $nim, $statuspengajuan);
 $stmt->execute();
 $result = $stmt->get_result();
 $jhasil = $result->num_rows;
@@ -71,7 +71,6 @@ if ($jhasil > 0) {
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h3>Pengajuan Ijin Penggunaan Laboratorium</h3>
-                            <?= $jhasil; ?>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
