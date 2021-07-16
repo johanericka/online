@@ -25,7 +25,6 @@ $email = $dhasil['email'];
 if ($nohp == null or $email == null) {
 	header("location:userprofile-tampil.php");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -220,9 +219,46 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $surat; ?></td>
 														<td>
 															<?php
-															if ($verifikasi1 == 0) {
+															if ($verifikasi2 == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="ijinlab-dosbing-tampil.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-info btn-sm" href="ijinlab-kaprodi-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search"></i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /.ijin lab sebagai kaprodi -->
+
+												<!-- ijin lab sebagai kaprodi-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
+												$jmldata = mysqli_num_rows($query);
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penggunaan Laboratorium';
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasi3 == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="ijinlab-wd-tampil.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-search"></i>
 																	Lihat
 																</a>

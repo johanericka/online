@@ -275,7 +275,7 @@ require('../system/myfunc.php');
                                                     <input type="hidden" name="namalab" value="<?php echo $namalab; ?>"></input>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <button name="aksi" value="setujui" type="submit" formaction="ijinlab-dosbing-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
+                                                            <button name="aksi" value="setujui" type="submit" formaction="ijinlab-kaprodi-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tolak" class="btn btn-danger btn-block"> <i class="fa fa-times"></i> Tolak</button>
@@ -296,7 +296,7 @@ require('../system/myfunc.php');
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                                                    <button name="aksi" value="tolak" type="submit" formaction="ijinlab-dosbing-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menolak pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
+                                                                    <button name="aksi" value="tolak" type="submit" formaction="ijinlab-kaprodi-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menolak pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -116,6 +116,18 @@ require('../system/myfunc.php');
 								<div class="card-body p-0">
 									<!-- /.card-header -->
 									<div class="card-body">
+										<?php
+										if (isset($_GET['pesan'])) {
+											if ($_GET['pesan'] == "penuh") {
+										?>
+												<div class="alert alert-danger alert-dismissible fade show">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													<strong>ERROR!!</strong> kapasitas lab penuh
+												</div>
+										<?php
+											}
+										}
+										?>
 										<div class="tab-content" id="custom-tabs-one-tabContent">
 											<div class="tab-pane fade show active" id="custom-tabs-one-datadiri" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
 
@@ -168,15 +180,9 @@ require('../system/myfunc.php');
 												$data2 = mysqli_fetch_array($query2);
 												$kapasitas = $data2['kapasitas'];
 												?>
-												<div class="row">
-													<div class="col-lg-6">
-														<label>Laboratorium </label>
-													</div>
-													<div class="col-lg-6">
-														<p style="color:red">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
-													</div>
-												</div>
+												<label>Laboratorium </label>
 												<input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
+												<p style="color:red">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
 												<br />
 												<label>Dosen Pembimbing</label><br />
 												<input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>

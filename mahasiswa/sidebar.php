@@ -1,4 +1,5 @@
 <?php
+require('../system/dbconn.php');
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
