@@ -57,7 +57,7 @@ require('../system/myfunc.php');
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h3>Pengajuan Ijin Penggunaan Laboratorium</h3>
 						</div>
 					</div>
@@ -108,12 +108,7 @@ require('../system/myfunc.php');
 									<h3 class="card-title">Pengajuan Surat Mahasiswa </h3>
 									<!-- card minimize -->
 									<div class="card-tools">
-										<!-- This will cause the card to maximize when clicked 
-							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-										<!-- This will cause the card to collapse when clicked -->
 										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-										<!-- This will cause the card to be removed when clicked
-							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
 									</div>
 								</div>
 								<!-- /.card-header -->
@@ -123,161 +118,164 @@ require('../system/myfunc.php');
 									<div class="card-body">
 										<div class="tab-content" id="custom-tabs-one-tabContent">
 											<div class="tab-pane fade show active" id="custom-tabs-one-datadiri" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-												<form role="form" method="POST">
-													<label>Nama</label> <br />
-													<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly></input>
-													<br />
-													<label>NIM</label><br />
-													<input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly></input>
-													<br />
-													<label>Tempat / Tgl. Lahir </label><br />
-													<input type="text" class="form-control" name="ttl" value="<?php echo $ttl; ?>" readonly></input>
-													<br />
-													<label>Alamat Asal </label><br />
-													<textarea class="form-control" rows="3" id="alamatasal" name="alamatasal" readonly><?php echo $alamatasal; ?></textarea>
-													<br />
-													<label>Alamat Di Malang </label><br />
-													<textarea class="form-control" rows="3" id="alamatmalang" name="alamatmalang" readonly><?php echo $alamatmalang; ?></textarea>
-													<br />
-													<label>No. HP</label><br />
-													<input type="text" class="form-control" name="nohp" value="<?php echo $nohp; ?>" readonly></input>
-													<br />
-													<label>No. HP Orang Tua / Wali</label><br />
-													<input type="text" class="form-control" name="nohportu" value="<?php echo $nohportu; ?>" readonly></input>
-													<br />
-													<label>Riwayat Penyakit</label><br />
-													<textarea class="form-control" rows="3" id="riwayatpenyakit" name="riwayatpenyakit" readonly><?php echo $riwayatpenyakit; ?></textarea>
-													<br />
-													<label>Posisi saat mendaftar</label><br />
-													<?php
-													if ($posisi == 'Alamat Asal') {
-													?>
-														<input type="radio" id="asal" name="posisi" value="Alamat Asal" checked readonly> Alamat Asal<br />
-														<input type="radio" id="malang" name="posisi" value="Alamat di malang" readonly> Alamat di Malang<br />
-														<br />
-													<?php
-													} else {
-													?>
-														<input type="radio" id="asal" name="posisi" value="Alamat Asal" readonly> Alamat Asal<br />
-														<input type="radio" id="malang" name="posisi" value="Alamat di malang" checked readonly> Alamat di Malang<br />
-														<br />
-													<?php
-													}
-													?>
-													<label>Program Studi </label><br />
-													<input type="text" class="form-control" name="prodi" value="<?php echo $prodi; ?>" readonly></input>
-													<br />
-													<label>Nama Laboratorium </label><br />
-													<div class="row">
-														<div class="col-lg-6">
-															<input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
-														</div>
-														<div class="col-lg-6">
-															<?php
-															$query2 = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE namalab = '$namalab'");
-															$data2 = mysqli_fetch_array($query2);
-															$kapasitas = $data2['kapasitas'];
-															echo "<font style='color:red'>Sisa kapasitas lab = " . $kapasitas . "</font><br/>";
-															?>
-														</div>
-													</div>
-													<br />
-													<label>Dosen Pembimbing</label><br />
-													<input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
-													<br />
-													<label>Waktu Penggunaan</label>
-													<div class="row">
-														<div class="col-lg-6">
-															Tanggal Mulai<br />
-															<input type="text" class="form-control" id="tglmulai" name="tglmulai" value="<?= tgl_indo($tglmulai); ?>" disabled></input>
-														</div>
-														<div class="col-lg-6">
-															Tanggal Selesai<br />
-															<input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
-														</div>
-													</div>
-													<br />
-													<?php
-													if (isset($_GET['respon'])) {
-														$respon = mysqli_real_escape_string($dbsurat, $_GET['respon']);
-														if ($respon == "kosong") {
-													?>
-															<div class="alert alert-danger alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert">&times;</button>
-																<strong>ERROR!</strong> Alasan penolakan harus diisi
-															</div>
-													<?php
-														}
-													};
-													?>
-													<label>Lampiran</label>
-													<div class="container-fluid">
-														<div class="row">
-															<div class="col">
-																<p class="text-center">Lampiran-1</p>
-																<?php
-																if ($lamp1 == '') {
-																	$namafile = '../img/noimage.gif';
-																} else {
-																	$namafile = $lamp1;
-																}
-																?>
-																<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
-															</div>
-															<div class="col">
-																<p class="text-center">Lampiran-4</p>
-																<?php
-																if ($lamp4 == '') {
-																	$namafile = '../img/noimage.gif';
-																} else {
-																	$namafile = $lamp4;
-																}
-																?>
-																<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
-															</div>
-															<div class="col">
-																<p class="text-center">Lampiran-5</p>
-																<?php
-																if ($lamp5 == '') {
-																	$namafile = '../img/noimage.gif';
-																} else {
-																	$namafile = $lamp5;
-																}
-																?>
-																<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
-															</div>
-															<div class="col">
-																<p class="text-center">Lampiran-6</p>
-																<?php
-																if ($lamp6 == '') {
-																	$namafile = '../img/noimage.gif';
-																} else {
-																	$namafile = $lamp6;
-																}
-																?>
-																<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
-															</div>
-															<div class="col">
-																<p class="text-center">Lampiran-7</p>
-																<?php
-																if ($lamp7 == '') {
-																	$namafile = '../img/noimage.gif';
-																} else {
-																	$namafile = $lamp7;
-																}
-																?>
-																<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
-															</div>
-														</div>
-													</div>
 
+												<label>Nama</label> <br />
+												<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly></input>
+												<br />
+												<label>NIM</label><br />
+												<input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly></input>
+												<br />
+												<label>Tempat / Tgl. Lahir </label><br />
+												<input type="text" class="form-control" name="ttl" value="<?php echo $ttl; ?>" readonly></input>
+												<br />
+												<label>Alamat Asal </label><br />
+												<textarea class="form-control" rows="3" id="alamatasal" name="alamatasal" readonly><?php echo $alamatasal; ?></textarea>
+												<br />
+												<label>Alamat Di Malang </label><br />
+												<textarea class="form-control" rows="3" id="alamatmalang" name="alamatmalang" readonly><?php echo $alamatmalang; ?></textarea>
+												<br />
+												<label>No. HP</label><br />
+												<input type="text" class="form-control" name="nohp" value="<?php echo $nohp; ?>" readonly></input>
+												<br />
+												<label>No. HP Orang Tua / Wali</label><br />
+												<input type="text" class="form-control" name="nohportu" value="<?php echo $nohportu; ?>" readonly></input>
+												<br />
+												<label>Riwayat Penyakit</label><br />
+												<textarea class="form-control" rows="3" id="riwayatpenyakit" name="riwayatpenyakit" readonly><?php echo $riwayatpenyakit; ?></textarea>
+												<br />
+												<label>Posisi saat mendaftar</label><br />
+												<?php
+												if ($posisi == 'Alamat Asal') {
+												?>
+													<input type="radio" id="asal" name="posisi" value="Alamat Asal" checked readonly> Alamat Asal<br />
+													<input type="radio" id="malang" name="posisi" value="Alamat di malang" readonly> Alamat di Malang<br />
+													<br />
+												<?php
+												} else {
+												?>
+													<input type="radio" id="asal" name="posisi" value="Alamat Asal" readonly> Alamat Asal<br />
+													<input type="radio" id="malang" name="posisi" value="Alamat di malang" checked readonly> Alamat di Malang<br />
+													<br />
+												<?php
+												}
+												?>
+												<label>Program Studi </label><br />
+												<input type="text" class="form-control" name="prodi" value="<?php echo $prodi; ?>" readonly></input>
+												<br />
+												<?php
+												//kapasitas lab
+												$query2 = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE namalab = '$namalab'");
+												$data2 = mysqli_fetch_array($query2);
+												$kapasitas = $data2['kapasitas'];
+												?>
+												<div class="row">
+													<div class="col-lg-6">
+														<label>Laboratorium </label>
+													</div>
+													<div class="col-lg-6">
+														<p style="color:red">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
+													</div>
+												</div>
+												<input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
+												<br />
+												<label>Dosen Pembimbing</label><br />
+												<input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
+												<br />
+												<label>Waktu Penggunaan</label>
+												<div class="row">
+													<div class="col-lg-6">
+														Tanggal Mulai<br />
+														<input type="text" class="form-control" id="tglmulai" name="tglmulai" value="<?= tgl_indo($tglmulai); ?>" disabled></input>
+													</div>
+													<div class="col-lg-6">
+														Tanggal Selesai<br />
+														<input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
+													</div>
+												</div>
+												<br />
+												<?php
+												if (isset($_GET['respon'])) {
+													$respon = mysqli_real_escape_string($dbsurat, $_GET['respon']);
+													if ($respon == "kosong") {
+												?>
+														<div class="alert alert-danger alert-dismissible fade show">
+															<button type="button" class="close" data-dismiss="alert">&times;</button>
+															<strong>ERROR!</strong> Alasan penolakan harus diisi
+														</div>
+												<?php
+													}
+												};
+												?>
+												<label>Lampiran</label> <br />
+												<small style="color:red">Klik pada gambar untuk memperbesar</small>
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col">
+															<p class="text-center">Lampiran-1</p>
+															<?php
+															if ($lamp1 == '') {
+																$namafile = '../img/noimage.gif';
+															} else {
+																$namafile = $lamp1;
+															}
+															?>
+															<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+														</div>
+														<div class="col">
+															<p class="text-center">Lampiran-4</p>
+															<?php
+															if ($lamp4 == '') {
+																$namafile = '../img/noimage.gif';
+															} else {
+																$namafile = $lamp4;
+															}
+															?>
+															<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+														</div>
+														<div class="col">
+															<p class="text-center">Lampiran-5</p>
+															<?php
+															if ($lamp5 == '') {
+																$namafile = '../img/noimage.gif';
+															} else {
+																$namafile = $lamp5;
+															}
+															?>
+															<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+														</div>
+														<div class="col">
+															<p class="text-center">Lampiran-6</p>
+															<?php
+															if ($lamp6 == '') {
+																$namafile = '../img/noimage.gif';
+															} else {
+																$namafile = $lamp6;
+															}
+															?>
+															<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+														</div>
+														<div class="col">
+															<p class="text-center">Lampiran-7</p>
+															<?php
+															if ($lamp7 == '') {
+																$namafile = '../img/noimage.gif';
+															} else {
+																$namafile = $lamp7;
+															}
+															?>
+															<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+														</div>
+													</div>
+												</div>
+												<form role="form" method="POST">
 													<input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
 													<input type="hidden" name="jurusan" value="<?php echo $jurusan; ?>"></input>
 													<input type="hidden" name="nim" value="<?php echo $nim; ?>"></input>
 													<input type="hidden" name="nama" value="<?php echo $nama; ?>"></input>
+													<input type="hidden" name="namalab" value="<?php echo $namalab; ?>"></input>
 													<div class="row">
 														<div class="col-lg-6">
-															<button name="aksi" value="setujui" type="submit" formaction="lab-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
+															<button name="aksi" value="setujui" type="submit" formaction="ijinlab-dosbing-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
 														</div>
 														<div class="col-lg-6">
 															<button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tolak" class="btn btn-danger btn-block"> <i class="fa fa-times"></i> Tolak</button>
@@ -298,7 +296,7 @@ require('../system/myfunc.php');
 																</div>
 																<div class="modal-footer justify-content-between">
 																	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-																	<button name="aksi" value="tolak" type="submit" formaction="lab-tolak.php?nodata=<?php echo $nodata; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-times"></i> Tolak</button>
+																	<button name="aksi" value="tolak" type="submit" formaction="ijinlab-dosbing-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menolak pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
 																</div>
 															</div>
 														</div>

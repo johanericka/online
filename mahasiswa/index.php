@@ -141,7 +141,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 													<?php
 													} else {
 													?>
-														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <?= $keterangan; ?><br />
+														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 													<?php
 													};
 													?>
@@ -157,7 +157,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 													<?php
 													} else {
 													?>
-														Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <?= $keterangan; ?><br />
+														Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 													<?php
 													};
 													?>
@@ -173,7 +173,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 													<?php
 													} else {
 													?>
-														Ditolak oleh Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> dengan alasan <?= $keterangan; ?><br />
+														Ditolak oleh Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b></b><br />
 												<?php
 													}
 												};
@@ -262,7 +262,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 														<?php
 														} else {
 														?>
-															Ditolak Dosen Koordinator PKL <?= namadosen($dbsurat, $validatorkoor); ?> dengan alasan <?= $keterangan; ?><br />
+															Ditolak Dosen Koordinator PKL <?= namadosen($dbsurat, $validatorkoor); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 														<?php
 														};
 														?>
@@ -278,7 +278,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 														<?php
 														} else {
 														?>
-															Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?> dengan alasan <?= $keterangan; ?><br />
+															Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 														<?php
 														};
 														?>
@@ -294,7 +294,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 														<?php
 														} else {
 														?>
-															Ditolak oleh Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validatorfakultas); ?> dengan alasan <?= $keterangan; ?><br />
+															Ditolak oleh Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validatorfakultas); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 														<?php
 														};
 														?>
@@ -357,7 +357,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 													<?php
 													} else {
 													?>
-														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validatordosen); ?> dengan alasan <?= $keterangan; ?><br />
+														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validatordosen); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 													<?php
 													};
 													?>

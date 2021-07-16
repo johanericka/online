@@ -163,9 +163,9 @@ if ($nohp == null or $email == null) {
 												?>
 												<!-- /. PKL koordinator-->
 
-												<!-- ijin lab -->
+												<!-- ijin lab sebagai dosbing-->
 												<?php
-												$query = mysqli_query($dbsurat, "select * from ijinlab where validator1='$nip' AND validasi1 = 0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator1='$nip' AND validasi1 = 0");
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
@@ -198,7 +198,44 @@ if ($nohp == null or $email == null) {
 													$no++;
 												}
 												?>
-												<!-- /.ijin lab -->
+												<!-- /.ijin lab sebagai dosbing -->
+
+												<!-- ijin lab sebagai kaprodi-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
+												$jmldata = mysqli_num_rows($query);
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penggunaan Laboratorium';
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasi1 == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="ijinlab-dosbing-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search"></i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /.ijin lab sebagai kaprodi -->
 
 												<!-- ijin penelitian -->
 												<?php
