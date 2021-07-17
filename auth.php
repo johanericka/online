@@ -20,7 +20,7 @@ if ($kunci == $antibot) {
         $nip = $dhasil['nip'];
         $nohp = $dhasil['nohp'];
         $email = $dhasil['email'];
-        $jurusan = $dhasil['jurusan'];
+        $prodi = $dhasil['prodi'];
         $hakakses = $dhasil['hakakses'];
 
         //cari jabatan
@@ -39,7 +39,7 @@ if ($kunci == $antibot) {
         $_SESSION['user'] = $username;
         $_SESSION['nama'] = $nama;
         $_SESSION['nip'] = $nip;
-        $_SESSION['jurusan'] = $jurusan;
+        $_SESSION['prodi'] = $prodi;
         $_SESSION['hakakses'] = $hakakses;
         $_SESSION['jabatan'] = $jabatan;
 

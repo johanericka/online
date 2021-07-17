@@ -6,7 +6,7 @@ if ($_SESSION['hakakses'] != "mahasiswa") {
 require('../system/dbconn.php');
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 //cek kalo sudah mengisi data maka lanjut ke upload lampiran
@@ -62,6 +62,7 @@ if ($jhasil > 0) {
 
         <!-- Main Sidebar Container -->
         <?php require('sidebar.php'); ?>
+        <!-- ./Main Sidebar Container -->
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

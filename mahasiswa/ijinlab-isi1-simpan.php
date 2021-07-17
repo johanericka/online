@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Jakarta");
 $tanggal = date('Y-m-d H:i:s');
 $nama =  mysqli_real_escape_string($dbsurat, $_POST['nama']);
 $nim = mysqli_real_escape_string($dbsurat, $_POST['nim']);
-$prodi = mysqli_real_escape_string($dbsurat, $_POST['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_POST['prodi']);
 $ttl = mysqli_real_escape_string($dbsurat, $_POST['ttl']);
 $alamatasal = mysqli_real_escape_string($dbsurat, $_POST['alamatasal']);
 $alamatmalang = mysqli_real_escape_string($dbsurat, $_POST['alamatmalang']);

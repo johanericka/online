@@ -15,7 +15,7 @@ require('../system/dbconn.php');
             <div class="info">
                 <a href="#" class="d-block"><?= $nama; ?></a>
                 <a href="#" class="d-block">NIM : <?= $nim; ?></a>
-                <a href="#" class="d-block">Prodi : <?= $jurusan; ?></a>
+                <a href="#" class="d-block">Prodi : <?= $prodi; ?></a>
             </div>
         </div>
 
@@ -279,7 +279,7 @@ require('../system/dbconn.php');
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../logout.php" class="nav-link">
+                    <a href="../deauth.php" class="nav-link">
                         <i class="nav-icon fas fa-window-close"></i>
                         <p>
                             Keluar

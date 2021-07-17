@@ -7,7 +7,7 @@ require('../system/dbconn.php');
 require('../system/myfunc.php');
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_SESSION['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 if (isset($_GET['nodata'])) {

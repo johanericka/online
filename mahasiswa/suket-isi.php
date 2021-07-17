@@ -1,3 +1,15 @@
+<?php
+session_start();
+if ($_SESSION['hakakses'] != "mahasiswa") {
+	header("location:../deauth.php");
+}
+require('../system/dbconn.php');
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
+$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,30 +34,6 @@
 	<script type="text/javascript" src="../system/js/jquery.form.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "mahasiswa") {
-	header("location:../index.php?pesan=noaccess");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nim = $_SESSION['nim'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$role = $_SESSION['role'];
-?>
 
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
@@ -62,76 +50,8 @@ $role = $_SESSION['role'];
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="#" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIM : <?php echo $nim; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item has-treeview menu-close">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fa fa-file"></i>
-								<p>
-									Dokumen
-									<i class="right fas fa-angle-left"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/wfh/doc/SOPIjinLayananLaboratorium.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>SOP Ijin Layanan Lab.</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="mailto:saintekonline@gmail.com" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-window-close"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php require('sidebar.php'); ?>
+		<!-- ./Main Sidebar Container -->
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -139,52 +59,40 @@ $role = $_SESSION['role'];
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h3>Pengajuan Surat Keterangan</h3>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
 			</section>
 
-			<!-- ambil data mahasiswa dari database -->
-			<?php
-			$idmhs = $_SESSION['iduser'];
-			$datamhs = mysqli_query($dbsurat, "SELECT * FROM useraccount2 WHERE kode='$idmhs'");
-			// ambil data dari record
-			$row = mysqli_fetch_array($datamhs);
-			$nim = $row['kode'];
-			$nama = $row['nama'];
-			//$kdjurusan = substr($nim,2,2);
-			//$datajurusan = mysqli_query($dbsurat,"select * from jurusan where kdjurusan='$kdjurusan'");
-			//$data = mysqli_fetch_array($datajurusan);
-			$namajurusan = $_SESSION['jurusan'];
-			?>
-
 			<!-- Main content -->
 			<div class="content">
 				<div class="container-fluid">
-					Saya yang bertanda tangan di bawah ini <br />
-					<form role="form" method="post" action="suket-simpan.php">
-						Nama <br />
-						<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly /></input>
-						NIM <br />
-						<input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly /></input>
-						Jurusan <br />
-						<input type="text" class="form-control" name="jurusan" value="<?php echo $namajurusan ?>" readonly /></input>
-						<br />
-						<label>Mengajukan permohonan</label>
-						<br />
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Rekomendasi" checked>
-								<label class="form-check-label">Surat Keterangan Rekomendasi</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Kelakuan Baik">
-								<label class="form-check-label">Surat Keterangan Kelakuan Baik</label>
-							</div>
-							<p style="color:blue">Surat Keterangan Aktif Kuliah dikeluarkan oleh Akademik Pusat (Universitas) silahkan klik <a href="http://akademik.uin-malang.ac.id/" target="_blank">disini</a></p>
-							<!--
+					<div class="row">
+						<div class="col-12">
+							<form role="form" method="post" action="suket-simpan.php">
+								<label>Nama</label>
+								<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly /></input>
+								<label>NIM</label>
+								<input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly /></input>
+								<label>Program Studi</label>
+								<input type="text" class="form-control" name="prodi" value="<?php echo $prodi ?>" readonly /></input>
+								<br />
+								<label>Mengajukan permohonan</label>
+								<br />
+								<div class="form-group">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Rekomendasi" checked>
+										<label class="form-check-label">Surat Keterangan Rekomendasi</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Kelakuan Baik">
+										<label class="form-check-label">Surat Keterangan Kelakuan Baik</label>
+									</div>
+									<p>Surat Keterangan Aktif Kuliah dikeluarkan oleh Akademik Pusat (Universitas) silahkan <a href="http://akademik.uin-malang.ac.id/" target="_blank">klik disini</a></p>
+									<!-- UKT -->
+									<!-- 
 							<div class="form-check">
 							  <input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Keringanan UKT">
 							  <label class="form-check-label" >Surat Keterangan Keringanan UKT</label>
@@ -198,25 +106,28 @@ $role = $_SESSION['role'];
 							  <label class="form-check-label" >Surat Keterangan Perpanjangan Waktu Pembayaran UKT</label>
 							</div>
 						-->
-						</div>
-						<!--
+								</div>
+								<!--
 						<label>Dosen Wali </label>
 						<div class="search-box">
 							<input type="text" autocomplete="off" placeholder="cari dosen" name="dosen"/></input>
 							<div class="result"></div>
 						</div-->
-						<div class="form-group">
-							<label>Keperluan</label>
-							<textarea class="form-control" rows="3" placeholder="" name="keperluan"></textarea>
-						</div>
-						<button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Ajukan</button>
-					</form>
 
-				</div><!-- /.container-fluid -->
+								<label>Keperluan</label><small style="color:red"> wajib diisi</small>
+								<textarea class="form-control" rows="3" placeholder="" name="keperluan" required></textarea>
+								<br />
+
+								<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-check"></i> Ajukan</button>
+								<br />
+							</form>
+						</div><!-- /.container-fluid -->
+					</div>
+					<!-- /.content -->
+				</div>
+				<!-- /.content-wrapper -->
 			</div>
-			<!-- /.content -->
 		</div>
-		<!-- /.content-wrapper -->
 
 		<!-- footer -->
 		<?php include '../system/footer.html' ?>
