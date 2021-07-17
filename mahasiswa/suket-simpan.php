@@ -29,10 +29,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
 $nipwd = $dhasil['nip'];
-
+$statussurat = '-1';
 //masukin data
-$stmt = $dbsurat->prepare("INSERT INTO suket (tanggal, nim, nama, prodi, jenissurat, keperluan, validator2, validator3) VALUES (?,?,?,?,?,?,?,?)");
-$stmt->bind_param("ssssssss", $tanggal, $nim, $nama, $prodi, $jenissurat, $keperluan, $nipkaprodi, $nipwd);
+$stmt = $dbsurat->prepare("INSERT INTO suket (tanggal, nim, nama, prodi, jenissurat, keperluan, validator2, validator3,statussurat) VALUES (?,?,?,?,?,?,?,?,?)");
+$stmt->bind_param("ssssssssi", $tanggal, $nim, $nama, $prodi, $jenissurat, $keperluan, $nipkaprodi, $nipwd, $statussurat);
 $stmt->execute();
 
 /*
@@ -69,4 +69,4 @@ if (mysqli_query($dbsurat, $sql)) {
 	echo mysqli_error($dbsurat);
 }
 */
-header('location:index.php');
+header('location:suket-isilampiran.php');

@@ -3,7 +3,7 @@ session_start();
 $user = $_SESSION['user'];
 $nip = $_SESSION['nip'];
 $nama = $_SESSION['nama'];
-$jurusan = $_SESSION['jurusan'];
+$prodi = $_SESSION['prodi'];
 $hakakses = $_SESSION['hakakses'];
 $jabatan = $_SESSION['jabatan'];
 if ($_SESSION['hakakses'] != "dosen") {
@@ -269,7 +269,7 @@ require('../system/myfunc.php');
                                                 </div>
                                                 <form role="form" method="POST">
                                                     <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
-                                                    <input type="hidden" name="jurusan" value="<?php echo $jurusan; ?>"></input>
+                                                    <input type="hidden" name="prodi" value="<?php echo $prodi; ?>"></input>
                                                     <input type="hidden" name="nim" value="<?php echo $nim; ?>"></input>
                                                     <input type="hidden" name="nama" value="<?php echo $nama; ?>"></input>
                                                     <input type="hidden" name="namalab" value="<?php echo $namalab; ?>"></input>

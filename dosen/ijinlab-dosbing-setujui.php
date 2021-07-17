@@ -7,7 +7,7 @@ $tgl = date('Y-m-d H:i:s');
 $nim = mysqli_real_escape_string($dbsurat, $_POST['nim']);
 $nama = mysqli_real_escape_string($dbsurat, $_POST['nama']);
 $namalab = mysqli_real_escape_string($dbsurat, $_POST['namalab']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_POST['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_POST['prodi']);
 
 //cek kapasitas lab
 $sql3 = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE namalab='$namalab'");

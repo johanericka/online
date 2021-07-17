@@ -3,7 +3,7 @@ session_start();
 $user = $_SESSION['user'];
 $nip = $_SESSION['nip'];
 $nama = $_SESSION['nama'];
-$jurusan = $_SESSION['jurusan'];
+$prodi = $_SESSION['prodi'];
 $hakakses = $_SESSION['hakakses'];
 $jabatan = $_SESSION['jabatan'];
 if ($_SESSION['hakakses'] != "dosen") {
@@ -14,6 +14,7 @@ require('../system/myfunc.php');
 ?>
 
 <?php
+/*
 //cek apabila ada data user kurang lengkap lempar ke update profile
 $stmt = $dbsurat->prepare('SELECT * FROM pengguna WHERE nip=?');
 $stmt->bind_param('s', $nip);
@@ -25,6 +26,7 @@ $email = $dhasil['email'];
 if ($nohp == null or $email == null) {
 	header("location:userprofile-tampil.php");
 }
+*/
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +121,7 @@ if ($nohp == null or $email == null) {
 													<th width="10%" style="text-align:center">NIM</th>
 													<th style="text-align:center">Nama</th>
 													<th style="text-align:center">Surat</th>
-													<th width="10%" colspan="2" style="text-align:center">Aksi</th>
+													<th width="15%" colspan="2" style="text-align:center">Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -134,7 +136,7 @@ if ($nohp == null or $email == null) {
 													$nama = $data['nama'];
 													$surat = 'Ijin PKL';
 													$validasikoordinator = $data['validasikoordinator'];
-													$validasijurusan = $data['validasijurusan'];
+													$validasiprodi = $data['validasiprodi'];
 													$validasifakultas = $data['validasifakultas'];
 												?>
 													<tr>
@@ -282,7 +284,7 @@ if ($nohp == null or $email == null) {
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
 													$verifikasidosen = $data['validasidosen'];
-													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasiprodi = $data['validasiprodi'];
 													$verifikasifakultas = $data['validasifakultas'];
 												?>
 													<tr>
@@ -319,7 +321,7 @@ if ($nohp == null or $email == null) {
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
 													$verifikasidosen = $data['validasidosen'];
-													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasiprodi = $data['validasiprodi'];
 													$verifikasifakultas = $data['validasifakultas'];
 												?>
 													<tr>
@@ -356,7 +358,7 @@ if ($nohp == null or $email == null) {
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
 													$verifikasidosen = $data['validasidosen'];
-													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasiprodi = $data['validasiprodi'];
 													$verifikasifakultas = $data['validasifakultas'];
 												?>
 													<tr>
@@ -393,7 +395,7 @@ if ($nohp == null or $email == null) {
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
 													$verifikasidosen = $data['validasidosen'];
-													$verifikasijurusan = $data['validasijurusan'];
+													$verifikasiprodi = $data['validasiprodi'];
 													$verifikasifakultas = $data['validasifakultas'];
 												?>
 													<tr>
@@ -421,17 +423,17 @@ if ($nohp == null or $email == null) {
 												?>
 												<!-- /pengambilandata -->
 
-												<!-- Surat Keterangan -->
+												<!-- Surat Keterangan as kaprodi-->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validatordosen='$user' AND validasidosen is null");
+												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator2='$nip' AND validasi2 = 0");
 												while ($data = mysqli_fetch_array($query)) {
-													$nodata = $data['id'];
+													$nodata = $data['no'];
 													$nim = $data['nim'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
-													$verifikasidosen = $data['validasidosen'];
-													$verifikasijurusan = $data['validasijurusan'];
-													$verifikasifakultas = $data['validasifakultas'];
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?php echo $no; ?></td>
@@ -439,24 +441,49 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $nama; ?></td>
 														<td><?php echo $surat; ?></td>
 														<td>
-															<?php
-															if ($verifikasidosen == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="suket-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
-																</a>
-															<?php
-															};
-															?>
+															<a class="btn btn-info btn-sm" href="suket-kaprodi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																<i class="fas fa-search">
+																</i>
+																Lihat
+															</a>
 														</td>
 													</tr>
 												<?php
 													$no++;
 												}
 												?>
-												<!-- /Surat Keterangan -->
+												<!-- /Surat Keterangan as kaprodi-->
+
+												<!-- Surat Keterangan as WD-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = $data['jenissurat'];
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="suket-wd-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																<i class="fas fa-search">
+																</i>
+																Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /Surat Keterangan as WD-->
 
 												<!-- SKPI as Dosen PA -->
 												<?php
@@ -553,7 +580,7 @@ if ($nohp == null or $email == null) {
 													$tglwfh3 = $data['tglwfh3'];
 													$tglwfh4 = $data['tglwfh4'];
 													$tglwfh5 = $data['tglwfh5'];
-													$verifikasijurusan = $data['verifikasijurusan'];
+													$verifikasiprodi = $data['verifikasiprodi'];
 													$verifikasifakultas = $data['verifikasifakultas'];
 													if (date($tglwfh5) != 0) {
 														$wfhselesai = $tglwfh5;
@@ -581,7 +608,7 @@ if ($nohp == null or $email == null) {
 														</td>
 														<td>
 															<?php
-															if ($verifikasijurusan == 0) {
+															if ($verifikasiprodi == 0) {
 															?>
 																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-search">
@@ -592,7 +619,7 @@ if ($nohp == null or $email == null) {
 															};
 															?>
 															<?php
-															if ($verifikasijurusan == 1) {
+															if ($verifikasiprodi == 1) {
 															?>
 																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-print">
@@ -603,7 +630,7 @@ if ($nohp == null or $email == null) {
 															};
 															?>
 															<?php
-															if ($verifikasijurusan == 2) {
+															if ($verifikasiprodi == 2) {
 															?>
 																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-times">
@@ -618,7 +645,7 @@ if ($nohp == null or $email == null) {
 														</td>
 														<td>
 															<?php
-															if ($verifikasijurusan < 2 and $verifikasifakultas == 0) {
+															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
 															?>
 																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-search">
@@ -629,7 +656,7 @@ if ($nohp == null or $email == null) {
 															};
 															?>
 															<?php
-															if ($verifikasijurusan < 2 and $verifikasifakultas == 1) {
+															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
 															?>
 																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-print">
@@ -640,7 +667,7 @@ if ($nohp == null or $email == null) {
 															};
 															?>
 															<?php
-															if ($verifikasijurusan < 2 and $verifikasifakultas == 2) {
+															if ($verifikasiprodi < 2 and $verifikasifakultas == 2) {
 															?>
 																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-times">
@@ -653,7 +680,7 @@ if ($nohp == null or $email == null) {
 														</td>
 														<td>
 															<?php
-															if ($verifikasijurusan == 2 or $verifikasifakultas == 2) {
+															if ($verifikasiprodi == 2 or $verifikasifakultas == 2) {
 															?>
 																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
 																	<i class="fas fa-trash">

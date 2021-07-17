@@ -73,7 +73,7 @@ if ($nohp == null or $email == null) {
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h3></h3>
+							<h3>Dashboard</h3>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -214,8 +214,10 @@ if ($nohp == null or $email == null) {
 												} elseif ($statuspengajuan == 0) {
 												?>
 													<a class="btn btn-secondary btn-sm" disabled>
-														<i class="fas fa-spinner"></i>
-														Dalam proses
+														<i class="fas fa-spinner"></i> Proses
+													</a>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="lab-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Batalkan
 													</a>
 												<?php
 												} elseif ($statuspengajuan == 2) {
@@ -350,6 +352,7 @@ if ($nohp == null or $email == null) {
 										$validator2 = $q['validator2'];
 										$validasi3 = $q['validasi3'];
 										$validator3 = $q['validator3'];
+										$keterangan = $q['keterangan'];
 										$statussurat = $q['statussurat'];
 									?>
 										<tr>
@@ -400,13 +403,16 @@ if ($nohp == null or $email == null) {
 												} elseif ($statussurat == 2) {
 												?>
 													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="suket-hapus.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-trash"></i>
+														<i class="fas fa-trash"></i> Hapus
 													</a>
 												<?php
 												} else {
 												?>
 													<a class="btn btn-secondary btn-sm" onclick="return alert('Harap menunggu proses verifikasi')" disabled>
-														<i class="fas fa-spinner"></i> Dalam proses
+														<i class="fas fa-spinner"></i> Proses
+													</a>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="suket-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Batalkan
 													</a>
 												<?php
 												}
