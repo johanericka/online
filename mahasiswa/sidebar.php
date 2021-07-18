@@ -77,6 +77,26 @@ require('../system/dbconn.php');
                         <?php
                         }
                         ?>
+
+                        <!-- surat keterangan UKT -->
+                        <?php
+                        $query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE nim='$nim' AND keterangan IS NULL");
+                        $cekdata = mysqli_num_rows($query);
+                        if ($cekdata == 0) {
+                        ?>
+                            <li class="nav-item">
+                                <a href="suket-ukt-isi.php" class="nav-link">
+                                    <i class="nav-icon fas fa-id-card"></i>
+                                    <p>
+                                        Surat Keterangan UKT
+                                        <span class="right badge badge-danger"></span>
+                                    </p>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+
                         <!-- surat pengantar PKL -->
                         <?php
                         $qpkl = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota='$nim'");

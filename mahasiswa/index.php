@@ -348,6 +348,8 @@ if ($nohp == null or $email == null) {
 									while ($q = mysqli_fetch_array($data)) {
 										$nodata = $q['no'];
 										$nim = $q['nim'];
+										$validasi1 = $q['validasi1'];
+										$validator1 = $q['validator1'];
 										$validasi2 = $q['validasi2'];
 										$validator2 = $q['validator2'];
 										$validasi3 = $q['validasi3'];
@@ -359,6 +361,25 @@ if ($nohp == null or $email == null) {
 											<td><?php echo $no++; ?></td>
 											<td><?php echo $q['jenissurat']; ?></td>
 											<td>
+												<!-- dosen wali -->
+												<?php
+												if ($validator1 <> '') {
+													if ($validasi1 == 0) {
+												?>
+														Menunggu verifikasi Dosen Wali <?= namadosen($dbsurat, $validator1); ?><br />
+													<?php
+													} elseif ($validasi1 == 1) {
+													?>
+														Telah disetujui Dosen Wali <?= namadosen($dbsurat, $validator1); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak oleh Dosen Wali <?= namadosen($dbsurat, $validator1); ?> dengan alasan <b style="color:red"> <?= $keterangan; ?></b><br />
+												<?php
+													}
+												};
+												?>
+
 												<!-- ketua jurusan -->
 												<?php
 												if ($validasi2 == 0) {
