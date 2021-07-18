@@ -100,20 +100,29 @@ require('../system/dbconn.php');
                         <!-- surat pengantar PKL -->
                         <?php
                         $qpkl = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota='$nim'");
-                        $dpkl = mysqli_fetch_array($qpkl);
-                        $nimketua = $dpkl['nimketua'];
+                        $jpkl = mysqli_num_rows($qpkl);
+                        if ($jpkl > 0) {
+                            $dpkl = mysqli_fetch_array($qpkl);
+                            $nimketua = $dpkl['nimketua'];
 
-                        $qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND validasifakultas=0");
-                        $jpkl2 = mysqli_num_rows($qpkl2);
-                        if ($jpkl2 == 0) {
+                            $qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND validasifakultas=0");
+                            $jpkl2 = mysqli_num_rows($qpkl2);
+                            if ($jpkl2 == 0) {
                         ?>
+                                <li class="nav-item">
+                                    <a href="pkl-isitempat.php" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Surat Pengantar PKL</p>
+                                    </a>
+                                </li>
+                            <?php
+                            }
+                        } else {
+                            ?>
                             <li class="nav-item">
-                                <a href="pkl-isilampiran.php" class="nav-link">
+                                <a href="pkl-isitempat.php" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        Surat Pengantar PKL
-                                        <span class="right badge badge-danger"></span>
-                                    </p>
+                                    <p>Surat Pengantar PKL</p>
                                 </a>
                             </li>
                         <?php

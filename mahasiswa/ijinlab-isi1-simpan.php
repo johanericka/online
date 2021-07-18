@@ -23,7 +23,6 @@ $jmlhari = (strtotime($tglselesai) - strtotime($tglmulai)) / 60 / 60 / 24;
 if ($jmlhari > 30) {
     $tglselesai = date('Y-m-d', strtotime($tglmulai . " +1 month"));
 }
-echo $tglselesai . "<br/>";
 
 //masukin data
 $stmt = $dbsurat->prepare("INSERT INTO ijinlab (tanggal, nim, nama, ttl, alamatasal, alamatmalang, nohp, nohportu, riwayatpenyakit, posisi, prodi, namalab, dosen,tglmulai,tglselesai) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
