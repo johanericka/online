@@ -58,4 +58,4 @@ $stmt = $dbsurat->prepare("UPDATE pkl
 $stmt->bind_param("sssii", $nipkoor, $nipkaprodi, $nipwd, $statussurat, $nodata);
 $stmt->execute();
 */
-//header("location:index.php");
+header("location:index.php");

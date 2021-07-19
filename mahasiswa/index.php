@@ -272,11 +272,11 @@ if ($nohp == null or $email == null) {
 												?>
 													<!-- koordinator PKL -->
 													<?php
-													if ($validator1 == 0) {
+													if ($validasi1 == 0) {
 													?>
 														Menunggu verifikasi Dosen Koordinator PKL <?= namadosen($dbsurat, $validator1); ?><br />
 													<?php
-													} elseif ($valkoor == 1) {
+													} elseif ($validasi1 == 1) {
 													?>
 														Telah disetujui Dosen Koordinator PKL <?= namadosen($dbsurat, $validator1); ?> <br />
 													<?php
@@ -288,11 +288,11 @@ if ($nohp == null or $email == null) {
 													?>
 													<!-- ketua jurusan -->
 													<?php
-													if ($validator2 == 0) {
+													if ($validasi2 == 0) {
 													?>
 														Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?><br />
 													<?php
-													} elseif ($valjur == 1) {
+													} elseif ($validasi2 == 1) {
 													?>
 														Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> <br />
 													<?php
@@ -304,11 +304,11 @@ if ($nohp == null or $email == null) {
 													?>
 													<!-- WD-1 -->
 													<?php
-													if ($validator3 == 0) {
+													if ($validasi3 == 0) {
 													?>
 														Menunggu verifikasi Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validator3); ?><br />
 													<?php
-													} elseif ($valfak == 1) {
+													} elseif ($validasi3 == 1) {
 													?>
 														Telah disetujui Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validator3); ?> <br />
 													<?php
