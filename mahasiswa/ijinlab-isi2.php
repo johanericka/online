@@ -194,7 +194,7 @@ if (isset($_GET['nodata'])) {
                                     <div class="form-group">
                                         <form action="ijinlab-upload.php" method="post" enctype="multipart/form-data">
                                             <label>Lampiran</label>
-                                            <select class="custom-select form-control-border" name="lampiran">
+                                            <select class="form-control" name="lampiran">
                                                 <option value="lamp1" selected>Lampiran-1 Hasil screening COVID-19</option>
                                                 <option value="lamp4">Lampiran-4 Karantina Mandiri</option>
                                                 <option value="lamp5">Lampiran-5 Kesanggupan menerapkan protokol kesehatan</option>
@@ -202,10 +202,9 @@ if (isset($_GET['nodata'])) {
                                                 <option value="lamp7">Lampiran-7 Kesediaan Karantina Mandiri</option>
                                             </select>
                                             <br />
-                                            <br />
                                             <label>File</label>
                                             <br />
-                                            <input type="file" name="fileToUpload" id="fileToUpload">
+                                            <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
                                             <br />
                                             <small style="color:red">Format file JPG/JPEG ukuran maksimal 1MB</small>
                                             <br />

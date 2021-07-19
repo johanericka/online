@@ -98,7 +98,7 @@ if ($jhasil > 0) {
                                         <input type="number" class="form-control" name="nim" value="<?= $nim; ?>" readonly /></input>
                                         <br />
                                         <label>Program Studi </label><br />
-                                        <input type="text" class="form-control" name="jurusan" value="<?php echo $jurusan; ?>" readonly /></input>
+                                        <input type="text" class="form-control" name="jurusan" value="<?php echo $prodi; ?>" readonly /></input>
                                         <br />
                                         <label>Tempat / Tgl. Lahir </label><small style="color:red">*</small><br />
                                         <input type="text" class="form-control" name="ttl" placeholder="Tempat / Tgl. Lahir" required>

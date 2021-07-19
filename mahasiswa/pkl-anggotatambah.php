@@ -1,25 +1,23 @@
 <?php
+session_start();
 require_once('../system/dbconn.php');
 
-$nim = mysqli_real_escape_string($dbsurat, $_POST['nim']);
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nimanggota = mysqli_real_escape_string($dbsurat, $_POST['nimanggota']);
-echo "NIM = " . $nim;
-echo "NIM anggota = " . $nimanggota;
-
+$nodata = mysqli_real_escape_string($dbsurat, $_POST['nodata']);
 
 if (empty($nimanggota)) {
 	$ket = "notfound";
 } else {
-	$carianggota = mysqli_query($dbsurat, "SELECT kode, nama FROM useraccount2 WHERE kode='$nimanggota'");
+	$carianggota = mysqli_query($dbsurat, "SELECT nip, nama FROM pengguna WHERE nip='$nimanggota'");
 	$hasil = mysqli_num_rows($carianggota);
 	if ($hasil > 0) {
 		$data = mysqli_fetch_array($carianggota);
-		$nimanggota2 = $data[0];
-		$namaanggota2 = $data[1];
+		$nimanggota2 = $data['nip'];
+		$namaanggota2 = $data['nama'];
 		$sql = "INSERT INTO pklanggota (nimketua, nimanggota, nama) 
-				values('" . $nim . "','" . $nimanggota2 . "','" . $namaanggota2 . "')";
+				values('$nim','$nimanggota2','$namaanggota2')";
 		if (mysqli_query($dbsurat, $sql)) {
-			echo "data tersimpan";
 			$ket = "ok";
 		} else {
 			echo "error " . $mysqli_error($dbsurat);
@@ -29,4 +27,4 @@ if (empty($nimanggota)) {
 	}
 }
 
-header("location:pkl-isi.php?ket=$ket");
+header("location:pkl-isianggota.php?nodata=$nodata&ket=$ket");

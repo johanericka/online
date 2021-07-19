@@ -76,39 +76,46 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12">
-                            <label>Nama</label>
-                            <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly /></input>
-                            <label>NIM</label>
-                            <input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly /></input>
-                            <label>Program Studi</label>
-                            <input type="text" class="form-control" name="prodi" value="<?php echo $prodi ?>" readonly /></input>
-                            <form role="form" method="post" action="pkl-isitempat-simpan.php">
-                                <label>Instansi tujuan PKL / Magang </label>
-                                <input type="text" class="form-control" name="instansi" placeholder="nama Instansi" required /></input>
-                                <label>Tempat PKL / Magang </label>
-                                <input type="text" class="form-control" name="tempatpkl" placeholder="Bagian / Divisi Instansi tujuan PKL / Magang" required /></input>
-                                <label>Alamat </label>
-                                <textarea class="form-control" rows="3" name="alamat" placeholder="alamat instansi" required></textarea>
-                                <br />
-                                <label>Tanggal</label>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            Tgl. Mulai
-                                            <input type="date" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
-                                        </div>
-                                        <div class="col-6">
-                                            Tgl. Selesai
-                                            <input type="date" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
-                                        </div>
-                                    </div>
-                                    <small style="color:red"><i>Maksimal 1 bulan </i></small>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Identitas Diri</h3>
                                 </div>
-                                <br />
-                                <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Isi Anggota <i class="fa fa-arrow-right"></i></button>
-                            </form>
-                            <br />
+                                <div class="card-body">
+                                    <label>Nama</label>
+                                    <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly /></input>
+                                    <label>NIM</label>
+                                    <input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly /></input>
+                                    <label>Program Studi</label>
+                                    <input type="text" class="form-control" name="prodi" value="<?php echo $prodi ?>" readonly /></input>
+                                    <form role="form" method="post" action="pkl-isitempat-simpan.php">
+                                        <label>Instansi tujuan PKL / Magang </label>
+                                        <input type="text" class="form-control" name="instansi" placeholder="nama Instansi" required /></input>
+                                        <label>Tempat PKL / Magang </label>
+                                        <input type="text" class="form-control" name="tempatpkl" placeholder="Bagian / Divisi Instansi tujuan PKL / Magang" required /></input>
+                                        <label>Alamat </label>
+                                        <textarea class="form-control" rows="3" name="alamat" placeholder="alamat instansi" required></textarea>
+                                        <br />
+                                        <label>Tanggal</label>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Tgl. Mulai
+                                                    <input type="date" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
+                                                </div>
+                                                <div class="col-6">
+                                                    Tgl. Selesai
+                                                    <input type="date" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
+                                                </div>
+                                            </div>
+                                            <small style="color:red"><i>Maksimal 1 bulan </i></small>
+                                        </div>
+                                        <br />
+                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Isi Anggota <i class="fa fa-arrow-right"></i></button>
+                                    </form>
+                                    <br />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -130,7 +130,7 @@ if ($nohp == null or $email == null) {
 										$validator3 = $data['validator3'];
 										$tglvalidasi3 = tgl_indo($data['tglvalidasi3']);
 										$keterangan = $data['keterangan'];
-										$statuspengajuan = $data['statuspengajuan'];
+										$statussurat = $data['statuspengajuan'];
 
 									?>
 										<tr>
@@ -139,7 +139,7 @@ if ($nohp == null or $email == null) {
 											<td>
 												<!-- data belum lengkap -->
 												<?php
-												if ($statuspengajuan == -1) {
+												if ($statussurat == -1) {
 												?>
 													<p style="color:red">Data belum lengkap</p>
 												<?php
@@ -197,21 +197,21 @@ if ($nohp == null or $email == null) {
 											</td>
 											<td>
 												<?php
-												if ($statuspengajuan == -1) {
+												if ($statussurat == -1) {
 												?>
 													<a class="btn btn-info btn-sm" href="ijinlab-isi2.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-file"></i>
 														Lengkapi
 													</a>
 												<?php
-												} elseif ($statuspengajuan == 1) {
+												} elseif ($statussurat == 1) {
 												?>
 													<a class="btn btn-success btn-sm" href="ijinlab-cetak.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-print"></i>
 														Cetak
 													</a>
 												<?php
-												} elseif ($statuspengajuan == 0) {
+												} elseif ($statussurat == 0) {
 												?>
 													<a class="btn btn-secondary btn-sm" disabled>
 														<i class="fas fa-spinner"></i> Proses
@@ -220,7 +220,7 @@ if ($nohp == null or $email == null) {
 														<i class="fas fa-trash"></i> Batalkan
 													</a>
 												<?php
-												} elseif ($statuspengajuan == 2) {
+												} elseif ($statussurat == 2) {
 												?>
 													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="lab-hapus.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-trash"></i> Hapus
@@ -239,104 +239,123 @@ if ($nohp == null or $email == null) {
 
 									<!-- Ijin PKL -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota = '$nim'");
-									$dquery = mysqli_num_rows($query);
-									if ($dquery > 0) {
-										while ($data = mysqli_fetch_array($query)) {
-											$nimketua = $data['nimketua'];
-
-											$query2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim = '$nimketua'");
-											while ($q = mysqli_fetch_array($query2)) {
-												$nodata = $q['id'];
-												$nim = $q['nim'];
-												$nama =  $q['nama'];
-												$valkoor = $q['validasikoordinator'];
-												$validatorkoor = $q['validatorkoor'];
-												$tglvalkoor = $q['tglvalidasikoordinator'];
-												$valjur = $q['validasijurusan'];
-												$validatorjurusan = $q['validatorjurusan'];
-												$tglvaljur = $q['tglvalidasijurusan'];
-												$valfak = $q['validasifakultas'];
-												$validatorfakultas = $q['validatorfakultas'];
-												$tglvalfak = $q['tglvalidasifakultas'];
-												$keterangan = $q['keterangan'];
+									$query2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim = '$nim'");
+									while ($q = mysqli_fetch_array($query2)) {
+										$nodata = $q['no'];
+										$nim = $q['nim'];
+										$nama =  $q['nama'];
+										$validasi1 = $q['validasi1'];
+										$validator1 = $q['validator1'];
+										$tglvalidasi1 = $q['tglvalidasi1'];
+										$validasi2 = $q['validasi2'];
+										$validator2 = $q['validator2'];
+										$tglvalidasi2 = $q['tglvalidasi2'];
+										$validasi3 = $q['validasi3'];
+										$validator3 = $q['validator3'];
+										$tglvalidasi3 = $q['tglvalidasi3'];
+										$keterangan = $q['keterangan'];
+										$statussurat = $q['statussurat'];
 									?>
 
-												<tr>
-													<td><?php echo $no++; ?></td>
-													<td>Surat Pengantar PKL <br />
-														Ketua <?= $nama; ?>
-													</td>
-													<td>
-														<!-- koordinator PKL -->
-														<?php
-														if ($valkoor == 0) {
-														?>
-															Menunggu verifikasi Dosen Koordinator PKL <?= namadosen($dbsurat, $validatorkoor); ?><br />
-														<?php
-														} elseif ($valkoor == 1) {
-														?>
-															Telah disetujui Dosen Koordinator PKL <?= namadosen($dbsurat, $validatorkoor); ?> <br />
-														<?php
-														} else {
-														?>
-															Ditolak Dosen Koordinator PKL <?= namadosen($dbsurat, $validatorkoor); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
-														<?php
-														};
-														?>
-														<!-- ketua jurusan -->
-														<?php
-														if ($valjur == 0) {
-														?>
-															Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?><br />
-														<?php
-														} elseif ($valjur == 1) {
-														?>
-															Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?> <br />
-														<?php
-														} else {
-														?>
-															Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validatorjurusan); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
-														<?php
-														};
-														?>
-														<!-- WD-1 -->
-														<?php
-														if ($valfak == 0) {
-														?>
-															Menunggu verifikasi Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validatorfakultas); ?><br />
-														<?php
-														} elseif ($valfak == 1) {
-														?>
-															Telah disetujui Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validatorfakultas); ?> <br />
-														<?php
-														} else {
-														?>
-															Ditolak oleh Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validatorfakultas); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
-														<?php
-														};
-														?>
-													</td>
-													<td colspan="2">
-														<?php
-														if ($valkoor == 1 and $valjur == 1 and $valfak == 1) {
-															echo '<a class="btn btn-success btn-sm" href="pkl-cetak.php?nodata=' . $nodata . '" target="_blank"> <i class="fas fa-print"></i> Cetak</a>';
-														}
-														?>
-														<?php
-														if ($valkoor == 2 or $valjur == 2 or $valfak == 2) {
-														?>
-															<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="pkl-hapus.php?nodata=<?= $nodata; ?>&nim=<?= $nim; ?>">
-																<i class="fas fa-trash-alt"></i>
-															</a>
-														<?php
-														}
-														?>
-													</td>
-												</tr>
+										<tr>
+											<td><?php echo $no++; ?></td>
+											<td>Surat Pengantar PKL <br />
+												Ketua <?= $nama; ?>
+											</td>
+											<td>
+												<?php
+												if ($statussurat == -1) {
+												?>
+													<p style="color:red">Data belum lengkap</p>
+												<?php
+												} else {
+												?>
+													<!-- koordinator PKL -->
+													<?php
+													if ($validator1 == 0) {
+													?>
+														Menunggu verifikasi Dosen Koordinator PKL <?= namadosen($dbsurat, $validator1); ?><br />
+													<?php
+													} elseif ($valkoor == 1) {
+													?>
+														Telah disetujui Dosen Koordinator PKL <?= namadosen($dbsurat, $validator1); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak Dosen Koordinator PKL <?= namadosen($dbsurat, $validatovalidator1rkoor); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
+													<?php
+													};
+													?>
+													<!-- ketua jurusan -->
+													<?php
+													if ($validator2 == 0) {
+													?>
+														Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?><br />
+													<?php
+													} elseif ($valjur == 1) {
+													?>
+														Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
+													<?php
+													};
+													?>
+													<!-- WD-1 -->
+													<?php
+													if ($validator3 == 0) {
+													?>
+														Menunggu verifikasi Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validator3); ?><br />
+													<?php
+													} elseif ($valfak == 1) {
+													?>
+														Telah disetujui Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validator3); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak oleh Wakil Dekan Bidang Kemahasiswaan <?= namadosen($dbsurat, $validator3); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
+												<?php
+													}
+												};
+												?>
+											</td>
+											<td colspan="2">
+												<?php
+												if ($statussurat == -1) {
+												?>
+													<a class="btn btn-info btn-sm" href="pkl-isianggota.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-file"></i>
+														Lengkapi
+													</a>
+												<?php
+												} elseif ($statussurat == 1) {
+												?>
+													<a class="btn btn-success btn-sm" href="pkl-cetak.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-print"></i>
+														Cetak
+													</a>
+												<?php
+												} elseif ($statussurat == 0) {
+												?>
+													<a class="btn btn-secondary btn-sm" disabled>
+														<i class="fas fa-spinner"></i> Proses
+													</a>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="pkl-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Batalkan
+													</a>
+												<?php
+												} elseif ($statussurat == 2) {
+												?>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="pkl-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Hapus
+													</a>
+												<?php
+												}
+												?>
+											</td>
+										</tr>
 									<?php
-											}
-										}
 									}
 									?>
 									<!-- /Ijin PKL -->

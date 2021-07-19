@@ -1,3 +1,16 @@
+<?php
+session_start();
+if ($_SESSION['hakakses'] != "mahasiswa") {
+	header("location:../deauth.php");
+}
+require('../system/dbconn.php');
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
+$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+$nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,31 +35,6 @@
 	<script type="text/javascript" src="../system/js/jquery.form.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "mahasiswa") {
-	header("location:../index.php?pesan=noaccess");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nim = $_SESSION['nim'];
-$nama = $_SESSION['nama'];
-$jurusan = $_SESSION['jurusan'];
-$status = $_SESSION['status'];
-?>
-
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
@@ -62,82 +50,9 @@ $status = $_SESSION['status'];
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="#" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIM : <?php echo $nim; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item has-treeview menu-close">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fa fa-file"></i>
-								<p>
-									Dokumen
-									<i class="right fas fa-angle-left"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/wfh/doc/SOPIjinLayananLaboratorium.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>SOP Ijin Layanan Lab.</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/wfh/doc/PemberitahuanKegiatanPKL.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>Pemberitahuan Kegiatan PKL</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="mailto:saintekonline@gmail.com" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-window-close"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php
+		require('sidebar.php');
+		?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -145,7 +60,7 @@ $status = $_SESSION['status'];
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h3>Pengajuan Surat Pengantar PKL / Magang</h3>
 							<div class="alert alert-warning alert-dismissible fade show">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -157,69 +72,126 @@ $status = $_SESSION['status'];
 				</div><!-- /.container-fluid -->
 			</section>
 
-			<!-- dapatkan no surat -->
-			<?php
-			$query = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nim' AND validatorkoor IS NULL");
-			$data = mysqli_fetch_array($query);
-			$nodata = $data['id'];
-			?>
-
 			<!-- Main content -->
-			<section class="content">
-				<div class="col-12 col-sm-6 col-lg-12">
-					<div class="card card-success card-tabs">
-						<b>Lampiran 1 - Pakta Integritas</b>
-						<br />
-						Upload Pakta Integritas PKL / Magang <a href="http://saintek.uin-malang.ac.id/online/doc/paktaintegritaspkl.docx" target="_blank"><b>Download disini </b></a>
-						<br />
-						<form action="upload-lampiranpkl.php" enctype="multipart/form-data" class="form-horizontal" method="post">
-							<input type="file" name="image" class="form-control" />
-							<small style="color:blue"><i>*) Ukuran file maksimal 1MB format PDF / JPG</i></small>
-							<br />
-							<input type="hidden" name="nim" value="<?php echo $nim; ?>" />
-							<input type="hidden" name="nodata" value="<?php echo $nodata; ?>" />
-							<button class="btn btn-block btn-primary btn-upload" name="upload" value="paktaintegritaspkl"><i class="fa fa-file-upload"></i> Upload Pakta Integritas PKL / Magang</button>
-						</form>
-						<br />
-						<?php
-						$query = mysqli_query($dbsurat, "SELECT * FROM upload WHERE nim='$nim' AND keterangan='paktaintegritaspkl'");
-						$cekhasil = mysqli_num_rows($query);
-						if ($cekhasil > 0) {
-							$data = mysqli_fetch_array($query);
-							$namafile = $data['namafile'];
-						} else {
-							$namafile = '../uploads/noimage.gif';
-						}
-						?>
-						<?php
-						$ext = substr($namafile, -3);
-						if ($ext == "pdf") {
-						?>
-							<div><iframe src="<?php echo $namafile; ?>" width="80%" height="500px"></iframe></div>
-						<?php
-						} else {
-						?>
-							<div><img src="<?php echo $namafile; ?>" width="80%" /></div>
-						<?php
-						}
-						?>
-						<br />
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<?php
+							if (isset($_GET['pesan'])) {
+								if ($_GET['pesan'] == "gagal") {
+							?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>ERROR!</strong> Upload file gagal
+									</div>
+								<?php
+								} else if ($_GET['pesan'] == "filesize") {
+								?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>ERROR! </strong> ukuran file terlalu besar
+									</div>
+								<?php
+								} else if ($_GET['pesan'] == "extention") {
+								?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>ERROR! </strong> format file harus JPG/JPEG
+									</div>
+								<?php
+								} else if ($_GET['pesan'] == "registered") {
+								?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>ERROR!</strong> Anda telah terdaftar<br />
+										Klik Lupa Password apabila anda lupa password
+									</div>
+								<?php
+								} else if ($_GET['pesan'] == "success") {
+								?>
+									<div class="alert alert-success alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>BERHASIL! </strong> upload file berhasil
+									</div>
+								<?php
+								} else if ($_GET['pesan'] == "noaccess") {
+								?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>ERROR! </strong> Anda tidak memiliki akses
+									</div>
+								<?php
+								} else if ($_GET['pesan'] == "antibot") {
+								?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>ERROR! </strong> penjumlahan salah
+									</div>
+							<?php
+								}
+							}
+							?>
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Lampiran Pakta Integritass</h3>
+								</div>
+								<div class="card-body">
+									<b>Lampiran 1 - Pakta Integritas</b>
+									<br />
+									Upload Pakta Integritas PKL / Magang <a href="../doc/paktaintegritaspkl.docx" target="_blank"><b>Download disini </b></a>
+									<br />
+									<form action="pkl-isilampiran-upload.php" enctype="multipart/form-data" class="form-horizontal" method="post">
+										<input type="file" name="fileToUpload" class="form-control" />
+										<small style="color:blue"><i>*) Ukuran file maksimal 1MB format JPEG / JPG</i></small>
+										<br />
+										<input type="hidden" name="nodata" value="<?= $nodata; ?>" />
+										<button class="btn btn-block btn-primary btn-upload" name="fileToUpload" value="fileToUpload"><i class="fa fa-file-upload"></i> Upload Pakta Integritas PKL / Magang</button>
+									</form>
+									<br />
+									<!--tampilkan lampiran-->
+									<?php
+									$qlampiran = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE no='$nodata' AND nim='$nim'");
+									$dlampiran = mysqli_fetch_array($qlampiran);
+									$lampiran = $dlampiran['lampiran'];
+									?>
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col">
+												<?php
+												if ($lampiran == '') {
+													$namafile = 'noimage.gif';
+												} else {
+													$namafile = $lampiran;
+												}
+												?>
+												Lampiran
+												<br />
+												<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+											</div>
+										</div>
+									</div>
+									<br />
 
-						<br />
-						<?php
-						if ($cekhasil > 0) {
-						?>
-							<a href="pkl-isi.php" class="btn btn-success"><i class="fa fa-arrow-right "></i> Isi Data </a>
-						<?php
-						} else {
-						?>
-							<a href="pkl-isi.php" class="btn btn-success disabled"><i class="fa fa-arrow-right"></i> Isi Data </a>
-						<?php
-						}
-						?>
+									<br />
+									<?php
+									if ($lampiran <> '') {
+									?>
+										<a href="pkl-ajukan.php?nodata=<?= $nodata; ?>" class="btn btn-success btn-block"><i class="fa fa-check "></i> Ajukan Pegantar PKL </a>
+									<?php
+									} else {
+									?>
+										<a href="#" class="btn btn-success btn-block disabled"><i class="fa fa-check"></i> Ajukan Pegantar PKL </a>
+									<?php
+									}
+									?>
+								</div>
+							</div>
+							</section>
+						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 		</div>
 
 		<!-- footer -->
