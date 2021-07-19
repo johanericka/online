@@ -108,7 +108,6 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                                     <input type="date" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
                                                 </div>
                                             </div>
-                                            <small style="color:red"><i>Maksimal 1 bulan </i></small>
                                         </div>
                                         <br />
                                         <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Isi Anggota <i class="fa fa-arrow-right"></i></button>
