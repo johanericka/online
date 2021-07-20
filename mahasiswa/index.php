@@ -73,7 +73,7 @@ if ($nohp == null or $email == null) {
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h3>Dashboard</h3>
+							<h3>Dashboard </h3>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -239,11 +239,20 @@ if ($nohp == null or $email == null) {
 
 									<!-- Ijin PKL -->
 									<?php
-									$query2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim = '$nim'");
+									$query1 = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota = '$nim'");
+									$jquery1 = mysqli_num_rows($query1);
+									if ($jquery1 > 0) {
+										$dquery1 = mysqli_fetch_array($query1);
+										$nimketuapkl = $dquery1['nimketua'];
+									} else {
+										$nimketuapkl = $nim;
+									}
+
+									$query2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim = '$nimketuapkl'");
 									while ($q = mysqli_fetch_array($query2)) {
 										$nodata = $q['no'];
-										$nim = $q['nim'];
-										$nama =  $q['nama'];
+										$nimketua = $q['nim'];
+										$namaketua =  $q['nama'];
 										$validasi1 = $q['validasi1'];
 										$validator1 = $q['validator1'];
 										$tglvalidasi1 = $q['tglvalidasi1'];
@@ -260,7 +269,7 @@ if ($nohp == null or $email == null) {
 										<tr>
 											<td><?php echo $no++; ?></td>
 											<td>Surat Pengantar PKL <br />
-												Ketua <?= $nama; ?>
+												Ketua <?= $namaketua; ?>
 											</td>
 											<td>
 												<?php
@@ -362,7 +371,7 @@ if ($nohp == null or $email == null) {
 
 									<!-- Surat Keterangan -->
 									<?php
-									$data = mysqli_query($dbsurat, "SELECT * FROM suket WHERE nim = '" . $nim . "'");
+									$data = mysqli_query($dbsurat, "SELECT * FROM suket WHERE nim='$nim'");
 									$cek = mysqli_num_rows($data);
 									while ($q = mysqli_fetch_array($data)) {
 										$nodata = $q['no'];
