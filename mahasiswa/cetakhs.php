@@ -1,3 +1,28 @@
+<?php
+session_start();
+if ($_SESSION['hakakses'] != "mahasiswa") {
+	header("location:../index.php?pesan=noaccess");
+}
+require('../system/dbconn.php');
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
+$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+
+//cek kalo sudah mengisi data maka lanjut ke upload lampiran
+$statuspengajuan = -1;
+$stmt = $dbsurat->prepare("SELECT * FROM ijinlab WHERE nim=? AND statuspengajuan=?");
+$stmt->bind_param("si", $nim, $statuspengajuan);
+$stmt->execute();
+$result = $stmt->get_result();
+$jhasil = $result->num_rows;
+if ($jhasil > 0) {
+	$dhasil = $result->fetch_array();
+	$nodata = $dhasil['no'];
+	header("location:ijinlab-isi2.php?nodata=$nodata");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,31 +44,6 @@
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "mahasiswa") {
-	header("location:../index.php?pesan=noaccess");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nim = $_SESSION['nim'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$role = $_SESSION['role'];
-?>
 
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
