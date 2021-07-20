@@ -18,4 +18,8 @@ $stmt = $dbsurat->prepare("INSERT INTO pkl (tanggal, prodi, nim, nama, instansi,
 $stmt->bind_param("sssssssss", $tanggal, $prodi, $nim, $nama, $instansi, $tempatpkl, $alamat, $tglmulai, $tglselesai);
 $stmt->execute();
 
-header("location:pkl-isianggota.php");
+$qpkl = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nim' and statussurat=-1");
+$dpkl = mysqli_fetch_array($qpkl);
+$nodata = $dpkl['no'];
+
+header("location:pkl-isianggota.php?nodata=$nodata");

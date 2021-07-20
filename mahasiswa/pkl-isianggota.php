@@ -10,7 +10,9 @@ $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
-$nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
+if (isset($_GET['nodata'])) {
+    $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,17 +74,6 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                     </div>
                 </div>
             </section>
-
-            <!-- ambil data pkl -->
-            <?php
-            $sql = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE no='$nodata' AND nim='$nim'");
-            $dsql = mysqli_fetch_array($sql);
-            $instansi = $dsql['instansi'];
-            $tempatpkl = $dsql['tempatpkl'];
-            $alamat = $dsql['alamat'];
-            $tglmulai = $dsql['tglmulai'];
-            $tglselesai = $dsql['tglselesai'];
-            ?>
 
             <!-- Main content -->
             <div class="content">
