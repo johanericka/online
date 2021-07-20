@@ -82,13 +82,10 @@ if ($jhasil > 0) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-
-                            <!-- card pilihan lab -->
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Identitas Diri</h3>
                                 </div>
-                                <!-- /.card-header -->
                                 <div class="card-body">
                                     <form role="form" method="POST" action="ijinlab-isi1-simpan.php">
                                         <label>Nama </label><br />

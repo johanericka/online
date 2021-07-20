@@ -881,6 +881,37 @@ $role = $_SESSION['role'];
 									}
 									?>
 									<!-- /SKPI as kajur -->
+
+									<!-- cetak KHS as kajur-->
+									<?php
+									$query = mysqli_query($dbsurat, "SELECT * FROM cetakkhs WHERE validator2='$nip' AND validasi2 = 0");
+									$jmldata = mysqli_num_rows($query);
+									while ($data = mysqli_fetch_array($query)) {
+										$nodata = $data['no'];
+										$nim = $data['nim'];
+										$nama = $data['nama'];
+										$jurusan = $data['jurusan'];
+										$surat = 'Permohonan Cetak KHS';
+										$validasi2 = $data['validasi2'];
+										$validasi3 = $data['validasi3'];
+									?>
+										<tr>
+											<td><?= $no; ?></td>
+											<td><?= $nim; ?></td>
+											<td><?= $nama; ?></td>
+											<td><?= $surat; ?></td>
+											<td>
+												<a class="btn btn-info btn-sm" href="cetakkhs-tampil.php?nodata=<?php echo $nodata; ?>">
+													<i class="fas fa-search"></i> Lihat
+												</a>
+											</td>
+										</tr>
+									<?php
+										$no++;
+									}
+									?>
+									<!-- /.Cetak KHS-->
+
 								</tbody>
 							</table>
 						</div>
