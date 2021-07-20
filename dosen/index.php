@@ -128,16 +128,16 @@ if ($nohp == null or $email == null) {
 
 												<!-- PKL Koordinator-->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE validatorkoor='$user' AND validasikoordinator = 0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE validator1='$user' AND validasi1 = 0");
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
-													$nodata = $data['id'];
+													$nodata = $data['no'];
 													$nim = $data['nim'];
 													$nama = $data['nama'];
 													$surat = 'Ijin PKL';
-													$validasikoordinator = $data['validasikoordinator'];
-													$validasiprodi = $data['validasiprodi'];
-													$validasifakultas = $data['validasifakultas'];
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?php echo $no; ?></td>
@@ -145,17 +145,9 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $nama; ?></td>
 														<td><?php echo $surat; ?></td>
 														<td>
-															<?php
-															if ($validasikoordinator == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="pkl-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
-																</a>
-															<?php
-															};
-															?>
+															<a class="btn btn-info btn-sm" href="pkl-tampil.php?nodata=<?php echo $nodata; ?>">
+																<i class="fas fa-search"></i> Lihat
+															</a>
 														</td>
 													</tr>
 												<?php
