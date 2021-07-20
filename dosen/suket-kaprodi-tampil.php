@@ -101,8 +101,14 @@ require('../system/myfunc.php');
 									<input type="text" class="form-control" name="jurusan" value="<?= $prodi; ?>" readonly /></input>
 									Jenis Surat <br />
 									<input type="text" class="form-control" name="jenissurat" value="<?= $jenissurat; ?>" readonly /></input>
-									Keperluan <br />
-									<input type="text" class="form-control" name="keperluan" value="<?= $keperluan; ?>" readonly /></input>
+									<?php
+									if ($keperluan <> '') {
+									?>
+										Keperluan <br />
+										<input type="text" class="form-control" name="keperluan" value="<?= $keperluan; ?>" readonly /></input>
+									<?php
+									}
+									?>
 									Lampiran <br />
 									<?php
 									if ($lampiran == '') {

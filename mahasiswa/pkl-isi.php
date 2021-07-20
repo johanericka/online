@@ -185,9 +185,9 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 							<label>Instansi </label>
 							<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required /></input>
 							<label>Tempat PKL / Magang </label>
-							<textarea class="form-control" rows="3" name="tempatpkl" placeholder="tempat PKL yang dituju" required></textarea>
+							<input type="text" class="form-control" name="tempatpkl" placeholder="tempat PKL yang dituju" required></input>
 							<label>Alamat </label>
-							<textarea class="form-control" rows="3" name="alamat" placeholder="alamat instansi" required></textarea>
+							<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required></input>
 							<br />
 							<label>Tanggal</label>
 							<div class="form-group">
