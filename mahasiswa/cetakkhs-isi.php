@@ -10,6 +10,7 @@ $prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
 $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 //cek kalo sudah mengisi data maka lanjut ke upload lampiran
+
 $statuspengajuan = -1;
 $stmt = $dbsurat->prepare("SELECT * FROM ijinlab WHERE nim=? AND statuspengajuan=?");
 $stmt->bind_param("si", $nim, $statuspengajuan);
@@ -21,6 +22,7 @@ if ($jhasil > 0) {
 	$nodata = $dhasil['no'];
 	header("location:ijinlab-isi2.php?nodata=$nodata");
 }
+
 ?>
 
 <!DOCTYPE html>
