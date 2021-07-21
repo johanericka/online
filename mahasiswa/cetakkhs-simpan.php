@@ -35,4 +35,4 @@ $stmt = $dbsurat->prepare("INSERT INTO cetakkhs (tanggal, nim, nama, prodi, seme
 $stmt->bind_param("sssssssssss", $tanggal, $nim, $nama, $prodi, $semester, $tahunakademik, $keperluan, $alasan, $alasanbelumdiambil, $nipkaprodi, $nipwd1);
 $stmt->execute();
 
-//header("location:index.php");
+header("location:index.php");

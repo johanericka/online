@@ -290,7 +290,7 @@ if ($nohp == null or $email == null) {
 												?>
 												<!-- /.ijin lab sebagai kaprodi -->
 
-												<!-- ijin lab sebagai kaprodi-->
+												<!-- ijin lab sebagai WD-->
 												<?php
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												$jmldata = mysqli_num_rows($query);
@@ -325,19 +325,19 @@ if ($nohp == null or $email == null) {
 													$no++;
 												}
 												?>
-												<!-- /.ijin lab sebagai kaprodi -->
+												<!-- /.ijin lab sebagai WD -->
 
-												<!-- ijin penelitian -->
+												<!-- ijin penelitian as dosbing-->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validatordosen='$user' AND validasidosen = 0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
-													$nodata = $data['id'];
+													$nodata = $data['no'];
 													$nim = $data['nim'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
-													$verifikasidosen = $data['validasidosen'];
-													$verifikasiprodi = $data['validasiprodi'];
-													$verifikasifakultas = $data['validasifakultas'];
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?php echo $no; ?></td>
@@ -345,24 +345,74 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $nama; ?></td>
 														<td><?php echo $surat; ?></td>
 														<td>
-															<?php
-															if ($verifikasidosen == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="ijinpenelitian-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
-																</a>
-															<?php
-															};
-															?>
+															<a class="btn btn-info btn-sm" href="ijinpenelitian-dosen-tampil.php?nodata=<?php echo $nodata; ?>">
+																<i class="fas fa-search"></i> Lihat
+															</a>
 														</td>
 													</tr>
 												<?php
 													$no++;
 												}
 												?>
-												<!-- /.ijin penelitian -->
+												<!-- /.ijin penelitian as dosbing-->
+
+												<!-- ijin penelitian as kaprodi-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penelitian';
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="ijinpenelitian-kaprodi-tampil.php?nodata=<?php echo $nodata; ?>">
+																<i class="fas fa-search"></i> Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /.ijin penelitian as kaprodi-->
+
+												<!-- ijin penelitian as WD-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penelitian';
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="ijinpenelitian-wd-tampil.php?nodata=<?php echo $nodata; ?>">
+																<i class="fas fa-search"></i> Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /.ijin penelitian as WD-->
 
 												<!-- peminjaman alat -->
 												<?php

@@ -1,92 +1,55 @@
 <?php
-  require_once('../system/dbconn.php');
-  
-	$nim = mysqli_real_escape_string($dbsurat,$_POST['nim']);
-	$kdjurusan = substr($nim,2,2);
-	$kdfakultas = substr($nim,2,1);
-  
-	//cari nama jurusan
-	$query = mysqli_query($dbsurat,"SELECT * FROM jurusan WHERE kdjurusan = '$kdjurusan'");
-	$data = mysqli_fetch_array($query);
-		$jurusan = $data['jurusan'];
-	
-	$nama = $_POST['nama'];
-  	$judulskripsi = mysqli_real_escape_string($dbsurat,$_POST['judulskripsi']);
-	
-	//cari kode dosen dari nama dosen
-	$namadosen = mysqli_real_escape_string($dbsurat,$_POST['namadosen']);
-	$sql1 = mysqli_query($dbsurat,"SELECT kode FROM useraccount2 WHERE nama = '$namadosen'");
-	$hasildosen = mysqli_num_rows($sql1);
-		$row = mysqli_fetch_row($sql1); 
-			$kddosen = $row[0];
-			$dosbing = $namadosen;		
-	
-  $instansi = mysqli_real_escape_string($dbsurat,$_POST['instansi']);
-  $alamat = mysqli_real_escape_string($dbsurat,$_POST['alamat']);
-  $tglpelaksanaan = date('y-m-d', strtotime($_POST['tanggal']));
-	$tglselesai = date('y-m-d', strtotime($_POST['tglselesai']));
-	
-	//cari kajur
-	$sql2 = mysqli_query($dbsurat,"select iddosen from pejabat where level = 5 and jurusan = '".$jurusan."'"); 
-	$row2 = mysqli_fetch_row($sql2); 
-		$kdkajur = $row2[0];
-  
-	//cari wd1
-	$sql = mysqli_query($dbsurat,"select iddosen from pejabat where level = 2 and jurusan = 'SAINTEK'"); 
-	$data = mysqli_fetch_row($sql); 
-		$kdwd = $data[0];
-	
-		echo "Judul skripsi = ".$judulskripsi."<br/>";
-		echo "Instansi = ".$instansi."<br/>";
-		echo "Alamat = ".$alamat."<br/>";
-		echo "Hasil Dosen = ".$hasildosen."<br/>";
-		echo "Tgl Mulai = ".$tglpelaksanaan."<br/>";
-		echo "Tgl Selesai = ".$tglselesai."<br/>";
-		
+session_start();
+require('../system/dbconn.php');
 
-	if (empty($judulskripsi) 
-			OR empty($instansi) 
-			OR empty($alamat)
-			OR $hasildosen == 0
-			OR $tglpelaksanaan == 0
-			OR $tglselesai == 0
-			){
-		echo "<script>alert('ERROR!! ada data yang belum terisi, silahkan cek kembali');
-		document.location='ijinpenelitian-isi.php'</script>";		
-	}else{
-	  $sql = "insert into ijinpenelitian (kdfakultas,
-										kdjurusan, 
-										nim, 
-										nama, 
-										judulskripsi, 
-										dosbing, 
-										instansi, 
-										alamat, 
-										tglpelaksanaan,
-										tglselesai,
-										validatordosen,
-										validatorjurusan,
-										validatorfakultas) 
-			                         values('".$kdfakultas."',
-										    '".$kdjurusan."',
-										    '".$nim."',
-										    '".$nama."',
-											'".$judulskripsi."',
-											'".$dosbing."',
-											'".$instansi."',
-											'".$alamat."',
-											'".$tglpelaksanaan."',
-											'".$tglselesai."',
-											'".$kddosen."',
-											'".$kdkajur."',
-											'".$kdwd."')";
-		if (mysqli_query($dbsurat,$sql)) {
-			echo "data tersimpan";
-		}else {
-			"error ".$mysqli_error($dbsurat);
-		}
-  
-		header("location:index.php");
-	}
-	
-?>
+date_default_timezone_set("Asia/Jakarta");
+$tanggal = date('Y-m-d H:i:s');
+
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
+$dosen = mysqli_real_escape_string($dbsurat, $_POST['dosen']);
+$judulskripsi = mysqli_real_escape_string($dbsurat, $_POST['judulskripsi']);
+$instansi = mysqli_real_escape_string($dbsurat, $_POST['instansi']);
+$alamat = mysqli_real_escape_string($dbsurat, $_POST['alamat']);
+$tglmulai = $_POST['tglmulai'];
+$tglselesai = $_POST['tglselesai'];
+
+//hitung jumlah hari
+$jmlhari = (strtotime($tglselesai) - strtotime($tglmulai)) / 60 / 60 / 24;
+if ($jmlhari > 30) {
+	$tglselesai = date('Y-m-d', strtotime($tglmulai . " +1 month"));
+}
+
+//cari nip dosen
+$stmt = $dbsurat->prepare("SELECT * FROM pengguna WHERE nama=?");
+$stmt->bind_param("s", $dosen);
+$stmt->execute();
+$result = $stmt->get_result();
+$dhasil = $result->fetch_assoc();
+$nipdosen = $dhasil['nip'];
+
+//cari nip kajur
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan='kajur'");
+$stmt->bind_param("s", $prodi);
+$stmt->execute();
+$result = $stmt->get_result();
+$dhasil = $result->fetch_assoc();
+$nipkaprodi = $dhasil['nip'];
+
+//cari nip wd-1
+$jabatan = 'wakildekan';
+$level = 2;
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=? AND level=?");
+$stmt->bind_param("si", $jabatan, $level);
+$stmt->execute();
+$result = $stmt->get_result();
+$dhasil = $result->fetch_assoc();
+$nipwd1 = $dhasil['nip'];
+
+//masukin data
+$stmt = $dbsurat->prepare("INSERT INTO ijinpenelitian (tanggal, nim, nama, prodi, judulskripsi, dosen, instansi, alamat, tglmulai, tglselesai, validator1, validator2, validator3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+$stmt->bind_param("sssssssssssss", $tanggal, $nim, $nama, $prodi, $judulskripsi, $dosen, $instansi, $alamat, $tglmulai, $tglselesai, $nipdosen, $nipkaprodi, $nipwd1);
+$stmt->execute();
+
+header("location:index.php");
