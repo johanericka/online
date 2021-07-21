@@ -85,7 +85,7 @@ if (isset($_GET['nodata'])) {
                                     <h3 class="card-title">Anggota Observasi</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="post" action="pkl-anggotatambah.php">
+                                    <form role="form" method="post" action="observasi-anggotatambah.php">
                                         <div class="form-group">
                                             NIM
                                             <input type="number" name="nimanggota" autocomplete="none" />
@@ -144,7 +144,7 @@ if (isset($_GET['nodata'])) {
                                                             <td><?= $nimanggota; ?></td>
                                                             <td><?= $nama; ?></td>
                                                             <td>
-                                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" href="pkl-anggotahapus.php?nodata=<?= $nodata; ?>&nimanggota=<?= $q['nimanggota']; ?>"><i class="fa fa-trash-alt"></i></a>
+                                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" href="observasi-anggotahapus.php?nodata=<?= $nodata; ?>&nimanggota=<?= $q['nimanggota']; ?>"><i class="fa fa-trash-alt"></i></a>
                                                             </td>
                                                         </tr>
                                                     <?php

@@ -34,12 +34,6 @@ $nipwd = $dhasil['nip'];
 
 $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 $statussurat = 0;
-echo $nim . "<br/>";
-echo $nipkoor . "<br/>";
-echo $nipkaprodi . "<br/>";
-echo $nipwd . "<br/>";
-echo $nodata . "<br/>";
-echo $statussurat . "<br/>";
 
 $qupdate = mysqli_query($dbsurat, "UPDATE pkl SET validator1='$nipkoor', validator2='$nipkaprodi', validator3='$nipwd', statussurat='0' WHERE no='$nodata' AND nim='$nim'");
 if ($qupdate) {
