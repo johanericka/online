@@ -1,3 +1,17 @@
+<?php
+session_start();
+if ($_SESSION['hakakses'] != "mahasiswa") {
+	header("location:../index.php?pesan=noaccess");
+}
+require('../system/dbconn.php');
+include('../system/myfunc.php');
+
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
+$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,31 +40,6 @@
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "mahasiswa") {
-	header("location:../index.php?pesan=noaccess");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nim = $_SESSION['nim'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$jurusan = $_SESSION['jurusan'];
-?>
-
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
@@ -66,60 +55,9 @@ $jurusan = $_SESSION['jurusan'];
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="../../system/index3.html" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIM : <?php echo $nim; ?></a>
-						<a href="#" class="d-block">Prodi : <?php echo $jurusan; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php
+		include('sidebar.php');
+		?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -127,8 +65,8 @@ $jurusan = $_SESSION['jurusan'];
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h3>Pengisian Data SKPI</i></h3>
+						<div class="col-sm-12">
+							<h3>Pengajuan Data SKPI</i></h3>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -136,98 +74,86 @@ $jurusan = $_SESSION['jurusan'];
 
 			<!-- Main content -->
 			<section class="content">
-				<div class="content">
-					<div class="container-fluid">
-						<label>Nama</label><br />
-						<input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
-						<label>NIM</label><br />
-						<input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly /></input>
-						<label>Program Studi</label><br />
-						<input type="text" class="form-control" name="jurusan" value="<?= $jurusan; ?>" readonly /></input>
-						<hr>
-						<form role="FORM" method="POST">
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>Aktivitas Prestasi & Penghargaan</label>
-										<select id="aktivitas" name="aktivitas" class="form-control">
-											<option>Sertifikat Profesional</option>
-											<option>Pelatihan & Workshop</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<label>Bahasa Indonesia</label><br />
-							<textarea class="form-control" rows="2" name="indonesia" /></textarea>
-							<label>Bahasa Inggris</label><br />
-							<textarea class="form-control" rows="2" name="english" /></textarea>
-							<label>Link Sertifikat</label><br />
-							<input type="text" class="form-control" name="bukti" /></textarea>
-							<small style="color:red"><i>
-									Upload bukti sertifikat anda ke cloud storage. Paste link sertifikat anda disini. Pastikan file sertifikat anda dapat diakses tanpa permintaan izin. </i>
-							</small>
-							<br /><br />
-							<button type="submit" class="btn btn-success" value="simpan" formaction="skpi-simpan.php"> <i class="fa fa-file-upload"></i> Upload</button>
-							<hr>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Sertifikat di ajukan</h3>
+									<h3 class="card-title">Identitas Diri</h3>
 								</div>
-								<div class="card-body p-0">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th style="width: 10px">No</th>
-												<th>Aktivitas</th>
-												<th>Indonesia</th>
-												<th>English</th>
-												<th>Bukti</th>
-												<th>Hapus</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$no = 1;
+								<div class="card-body">
+									<label>Nama</label><br />
+									<input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
+									<label>NIM</label><br />
+									<input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly /></input>
+									<label>Program Studi</label><br />
+									<input type="text" class="form-control" name="jurusan" value="<?= $prodi; ?>" readonly /></input>
+									<hr>
+									<div class="card">
+										<div class="card-header">
+											<h3 class="card-title">Sertifikat di ajukan</h3>
+										</div>
+										<div class="card-body p-0">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th style="width: 10px">No</th>
+														<th>Aktivitas</th>
+														<th>Indonesia</th>
+														<th>English</th>
+														<th>Bukti</th>
+														<th>Hapus</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+													$no = 1;
 
-											$qprestasi = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim='$nim' ORDER BY aktivitas ASC, indonesia ASC");
-											while ($data = mysqli_fetch_array($qprestasi)) {
-												$nodata = $data[0];
-											?>
-												<tr>
-													<td><?= $no; ?></td>
-													<td><?= $data['aktivitas']; ?></td>
-													<td><?= $data['indonesia']; ?></td>
-													<td><i><?= $data['english']; ?></i></td>
-													<td> <a href="<?= urldecode($data['bukti']) ?>" target="_blank">Klik Disini</a> </td>
-													<td>
-														<a class="btn btn-danger btn-sm" onclick="return confirm('Menghapus data <?= $data['indonesia']; ?> ?')" href="skpi-isihapus.php?nodata=<?php echo $nodata; ?>">
-															<i class="fas fa-trash"></i>
-														</a>
-													</td>
-												</tr>
-											<?php
-												$no++;
-											}
-											?>
-										</tbody>
-									</table>
-								</div>
+													$qprestasi = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim='$nim' ORDER BY aktivitas ASC, indonesia ASC");
+													while ($data = mysqli_fetch_array($qprestasi)) {
+														$nodata = $data[0];
+													?>
+														<tr>
+															<td><?= $no; ?></td>
+															<td><?= $data['aktivitas']; ?></td>
+															<td><?= $data['indonesia']; ?></td>
+															<td><i><?= $data['english']; ?></i></td>
+															<td> <a href="<?= urldecode($data['bukti']) ?>" target="_blank">Klik Disini</a> </td>
+															<td>
+																<a class="btn btn-danger btn-sm" onclick="return confirm('Menghapus data <?= $data['indonesia']; ?> ?')" href="skpi-isihapus.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-trash"></i>
+																</a>
+															</td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<br />
+
+									<input type="hidden" name="nim" value="<?= $nim; ?>"></input>
+									<input type="hidden" name="nama" value="<?= $nama; ?>"></input>
+									<input type="hidden" name="jurusan" value="<?= $jurusan; ?>"></input>
+									<div class="row">
+										<div class="col-lg-6">
+											<button type="submit" class="btn btn-success btn-block" value="ajukan" formaction="skpi-ajukan.php"> <i class="fas fa-graduation-cap"></i> Ajukan</button>
+										</div>
+										<div class="col-lg-6">
+											<button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tambah" class="btn btn-primary btn-block"> <i class="fa fa-plus"></i> Tambah Data</button>
+										</div>
+									</div>
+									<br />
+									<small style="color:red">Apabila tidak memiliki sertifikat keahlian / workshop, pengajuan SKPI tetap dapat dilakukan dengan langsung klik tombol Ajukan</small>
+									<br />
+								</div><!-- /.container-fluid -->
 							</div>
-							<br />
-
-							<input type="hidden" name="nim" value="<?= $nim; ?>"></input>
-							<input type="hidden" name="nama" value="<?= $nama; ?>"></input>
-							<input type="hidden" name="jurusan" value="<?= $jurusan; ?>"></input>
-
-							<button type="submit" class="btn btn-warning" value="ajukan" formaction="skpi-ajukan.php"> <i class="fas fa-graduation-cap"></i> Ajukan</button>
-							<br />
-							<br />
-							<small style="color:blue"><i>Apabila tidak memiliki sertifikat keahlian / workshop, pengajuan SKPI tetap dapat dilakukan dengan langsung klik tombol Ajukan</i></small>
-						</form>
-						<br />
-					</div><!-- /.container-fluid -->
+						</div>
+					</div>
 				</div>
-
 			</section>
 			<!-- /.content -->
 		</div>
@@ -255,26 +181,6 @@ $jurusan = $_SESSION['jurusan'];
 	<!-- AdminLTE App -->
 	<script src="../system/dist/js/adminlte.min.js"></script>
 </body>
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
-
-<!-- timer untuk alert -->
-<script>
-	window.setTimeout(function() {
-		$(".alert").fadeTo(500, 0).slideUp(500, function() {
-			$(this).remove();
-		});
-	}, 1000);
-</script>
 
 <!-- cari dosen -->
 <script src="../system/js/jquery-1.12.4.min.js"></script>
@@ -302,5 +208,41 @@ function tgl_indo($tanggal)
 		});
 	});
 </script>
+
+<!-- modal tambah -->
+<div class="modal fade" id="modal-tambah">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Tambah Sertifikat</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<label>Aktivitas Prestasi & Penghargaan</label>
+				<select id="aktivitas" name="aktivitas" class="form-control">
+					<option>Sertifikat Profesional</option>
+					<option>Pelatihan & Workshop</option>
+				</select>
+				<br />
+				<label>Kegiatan (Bahasa Indonesia)</label><br />
+				<input type="text" class="form-control" name="indonesia" required>
+				<label>Activity (in English)</label><br />
+				<input type="text" class="form-control" name="english" required>
+				<label>File Sertifikat</label><br />
+				<input type="file" name="fileToUpload" class="form-control" />
+				<small style="color:blue"><i>*) Ukuran file maksimal 1MB format JPEG / JPG</i></small>
+				<br />
+
+			</div>
+			<div class="modal-footer justify-content-between">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-success" value="simpan" formaction="skpi-simpan.php"> <i class="fa fa-file-upload"></i> Upload</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ./modal tolak-->
 
 </html>
