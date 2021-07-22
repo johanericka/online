@@ -89,7 +89,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 										<small><i>(pilih dari nama dosen yang tampil)</i></small><br />
 										<div class="form-group">
 											<div class="search-box">
-												<input type="text" autocomplete="off" placeholder="cari dosen" name="dosen" required>
+												<input type="text" autocomplete="off" class="form-control" placeholder="cari dosen" name="dosen" required>
 												<div class="result"></div>
 											</div>
 										</div>

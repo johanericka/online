@@ -81,11 +81,11 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 							<small> Pilih dari nama dosen yang tampil</small><br />
 							<div class="form-group">
 								<div class="search-box">
-									<input type="text" class="form-control" autocomplete="off" placeholder="ketikkan nama dosen" name="namadosen" required>
+									<input type="text" class="form-control" autocomplete="off" placeholder="ketikkan nama dosen" name="dosen" required>
 									<div class="result"></div>
 								</div>
 							</div>
-							<label>Pimpinan Instansi</label>
+							<label>Nama Pimpinan Instansi</label>
 							<input type="text" class="form-control" name="pimpinaninstansi" placeholder="pimpinan instansi" required>
 							<label>Nama Instansi</label>
 							<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required>
