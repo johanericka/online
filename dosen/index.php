@@ -600,17 +600,17 @@ if ($nohp == null or $email == null) {
 												?>
 												<!-- /Observasi as dosen-->
 
-												<!-- pengambilandata -->
+												<!-- pengambilan data as dosen -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validatordosen='$user' AND validasidosen = 0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
-													$nodata = $data['id'];
+													$nodata = $data['no'];
 													$nim = $data['nim'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
-													$verifikasidosen = $data['validasidosen'];
-													$verifikasiprodi = $data['validasiprodi'];
-													$verifikasifakultas = $data['validasifakultas'];
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?php echo $no; ?></td>
@@ -618,17 +618,10 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $nama; ?></td>
 														<td><?php echo $surat; ?></td>
 														<td>
-															<?php
-															if ($verifikasidosen == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="pengambilandata-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
-																</a>
-															<?php
-															};
-															?>
+															<a class="btn btn-info btn-sm" href="pengambilandata-dosen-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																<i class="fas fa-search"></i>
+																Lihat
+															</a>
 														</td>
 													</tr>
 												<?php
@@ -636,6 +629,66 @@ if ($nohp == null or $email == null) {
 												}
 												?>
 												<!-- /pengambilandata -->
+
+												<!-- pengambilan data as kajur -->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Pengambilan Data';
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="pengambilandata-kaprodi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																<i class="fas fa-search"></i>
+																Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /pengambilan data as kajur -->
+
+												<!-- pengambilan data as wd -->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Pengambilan Data';
+													$validasi1 = $data['validasi1'];
+													$validasi2 = $data['validasi2'];
+													$validasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="pengambilandata-wd-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
+																<i class="fas fa-search"></i>
+																Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /pengambilan data as wd -->
 
 												<!-- Surat Keterangan as dosen wali-->
 												<?php
