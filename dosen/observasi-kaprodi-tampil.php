@@ -139,7 +139,7 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                                         <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <button name="aksi" value="setujui" type="submit" formaction="observasi-dosen-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin akan MENERIMA pengajuan ini ?')"> <i class="fa fa-check"></i> Setujui</button>
+                                                <button name="aksi" value="setujui" type="submit" formaction="observasi-kaprodi-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin akan MENERIMA pengajuan ini ?')"> <i class="fa fa-check"></i> Setujui</button>
                                             </div>
                                             <div class="col-lg-6">
                                                 <button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tolak" class="btn btn-danger btn-block"> <i class="fa fa-times"></i> Tolak</button>
@@ -160,7 +160,7 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                                                     </div>
                                                     <div class="modal-footer justify-content-between">
                                                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                                        <button name="aksi" value="tolak" type="submit" formaction="observasi-dosen-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan MENOLAK pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
+                                                        <button name="aksi" value="tolak" type="submit" formaction="observasi-kaprodi-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan MENOLAK pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
                                                     </div>
                                                 </div>
                                             </div>

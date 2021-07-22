@@ -96,9 +96,13 @@ if ($ceksql4 > 0) {
 	}
 }
 */
-
-$sql = "insert into wfh (fakultas, jurusan, tglsurat, iduser, nama, nip,jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorjurusan, verifikasijurusan, verifikatorfakultas, verifikasifakultas) 
+if ($jurusan == 'Teknik Informatika') {
+	$sql = "insert into wfh (fakultas, jurusan, tglsurat, iduser, nama, nip,jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorjurusan, verifikasijurusan, tglverifikasijurusan, verifikatorfakultas, verifikasifakultas) 
+	values ('$fakultas','$jurusan','$tglsurat','$iduser','$nama','$nip','$jabatan','$tgl1','$kegiatan1','$tgl2','$kegiatan2','$tgl3','$kegiatan3','$tgl4','$kegiatan4','$tgl5','$kegiatan5','$kdkajur',1,'$tglsurat','$kdwd',0)";
+} else {
+	$sql = "insert into wfh (fakultas, jurusan, tglsurat, iduser, nama, nip,jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorjurusan, verifikasijurusan, verifikatorfakultas, verifikasifakultas) 
 				values ('$fakultas','$jurusan','$tglsurat','$iduser','$nama','$nip','$jabatan','$tgl1','$kegiatan1','$tgl2','$kegiatan2','$tgl3','$kegiatan3','$tgl4','$kegiatan4','$tgl5','$kegiatan5','$kdkajur',0,'$kdwd',0)";
+}
 if (mysqli_query($dbsurat, $sql)) {
 	echo "data tersimpan";
 	header("location:index.php");
