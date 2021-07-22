@@ -104,7 +104,7 @@ require('../system/dbconn.php');
                             $dpkl = mysqli_fetch_array($qpkl);
                             $nimketua = $dpkl['nimketua'];
 
-                            $qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND validasifakultas=0");
+                            $qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND validasi3=0");
                             $jpkl2 = mysqli_num_rows($qpkl2);
                             if ($jpkl2 == 0) {
                         ?>
@@ -172,9 +172,9 @@ require('../system/dbconn.php');
                         $cekdata = mysqli_num_rows($query);
                         if ($cekdata > 0) {
                             $dobservasi = mysqli_fetch_array($query);
-                            $nimketua = $dobservasi['nimketua'];
+                            $nimketuaobservasi = $dobservasi['nimketua'];
 
-                            $qobservasi = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE nim='$nimketua' AND validasifakultas=0");
+                            $qobservasi = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE nim='$nimketuaobservasi' AND validasi3=0");
                             $jobservasi = mysqli_num_rows($qobservasi);
                             if ($jobservasi == 0) {
                         ?>
