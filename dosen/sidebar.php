@@ -68,7 +68,7 @@ require('../system/dbconn.php');
                     </a>
                 </li>
                 <?php
-                $qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$user'");
+                $qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$nip'");
                 $jmldata = mysqli_num_rows($qoperator);
                 if ($jmldata == 1) {
 

@@ -414,17 +414,17 @@ if ($nohp == null or $email == null) {
 												?>
 												<!-- /.ijin penelitian as WD-->
 
-												<!-- peminjaman alat -->
+												<!-- peminjaman alat as dosen-->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validatordosen='$user' AND validasidosen = 0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
-													$nodata = $data['id'];
+													$nodata = $data['no'];
 													$nim = $data['nim'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
-													$verifikasidosen = $data['validasidosen'];
-													$verifikasiprodi = $data['validasiprodi'];
-													$verifikasifakultas = $data['validasifakultas'];
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?php echo $no; ?></td>
@@ -432,24 +432,80 @@ if ($nohp == null or $email == null) {
 														<td><?php echo $nama; ?></td>
 														<td><?php echo $surat; ?></td>
 														<td>
-															<?php
-															if ($verifikasidosen == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="peminjamanalat-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
-																</a>
-															<?php
-															};
-															?>
+															<a class="btn btn-info btn-sm" href="peminjamanalat-dosen-tampil.php?nodata=<?= $nodata; ?>">
+																<i class="fas fa-search">
+																</i>
+																Lihat
+															</a>
 														</td>
 													</tr>
 												<?php
 													$no++;
 												}
 												?>
-												<!-- /peminjaman alat -->
+												<!-- /peminjaman alat as dosen-->
+
+												<!-- peminjaman alat as kaprodi-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Peminjaman Alat';
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="peminjamanalat-kaprodi-tampil.php?nodata=<?= $nodata; ?>">
+																<i class="fas fa-search">
+																</i>
+																Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /peminjaman alat as kaprodi-->
+
+												<!-- peminjaman alat as wd-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$nim = $data['nim'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Peminjaman Alat';
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php echo $nim; ?></td>
+														<td><?php echo $nama; ?></td>
+														<td><?php echo $surat; ?></td>
+														<td>
+															<a class="btn btn-info btn-sm" href="peminjamanalat-wd-tampil.php?nodata=<?= $nodata; ?>">
+																<i class="fas fa-search">
+																</i>
+																Lihat
+															</a>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /peminjaman alat as wd-->
 
 												<!-- Observasi as dosen-->
 												<?php
