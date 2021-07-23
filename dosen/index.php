@@ -785,7 +785,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$user'AND verifikasi1=0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0 GROUP BY nim");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -803,17 +803,11 @@ if ($nohp == null or $email == null) {
 															<td><?php echo $nama; ?></td>
 															<td><?php echo $surat; ?></td>
 															<td>
-																<?php
-																if ($verifikasi1 == 0) {
-																?>
-																	<a class="btn btn-info btn-sm" href="skpi-tampil.php?nim=<?php echo mysqli_real_escape_string($dbsurat, $nim); ?>">
-																		<i class="fas fa-search">
-																		</i>
-																		Lihat
-																	</a>
-																<?php
-																};
-																?>
+																<a class="btn btn-info btn-sm" href="skpi-dosen-tampil.php?nim=<?= mysqli_real_escape_string($dbsurat, $nim); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
 															</td>
 														</tr>
 												<?php
@@ -822,6 +816,74 @@ if ($nohp == null or $email == null) {
 												}
 												?>
 												<!-- /SKPI as Dosen PA -->
+
+												<!-- SKPI as kaprodi -->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1 GROUP BY nim");
+												$jdata = mysqli_num_rows($query);
+												if ($jdata > 0) {
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$nim = $data['nim'];
+														$nama = $data['nama'];
+														$surat = "Surat Keterangan Pendamping Ijazah";
+														$verifikasi1 = $data['verifikasi1'];
+														$verifikasi2 = $data['verifikasi2'];
+														$verifikasi3 = $data['verifikasi3'];
+												?>
+														<tr>
+															<td><?php echo $no; ?></td>
+															<td><?php echo $nim; ?></td>
+															<td><?php echo $nama; ?></td>
+															<td><?php echo $surat; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="skpi-kaprodi-tampil.php?nim=<?= mysqli_real_escape_string($dbsurat, $nim); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															</td>
+														</tr>
+												<?php
+														$no++;
+													}
+												}
+												?>
+												<!-- /SKPI as kaprodi -->
+
+												<!-- SKPI as WD -->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1 GROUP BY nim");
+												$jdata = mysqli_num_rows($query);
+												if ($jdata > 0) {
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$nim = $data['nim'];
+														$nama = $data['nama'];
+														$surat = "Surat Keterangan Pendamping Ijazah";
+														$verifikasi1 = $data['verifikasi1'];
+														$verifikasi2 = $data['verifikasi2'];
+														$verifikasi3 = $data['verifikasi3'];
+												?>
+														<tr>
+															<td><?php echo $no; ?></td>
+															<td><?php echo $nim; ?></td>
+															<td><?php echo $nama; ?></td>
+															<td><?php echo $surat; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="skpi-wd-tampil.php?nim=<?= mysqli_real_escape_string($dbsurat, $nim); ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	Lihat
+																</a>
+															</td>
+														</tr>
+												<?php
+														$no++;
+													}
+												}
+												?>
+												<!-- /SKPI as WD -->
 
 												<!-- cetak KHS as kajur-->
 												<?php
