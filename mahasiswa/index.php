@@ -1075,20 +1075,24 @@ if ($nohp == null or $email == null) {
 												<?php
 												if ($verifikasi3 == 1) {
 												?>
-													<a class="btn btn-success" href="skpi-tampil.php?nim=<?php echo $nim; ?>">
-														<i class="fas fa-eye"></i>
+													<a class="btn btn-success btn-sm" href="skpi-cetak.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-print"></i>
+														Cetak
 													</a>
 												<?php
-												}
+												} elseif ($verifikasi1 == 2 or $verifikasi2 == 2 or $verifikasi3 == 2) {
 												?>
-											</td>
-											<td>
-												<?php
-												if ($verifikasi3 <> 1) {
-												?>
-													<!-- hapus -->
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="skpi-hapus.php?nim=<?php echo $nim; ?>">
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="observasi-hapus.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-trash"></i> Hapus
+													</a>
+												<?php
+												} else {
+												?>
+													<a class="btn btn-secondary btn-sm" onclick="return alert('harap menunggu proses')" disabled>
+														<i class="fas fa-spinner"></i> Proses
+													</a>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="observasi-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Batalkan
 													</a>
 												<?php
 												}

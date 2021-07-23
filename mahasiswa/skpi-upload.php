@@ -1,16 +1,16 @@
 <?php
 session_start();
+require('../system/dbconn.php');
 
-require("../system/dbconn.php");
-
-$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
-$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+$aktivitas = mysqli_real_escape_string($dbsurat, $_POST['aktivitas']);
+$indonesia = mysqli_real_escape_string($dbsurat, $_POST['indonesia']);
+$english = mysqli_real_escape_string($dbsurat, $_POST['english']);
 
 $target_dir = "../lampiran/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$nodata = mysqli_real_escape_string($dbsurat, $_POST['nodata']);
 
 date_default_timezone_set("Asia/Jakarta");
 $tanggal = date('Y-m-d H:i:s');
@@ -27,20 +27,21 @@ $allowedfileExtensions = array('jpg', 'jpeg');
 
 if (in_array($fileExtension, $allowedfileExtensions)) {
     if ($fileSize <= 1048576) {
-        $dest_path = $target_dir . $nim . '-lampiranpkl-' . $nodata . '.' . $fileExtension;
+        $dest_path = $target_dir . $nim . '-lampiranskpi-' . $fileName;
         echo $dest_path;
         if (move_uploaded_file($fileTmpPath, $dest_path)) {
             //update data lampiran
-            $stmt = $dbsurat->prepare("UPDATE pkl SET lampiran=? WHERE no=?");
-            $stmt->bind_param("si", $dest_path, $nodata);
+            $stmt = $dbsurat->prepare("INSERT INTO skpi_prestasipenghargaan (tanggal, nim, nama, prodi, aktivitas, indonesia, english,bukti)
+                                        VALUES(?,?,?,?,?,?,?,?)");
+            $stmt->bind_param("ssssssss", $tanggal, $nim, $nama, $prodi, $aktivitas, $indonesia, $english, $dest_path);
             $stmt->execute();
-            header("location:pkl-isilampiran.php?nodata=$nodata&pesan=success");
+            header("location:skpi-isi.php?nodata=$nodata&pesan=success");
         } else {
-            header("location:pkl-isilampiran.php?nodata=$nodata&pesan=gagal");
+            header("location:skpi-isi.php?nodata=$nodata&pesan=gagal");
         };
     } else {
-        header("location:pkl-isilampiran.php?nodata=$nodata&pesan=filesize");
+        header("location:skpi-isi.php?nodata=$nodata&pesan=filesize");
     };
 } else {
-    header("location:pkl-isilampiran.php?nodata=$nodata&pesan=extention");
+    header("location:skpi-isi.php?nodata=$nodata&pesan=extention");
 };

@@ -112,15 +112,19 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 													$qprestasi = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim='$nim' ORDER BY aktivitas ASC, indonesia ASC");
 													while ($data = mysqli_fetch_array($qprestasi)) {
 														$nodata = $data[0];
+														$aktivitas = $data['aktivitas'];
+														$indonesia = $data['indonesia'];
+														$english = $data['english'];
+														$bukti = $data['bukti'];
 													?>
 														<tr>
 															<td><?= $no; ?></td>
-															<td><?= $data['aktivitas']; ?></td>
-															<td><?= $data['indonesia']; ?></td>
-															<td><i><?= $data['english']; ?></i></td>
-															<td> <a href="<?= urldecode($data['bukti']) ?>" target="_blank">Klik Disini</a> </td>
+															<td><?= $aktivitas; ?></td>
+															<td><?= $indonesia; ?></td>
+															<td><i><?= $english; ?></i></td>
+															<td> <a href="<?= $bukti; ?>" target="_blank"><img src="<?= $bukti; ?>" width="100px"></img></a> </td>
 															<td>
-																<a class="btn btn-danger btn-sm" onclick="return confirm('Menghapus data <?= $data['indonesia']; ?> ?')" href="skpi-isihapus.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-danger btn-sm" onclick="return confirm('Menghapus data <?= $indonesia; ?> ?')" href="skpi-isihapus.php?nodata=<?= $nodata; ?>">
 																	<i class="fas fa-trash"></i>
 																</a>
 															</td>
@@ -132,21 +136,57 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 												</tbody>
 											</table>
 										</div>
+										<form method="POST" enctype="multipart/form-data">
+											<button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tambah" class="btn btn-primary btn-block"> <i class="fa fa-plus"></i> Tambah Sertifikat</button>
+											<!-- modal tambah -->
+											<div class="modal fade" id="modal-tambah">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h4 class="modal-title">Tambah Sertifikat</h4>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<label>Aktivitas Prestasi & Penghargaan</label>
+															<select id="aktivitas" name="aktivitas" class="form-control">
+																<option>Sertifikat Profesional</option>
+																<option>Pelatihan & Workshop</option>
+															</select>
+															<br />
+															<label>Kegiatan (Bahasa Indonesia)</label><br />
+															<input type="text" class="form-control" name="indonesia" required>
+															<label>Activity (in English)</label><br />
+															<input type="text" class="form-control" name="english" required>
+															<label>File Sertifikat</label><br />
+															<input type="file" name="fileToUpload" class="form-control" />
+															<small style="color:blue"><i>*) Ukuran file maksimal 1MB format JPEG / JPG</i></small>
+															<br />
+														</div>
+														<div class="modal-footer justify-content-between">
+															<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-success" value="simpan" formaction="skpi-upload.php"> <i class="fa fa-file-upload"></i> Upload</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- ./modal tolak-->
+										</form>
 									</div>
-									<br />
-
-									<input type="hidden" name="nim" value="<?= $nim; ?>"></input>
-									<input type="hidden" name="nama" value="<?= $nama; ?>"></input>
-									<input type="hidden" name="jurusan" value="<?= $jurusan; ?>"></input>
-									<div class="row">
-										<div class="col-lg-6">
-											<button type="submit" class="btn btn-success btn-block" value="ajukan" formaction="skpi-ajukan.php"> <i class="fas fa-graduation-cap"></i> Ajukan</button>
+									<hr>
+									<form method="POST" action="skpi-simpanajukan.php">
+										<label>Dosen Wali </label>
+										<small><i>(pilih dari nama dosen yang tampil)</i></small><br />
+										<div class="form-group">
+											<div class="search-box">
+												<input type="text" class="form-control" autocomplete="off" placeholder="ketikkan nama dosen wali" name="dosen" required>
+												<div class="result"></div>
+											</div>
 										</div>
-										<div class="col-lg-6">
-											<button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tambah" class="btn btn-primary btn-block"> <i class="fa fa-plus"></i> Tambah Data</button>
-										</div>
-									</div>
-									<br />
+										<br />
+										<button type="submit" class="btn btn-success btn-block" value="ajukan" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fas fa-graduation-cap"></i> Ajukan</button>
+									</form>
 									<small style="color:red">Apabila tidak memiliki sertifikat keahlian / workshop, pengajuan SKPI tetap dapat dilakukan dengan langsung klik tombol Ajukan</small>
 									<br />
 								</div><!-- /.container-fluid -->
@@ -208,41 +248,5 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 		});
 	});
 </script>
-
-<!-- modal tambah -->
-<div class="modal fade" id="modal-tambah">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Tambah Sertifikat</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<label>Aktivitas Prestasi & Penghargaan</label>
-				<select id="aktivitas" name="aktivitas" class="form-control">
-					<option>Sertifikat Profesional</option>
-					<option>Pelatihan & Workshop</option>
-				</select>
-				<br />
-				<label>Kegiatan (Bahasa Indonesia)</label><br />
-				<input type="text" class="form-control" name="indonesia" required>
-				<label>Activity (in English)</label><br />
-				<input type="text" class="form-control" name="english" required>
-				<label>File Sertifikat</label><br />
-				<input type="file" name="fileToUpload" class="form-control" />
-				<small style="color:blue"><i>*) Ukuran file maksimal 1MB format JPEG / JPG</i></small>
-				<br />
-
-			</div>
-			<div class="modal-footer justify-content-between">
-				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-success" value="simpan" formaction="skpi-simpan.php"> <i class="fa fa-file-upload"></i> Upload</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- ./modal tolak-->
 
 </html>
