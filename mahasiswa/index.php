@@ -1066,7 +1066,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												if ($verifikasi3 == 1) {
 												?>
-													<b><i>Pengajuan SKPI anda telah disetujui. Silahkan hubungi administrasi Program Studi untuk informasi lebih lanjut. </i></b>
+													<b><i>Pengajuan SKPI anda telah disetujui dan akan di proses di SIAKAD. Silahkan hubungi administrasi Program Studi untuk informasi lebih lanjut. </i></b>
 												<?php
 												}
 												?>
@@ -1075,9 +1075,9 @@ if ($nohp == null or $email == null) {
 												<?php
 												if ($verifikasi3 == 1) {
 												?>
-													<a class="btn btn-success btn-sm" href="skpi-cetak.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print"></i>
-														Cetak
+													<a class="btn btn-success btn-sm" href="https://siakad.uin-malang.ac.id" target="_blank">
+														<i class="fas fa-graduation-cap"></i>
+														SIAKAD
 													</a>
 												<?php
 												} elseif ($verifikasi1 == 2 or $verifikasi2 == 2 or $verifikasi3 == 2) {
