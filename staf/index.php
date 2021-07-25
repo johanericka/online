@@ -23,14 +23,16 @@ require('../system/myfunc.php');
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="../system/plugins/fontawesome-free/css/all.min.css">
-	<!-- Ionicons -->
-	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<!-- overlayScrollbars -->
+	<!-- DataTables -->
+	<link rel="stylesheet" href="../system/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="../system/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="../system/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	<!-- Theme style -->
 	<link rel="stylesheet" href="../system/dist/css/adminlte.min.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -67,172 +69,161 @@ require('../system/myfunc.php');
 
 			<!-- Main content -->
 			<section class="content">
-				<!-- Default box -->
-				<div class="card card-primary">
-					<div class="card-header">
-						<h3 class="card-title">Rencana Kerja dan Surat Tugas <i>Work From Home</i></h3>
-						<!-- card minimize -->
-						<div class="card-tools">
-							<!-- This will cause the card to maximize when clicked 
-							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-							<!-- This will cause the card to collapse when clicked -->
-							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-							<!-- This will cause the card to be removed when clicked
-							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-						</div>
-					</div>
-					<!-- /.card-header -->
-					<?php $no = 1; ?>
-					<div class="card-body p-0">
-						<!-- /.card-header -->
-						<div class="card-body">
-							<table id="example1" class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>Mulai WFH</th>
-										<th>Akhir WFH</th>
-										<th>Rencana Kerja</th>
-										<th>Surat Tugas</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									$query = mysqli_query($dbsurat, "select * from wfh where iduser='$iduser' order by tglwfh1 desc");
-									$jmldata = mysqli_num_rows($query);
-									while ($data = mysqli_fetch_array($query)) {
-										$nodata = $data['no'];
-										$tglwfh1 = $data['tglwfh1'];
-										$tglwfh2 = $data['tglwfh2'];
-										$tglwfh3 = $data['tglwfh3'];
-										$tglwfh4 = $data['tglwfh4'];
-										$tglwfh5 = $data['tglwfh5'];
-										$verifikasijurusan = $data['verifikasijurusan'];
-										$verifikasifakultas = $data['verifikasifakultas'];
-										if (date($tglwfh5) != 0) {
-											$wfhselesai = $tglwfh5;
-										} else {
-											if (date($tglwfh4) != 0) {
-												$wfhselesai = $tglwfh4;
-											} else {
-												if (date($tglwfh3) != 0) {
-													$wfhselesai = $tglwfh3;
-												} else {
-													if (date($tglwfh2) != 0) {
-														$wfhselesai = $tglwfh2;
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<!-- Default box -->
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">Rencana Kerja dan Surat Tugas <i>Work From Home</i></h3>
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+									</div>
+								</div>
+								<!-- /.card-header -->
+								<?php $no = 1; ?>
+								<div class="card-body p-0">
+									<!-- /.card-header -->
+									<div class="card-body">
+										<table id="example2" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th width="5%">No</th>
+													<th>Mulai WFH</th>
+													<th>Akhir WFH</th>
+													<th>Rencana Kerja</th>
+													<th>Surat Tugas</th>
+													<th>Keterangan</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE nip='$nip' ORDER BY tglwfh1 DESC");
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$tglwfh1 = $data['tglwfh1'];
+													$tglwfh2 = $data['tglwfh2'];
+													$tglwfh3 = $data['tglwfh3'];
+													$tglwfh4 = $data['tglwfh4'];
+													$tglwfh5 = $data['tglwfh5'];
+													$verifikasiprodi = $data['verifikasiprodi'];
+													$verifikasifakultas = $data['verifikasifakultas'];
+													$keterangan = $data['keterangan'];
+													if (date($tglwfh5) != 0) {
+														$wfhselesai = $tglwfh5;
+													} else {
+														if (date($tglwfh4) != 0) {
+															$wfhselesai = $tglwfh4;
+														} else {
+															if (date($tglwfh3) != 0) {
+																$wfhselesai = $tglwfh3;
+															} else {
+																if (date($tglwfh2) != 0) {
+																	$wfhselesai = $tglwfh2;
+																}
+															}
+														}
 													}
-												}
-											}
-										}
-									?>
-										<tr>
-											<td><?php echo $no; ?></td>
-											<td><?php if (date($tglwfh1) != 0) {
-													echo tgl_indo($tglwfh1);
-												}  ?></td>
-											<td><?php
-												if (isset($wfhselesai)) {
-													echo tgl_indo($wfhselesai);
-												}
 												?>
-											</td>
-											<td>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td><?php if (date($tglwfh1) != 0) {
+																echo tgl_indo($tglwfh1);
+															}  ?>
+														</td>
+														<td><?php
+															if (isset($wfhselesai)) {
+																echo tgl_indo($wfhselesai);
+															}
+															?>
+														</td>
+														<td>
+															<?php
+															if ($verifikasiprodi == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	<!--Lihat-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasiprodi == 1) {
+															?>
+																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-print">
+																	</i>
+																	<!--Cetak-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasiprodi == 2) {
+															?>
+																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-times">
+																	</i>
+																	<!--Cek-->
+																</a>
+															<?php
+															};
+															?>
+														</td>
+														<td>
+															<?php
+															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search">
+																	</i>
+																	<!--Lihat-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
+															?>
+																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-print">
+																	</i>
+																	<!--Cetak-->
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasiprodi < 2 and $verifikasifakultas == 2) {
+															?>
+																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-trash">
+																	</i>
+																</a>
+															<?php
+															};
+															?>
+														</td>
+														<td>
+															<?= $keterangan; ?>
+														</td>
+													</tr>
 												<?php
-												if ($verifikasijurusan == 0) {
-												?>
-													<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														<!--Lihat-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan == 1) {
-												?>
-													<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print">
-														</i>
-														<!--Cetak-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan == 2) {
-												?>
-													<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-times">
-														</i>
-														<!--Cek-->
-													</a>
-												<?php
-												};
-												?>
-
-
-											</td>
-											<td>
-												<?php
-												if ($verifikasijurusan < 2 and $verifikasifakultas == 0) {
-												?>
-													<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-search">
-														</i>
-														<!--Lihat-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan < 2 and $verifikasifakultas == 1) {
-												?>
-													<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-print">
-														</i>
-														<!--Cetak-->
-													</a>
-												<?php
-												};
-												?>
-												<?php
-												if ($verifikasijurusan < 2 and $verifikasifakultas == 2) {
-												?>
-													<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-times">
-														</i>
-														<!--Cek-->
-													</a>
-												<?php
-												};
-												?>
-											</td>
-											<td>
-												<?php
-												if (($verifikasijurusan == 0 and $verifikasifakultas == 0) or ($verifikasijurusan == 2) or ($verifikasifakultas == 2)) {
-												?>
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-trash">
-														</i>
-													</a>
-												<?php
+													$no++;
 												}
 												?>
-											</td>
-										</tr>
-									<?php
-										$no++;
-									}
-									?>
-								</tbody>
-							</table>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.card-body -->
+								</div>
+								<!-- /.card -->
+								<!-- /.content -->
+							</div>
 						</div>
-						<!-- /.card-body -->
 					</div>
-					<!-- /.card -->
-					<!-- /.content -->
 				</div>
 			</section>
 			<!-- /.content -->
@@ -258,10 +249,43 @@ require('../system/myfunc.php');
 	<script src="../system/plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
 	<script src="../system/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- DataTables  & Plugins -->
+	<script src="../system/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="../system/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../system/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="../system/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+	<script src="../system/plugins/jszip/jszip.min.js"></script>
+	<script src="../system/plugins/pdfmake/pdfmake.min.js"></script>
+	<script src="../system/plugins/pdfmake/vfs_fonts.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+	<script src="../system/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../system/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../system/dist/js/demo.js"></script>
+
+	<script>
+		$(function() {
+			$("#example1").DataTable({
+				"responsive": true,
+				"lengthChange": false,
+				"autoWidth": false,
+				"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+			}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+			$('#example2').DataTable({
+				"paging": true,
+				"lengthChange": false,
+				"searching": false,
+				"ordering": true,
+				"info": true,
+				"autoWidth": false,
+				"responsive": true,
+			});
+		});
+	</script>
 </body>
 
 </html>

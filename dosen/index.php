@@ -963,14 +963,8 @@ if ($nohp == null or $email == null) {
 							<div class="card card-primary">
 								<div class="card-header">
 									<h3 class="card-title">Rencana Kerja dan Surat Tugas <i>Work From Home</i></h3>
-									<!-- card minimize -->
 									<div class="card-tools">
-										<!-- This will cause the card to maximize when clicked 
-							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-										<!-- This will cause the card to collapse when clicked -->
 										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-										<!-- This will cause the card to be removed when clicked
-							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
 									</div>
 								</div>
 								<!-- /.card-header -->
@@ -986,12 +980,12 @@ if ($nohp == null or $email == null) {
 													<th>Akhir WFH</th>
 													<th>Rencana Kerja</th>
 													<th>Surat Tugas</th>
-													<th>Aksi</th>
+													<th>Keterangan</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE iduser='$user' ORDER BY tglwfh1 DESC");
+												$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE nip='$nip' ORDER BY tglwfh1 DESC");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
 													$tglwfh1 = $data['tglwfh1'];
@@ -1001,6 +995,7 @@ if ($nohp == null or $email == null) {
 													$tglwfh5 = $data['tglwfh5'];
 													$verifikasiprodi = $data['verifikasiprodi'];
 													$verifikasifakultas = $data['verifikasifakultas'];
+													$keterangan = $data['keterangan'];
 													if (date($tglwfh5) != 0) {
 														$wfhselesai = $tglwfh5;
 													} else {
@@ -1023,7 +1018,11 @@ if ($nohp == null or $email == null) {
 																echo tgl_indo($tglwfh1);
 															}  ?>
 														</td>
-														<td><?php echo tgl_indo($wfhselesai); ?>
+														<td><?php
+															if (isset($wfhselesai)) {
+																echo tgl_indo($wfhselesai);
+															}
+															?>
 														</td>
 														<td>
 															<?php
@@ -1059,8 +1058,6 @@ if ($nohp == null or $email == null) {
 															<?php
 															};
 															?>
-
-
 														</td>
 														<td>
 															<?php
@@ -1088,26 +1085,16 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasiprodi < 2 and $verifikasifakultas == 2) {
 															?>
-																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-times">
+																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-trash">
 																	</i>
-																	<!--Cek-->
 																</a>
 															<?php
 															};
 															?>
 														</td>
 														<td>
-															<?php
-															if ($verifikasiprodi == 2 or $verifikasifakultas == 2) {
-															?>
-																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-trash">
-																	</i>
-																</a>
-															<?php
-															}
-															?>
+															<?= $keterangan; ?>
 														</td>
 													</tr>
 												<?php
@@ -1117,10 +1104,7 @@ if ($nohp == null or $email == null) {
 											</tbody>
 										</table>
 									</div>
-									<!-- /.card-body -->
 								</div>
-								<!-- /.card -->
-								<!-- /.content -->
 							</div>
 						</div>
 					</div>

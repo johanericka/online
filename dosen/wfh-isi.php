@@ -1,3 +1,18 @@
+<?php
+session_start();
+$user = $_SESSION['user'];
+$nip = $_SESSION['nip'];
+$nama = $_SESSION['nama'];
+$prodi = $_SESSION['prodi'];
+$hakakses = $_SESSION['hakakses'];
+$jabatan = $_SESSION['jabatan'];
+if ($_SESSION['hakakses'] != "dosen") {
+	header("location:../index.php?pesan=noaccess");
+}
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,44 +37,6 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "Dosen") {
-	if ($_SESSION['role'] != "koorpkl") {
-		header("location:../index.php?pesan=noaccess");
-	}
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nip = $_SESSION['nip'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$jurusan = $_SESSION['jurusan'];
-if ($_SESSION['role'] == 'koorpkl') {
-	$jabatan = "Dosen";
-} else {
-	//khusus pak Anas
-	if ($iduser == '61018') {
-		$jabatan = "Tenaga Kependidikan";
-	} else {
-		$jabatan = "Dosen";
-	}
-}
-$fakultas = "Sains dan Teknologi";
-?>
-
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
@@ -75,59 +52,9 @@ $fakultas = "Sains dan Teknologi";
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="../../system/index3.html" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php
+		require('sidebar.php');
+		?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -136,7 +63,7 @@ $fakultas = "Sains dan Teknologi";
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h3>Pengajuan <i>Work From Home</i></h3>
+							<h3>Pengajuan Izin <i>Work From Home</i></h3>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -147,56 +74,48 @@ $fakultas = "Sains dan Teknologi";
 				<div class="content">
 					<div class="container-fluid">
 						<form role="form" method="post" action="wfh-simpan.php">
-							<input type="hidden" class="form-control" name="iduser" value="<?php echo $iduser; ?>" readonly /></input>
+							<input type="hidden" class="form-control" name="iduser" value="<?= $iduser; ?>" readonly /></input>
 							<b>Nama</b> <br />
-							<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly /></input>
+							<input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
 							<b>NIP / ID SIAKAD</b><br />
-							<input type="text" class="form-control" name="nip" value="<?php echo $nip; ?>" readonly /></input>
+							<input type="text" class="form-control" name="nip" value="<?= $nip; ?>" readonly /></input>
 							<b>Jabatan</b> <br />
-							<input type="text" class="form-control" name="jabatan" value="<?php echo $jabatan; ?>" readonly /></input>
+							<input type="text" class="form-control" name="jabatan" value="<?= strtoupper($jabatan); ?>" readonly /></input>
 							<b>Program Studi</b> <br />
-							<input type="text" class="form-control" name="jurusan" value="<?php echo $jurusan; ?>" readonly /></input>
-							<input type="hidden" class="form-control" name="fakultas" value="<?php echo $fakultas; ?>" readonly /></input>
+							<input type="text" class="form-control" name="prodi" value="<?= $prodi; ?>" readonly /></input>
+							<input type="hidden" class="form-control" name="fakultas" value="<?= $fakultas; ?>" readonly /></input>
 							<br />
-							<b>Rencana Kerja WFH 1</b><br>
-							<div class="form-group">
-								Tanggal
-								<input type="date" id="tgl1" name="tgl1">
-							</div>
+							<b>Rencana Kerja WFH hari-1</b><br>
+							Tanggal
+							<input type="date" id="tgl1" name="tgl1" class="form-control" value="<?= date('Y-m-d', strtotime('+1 day')); ?>" required>
 							Kegiatan
-							<textarea class="form-control" rows="3" id="kegiatan1" name="kegiatan1" placeholder="uraian kegiatan" /></textarea>
-							<b>Rencana Kerja WFH 2</b><br>
-							<div class="form-group">
-								Tanggal
-								<input type="date" id="tgl2" name="tgl2">
-							</div>
-							<label>Kegiatan</label>
-							<textarea class="form-control" rows="3" id="kegiatan2" name="kegiatan2" placeholder="uraian kegiatan" /></textarea>
-							
-							<b>Rencana Kerja WFH 3</b><br>
-							<div class="form-group">
-								Tanggal
-								<input type="date" id="tgl3" name="tgl3">
-							</div>
-							<label>Kegiatan</label>
-							<textarea class="form-control" rows="3" id="kegiatan3" name="kegiatan3" placeholder="uraian kegiatan" /></textarea>
-							<b>Rencana Kerja WFH 4</b><br>
-							<div class="form-group">
-								Tanggal
-								<input type="date" id="tgl4" name="tgl4">
-							</div>
-							<label>Kegiatan</label>
-							<textarea class="form-control" rows="3" id="kegiatan4" name="kegiatan4" placeholder="uraian kegiatan" /></textarea>
-							<b>Rencana Kerja WFH 5</b><br>
-							<div class="form-group">
-								Tanggal
-								<input type="date" id="tgl5" name="tgl5">
-							</div>
-							<label>Kegiatan</label>
-							<textarea class="form-control" rows="3" id="kegiatan5" name="kegiatan5" placeholder="uraian kegiatan" /></textarea>
-							
+							<textarea class="form-control" rows="3" id="kegiatan1" name="kegiatan1" placeholder="uraian kegiatan" required></textarea>
 							<br />
-							<button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Ajukan</button>
+							<b>Rencana Kerja WFH hari-2</b><br>
+							Tanggal
+							<input type="date" id="tgl2" name="tgl2" class="form-control">
+							Kegiatan
+							<textarea class="form-control" rows="3" id="kegiatan2" name="kegiatan2" placeholder="uraian kegiatan"></textarea>
+							<br />
+							<b>Rencana Kerja WFH hari-3</b><br>
+							Tanggal
+							<input type="date" id="tgl3" name="tgl3" class="form-control">
+							Kegiatan
+							<textarea class="form-control" rows="3" id="kegiatan3" name="kegiatan3" placeholder="uraian kegiatan"></textarea>
+							<br />
+							<b>Rencana Kerja WFH hari-4</b><br>
+							Tanggal
+							<input type="date" id="tgl4" name="tgl4" class="form-control">
+							Kegiatan
+							<textarea class="form-control" rows="3" id="kegiatan4" name="kegiatan4" placeholder="uraian kegiatan"></textarea>
+							<br />
+							<b>Rencana Kerja WFH hari-5</b><br>
+							Tanggal
+							<input type="date" id="tgl5" name="tgl5" class="form-control">
+							Kegiatan
+							<textarea class="form-control" rows="3" id="kegiatan5" name="kegiatan5" placeholder="uraian kegiatan"></textarea>
+							<br />
+							<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan kebenaran data pada form ini')"> <i class="fa fa-save"></i> Ajukan</button>
 						</form>
 					</div>
 				</div>
@@ -204,16 +123,6 @@ $fakultas = "Sains dan Teknologi";
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
-
-		<!-- footer -->
-		<?php include '../system/footerdsn.html' ?>
-		<!-- /.footer -->
-
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 
@@ -225,32 +134,11 @@ $fakultas = "Sains dan Teknologi";
 	<script src="../system/dist/js/adminlte.min.js"></script>
 </body>
 
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
-
-<!-- timer untuk alert -->
-<script>
-	window.setTimeout(function() {
-		$(".alert").fadeTo(500, 0).slideUp(500, function() {
-			$(this).remove();
-		});
-	}, 1000);
-</script>
-
 <!-- disable sat-sun on date picker -->
 <script type="text/javascript">
-    $('.datepicker').datepicker({
-        daysOfWeekDisabled: [0,6]
-    });
+	$('.datepicker').datepicker({
+		daysOfWeekDisabled: [0, 6]
+	});
 </script>
 
 </html>
