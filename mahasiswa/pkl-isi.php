@@ -1,3 +1,15 @@
+<?php
+session_start();
+if ($_SESSION['hakakses'] != "mahasiswa") {
+	header("location:../deauth.php");
+}
+require('../system/dbconn.php');
+$nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
+$nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
+$prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
+$hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,31 +34,6 @@
 	<script type="text/javascript" src="../system/js/jquery.form.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "mahasiswa") {
-	header("location:../index.php?pesan=noaccess");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nim = $_SESSION['nim'];
-$nama = $_SESSION['nama'];
-$jurusan = $_SESSION['jurusan'];
-$status = $_SESSION['status'];
-?>
-
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
@@ -62,89 +49,17 @@ $status = $_SESSION['status'];
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="#" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
+		<?php
+		require('sidebar.php');
+		?>
 
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIM : <?php echo $nim; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item has-treeview menu-close">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fa fa-file"></i>
-								<p>
-									Dokumen
-									<i class="right fas fa-angle-left"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/wfh/doc/SOPIjinLayananLaboratorium.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>SOP Ijin Layanan Lab.</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="http://saintek.uin-malang.ac.id/wfh/doc/PemberitahuanKegiatanPKL.pdf" target="_blank" class="nav-link">
-										<i class="far fa-file-pdf"></i>
-										<p>Pemberitahuan Kegiatan PKL</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="mailto:saintekonline@gmail.com" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-window-close"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h3>Pengajuan Surat Pengantar PKL / Magang</h3>
 						</div>
 					</div>
@@ -157,12 +72,9 @@ $status = $_SESSION['status'];
 
 			<!-- Main content -->
 			<?php
-			$idmhs = $_SESSION['iduser'];
-
-			$datamhs = mysqli_query($dbsurat, "SELECT * FROM useraccount2 WHERE kode='$idmhs'");
+			$datamhs = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$nim'");
 			// ambil data dari record
 			$row = mysqli_fetch_array($datamhs);
-			$nim = $row['kode'];
 			$nama = $row['nama'];
 			?>
 			<section>
@@ -273,9 +185,9 @@ $status = $_SESSION['status'];
 							<label>Instansi </label>
 							<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required /></input>
 							<label>Tempat PKL / Magang </label>
-							<textarea class="form-control" rows="3" name="tempatpkl" placeholder="tempat PKL yang dituju" required></textarea>
+							<input type="text" class="form-control" name="tempatpkl" placeholder="tempat PKL yang dituju" required></input>
 							<label>Alamat </label>
-							<textarea class="form-control" rows="3" name="alamat" placeholder="alamat instansi" required></textarea>
+							<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required></input>
 							<br />
 							<label>Tanggal</label>
 							<div class="form-group">

@@ -1,3 +1,18 @@
+<?php
+session_start();
+$user = $_SESSION['user'];
+$nip = $_SESSION['nip'];
+$nama = $_SESSION['nama'];
+$prodi = $_SESSION['prodi'];
+$hakakses = $_SESSION['hakakses'];
+$jabatan = $_SESSION['jabatan'];
+if ($_SESSION['hakakses'] != "tendik") {
+	header("location:../deauth.php");
+}
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,30 +41,6 @@
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "Tenaga Kependidikan") {
-	header("location:../index.php?pesan=belum_login");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nip = $_SESSION['nip'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$jurusan = $_SESSION['jurusan'];
-?>
 
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
@@ -66,60 +57,9 @@ $jurusan = $_SESSION['jurusan'];
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="../../system/index3.html" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
-						<a href="#" class="d-block">Prodi : <?php echo $jurusan; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php
+		require('sidebar.php');
+		?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -170,7 +110,7 @@ $jurusan = $_SESSION['jurusan'];
 
 									<!-- SKPI -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE jurusan='$jurusan' GROUP BY NIM");
+									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE prodi='$prodi' GROUP BY nim");
 									while ($data = mysqli_fetch_array($query)) {
 										$nodata = $data['no'];
 										$nim = $data['nim'];
@@ -181,7 +121,7 @@ $jurusan = $_SESSION['jurusan'];
 										$verifikasi2 = $data['verifikasi2'];
 										$verifikasi3 = $data['verifikasi3'];
 
-										$qverifikator = mysqli_query($dbsurat, "SELECT * FROM useraccount2 WHERE kode='$verifikator1'");
+										$qverifikator = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$verifikator1'");
 										$dverifikator = mysqli_fetch_array($qverifikator);
 										$dosenpa = $dverifikator['nama'];
 									?>
@@ -276,7 +216,7 @@ $jurusan = $_SESSION['jurusan'];
 												};
 												?>
 												<?php
-												if ($iduser == 'DENYZA' and $verifikasi1 == 0) {
+												if ($nip == '200904011101' and $verifikasi1 == 0) {
 												?>
 													<a class="btn btn-warning btn-sm" href="skpi-tampil.php?nim=<?php echo mysqli_real_escape_string($dbsurat, $nim); ?>">
 														<i class="fas fa-eye"></i> Lihat
@@ -329,17 +269,6 @@ $jurusan = $_SESSION['jurusan'];
 	<!-- AdminLTE App -->
 	<script src="../system/dist/js/adminlte.min.js"></script>
 </body>
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
 
 <!-- timer untuk alert -->
 <script>

@@ -1,3 +1,6 @@
+<?php
+require('../system/dbconn.php');
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
@@ -12,6 +15,7 @@
             <div class="info">
                 <a href="#" class="d-block"><?php echo $nama; ?></a>
                 <a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
+                <a href="#" class="d-block">Jabatan : <?php echo strtoupper($jabatan); ?></a>
             </div>
         </div>
 
@@ -64,7 +68,7 @@
                     </a>
                 </li>
                 <?php
-                $qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$user'");
+                $qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$nip'");
                 $jmldata = mysqli_num_rows($qoperator);
                 if ($jmldata == 1) {
 

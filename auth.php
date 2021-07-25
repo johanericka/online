@@ -13,20 +13,35 @@ if ($kunci == $antibot) {
     $stmt->execute();
     $result = $stmt->get_result();
     $jhasil = $result->num_rows;
+
     if ($jhasil > 0) {
         $dhasil = $result->fetch_assoc();
         $nama = $dhasil['nama'];
         $nip = $dhasil['nip'];
         $nohp = $dhasil['nohp'];
         $email = $dhasil['email'];
-        $jurusan = $dhasil['jurusan'];
+        $prodi = $dhasil['prodi'];
         $hakakses = $dhasil['hakakses'];
+
+        //cari jabatan
+        $stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE nip=?");
+        $stmt->bind_param("s", $nip);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $jhasil = $result->num_rows;
+        if ($jhasil == 1) {
+            $dhasil = $result->fetch_array();
+            $jabatan = $dhasil['kdjabatan'];
+        } else {
+            $jabatan = $hakakses;
+        };
 
         $_SESSION['user'] = $username;
         $_SESSION['nama'] = $nama;
         $_SESSION['nip'] = $nip;
-        $_SESSION['jurusan'] = $nama;
+        $_SESSION['prodi'] = $prodi;
         $_SESSION['hakakses'] = $hakakses;
+        $_SESSION['jabatan'] = $jabatan;
 
         if ($hakakses == 'dosen') {
             header('location:dosen/index.php');
