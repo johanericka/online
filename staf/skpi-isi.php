@@ -1,3 +1,18 @@
+<?php
+session_start();
+$user = $_SESSION['user'];
+$nip = $_SESSION['nip'];
+$nama = $_SESSION['nama'];
+$prodi = $_SESSION['prodi'];
+$hakakses = $_SESSION['hakakses'];
+$jabatan = $_SESSION['jabatan'];
+if ($_SESSION['hakakses'] != "tendik") {
+	header("location:../deauth.php");
+}
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,31 +41,6 @@
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-if ($_SESSION['role'] != "Tenaga Kependidikan") {
-	header("location:../index.php?pesan=belum_login");
-}
-?>
-
-<?php
-$iduser = $_SESSION['iduser'];
-$nip = $_SESSION['nip'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$jurusan = $_SESSION['jurusan'];
-?>
-
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
@@ -66,60 +56,9 @@ $jurusan = $_SESSION['jurusan'];
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="../../system/index3.html" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
-						<a href="#" class="d-block">Prodi : <?php echo $jurusan; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php
+		include('sidebar.php');
+		?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -139,18 +78,12 @@ $jurusan = $_SESSION['jurusan'];
 				<div class="content">
 					<div class="container-fluid">
 						<form role="form" method="post" action="skpi-simpan.php">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="form-group">
-										<label>Capaian Pembelajaran</label>
-										<select id="cpl" name="cpl" class="form-control">
-											<option>Kemampuan Kerja</option>
-											<option>Penguasaan Pengetahuan</option>
-											<option>Sikap Khusus</option>
-										</select>
-									</div>
-								</div>
-							</div>
+							<label>Capaian Pembelajaran</label>
+							<select id="cpl" name="cpl" class="form-control">
+								<option value="Kemampuan Kerja" selected>Kemampuan Kerja</option>
+								<option value="Penguasaan Pengetahuan">Penguasaan Pengetahuan</option>
+								<option value="Sikap Khusus">Sikap Khusus</option>
+							</select>
 							<?php
 							if (isset($_GET['pesan'])) {
 								if ($_GET['pesan'] == "gagal") {
@@ -164,15 +97,24 @@ $jurusan = $_SESSION['jurusan'];
 							}
 							?>
 							<label>Bahasa Indonesia</label><br />
-							<textarea class="form-control" rows="2" name="indonesia" /></textarea>
+							<input type="text" class="form-control" name="indonesia" required>
 							<label>Bahasa Inggris</label><br />
-							<textarea class="form-control" rows="2" name="english" /></textarea>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="1" name="default" id="default"> Default
-							</div>
+							<input type="text" class="form-control" name="english" required>
+							<label>Status Compatible</label><br />
+							<select id="def" name="def" class="form-control">
+								<option value=0>Opsional</option>
+								<option value=1 selected>Default</option>
+								<option value=2>Paten</option>
+							</select>
+							<small style="color:blue">
+								<b>Keterangan :</b> <br />
+								Opsional : CPL tidak terpilih <br />
+								Default : CPL terpilih <br />
+								Paten : CPL harus dipilih
+							</small>
 							<br />
-							<input type="hidden" name="jurusan" value="<?= $jurusan; ?>" />
-							<button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Simpan</button>
+							<br />
+							<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin akan menyimpan CPL ini ?')"> <i class="fa fa-save"></i> Simpan</button>
 						</form>
 					</div>
 				</div>
@@ -197,7 +139,7 @@ $jurusan = $_SESSION['jurusan'];
 								<?php
 								$no = 1;
 
-								$qcpl = mysqli_query($dbsurat, "SELECT * FROM skpi_cpl WHERE jurusan='$jurusan' ORDER BY cpl ASC, indonesia ASC");
+								$qcpl = mysqli_query($dbsurat, "SELECT * FROM skpi_cpl WHERE jurusan='$prodi' ORDER BY cpl ASC, indonesia ASC");
 								while ($data = mysqli_fetch_array($qcpl)) {
 									$nodata = $data[0];
 								?>
@@ -274,25 +216,5 @@ $jurusan = $_SESSION['jurusan'];
 	<!-- AdminLTE App -->
 	<script src="../system/dist/js/adminlte.min.js"></script>
 </body>
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
-
-<!-- timer untuk alert -->
-<script>
-	window.setTimeout(function() {
-		$(".alert").fadeTo(500, 0).slideUp(500, function() {
-			$(this).remove();
-		});
-	}, 1000);
-</script>
 
 </html>

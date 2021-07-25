@@ -41,8 +41,8 @@ foreach ($kemampuankerja as $kerja) {
     $cpl = $data[2];
     $indonesia = $data[3];
     $english = $data[4];
-    $qsimpan = mysqli_query($dbsurat, "INSERT INTO skpi (nim,nama,jurusan,cpl,indonesia,english,verifikasi1,verifikator1,tglverifikasi1,verifikator2,verifikator3) VALUES 
-																			('$nim','$nama','$prodi','$cpl','$indonesia','$english',1,'$nip','$tgl','$nipkaprodi','$nipwd1')");
+    $qsimpan = mysqli_query($dbsurat, "INSERT INTO skpi (nim,nama,jurusan,cpl,indonesia,english,verifikasi1,verifikator1,tglverifikasi1,verifikasi2,verifikator2,tglverifikasi2,verifikator3) VALUES 
+																			('$nim','$nama','$prodi','$cpl','$indonesia','$english',1,'$nip','$tgl',1,'$nipkaprodi','$tgl','$nipwd1')");
 }
 
 foreach ($penguasaanpengetahuan as $pengetahuan) {
@@ -51,8 +51,8 @@ foreach ($penguasaanpengetahuan as $pengetahuan) {
     $cpl = $data2[2];
     $indonesia = $data2[3];
     $english = $data2[4];
-    $qsimpan2 = mysqli_query($dbsurat, "INSERT INTO skpi (nim,nama,jurusan,cpl,indonesia,english,verifikasi1,verifikator1,tglverifikasi1,verifikator2,verifikator3) VALUES 
-																			('$nim','$nama','$prodi','$cpl','$indonesia','$english',1,'$nip','$tgl','$nipkaprodi','$nipwd1')");
+    $qsimpan2 = mysqli_query($dbsurat, "INSERT INTO skpi (nim,nama,jurusan,cpl,indonesia,english,verifikasi1,verifikator1,tglverifikasi1,verifikasi2,verifikator2,tglverifikasi2,verifikator3) 
+                                        VALUES ('$nim','$nama','$prodi','$cpl','$indonesia','$english',1,'$nip','$tgl',1,'$nipkaprodi','$tgl','$nipwd1')");
 }
 
 foreach ($SikapKhusus as $khusus) {
@@ -61,8 +61,8 @@ foreach ($SikapKhusus as $khusus) {
     $cpl = $data3[2];
     $indonesia = $data3[3];
     $english = $data3[4];
-    $qsimpan3 = mysqli_query($dbsurat, "INSERT INTO skpi (nim,nama,jurusan,cpl,indonesia,english,verifikasi1,verifikator1,tglverifikasi1,verifikator2,verifikator3) VALUES 
-																			('$nim','$nama','$prodi','$cpl','$indonesia','$english',1,'$nip','$tgl','$nipkaprodi','$nipwd1')");
+    $qsimpan3 = mysqli_query($dbsurat, "INSERT INTO skpi (nim,nama,jurusan,cpl,indonesia,english,verifikasi1,verifikator1,tglverifikasi1,verifikasi2,verifikator2,tglverifikasi2,verifikator3) 
+                                        VALUES ('$nim','$nama','$prodi','$cpl','$indonesia','$english',1,'$nip','$tgl',1,'$nipkaprodi','$tgl','$nipwd1')");
 }
 
 
