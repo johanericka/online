@@ -785,7 +785,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -819,7 +819,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as kaprodi -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -853,7 +853,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as WD -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -954,6 +954,51 @@ if ($nohp == null or $email == null) {
 				</div>
 			</section>
 
+			<!-- pengajuan surat bawahan -->
+			<?php if ($jabatan == 'dekan' or $jabatan == 'wadek1' or $jabatan == 'wadek2' or $jabatan == 'wadek3' or $jabatan == 'kajur' or $jabatan == 'kabag') { ?>
+				<section class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<!-- Default box -->
+								<div class="card card-success">
+									<div class="card-header">
+										<h3 class="card-title">Pengajuan Surat Bawahan </h3>
+										<!-- card minimize -->
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+										</div>
+									</div>
+									<!-- /.card-header -->
+									<?php $no = 1; ?>
+									<div class="card-body p-0">
+										<!-- /.card-header -->
+										<div class="card-body">
+											<table class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th width="5%" style="text-align:center">No</th>
+														<th width="10%" style="text-align:center">NIM</th>
+														<th style="text-align:center">Nama</th>
+														<th style="text-align:center">Surat</th>
+														<th width="15%" colspan="2" style="text-align:center">Aksi</th>
+													</tr>
+												</thead>
+												<tbody>
+
+
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			<?php }; ?>
+
 			<!-- data pengajuan pribadi -->
 			<section class="content">
 				<div class="container-fluid">
@@ -1028,11 +1073,7 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasiprodi == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	<!--Lihat-->
-																</a>
+																menunggu verifikasi
 															<?php
 															};
 															?>
@@ -1040,9 +1081,7 @@ if ($nohp == null or $email == null) {
 															if ($verifikasiprodi == 1) {
 															?>
 																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-print">
-																	</i>
-																	<!--Cetak-->
+																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
@@ -1051,9 +1090,7 @@ if ($nohp == null or $email == null) {
 															if ($verifikasiprodi == 2) {
 															?>
 																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-times">
-																	</i>
-																	<!--Cek-->
+																	<i class="fas fa-times"></i>
 																</a>
 															<?php
 															};
@@ -1063,11 +1100,7 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	<!--Lihat-->
-																</a>
+																menunggu verifikasi
 															<?php
 															};
 															?>
@@ -1075,25 +1108,23 @@ if ($nohp == null or $email == null) {
 															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
 															?>
 																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-print">
-																	</i>
-																	<!--Cetak-->
+																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
 															?>
+
+														</td>
+														<td>
 															<?php
 															if ($verifikasiprodi < 2 and $verifikasifakultas == 2) {
 															?>
 																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-trash">
-																	</i>
+																	<i class="fas fa-trash"></i> Hapus
 																</a>
 															<?php
 															};
 															?>
-														</td>
-														<td>
 															<?= $keterangan; ?>
 														</td>
 													</tr>

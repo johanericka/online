@@ -141,11 +141,7 @@ require('../system/myfunc.php');
 															<?php
 															if ($verifikasiprodi == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	<!--Lihat-->
-																</a>
+																menunggu verifikasi
 															<?php
 															};
 															?>
@@ -153,9 +149,7 @@ require('../system/myfunc.php');
 															if ($verifikasiprodi == 1) {
 															?>
 																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-print">
-																	</i>
-																	<!--Cetak-->
+																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
@@ -176,11 +170,7 @@ require('../system/myfunc.php');
 															<?php
 															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	<!--Lihat-->
-																</a>
+																menunggu verifikasi
 															<?php
 															};
 															?>
@@ -188,25 +178,23 @@ require('../system/myfunc.php');
 															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
 															?>
 																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-print">
-																	</i>
-																	<!--Cetak-->
+																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
 															?>
-															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 2) {
-															?>
-																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-trash">
-																	</i>
-																</a>
-															<?php
-															};
-															?>
+
 														</td>
 														<td>
+															<?php
+															if ($verifikasifakultas <> 1) {
+															?>
+																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-trash"></i> Hapus
+																</a>
+															<?php
+															};
+															?>
 															<?= $keterangan; ?>
 														</td>
 													</tr>
