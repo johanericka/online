@@ -115,7 +115,7 @@ require('../system/myfunc.php');
 							Kegiatan
 							<textarea class="form-control" rows="3" id="kegiatan5" name="kegiatan5" placeholder="uraian kegiatan"></textarea>
 							<br />
-							<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan kebenaran data pada form ini')"> <i class="fa fa-save"></i> Ajukan</button>
+							<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data pada form ini adalah benar')"> <i class="fa fa-save"></i> Ajukan</button>
 						</form>
 					</div>
 				</div>

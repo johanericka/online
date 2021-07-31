@@ -1108,7 +1108,7 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasiprodi == 1) {
 															?>
-																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>" target="_blank">
 																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
@@ -1117,33 +1117,39 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasiprodi == 2) {
 															?>
-																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-times"></i>
-																</a>
+																Ditolak oleh <?= namadosen($dbsurat, $verifikatorprodi); ?>
 															<?php
 															};
 															?>
 														</td>
 														<td>
 															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
+															if ($verifikasifakultas == 0) {
 															?>
-																menunggu verifikasi <?= namadosen($dbsurat, $verifikatorfakultas); ?>
+																Menunggu verifikasi <?= namadosen($dbsurat, $verifikatorfakultas); ?>
 															<?php
 															};
 															?>
 															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
+															if ($verifikasifakultas == 1) {
 															?>
-																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>" target="_blank">
 																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
 															?>
-
+															<?php
+															if ($verifikasifakultas == 2) {
+															?>
+																Ditolak oleh <?= namadosen($dbsurat, $verifikatorfakultas); ?>
+															<?php
+															};
+															?>
 														</td>
 														<td>
+															<?= $keterangan; ?>
+															<br />
 															<?php
 															if ($verifikasifakultas <> 1) {
 															?>
@@ -1153,7 +1159,6 @@ if ($nohp == null or $email == null) {
 															<?php
 															};
 															?>
-															<?= $keterangan; ?>
 														</td>
 													</tr>
 												<?php

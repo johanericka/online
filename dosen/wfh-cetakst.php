@@ -223,14 +223,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td></td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
 			<td class="text-center">
 				<small><i>Scan QRCode ini </i></small><br />
 				<img src="../qrcode/<?php echo $namafile; ?>.png" width="70" /><br />

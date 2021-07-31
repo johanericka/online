@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once('../system/dbconn.php');
+require('../system/dbconn.php');
+include('../system/myfunc.php');
 //require_once('../system/phpmailer/sendmail.php');
 
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
@@ -19,37 +20,52 @@ $tgl4 = mysqli_real_escape_string($dbsurat, $_POST['tgl4']);
 $kegiatan4 = mysqli_real_escape_string($dbsurat, $_POST['kegiatan4']);
 $tgl5 = mysqli_real_escape_string($dbsurat, $_POST['tgl5']);
 $kegiatan5 = mysqli_real_escape_string($dbsurat, $_POST['kegiatan5']);
-if ($jabatan == 'tendik') {
-	$jabatan = 'Tenaga Kependidikan';
-} elseif ($jabatan == 'wadek1' or $jabatan == 'wadek2' or $jabatan == 'wadek3') {
-	$jabatan = 'Wakil Dekan';
-} elseif ($jabatan == 'dekan') {
-	$jabatan = 'Dekan';
+
+//kaprodi keatas verifikasi wd2
+if ($jabatan == 'dosen') {
+	$kdjabatan = 'kaprodi';
+	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan=?");
+	$stmt->bind_param("ss", $prodi, $kdjabatan);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dhasil = $result->fetch_assoc();
+	$nipkaprodi = $dhasil['nip'];
 } else {
-	$jabatan = 'Dosen';
+	$jabatanwd = 'wadek2';
+	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
+	$stmt->bind_param("s", $jabatanwd);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dhasil = $result->fetch_assoc();
+	$nipkaprodi = $dhasil['nip'];
 }
-
-
-//cari nip kajur
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan='kajur'");
-$stmt->bind_param("s", $prodi);
-$stmt->execute();
-$result = $stmt->get_result();
-$dhasil = $result->fetch_assoc();
-$nipkaprodi = $dhasil['nip'];
 
 //cari nip wd-2
 $jabatanwd = 'wadek2';
-$level = 3;
 $stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
-$stmt->bind_param("i", $jabatanwd);
+$stmt->bind_param("s", $jabatanwd);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
 $nipwd = $dhasil['nip'];
 
-echo $nipkaprodi . '<br/>';
-echo $nipwd;
+if ($jabatan == 'dosen') {
+	$jabatan = 'Dosen';
+} elseif ($jabatan == 'kaprodi') {
+	$jabatan = 'Ketua Program Studi';
+} elseif ($jabatan == 'wadek1') {
+	$jabatan = 'Wakil Dekan bidang Akademik';
+} elseif ($jabatan == 'wadek2') {
+	$jabatan = 'Wakil Dekan bidang AUPK';
+} elseif ($jabatan == 'wadek3') {
+	$jabatan = 'Wakil Dekan bidang Kemahasiswaan';
+} elseif ($jabatan == 'tendik') {
+	$jabatan = 'Tenaga Kependidikan';
+} elseif ($jabatan == 'kabag') {
+	$jabatan = 'Kepala Bagian AUPK';
+} elseif ($jabatan == 'kasubag') {
+	$jabatan = 'Kepala Sub Bagian';
+}
 
 if ($prodi == 'Teknik Informatika') {
 	$sql = "INSERT INTO wfh (prodi, tglsurat, iduser, nip, nama, jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorprodi, verifikasiprodi, tglverifikasiprodi, verifikatorfakultas) 

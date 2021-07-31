@@ -75,9 +75,9 @@ require('../system/myfunc.php');
 				$nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 				$query = mysqli_query($dbsurat, "select * from wfh where no='$nodata'");
 				$data = mysqli_fetch_array($query);
-				$nama = $data['nama'];
-				$nip = $data['nip'];
-				$prodi = mysqli_real_escape_string($dbsurat, $data['prodi']);
+				$namadosen = $data['nama'];
+				$nipdosen = $data['nip'];
+				$prodidosen = mysqli_real_escape_string($dbsurat, $data['prodi']);
 				$tglwfh1 = mysqli_real_escape_string($dbsurat, $data['tglwfh1']);
 				$kegiatan1 = mysqli_real_escape_string($dbsurat, $data['kegiatan1']);
 				$tglwfh2 = mysqli_real_escape_string($dbsurat, $data['tglwfh2']);
@@ -97,11 +97,11 @@ require('../system/myfunc.php');
 				<div class="content">
 					<div class="container-fluid">
 						Nama <br />
-						<input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
+						<input type="text" class="form-control" name="nama" value="<?= $namadosen; ?>" readonly /></input>
 						NIP <br />
-						<input type="text" class="form-control" name="niptk" value="<?= $nip; ?>" readonly /></input>
+						<input type="text" class="form-control" name="niptk" value="<?= $nipdosen; ?>" readonly /></input>
 						Program Studi <br />
-						<input type="text" class="form-control" name="prodi" value="<?= $prodi; ?>" readonly /></input>
+						<input type="text" class="form-control" name="prodi" value="<?= $prodidosen; ?>" readonly /></input>
 						<br />
 						<?php $no = 1; ?>
 						<table id="example1" class="table table-bordered table-striped">
