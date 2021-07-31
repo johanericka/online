@@ -55,7 +55,7 @@ if ($prodi == 'Teknik Informatika') {
 	$sql = "INSERT INTO wfh (prodi, tglsurat, iduser, nip, nama, jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorprodi, verifikasiprodi, tglverifikasiprodi, verifikatorfakultas) 
 			VALUES ('$prodi','$tglsurat','$nip','$nip','$nama','$jabatan','$tgl1','$kegiatan1','$tgl2','$kegiatan2','$tgl3','$kegiatan3','$tgl4','$kegiatan4','$tgl5','$kegiatan5','$nipkaprodi','1','$tglsurat','$nipwd')";
 } else {
-	$sql = "INSERT INTO wfh (prodi, tglsurat, iduser, nama, nip,jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorjurusan, verifikatorprodi) 
+	$sql = "INSERT INTO wfh (prodi, tglsurat, iduser, nama, nip,jabatan, tglwfh1, kegiatan1, tglwfh2, kegiatan2,tglwfh3, kegiatan3, tglwfh4, kegiatan4,tglwfh5, kegiatan5,verifikatorprodi, verifikatorfakultas) 
 			VALUES ('$prodi','$tglsurat','$nip','$nama','$nip','$jabatan','$tgl1','$kegiatan1','$tgl2','$kegiatan2','$tgl3','$kegiatan3','$tgl4','$kegiatan4','$tgl5','$kegiatan5','$nipkaprodi','$nipwd')";
 }
 

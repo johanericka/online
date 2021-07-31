@@ -231,10 +231,11 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td>
+			<td class="text-center">
 				<small><i>Scan QRCode ini </i></small><br />
 				<img src="../qrcode/<?php echo $namafile; ?>.png" width="70" /><br />
-				<small><i>untuk verifikasi</i></small>
+				<small><i>untuk verifikasi</i></small><br />
+				<small><i>keaslian surat</i></small><br />
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
