@@ -28,7 +28,7 @@ require('../system/myfunc.php');
 <?php
 //get data wfh from table wfh
 $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
-$query = mysqli_query($dbsurat, "select * from wfh where no='$nodata'");
+$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE no='$nodata'");
 $data = mysqli_fetch_array($query);
 $fakultas = $data['fakultas'];
 $prodi = $data['prodi'];
@@ -36,6 +36,7 @@ $tglsurat = $data['tglsurat'];
 $iduser = $data['iduser'];
 $nip = $data['nip'];
 $nama = $data['nama'];
+$jabatan = $data['jabatan'];
 $tglwfh1 = $data['tglwfh1'];
 $kegiatan1 = $data['kegiatan1'];
 $tglwfh2 = $data['tglwfh2'];
@@ -57,7 +58,7 @@ $row = mysqli_fetch_array($datakajur);
 $iddosen = $row['iddosen'];
 $nipkajur = $row['nip'];
 $namakajur = $row['nama'];
-$jabatan = $row['jabatan'];
+$jabatankajur = $row['kdjabatan'];
 
 //buat qrcode
 include "../system/phpqrcode/qrlib.php";
@@ -125,13 +126,13 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		<tr>
 			<td>&nbsp;</td>
 			<td>Jabatan</td>
-			<td colspan="3">: Dosen</td>
+			<td colspan="3">: <?= $jabatan; ?></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td>Program Studi</td>
-			<td colspan="3">: <?php echo $prodi; ?></td>
+			<td>Fakultas</td>
+			<td colspan="3">: Sains dan Teknologi</td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -249,21 +250,25 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><small><i>Scan QRCode ini </i></td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td style="text-align:center">Ketua Program Studi <?php echo ucwords($prodi); ?>,</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td><img src="../qrcode/<?php echo $namafile; ?>.png" width="70" /></td>
+			<td><small><i>Scan QRCode ini </i></small><br />
+				<img src="../qrcode/<?php echo $namafile; ?>.png" width="70" /><br />
+				<small><i>untuk verifikasi</i></small><br />
+				<small><i>keaslian surat</i></small>
+			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<?php
 			if ($verifikasijurusan == 1) {
+				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = 'kabag'");
+				$hasil = mysqli_fetch_array($sql);
+				$ttd = $hasil['ttd'];
 			?>
-				<td style="text-align:center"><img src="../ttd/ttd<?php echo $iddosen; ?>.png" width="70" /></td>
+				<td style="text-align:center">
+					Kepala Bagian AUPK,<br />
+					<img src="../ttd/<?= $ttd; ?>" width="70" /><br />
+					<u><?= $namakajur; ?></u><br />
+					NIP. <?= $nipkajur; ?>
+				</td>
 			<?php
 			}
 			?>
@@ -271,10 +276,10 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><small><i>untuk verifikasi</i></small></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td style="text-align:center"><u><?php echo $namakajur; ?></u></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -282,7 +287,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td style="text-align:center">NIP. <?php echo $nipkajur; ?></td>
+			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
 	</tbody>

@@ -223,25 +223,21 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td></td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
+			<td class="text-center">
 				<small><i>Scan QRCode ini </i></small><br />
 				<img src="../qrcode/<?php echo $namafile; ?>.png" width="70" /><br />
-				<small><i>untuk verifikasi</i></small>
+				<small><i>untuk verifikasi</i></small><br />
+				<small><i>keaslian surat</i></small><br />
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<?php
 			if ($verifikasifakultas == 1) {
+				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = 'wadek2'");
+				$hasil = mysqli_fetch_array($sql);
+				$ttd = $hasil['ttd'];
 			?>
-				<td style="text-align:center"><img src="../ttd/<?= $nipwd; ?>.jpg" width="300px"></td>
+				<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300px"></td>
 			<?php
 			}
 			?>

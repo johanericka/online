@@ -67,6 +67,77 @@ require('../system/myfunc.php');
 				</div><!-- /.container-fluid -->
 			</section>
 
+			<!-- pengajuan bawahan-->
+			<?php if ($jabatan == 'dekan' or $jabatan == 'wadek1' or $jabatan == 'wadek2' or $jabatan == 'wadek3' or $jabatan == 'kaprodi' or $jabatan == 'kabag') { ?>
+				<section class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<!-- Default box -->
+								<div class="card card-success">
+									<div class="card-header">
+										<h3 class="card-title">Pengajuan Surat Bawahan </h3>
+										<!-- card minimize -->
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+										</div>
+									</div>
+									<!-- /.card-header -->
+									<?php $no = 1; ?>
+									<div class="card-body p-0">
+										<!-- /.card-header -->
+										<div class="card-body">
+											<table class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th width="5%" style="text-align:center">No</th>
+														<th style="text-align:center">Nama</th>
+														<th style="text-align:center">Surat</th>
+														<th width="15%" colspan="2" style="text-align:center">Aksi</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- verifikasi WFH as kabag-->
+													<?php
+													$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE verifikasiprodi=0 and verifikatorprodi='$nip'");
+													$jmldata = mysqli_num_rows($query);
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$prodistaf = $data['prodi'];
+														$nipstaf = $data['nip'];
+														$namastaf = $data['nama'];
+														$verifikasiprodi = $data['verifikasiprodi'];
+														$verifikasifakultas = $data['verifikasifakultas'];
+														$surat = 'Ijin WFH';
+													?>
+														<tr>
+															<td><?= $no; ?></td>
+															<td><?= $namastaf; ?></td>
+															<td><?= $surat; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="wfh-kabag-tampil.php?nodata=<?= $nodata; ?>">
+																	<i class="fas fa-search"></i>Lihat
+																</a>
+															</td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+													<!-- /verifikasi WFH as kabag-->
+
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			<?php }; ?>
+
 			<!-- Main content -->
 			<section class="content">
 				<div class="container-fluid">
@@ -107,7 +178,9 @@ require('../system/myfunc.php');
 													$tglwfh4 = $data['tglwfh4'];
 													$tglwfh5 = $data['tglwfh5'];
 													$verifikasiprodi = $data['verifikasiprodi'];
+													$verifikatorprodi = $data['verifikatorprodi'];
 													$verifikasifakultas = $data['verifikasifakultas'];
+													$verifikatorfakultas = $data['verifikatorfakultas'];
 													$keterangan = $data['keterangan'];
 													if (date($tglwfh5) != 0) {
 														$wfhselesai = $tglwfh5;
@@ -141,14 +214,14 @@ require('../system/myfunc.php');
 															<?php
 															if ($verifikasiprodi == 0) {
 															?>
-																menunggu verifikasi
+																Menunggu verifikasi <?= namadosen($dbsurat, $verifikatorprodi); ?>
 															<?php
 															};
 															?>
 															<?php
 															if ($verifikasiprodi == 1) {
 															?>
-																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>" target="_blank">
 																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
@@ -157,35 +230,38 @@ require('../system/myfunc.php');
 															<?php
 															if ($verifikasiprodi == 2) {
 															?>
-																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-times">
-																	</i>
-																	<!--Cek-->
-																</a>
+																Ditolak <?= namadosen($dbsurat, $verifikatorprodi); ?>
 															<?php
 															};
 															?>
 														</td>
 														<td>
 															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
+															if ($verifikasifakultas == 0) {
 															?>
-																menunggu verifikasi
+																menunggu verifikasi <?= namadosen($dbsurat, $verifikatorfakultas); ?>
 															<?php
 															};
 															?>
 															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
+															if ($verifikasifakultas == 1) {
 															?>
-																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>" target="_blank">
 																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
 															?>
-
+															<?php
+															if ($verifikasifakultas == 2) {
+															?>
+																Ditolak <?= namadosen($dbsurat, $verifikatorfakultas); ?>
+															<?php
+															};
+															?>
 														</td>
 														<td>
+															<?= $keterangan; ?>
 															<?php
 															if ($verifikasifakultas <> 1) {
 															?>
@@ -195,7 +271,6 @@ require('../system/myfunc.php');
 															<?php
 															};
 															?>
-															<?= $keterangan; ?>
 														</td>
 													</tr>
 												<?php

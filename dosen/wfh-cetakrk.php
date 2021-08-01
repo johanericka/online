@@ -263,13 +263,28 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 				<td style="text-align:center">
 					<?php
 					if ($jabatankajur == 'wadek2') {
+						$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = '$jabatankajur'");
+						$hasil = mysqli_fetch_array($sql);
+						$ttd = $hasil['ttd'];
 					?>
-						<img src="../ttd/<?= $nipkajur; ?>.jpg" width="300px">
+						<img src="../ttd/<?= $ttd; ?>" width="300px">
+					<?php
+					} elseif ($jabatankajur == 'dekan') {
+						$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = '$jabatankajur'");
+						$hasil = mysqli_fetch_array($sql);
+						$ttd = $hasil['ttd'];
+					?>
+						<img src="../ttd/<?= $ttd; ?>" width="300px">
 					<?php
 					} else {
+						$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = '$jabatankajur' AND prodi='$prodi'");
+						$hasil = mysqli_fetch_array($sql);
+						$namakajur = $hasil['nama'];
+						$nipkajur = $hasil['nip'];
+						$ttd = $hasil['ttd'];
 					?>
 						Ketua Program Studi <?= ucwords($prodi); ?>,<br />
-						<img src="../ttd/ttd<?= $iddosen; ?>.png" width="70" /><br />
+						<img src="../ttd/<?= $ttd; ?>" width="70" /><br />
 						<u><?= $namakajur; ?></u><br />
 						NIP. <?= $nipkajur; ?>
 					<?php
