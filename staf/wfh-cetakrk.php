@@ -52,6 +52,12 @@ $verifikasijurusan = $data['verifikasiprodi'];
 $tglverifikasijurusan = $data['tglverifikasiprodi'];
 $nosurat = $data['keterangan'];
 
+if ($jabatan == 'tendik') {
+	$jabatan = 'Tenaga Kependidikan';
+} elseif ($jabatan == 'kabag') {
+	$jabatan = 'Kepala Bagian AUPK';
+}
+
 //get data kajur
 $datakajur = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip='$verifikatorjurusan'");
 $row = mysqli_fetch_array($datakajur);
@@ -131,8 +137,20 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td>Fakultas</td>
-			<td colspan="3">: Sains dan Teknologi</td>
+			<?php
+			if ($prodi == 'SAINTEK') {
+			?>
+				<td>Fakultas</td>
+				<td colspan="3">: Sains dan Teknologi</td>
+			<?php
+			} else {
+			?>
+				<td>Program Studi</td>
+				<td colspan="3">: <?= $prodi; ?></td>
+			<?php
+			}
+			?>
+
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -153,14 +171,14 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 <table table style="width:80%; margin-left:auto;margin-right:auto;" cellspacing="0" border="1">
 	<tbody>
 		<tr>
-			<td style="text-align:center"><b>No.</b></td>
-			<td style="text-align:center"><b>Tanggal</b></td>
-			<td style="text-align:center"><b>Kegiatan</b></td>
+			<td style="text-align:center" width="5%"><b>No.</b></td>
+			<td style="text-align:center" width="20%"><b>Tanggal</b></td>
+			<td style="text-align:center" width="75%"><b>Kegiatan</b></td>
 		</tr>
 		<tr>
 			<td style="text-align:center"><?= $no; ?></td>
-			<td style="text-align:center"><?php echo tgl_indo($tglwfh1); ?></td>
-			<td style="text-align:left"><?php echo $kegiatan1; ?></td>
+			<td style="text-align:center"><?= tgl_indo($tglwfh1); ?></td>
+			<td style="text-align:left"><?= nl2br($kegiatan1); ?></td>
 			<?php $no++; ?>
 		</tr>
 		<?php
@@ -168,8 +186,8 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		?>
 			<tr>
 				<td style="text-align:center"><?= $no; ?></td>
-				<td style="text-align:center"><?php echo tgl_indo($tglwfh2); ?></td>
-				<td style="text-align:left"><?php echo $kegiatan2; ?></td>
+				<td style="text-align:center"><?= tgl_indo($tglwfh2); ?></td>
+				<td style="text-align:left"><?= nl2br($kegiatan2); ?></td>
 				<?php $no++; ?>
 			</tr>
 		<?php
@@ -180,8 +198,8 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		?>
 			<tr>
 				<td style="text-align:center"><?= $no; ?></td>
-				<td style="text-align:center"><?php echo tgl_indo($tglwfh3); ?></td>
-				<td style="text-align:left"><?php echo $kegiatan3; ?></td>
+				<td style="text-align:center"><?= tgl_indo($tglwfh3); ?></td>
+				<td style="text-align:left"><?= nl2br($kegiatan3); ?></td>
 				<?php $no++; ?>
 			</tr>
 		<?php
@@ -192,8 +210,8 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		?>
 			<tr>
 				<td style="text-align:center"><?= $no; ?></td>
-				<td style="text-align:center"><?php echo tgl_indo($tglwfh4); ?></td>
-				<td style="text-align:left"><?php echo $kegiatan4; ?></td>
+				<td style="text-align:center"><?= tgl_indo($tglwfh4); ?></td>
+				<td style="text-align:left"><?= nl2br($kegiatan4); ?></td>
 				<?php $no++; ?>
 			</tr>
 		<?php
@@ -204,8 +222,8 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		?>
 			<tr>
 				<td style="text-align:center"><?= $no; ?></td>
-				<td style="text-align:center"><?php echo tgl_indo($tglwfh5); ?></td>
-				<td style="text-align:left"><?php echo $kegiatan5; ?></td>
+				<td style="text-align:center"><?= tgl_indo($tglwfh5); ?></td>
+				<td style="text-align:left"><?= nl2br($kegiatan5); ?></td>
 				<?php $no++; ?>
 			</tr>
 		<?php

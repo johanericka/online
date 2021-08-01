@@ -77,20 +77,20 @@ require('../system/myfunc.php');
 				$data = mysqli_fetch_array($query);
 				$nama = $data['nama'];
 				$nip = $data['nip'];
-				$prodi = mysqli_real_escape_string($dbsurat, $data['prodi']);
-				$tglwfh1 = mysqli_real_escape_string($dbsurat, $data['tglwfh1']);
-				$kegiatan1 = mysqli_real_escape_string($dbsurat, $data['kegiatan1']);
-				$tglwfh2 = mysqli_real_escape_string($dbsurat, $data['tglwfh2']);
-				$kegiatan2 = mysqli_real_escape_string($dbsurat, $data['kegiatan2']);
-				$tglwfh3 = mysqli_real_escape_string($dbsurat, $data['tglwfh3']);
-				$kegiatan3 = mysqli_real_escape_string($dbsurat, $data['kegiatan3']);
-				$tglwfh4 = mysqli_real_escape_string($dbsurat, $data['tglwfh4']);
-				$kegiatan4 = mysqli_real_escape_string($dbsurat, $data['kegiatan4']);
-				$tglwfh5 = mysqli_real_escape_string($dbsurat, $data['tglwfh5']);
-				$kegiatan5 = mysqli_real_escape_string($dbsurat, $data['kegiatan5']);
-				$verifikasiprodi = mysqli_real_escape_string($dbsurat, $data['verifikasiprodi']);
-				$verifikasifakultas = mysqli_real_escape_string($dbsurat, $data['verifikasifakultas']);
-				$keterangan = mysqli_real_escape_string($dbsurat, $data['keterangan']);
+				$prodi = $data['prodi'];
+				$tglwfh1 = $data['tglwfh1'];
+				$kegiatan1 = $data['kegiatan1'];
+				$tglwfh2 = $data['tglwfh2'];
+				$kegiatan2 = $data['kegiatan2'];
+				$tglwfh3 = $data['tglwfh3'];
+				$kegiatan3 = $data['kegiatan3'];
+				$tglwfh4 = $data['tglwfh4'];
+				$kegiatan4 = $data['kegiatan4'];
+				$tglwfh5 = $data['tglwfh5'];
+				$kegiatan5 = $data['kegiatan5'];
+				$verifikasiprodi = $data['verifikasiprodi'];
+				$verifikasifakultas = $data['verifikasifakultas'];
+				$keterangan = $data['keterangan'];
 				?>
 
 
@@ -119,7 +119,7 @@ require('../system/myfunc.php');
 									<tr>
 										<td><?= $no; ?></td>
 										<td><?= tgl_indo($tglwfh1); ?></td>
-										<td><?= ($kegiatan1); ?></td>
+										<td><?= nl2br($kegiatan1); ?></td>
 									</tr>
 								<?php
 									$no++;
@@ -131,7 +131,7 @@ require('../system/myfunc.php');
 									<tr>
 										<td><?= $no; ?></td>
 										<td><?= tgl_indo($tglwfh2); ?></td>
-										<td><?= ($kegiatan2); ?></td>
+										<td><?= nl2br($kegiatan2); ?></td>
 									</tr>
 								<?php
 									$no++;
@@ -143,7 +143,7 @@ require('../system/myfunc.php');
 									<tr>
 										<td><?= $no; ?></td>
 										<td><?= tgl_indo($tglwfh3); ?></td>
-										<td><?= ($kegiatan3); ?></td>
+										<td><?= nl2br($kegiatan3); ?></td>
 									</tr>
 								<?php
 									$no++;
@@ -155,7 +155,7 @@ require('../system/myfunc.php');
 									<tr>
 										<td><?= $no; ?></td>
 										<td><?= tgl_indo($tglwfh4); ?></td>
-										<td><?= ($kegiatan4); ?></td>
+										<td><?= nl2br($kegiatan4); ?></td>
 									</tr>
 								<?php
 									$no++;
@@ -167,7 +167,7 @@ require('../system/myfunc.php');
 									<tr>
 										<td><?= $no; ?></td>
 										<td><?= tgl_indo($tglwfh5); ?></td>
-										<td><?= ($kegiatan5); ?></td>
+										<td><?= nl2br($kegiatan5); ?></td>
 									</tr>
 								<?php
 									$no++;

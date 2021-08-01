@@ -42,6 +42,12 @@ function semester($tanggal)
     }
 }
 
+function multibaris($pesan)
+{
+    str_replace(["\r\n", "\r", "\n"], "<br/>", $pesan);
+    return $pesan;
+}
+
 ?>
 <script>
     window.setTimeout(function() {
