@@ -259,13 +259,27 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 			<td>&nbsp;</td>
 			<?php
 			if ($verifikasijurusan == 1) {
-				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = 'kabag'");
+				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$verifikatorjurusan'");
 				$hasil = mysqli_fetch_array($sql);
+				$kdjabatan = $hasil['kdjabatan'];
+				$namakajur = $hasil['nama'];
+				$nipkajur = $hasil['nip'];
 				$ttd = $hasil['ttd'];
 			?>
 				<td style="text-align:center">
-					Kepala Bagian AUPK,<br />
-					<img src="../ttd/<?= $ttd; ?>" width="70" /><br />
+					<?php
+					if ($kdjabatan == 'kabag') {
+					?>
+						Kepala Bagian AUPK,<br />
+						<img src="../ttd/<?= $ttd; ?>" width="70" /><br />
+					<?php
+					} else {
+					?>
+						Kepala Program Studi <?= $prodi; ?>,<br />
+						<img src="../ttd/<?= $ttd; ?>" width="300" /><br />
+					<?php
+					}
+					?>
 					<u><?= $namakajur; ?></u><br />
 					NIP. <?= $nipkajur; ?>
 				</td>

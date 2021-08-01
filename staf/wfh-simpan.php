@@ -21,30 +21,8 @@ $tgl5 = mysqli_real_escape_string($dbsurat, $_POST['tgl5']);
 $kegiatan5 = mysqli_real_escape_string($dbsurat, $_POST['kegiatan5']);
 
 //kaprodi keatas verifikasi wd2
-if ($jabatan == 'kaprodi' or $jabatan == 'dekan' or $jabatan == 'wadek1' or $jabatan == 'wadek3' or $jabatan == 'kabag') {
-	//cari nip kaprodi
-	$jabatanwd = 'wadek2';
-	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
-	$stmt->bind_param("s", $jabatanwd);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$dhasil = $result->fetch_assoc();
-	$nipkaprodi = $dhasil['nip'];
-	//cari nip wd-2
-	$nipwd = $dhasil['nip'];
-} elseif ($jabatan == 'wadek2') {
-	//cari nip kaprodi
-	$jabatanwd = 'dekan';
-	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
-	$stmt->bind_param("s", $jabatanwd);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$dhasil = $result->fetch_assoc();
-	$nipkaprodi = $dhasil['nip'];
-	//cari nip wd-2
-	$nipwd = $dhasil['nip'];
-} else {
-	//cari nip kaprodi
+if ($prodi == 'SAINTEK') {
+	//tendik fakutlas yang ttd kabag
 	$kdjabatan = 'kabag';
 	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan=?");
 	$stmt->bind_param("ss", $prodi, $kdjabatan);
@@ -52,16 +30,25 @@ if ($jabatan == 'kaprodi' or $jabatan == 'dekan' or $jabatan == 'wadek1' or $jab
 	$result = $stmt->get_result();
 	$dhasil = $result->fetch_assoc();
 	$nipkaprodi = $dhasil['nip'];
-
-	//cari nip wd-2
-	$jabatanwd = 'wadek2';
-	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
-	$stmt->bind_param("s", $jabatanwd);
+} else {
+	//tendik fakutlas yang ttd kabag
+	$kdjabatan = 'kaprodi';
+	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan=?");
+	$stmt->bind_param("ss", $prodi, $kdjabatan);
 	$stmt->execute();
 	$result = $stmt->get_result();
 	$dhasil = $result->fetch_assoc();
-	$nipwd = $dhasil['nip'];
+	$nipkaprodi = $dhasil['nip'];
 }
+//cari nip wd-2
+$jabatanwd = 'wadek2';
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
+$stmt->bind_param("s", $jabatanwd);
+$stmt->execute();
+$result = $stmt->get_result();
+$dhasil = $result->fetch_assoc();
+$nipwd = $dhasil['nip'];
+
 
 
 
