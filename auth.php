@@ -29,7 +29,7 @@ if ($kunci == $antibot) {
         $stmt->execute();
         $result = $stmt->get_result();
         $jhasil = $result->num_rows;
-        if ($jhasil == 1) {
+        if ($jhasil > 0) {
             $dhasil = $result->fetch_array();
             $jabatan = $dhasil['kdjabatan'];
         } else {
@@ -42,6 +42,9 @@ if ($kunci == $antibot) {
         $_SESSION['prodi'] = $prodi;
         $_SESSION['hakakses'] = $hakakses;
         $_SESSION['jabatan'] = $jabatan;
+        echo $nip;
+        echo $jabatan;
+        echo $jhasil;
 
         if ($hakakses == 'dosen') {
             header('location:dosen/index.php');

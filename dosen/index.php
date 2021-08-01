@@ -118,7 +118,7 @@ if ($nohp == null or $email == null) {
 											<thead>
 												<tr>
 													<th width="5%" style="text-align:center">No</th>
-													<th width="10%" style="text-align:center">NIM</th>
+													<th width="10%" style="text-align:center">PRODI</th>
 													<th style="text-align:center">Nama</th>
 													<th style="text-align:center">Surat</th>
 													<th width="15%" colspan="2" style="text-align:center">Aksi</th>
@@ -132,7 +132,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Pengantar PKL / Magang';
 													$validasi1 = $data['validasi1'];
@@ -140,10 +140,10 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pkl-koor-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -162,7 +162,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Pengantar PKL / Magang';
 													$validasi1 = $data['validasi1'];
@@ -170,10 +170,10 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pkl-kaprodi-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -192,7 +192,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Pengantar PKL / Magang';
 													$validasi1 = $data['validasi1'];
@@ -200,10 +200,10 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pkl-wd-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -222,7 +222,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
 													$verifikasi1 = $data['validasi1'];
@@ -230,10 +230,10 @@ if ($nohp == null or $email == null) {
 													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<?php
 															if ($verifikasi1 == 0) {
@@ -259,7 +259,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
 													$verifikasi1 = $data['validasi1'];
@@ -267,17 +267,16 @@ if ($nohp == null or $email == null) {
 													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<?php
 															if ($verifikasi2 == 0) {
 															?>
 																<a class="btn btn-info btn-sm" href="ijinlab-kaprodi-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search"></i>
-																	Lihat
+																	<i class="fas fa-search"></i> Lihat
 																</a>
 															<?php
 															};
@@ -296,7 +295,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
 													$verifikasi1 = $data['validasi1'];
@@ -304,17 +303,16 @@ if ($nohp == null or $email == null) {
 													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<?php
 															if ($verifikasi3 == 0) {
 															?>
 																<a class="btn btn-info btn-sm" href="ijinlab-wd-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search"></i>
-																	Lihat
+																	<i class="fas fa-search"></i> Lihat
 																</a>
 															<?php
 															};
@@ -332,7 +330,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
 													$validasi1 = $data['validasi1'];
@@ -340,10 +338,10 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="ijinpenelitian-dosen-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -361,7 +359,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
 													$validasi1 = $data['validasi1'];
@@ -369,10 +367,10 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="ijinpenelitian-kaprodi-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -390,7 +388,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
 													$validasi1 = $data['validasi1'];
@@ -398,10 +396,10 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="ijinpenelitian-wd-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -419,7 +417,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
 													$verifikasi1 = $data['validasi1'];
@@ -427,15 +425,13 @@ if ($nohp == null or $email == null) {
 													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="peminjamanalat-dosen-tampil.php?nodata=<?= $nodata; ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -450,7 +446,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
 													$verifikasi1 = $data['validasi1'];
@@ -458,15 +454,13 @@ if ($nohp == null or $email == null) {
 													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="peminjamanalat-kaprodi-tampil.php?nodata=<?= $nodata; ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -481,7 +475,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
 													$verifikasi1 = $data['validasi1'];
@@ -489,15 +483,13 @@ if ($nohp == null or $email == null) {
 													$verifikasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="peminjamanalat-wd-tampil.php?nodata=<?= $nodata; ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -512,7 +504,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
 													$validasi1 = $data['validasi1'];
@@ -520,15 +512,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodi; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="observasi-dosen-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -543,7 +533,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
 													$validasi1 = $data['validasi1'];
@@ -551,15 +541,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="observasi-kaprodi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -574,7 +562,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
 													$validasi1 = $data['validasi1'];
@@ -582,15 +570,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="observasi-wd-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -605,7 +591,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
 													$validasi1 = $data['validasi1'];
@@ -613,14 +599,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pengambilandata-dosen-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search"></i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -635,7 +620,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
 													$validasi1 = $data['validasi1'];
@@ -643,14 +628,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pengambilandata-kaprodi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search"></i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -665,7 +649,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
 													$validasi1 = $data['validasi1'];
@@ -673,14 +657,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pengambilandata-wd-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search"></i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -695,7 +678,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
 													$validasi1 = $data['validasi1'];
@@ -703,15 +686,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="suket-dosen-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -726,7 +707,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator2='$nip' AND validasi2 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
 													$validasi1 = $data['validasi1'];
@@ -734,15 +715,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="suket-kaprodi-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -757,7 +736,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
 													$validasi1 = $data['validasi1'];
@@ -765,15 +744,13 @@ if ($nohp == null or $email == null) {
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
-														<td><?php echo $no; ?></td>
-														<td><?php echo $nim; ?></td>
-														<td><?php echo $nama; ?></td>
-														<td><?php echo $surat; ?></td>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="suket-wd-tampil.php?nodata=<?php echo mysqli_real_escape_string($dbsurat, $nodata); ?>">
-																<i class="fas fa-search">
-																</i>
-																Lihat
+																<i class="fas fa-search"></i> Lihat
 															</a>
 														</td>
 													</tr>
@@ -785,12 +762,12 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
 														$nodata = $data['no'];
-														$nim = $data['nim'];
+														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
 														$verifikasi1 = $data['verifikasi1'];
@@ -798,15 +775,13 @@ if ($nohp == null or $email == null) {
 														$verifikasi3 = $data['verifikasi3'];
 												?>
 														<tr>
-															<td><?php echo $no; ?></td>
-															<td><?php echo $nim; ?></td>
-															<td><?php echo $nama; ?></td>
-															<td><?php echo $surat; ?></td>
+															<td><?= $no; ?></td>
+															<td><?= $prodimhs; ?></td>
+															<td><?= $nama; ?></td>
+															<td><?= $surat; ?></td>
 															<td>
 																<a class="btn btn-info btn-sm" href="skpi-dosen-tampil.php?nim=<?= mysqli_real_escape_string($dbsurat, $nim); ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
+																	<i class="fas fa-search"></i> Lihat
 																</a>
 															</td>
 														</tr>
@@ -819,12 +794,12 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as kaprodi -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
 														$nodata = $data['no'];
-														$nim = $data['nim'];
+														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
 														$verifikasi1 = $data['verifikasi1'];
@@ -832,15 +807,13 @@ if ($nohp == null or $email == null) {
 														$verifikasi3 = $data['verifikasi3'];
 												?>
 														<tr>
-															<td><?php echo $no; ?></td>
-															<td><?php echo $nim; ?></td>
-															<td><?php echo $nama; ?></td>
-															<td><?php echo $surat; ?></td>
+															<td><?= $no; ?></td>
+															<td><?= $nim; ?></td>
+															<td><?= $nama; ?></td>
+															<td><?= $surat; ?></td>
 															<td>
 																<a class="btn btn-info btn-sm" href="skpi-kaprodi-tampil.php?nim=<?= mysqli_real_escape_string($dbsurat, $nim); ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
+																	<i class="fas fa-search"></i>Lihat
 																</a>
 															</td>
 														</tr>
@@ -853,12 +826,12 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as WD -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
 														$nodata = $data['no'];
-														$nim = $data['nim'];
+														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
 														$verifikasi1 = $data['verifikasi1'];
@@ -866,15 +839,13 @@ if ($nohp == null or $email == null) {
 														$verifikasi3 = $data['verifikasi3'];
 												?>
 														<tr>
-															<td><?php echo $no; ?></td>
-															<td><?php echo $nim; ?></td>
-															<td><?php echo $nama; ?></td>
-															<td><?php echo $surat; ?></td>
+															<td><?= $no; ?></td>
+															<td><?= $prodimhs; ?></td>
+															<td><?= $nama; ?></td>
+															<td><?= $surat; ?></td>
 															<td>
 																<a class="btn btn-info btn-sm" href="skpi-wd-tampil.php?nim=<?= mysqli_real_escape_string($dbsurat, $nim); ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	Lihat
+																	<i class="fas fa-search"></i> Lihat
 																</a>
 															</td>
 														</tr>
@@ -891,16 +862,15 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
-													$prodi = $data['prodi'];
 													$surat = 'Permohonan Cetak KHS';
 													$validasi2 = $data['validasi2'];
 													$validasi3 = $data['validasi3'];
 												?>
 													<tr>
 														<td><?= $no; ?></td>
-														<td><?= $nim; ?></td>
+														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
 														<td>
@@ -921,7 +891,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
-													$nim = $data['nim'];
+													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$prodi = $data['prodi'];
 													$surat = 'Permohonan Cetak KHS';
@@ -930,7 +900,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
-														<td><?= $nim; ?></td>
+														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
 														<td>
@@ -954,6 +924,107 @@ if ($nohp == null or $email == null) {
 				</div>
 			</section>
 
+			<!-- pengajuan surat bawahan -->
+			<?php if ($jabatan == 'dekan' or $jabatan == 'wadek1' or $jabatan == 'wadek2' or $jabatan == 'wadek3' or $jabatan == 'kaprodi' or $jabatan == 'kabag') { ?>
+				<section class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<!-- Default box -->
+								<div class="card card-success">
+									<div class="card-header">
+										<h3 class="card-title">Pengajuan Surat Bawahan </h3>
+										<!-- card minimize -->
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+										</div>
+									</div>
+									<!-- /.card-header -->
+									<?php $no = 1; ?>
+									<div class="card-body p-0">
+										<!-- /.card-header -->
+										<div class="card-body">
+											<table class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th width="5%" style="text-align:center">No</th>
+														<th width="20%" style="text-align:center">PRODI</th>
+														<th style="text-align:center">Nama</th>
+														<th style="text-align:center">Surat</th>
+														<th width="15%" colspan="2" style="text-align:center">Aksi</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- verifikasi WFH as kajur-->
+													<?php
+													$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE verifikasiprodi=0 and verifikatorprodi='$nip'");
+													$jmldata = mysqli_num_rows($query);
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$prodistaf = $data['prodi'];
+														$nipstaf = $data['nip'];
+														$namastaf = $data['nama'];
+														$verifikasiprodi = $data['verifikasiprodi'];
+														$verifikasifakultas = $data['verifikasifakultas'];
+														$surat = 'Ijin WFH';
+													?>
+														<tr>
+															<td><?= $no; ?></td>
+															<td><?= $prodistaf; ?></td>
+															<td><?= $namastaf; ?></td>
+															<td><?= $surat; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="wfh-kaprodi-tampil.php?nodata=<?= $nodata; ?>">
+																	<i class="fas fa-search"></i>Lihat
+																</a>
+															</td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+													<!-- /verifikasi WFH as kajur-->
+
+													<!-- verifikasi WFH as WD-->
+													<?php
+													$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE verifikatorfakultas='$nip' and verifikasifakultas=0 and verifikasiprodi=1");
+													$jmldata = mysqli_num_rows($query);
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$prodistaf = $data['prodi'];
+														$nipstaf = $data['nip'];
+														$namastaf = $data['nama'];
+														$verifikasiprodi = $data['verifikasiprodi'];
+														$verifikasifakultas = $data['verifikasifakultas'];
+														$surat = 'Ijin WFH';
+													?>
+														<tr>
+															<td><?= $no; ?></td>
+															<td><?= $nipstaf; ?></td>
+															<td><?= $namastaf; ?></td>
+															<td><?= $surat; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="wfh-wd-tampil.php?nodata=<?= $nodata; ?>">
+																	<i class="fas fa-search"></i> Lihat
+																</a>
+															</td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+													<!-- /verifikasi WFH as WD-->
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			<?php }; ?>
+
 			<!-- data pengajuan pribadi -->
 			<section class="content">
 				<div class="container-fluid">
@@ -963,14 +1034,8 @@ if ($nohp == null or $email == null) {
 							<div class="card card-primary">
 								<div class="card-header">
 									<h3 class="card-title">Rencana Kerja dan Surat Tugas <i>Work From Home</i></h3>
-									<!-- card minimize -->
 									<div class="card-tools">
-										<!-- This will cause the card to maximize when clicked 
-							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-										<!-- This will cause the card to collapse when clicked -->
 										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-										<!-- This will cause the card to be removed when clicked
-							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
 									</div>
 								</div>
 								<!-- /.card-header -->
@@ -986,12 +1051,12 @@ if ($nohp == null or $email == null) {
 													<th>Akhir WFH</th>
 													<th>Rencana Kerja</th>
 													<th>Surat Tugas</th>
-													<th>Aksi</th>
+													<th>Keterangan</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE iduser='$user' ORDER BY tglwfh1 DESC");
+												$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE nip='$nip' ORDER BY tglwfh1 DESC");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
 													$tglwfh1 = $data['tglwfh1'];
@@ -1000,7 +1065,10 @@ if ($nohp == null or $email == null) {
 													$tglwfh4 = $data['tglwfh4'];
 													$tglwfh5 = $data['tglwfh5'];
 													$verifikasiprodi = $data['verifikasiprodi'];
+													$verifikatorprodi = $data['verifikatorprodi'];
 													$verifikasifakultas = $data['verifikasifakultas'];
+													$verifikatorfakultas = $data['verifikatorfakultas'];
+													$keterangan = $data['keterangan'];
 													if (date($tglwfh5) != 0) {
 														$wfhselesai = $tglwfh5;
 													} else {
@@ -1023,27 +1091,25 @@ if ($nohp == null or $email == null) {
 																echo tgl_indo($tglwfh1);
 															}  ?>
 														</td>
-														<td><?php echo tgl_indo($wfhselesai); ?>
+														<td><?php
+															if (isset($wfhselesai)) {
+																echo tgl_indo($wfhselesai);
+															}
+															?>
 														</td>
 														<td>
 															<?php
 															if ($verifikasiprodi == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	<!--Lihat-->
-																</a>
+																menunggu verifikasi <?= namadosen($dbsurat, $verifikatorprodi); ?>
 															<?php
 															};
 															?>
 															<?php
 															if ($verifikasiprodi == 1) {
 															?>
-																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-print">
-																	</i>
-																	<!--Cetak-->
+																<a class="btn btn-success btn-sm" href="wfh-cetakrk.php?nodata=<?php echo $nodata; ?>" target="_blank">
+																	<i class="fas fa-print"></i> Cetak
 																</a>
 															<?php
 															};
@@ -1051,62 +1117,47 @@ if ($nohp == null or $email == null) {
 															<?php
 															if ($verifikasiprodi == 2) {
 															?>
-																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-times">
-																	</i>
-																	<!--Cek-->
-																</a>
-															<?php
-															};
-															?>
-
-
-														</td>
-														<td>
-															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 0) {
-															?>
-																<a class="btn btn-info btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-search">
-																	</i>
-																	<!--Lihat-->
-																</a>
-															<?php
-															};
-															?>
-															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 1) {
-															?>
-																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-print">
-																	</i>
-																	<!--Cetak-->
-																</a>
-															<?php
-															};
-															?>
-															<?php
-															if ($verifikasiprodi < 2 and $verifikasifakultas == 2) {
-															?>
-																<a class="btn btn-danger btn-sm" href="wfh-tampil.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-times">
-																	</i>
-																	<!--Cek-->
-																</a>
+																Ditolak oleh <?= namadosen($dbsurat, $verifikatorprodi); ?>
 															<?php
 															};
 															?>
 														</td>
 														<td>
 															<?php
-															if ($verifikasiprodi == 2 or $verifikasifakultas == 2) {
+															if ($verifikasifakultas == 0) {
+															?>
+																Menunggu verifikasi <?= namadosen($dbsurat, $verifikatorfakultas); ?>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasifakultas == 1) {
+															?>
+																<a class="btn btn-success btn-sm" href="wfh-cetakst.php?nodata=<?php echo $nodata; ?>" target="_blank">
+																	<i class="fas fa-print"></i> Cetak
+																</a>
+															<?php
+															};
+															?>
+															<?php
+															if ($verifikasifakultas == 2) {
+															?>
+																Ditolak oleh <?= namadosen($dbsurat, $verifikatorfakultas); ?>
+															<?php
+															};
+															?>
+														</td>
+														<td>
+															<?= $keterangan; ?>
+															<br />
+															<?php
+															if ($verifikasifakultas <> 1) {
 															?>
 																<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="wfh-hapus.php?nodata=<?php echo $nodata; ?>">
-																	<i class="fas fa-trash">
-																	</i>
+																	<i class="fas fa-trash"></i> Hapus
 																</a>
 															<?php
-															}
+															};
 															?>
 														</td>
 													</tr>
@@ -1117,10 +1168,7 @@ if ($nohp == null or $email == null) {
 											</tbody>
 										</table>
 									</div>
-									<!-- /.card-body -->
 								</div>
-								<!-- /.card -->
-								<!-- /.content -->
 							</div>
 						</div>
 					</div>

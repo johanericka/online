@@ -13,9 +13,9 @@ require('../system/dbconn.php');
         <!-- Sidebar user (optional)-->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info">
-                <a href="#" class="d-block"><?php echo $nama; ?></a>
-                <a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
-                <a href="#" class="d-block">Jabatan : <?php echo strtoupper($jabatan); ?></a>
+                <a href="#" class="d-block"><?= $nama; ?></a>
+                <a href="#" class="d-block">NIP : <?= $nip; ?></a>
+                <a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>
             </div>
         </div>
 
