@@ -40,33 +40,60 @@ require('../system/dbconn.php');
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="bimbingan-tampil.php" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Mhs. Bimbingan
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="datasurat-tampil.php" class="nav-link">
-                        <i class="nav-icon fas fa-envelope-open"></i>
-                        <p>
-                            Riwayat Surat
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="wfh-isi.php" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
-                        <p>
-                            Pengajuan WFH
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
-                </li>
+                <?php
+                $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Mhs. Bimbingan'");
+                $dmenu = mysqli_fetch_array($qmenu);
+                $statussurat = $dmenu['status'];
+                if ($statussurat == 1) {
+                ?>
+                    <li class="nav-item">
+                        <a href="bimbingan-tampil.php" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Mhs. Bimbingan
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
+                <?php
+                $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Riwayat Surat'");
+                $dmenu = mysqli_fetch_array($qmenu);
+                $statussurat = $dmenu['status'];
+                if ($statussurat == 1) {
+                ?>
+                    <li class="nav-item">
+                        <a href="datasurat-tampil.php" class="nav-link">
+                            <i class="nav-icon fas fa-envelope-open"></i>
+                            <p>
+                                Riwayat Surat
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
+                <?php
+                $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Pengajuan WFH'");
+                $dmenu = mysqli_fetch_array($qmenu);
+                $statussurat = $dmenu['status'];
+                if ($statussurat == 1) {
+                ?>
+                    <li class="nav-item">
+                        <a href="wfh-isi.php" class="nav-link">
+                            <i class="nav-icon fas fa-envelope"></i>
+                            <p>
+                                Pengajuan WFH
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
                 <?php
                 $qoperator = mysqli_query($dbsurat, "SELECT * FROM skpi_operator WHERE kode='$nip'");
                 $jmldata = mysqli_num_rows($qoperator);
@@ -82,25 +109,43 @@ require('../system/dbconn.php');
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="skpi-rekap.php" class="nav-link">
-                                    <i class="nav-icon fas fa-graduation-cap"></i>
-                                    <p>
-                                        Rekap Pengajuan SKPI
-                                        <!--<span class="right badge badge-danger">BARU</span>-->
-                                    </p>
-                                </a>
-                            </li>
+                            <?php
+                            $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Rekap Pengajuan SKPI'");
+                            $dmenu = mysqli_fetch_array($qmenu);
+                            $statussurat = $dmenu['status'];
+                            if ($statussurat == 1) {
+                            ?>
+                                <li class="nav-item">
+                                    <a href="skpi-rekap.php" class="nav-link">
+                                        <i class="nav-icon fas fa-graduation-cap"></i>
+                                        <p>
+                                            Rekap Pengajuan SKPI
+                                            <!--<span class="right badge badge-danger">BARU</span>-->
+                                        </p>
+                                    </a>
+                                </li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="skpi-isi.php" class="nav-link">
-                                    <i class="nav-icon fas fa-graduation-cap"></i>
-                                    <p>
-                                        Isi data SKPI
-                                    </p>
-                                </a>
-                            </li>
+                            <?php
+                            $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Isi data SKPI'");
+                            $dmenu = mysqli_fetch_array($qmenu);
+                            $statussurat = $dmenu['status'];
+                            if ($statussurat == 1) {
+                            ?>
+                                <li class="nav-item">
+                                    <a href="skpi-isi.php" class="nav-link">
+                                        <i class="nav-icon fas fa-graduation-cap"></i>
+                                        <p>
+                                            Isi data SKPI
+                                        </p>
+                                    </a>
+                                </li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </li>
                 <?php
@@ -125,20 +170,20 @@ require('../system/dbconn.php');
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="http://saintek.uin-malang.ac.id/online/doc/se276-2021.pdf" target="_blank" class="nav-link">
+                            <a href="../doc/se276-2021.pdf" target="_blank" class="nav-link">
                                 <i class="far fa-file-pdf"></i>
                                 <p>SE Rektor UIN Malang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="http://saintek.uin-malang.ac.id/online/doc/panduandosen.pdf" target="_blank" class="nav-link">
+                            <a href="../doc/panduandosen.pdf" target="_blank" class="nav-link">
                                 <i class="far fa-file-pdf"></i>
                                 <p>Panduan Pengajuan WFH</p>
                             </a>
                         </li>
                         <?php if ($user == '62007') { ?>
                             <li class="nav-item">
-                                <a href="http://saintek.uin-malang.ac.id/online/doc/panduankajur.pdf" target="_blank" class="nav-link">
+                                <a href="../doc/panduankajur.pdf" target="_blank" class="nav-link">
                                     <i class="far fa-file-pdf"></i>
                                     <p>Panduan Verifikasi WFH</p>
                                 </a>

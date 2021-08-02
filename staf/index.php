@@ -68,7 +68,7 @@ require('../system/myfunc.php');
 			</section>
 
 			<!-- pengajuan bawahan-->
-			<?php if ($jabatan == 'dekan' or $jabatan == 'wadek1' or $jabatan == 'wadek2' or $jabatan == 'wadek3' or $jabatan == 'kaprodi' or $jabatan == 'kabag') { ?>
+			<?php if ($jabatan == 'kabag-aupk') { ?>
 				<section class="content">
 					<div class="container-fluid">
 						<div class="row">

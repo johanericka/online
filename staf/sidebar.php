@@ -91,7 +91,7 @@
 
                 <!-- menu khusus kasubag akademik -->
                 <?php
-                if ($nip == '198007252006041002') {
+                if ($jabatan == 'kasubag-akademik') {
                 ?>
                     <li class="nav-item">
                         <a href="lab-cekkapasitas.php" class="nav-link">
@@ -107,6 +107,15 @@
                             <i class="nav-icon fas fa-envelope-open"></i>
                             <p>
                                 Rekap. Surat
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kontrolmenu-tampil.php" class="nav-link">
+                            <i class="nav-icon fas fa-envelope-open"></i>
+                            <p>
+                                Menu Persuratan
                                 <span class="right badge badge-danger"></span>
                             </p>
                         </a>
