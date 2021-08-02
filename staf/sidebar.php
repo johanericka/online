@@ -91,7 +91,7 @@
 
                 <!-- menu khusus kasubag akademik -->
                 <?php
-                if ($nip == 'P00065') {
+                if ($nip == '198007252006041002') {
                 ?>
                     <li class="nav-item">
                         <a href="lab-cekkapasitas.php" class="nav-link">
