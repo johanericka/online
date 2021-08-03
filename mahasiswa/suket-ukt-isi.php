@@ -98,10 +98,11 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                 </div>
                                 <label>Dosen Wali </label>
                                 <div class="search-box">
-                                    <input type="text" autocomplete="off" placeholder="cari dosen" name="dosen" /></input>
+                                    <input type="text" autocomplete="off" class="form-control" placeholder="ketikkan nama dosen" name="dosen" required></input>
                                     <div class="result"></div>
                                 </div>
-                                <br />
+                                <small>Pilih nama dosen yang tampil</small>
+                                <hr>
                                 <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-check"></i> Ajukan</button>
                                 <br />
                             </form>

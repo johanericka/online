@@ -193,7 +193,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			?>
 				<tr>
 					<td>&nbsp;</td>
-					<td colspan="4">yang bersangkutan merupakan mahasiswa di program studi <?php echo $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, dan kami <b>rekomendasikan</b> untuk mengikuti pendaftaran <?= $keperluan; ?> </td>
+					<td colspan="4">yang bersangkutan merupakan mahasiswa di program studi <?php echo $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, dan kami <b>rekomendasikan</b> untuk <?= $keperluan; ?> </td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -294,14 +294,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td style="text-align:center">Malang, <?= tgl_indo($tglvalidasi3); ?></td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
