@@ -13,7 +13,8 @@ $jenissurat = mysqli_real_escape_string($dbsurat, $_POST['jenissurat']);
 $keperluan = mysqli_real_escape_string($dbsurat, $_POST['keperluan']);
 
 //cari nip kajur
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan='kajur'");
+$jabatan = 'kaprodi';
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan='$jabatan'");
 $stmt->bind_param("s", $prodi);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,10 +22,9 @@ $dhasil = $result->fetch_assoc();
 $nipkaprodi = $dhasil['nip'];
 
 //cari nip wd-1
-$jabatan = 'wakildekan';
-$level = 4;
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=? AND level=?");
-$stmt->bind_param("si", $jabatan, $level);
+$jabatan = 'wadek1';
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
+$stmt->bind_param("s", $jabatan);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();

@@ -445,7 +445,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												if ($statussurat == 1) {
 												?>
-													<a class="btn btn-success btn-sm" href="suket-cetak.php?nodata=' . $nodata . '" target="_blank">
+													<a class="btn btn-success btn-sm" href="suket-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
 														<i class="fas fa-print"></i> Cetak
 													</a>
 												<?php

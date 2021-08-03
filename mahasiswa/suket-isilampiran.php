@@ -143,19 +143,16 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 							<br />
 							<input type="text" class="form-control" name="jenissurat" value="<?= $jenissurat; ?>" readonly /></input>
 							<label>Keperluan</label>
-							<input type="text" class="form-control" name="keperluan" value="<?= $keperluan; ?>" readonly /></input>
+							<textarea class="form-control" name="keperluan" readonly><?= stripslashes(str_replace('\r\n', PHP_EOL, $keperluan)); ?></textarea>
 							<br />
 							<form action="suket-upload.php" method="post" enctype="multipart/form-data">
-								<label>Lampiran</label>
-								<br />
+								<label>Lampiran</label><br />
 								<small>Lampirkan dokumen pendukung apabila ada</small>
 								<br />
 								<label>File</label>
 								<br />
 								<input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
-								<br />
 								<small style="color:red">Format file JPG/JPEG ukuran maksimal 1MB</small>
-								<br />
 								<br />
 								<input type="hidden" name="nodata" value="<?= $nodata; ?>">
 								<button type="submit" class="btn btn-primary btn-block" value="Upload Lampiran" name="submit"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
