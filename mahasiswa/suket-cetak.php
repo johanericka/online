@@ -9,25 +9,29 @@
 </script>
 
 <!-- connect to db -->
-<?php require_once('../system/dbconn.php'); ?>
+<?php
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+?>
 <!-- ./db -->
 
 <!-- ambil data ijin lab dari tabel suket -->
 <?php
 $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
-$datamhs = mysqli_query($dbsurat, "select * from suket where id='$nodata'");
+$datamhs = mysqli_query($dbsurat, "SELECT * FROM suket WHERE no='$nodata'");
 $row = mysqli_fetch_array($datamhs);
 $nosurat = $row['keterangan'];
 $nim = $row['nim'];
 $nama = $row['nama'];
-$jurusan = $row['jurusan'];
+$prodi = $row['prodi'];
 $jenissurat = $row['jenissurat'];
 $keperluan = $row['keperluan'];
-$validatorfakultas = $row['validatorfakultas'];
-$validasifakultas = $row['validasifakultas'];
-$tglvalidasifakultas = $row['tglvalidasifakultas'];
+$validator3 = $row['validator3'];
+$validasi3 = $row['validasi3'];
+$tglvalidasi3 = $row['tglvalidasi3'];
 $keterangan = $row['keterangan'];
-$tgl = date('Y-m-d', strtotime($row[14]));
+
+$tgl = $tglvalidasi3;
 $jam = date('H-i-s');
 $tahun = date('Y');
 $bulan = date('m');
@@ -35,7 +39,7 @@ $bulan = date('m');
 
 
 //data wd
-$datawd = mysqli_query($dbsurat, "select * from pejabat where iddosen='$validatorfakultas'");
+$datawd = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip='$validator3'");
 $rowwd = mysqli_fetch_array($datawd);
 $idwd = $rowwd['iddosen'];
 $nipwd = $rowwd['nip'];
@@ -168,13 +172,13 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			<tr>
 				<td>&nbsp;</td>
 				<td>NIM</td>
-				<td colspan="3">: <?php echo $nim; ?></td>
+				<td colspan="3">: <?= $nim; ?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td>Jurusan</td>
-				<td colspan="3">: <?php echo $jurusan; ?></td>
+				<td>Program Studi</td>
+				<td colspan="3">: <?= $prodi; ?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
@@ -189,7 +193,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			?>
 				<tr>
 					<td>&nbsp;</td>
-					<td colspan="4">yang bersangkutan merupakan mahasiswa di program studi <?php echo $jurusan; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, dan kami <b>rekomendasikan</b> untuk mengikuti pendaftaran <?php echo $keperluan; ?> </td>
+					<td colspan="4">yang bersangkutan merupakan mahasiswa di program studi <?php echo $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, dan kami <b>rekomendasikan</b> untuk <?= $keperluan; ?> </td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -221,19 +225,19 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 						$tahunb = $tahun + 1;
 					}
 					?>
-					<td colspan="4">Pada Semester <?php echo $semester; ?> Tahun Akademik <?php echo $tahuna . "/" . $tahunb; ?> adalah mahasiswa di Program Studi <?php echo $jurusan; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang dan
+					<td colspan="4">Pada Semester <?= $semester; ?> Tahun Akademik <?= $tahuna . "/" . $tahunb; ?> adalah mahasiswa di Program Studi <?= $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang dan
 						<?php
 						if ($jenissurat == "Surat Keterangan Keringanan UKT") {
 						?>
-							telah memenuhi syarat administrasi untuk mendapatkan <b> KERINGANAN UKT semester <?php echo $semester ?> Tahun Akademik <?php echo $tahuna . "/" . $tahunb; ?></b>.</td>
+							telah memenuhi syarat administrasi untuk mendapatkan <b> KERINGANAN UKT semester <?= $semester ?> Tahun Akademik <?= $tahuna . "/" . $tahunb; ?></b>.</td>
 				<?php
 						} elseif ($jenissurat == "Surat Keterangan Penurunan UKT") {
 				?>
-					telah memenuhi syarat administrasi untuk mendapatkan <b> PENURUNAN UKT semester <?php echo $semester ?> Tahun Akademik <?php echo $tahuna . "/" . $tahunb; ?></b>.</td>
+					telah memenuhi syarat administrasi untuk mendapatkan <b> PENURUNAN UKT semester <?= $semester ?> Tahun Akademik <?= $tahuna . "/" . $tahunb; ?></b>.</td>
 				<?php
 						} elseif ($jenissurat == "Surat Keterangan Perpanjangan Waktu Pembayaran UKT") {
 				?>
-					telah memenuhi syarat administrasi untuk mendapatkan <b> PERPANJANGAN WAKTU PEMBAYARAN UKT semester <?php echo $semester ?> Tahun Akademik <?php echo $tahuna . "/" . $tahunb; ?></b>.</td>
+					telah memenuhi syarat administrasi untuk mendapatkan <b> PERPANJANGAN WAKTU PEMBAYARAN UKT semester <?= $semester ?> Tahun Akademik <?= $tahuna . "/" . $tahunb; ?></b>.</td>
 				<?php
 						} else {
 				?>
@@ -289,79 +293,32 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
-				<td style="text-align:center">Malang, <?php echo tgl_indo($tglvalidasifakultas); ?></td>
+				<td style="text-align:center">Malang, <?= tgl_indo($tglvalidasi3); ?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td style="text-align:center">a.n. Dekan</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td style="text-align:center"><small><i>Scan QRCode ini </i></td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td style="text-align:center"><?php echo $jabatanwd; ?>,</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td style="text-align:center"><img src="../qrcode/<?php echo $namafile; ?>.png" width="80" /></td>
+				<td style="text-align:center">
+					<small><i>Scan QRCode ini </i></small><br />
+					<img src="../qrcode/<?= $namafile; ?>.png" width="80" /><br />
+					<small><i>untuk verifikasi surat</i></small>
+				</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<?php
-				if ($validasifakultas == 1) {
+				if ($validasi3 == 1) {
+					$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$validator3'");
+					$hasil = mysqli_fetch_array($sql);
+					$ttd = $hasil['ttd'];
 				?>
-					<td style="text-align:center"><img src="../ttd/ttd<?php echo $validatorfakultas; ?>.png" width="100" /></td>
+					<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300" /></td>
 				<?php
 				}
 				?>
 				<td>&nbsp;</td>
 			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td style="text-align:center"><small><i>untuk verifikasi surat</i></small></td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td style="text-align:center"><u><?php echo $namawd; ?></u></td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td style="text-align:center">NIP. <?php echo $nipwd; ?></td>
-				<td>&nbsp;</td>
-			</tr>
 		</tbody>
 </font>
 </table>
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari',
-		'Februari',
-		'Maret',
-		'April',
-		'Mei',
-		'Juni',
-		'Juli',
-		'Agustus',
-		'September',
-		'Oktober',
-		'November',
-		'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
 
 </html>

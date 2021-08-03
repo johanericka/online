@@ -105,7 +105,7 @@ require('../system/myfunc.php');
 									if ($keperluan <> '') {
 									?>
 										Keperluan <br />
-										<input type="text" class="form-control" name="keperluan" value="<?= $keperluan; ?>" readonly /></input>
+										<textarea class="form-control" name="keperluan" readonly><?= stripslashes(str_replace('\r\n', PHP_EOL, $keperluan)); ?></textarea>
 									<?php
 									}
 									?>

@@ -91,33 +91,10 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 										<label class="form-check-label">Surat Keterangan Kelakuan Baik</label>
 									</div>
 									<p>Surat Keterangan Aktif Kuliah dikeluarkan oleh Akademik Pusat (Universitas) silahkan <a href="http://akademik.uin-malang.ac.id/" target="_blank">klik disini</a></p>
-									<!-- UKT -->
-									<!-- 
-							<div class="form-check">
-							  <input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Keringanan UKT">
-							  <label class="form-check-label" >Surat Keterangan Keringanan UKT</label>
-							</div>
-							<div class="form-check">
-							  <input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Penurunan UKT">
-							  <label class="form-check-label" >Surat Keterangan Penurunan UKT </label> <small>(Khusus mahasiswa yang sedang menempuh skripsi)</small>
-							</div>
-							<div class="form-check">
-							  <input class="form-check-input" type="radio" name="jenissurat" value="Surat Keterangan Perpanjangan Waktu Pembayaran UKT">
-							  <label class="form-check-label" >Surat Keterangan Perpanjangan Waktu Pembayaran UKT</label>
-							</div>
-						-->
 								</div>
-								<!--
-						<label>Dosen Wali </label>
-						<div class="search-box">
-							<input type="text" autocomplete="off" placeholder="cari dosen" name="dosen"/></input>
-							<div class="result"></div>
-						</div-->
-
 								<label>Keperluan</label><small style="color:red"> wajib diisi</small>
-								<textarea class="form-control" rows="3" placeholder="" name="keperluan" required></textarea>
+								<input type="text" class="form-control" rows="3" placeholder="" name="keperluan" required>
 								<br />
-
 								<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-check"></i> Ajukan</button>
 								<br />
 							</form>

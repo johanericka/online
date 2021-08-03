@@ -50,7 +50,7 @@ require('../system/dbconn.php');
                             $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim'");
                             $dijinlab = mysqli_fetch_array($query);
                             $statuspengajuan = $dijinlab['statuspengajuan'];
-                            if ($statuspengajuan > 0) {
+                            if ($statuspengajuan == 0) {
                         ?>
                                 <li class="nav-item">
                                     <a href="ijinlab-isi1.php" class="nav-link">
