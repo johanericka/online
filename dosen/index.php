@@ -7,7 +7,7 @@ $prodi = $_SESSION['prodi'];
 $hakakses = $_SESSION['hakakses'];
 $jabatan = $_SESSION['jabatan'];
 if ($_SESSION['hakakses'] != "dosen") {
-	header("location:../index.php?pesan=noaccess");
+	header("location:../deauth.php");
 }
 require('../system/dbconn.php');
 require('../system/myfunc.php');
@@ -101,12 +101,7 @@ if ($nohp == null or $email == null) {
 									<h3 class="card-title">Pengajuan Surat Mahasiswa </h3>
 									<!-- card minimize -->
 									<div class="card-tools">
-										<!-- This will cause the card to maximize when clicked 
-							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-										<!-- This will cause the card to collapse when clicked -->
 										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-										<!-- This will cause the card to be removed when clicked
-							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
 									</div>
 								</div>
 								<!-- /.card-header -->
@@ -1000,7 +995,7 @@ if ($nohp == null or $email == null) {
 													?>
 														<tr>
 															<td><?= $no; ?></td>
-															<td><?= $nipstaf; ?></td>
+															<td><?= $prodistaf; ?></td>
 															<td><?= $namastaf; ?></td>
 															<td><?= $surat; ?></td>
 															<td>
