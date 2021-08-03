@@ -1,8 +1,8 @@
 <?php
 session_start();
 require('../system/dbconn.php');
-include('../system/myfunc.php');
-//require_once('../system/phpmailer/sendmail.php');
+require('../system/myfunc.php');
+require('../system/phpmailer/sendmail.php');
 
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $nip = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
@@ -31,6 +31,7 @@ if ($jabatan == 'kaprodi' or $jabatan == 'dekan' or $jabatan == 'wadek1' or $jab
 	$result = $stmt->get_result();
 	$dhasil = $result->fetch_assoc();
 	$nipkaprodi = $dhasil['nip'];
+	$namakaprodi = $dhasil['nama'];
 	//cari nip wd-2
 	$nipwd = $dhasil['nip'];
 } elseif ($jabatan == 'wadek2') {
@@ -42,6 +43,7 @@ if ($jabatan == 'kaprodi' or $jabatan == 'dekan' or $jabatan == 'wadek1' or $jab
 	$result = $stmt->get_result();
 	$dhasil = $result->fetch_assoc();
 	$nipkaprodi = $dhasil['nip'];
+	$namakaprodi = $dhasil['nama'];
 	//cari nip wd-2
 	$nipwd = $dhasil['nip'];
 } else {
@@ -53,6 +55,7 @@ if ($jabatan == 'kaprodi' or $jabatan == 'dekan' or $jabatan == 'wadek1' or $jab
 	$result = $stmt->get_result();
 	$dhasil = $result->fetch_assoc();
 	$nipkaprodi = $dhasil['nip'];
+	$namakaprodi = $dhasil['nama'];
 
 	//cari nip wd-2
 	$jabatanwd = 'wadek2';
@@ -63,8 +66,6 @@ if ($jabatan == 'kaprodi' or $jabatan == 'dekan' or $jabatan == 'wadek1' or $jab
 	$dhasil = $result->fetch_assoc();
 	$nipwd = $dhasil['nip'];
 }
-
-
 
 if ($jabatan == 'dosen') {
 	$jabatan = 'Dosen';
@@ -93,7 +94,34 @@ if ($prodi == 'Teknik Informatika') {
 }
 
 if (mysqli_query($dbsurat, $sql)) {
+	//kirim email;
+	//cari email kaprodi berdasarkan NIP
+	$sql2 = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$nipkaprodi'");
+	$dsql2 = mysqli_fetch_array($sql2);
+	$emailkaprodi = $dsql2['email'];
+
+	$subject = "Pengajuan Ijin WFH";
+	$pesan = "Yth. " . $namakaprodi . "<br/>
+        <br/>
+		Assalamualaikum wr. wb.
+        <br />
+		<br />
+		Dengan hormat,
+		<br />
+        Terdapat pengajuan surat Ijin <i>Work From Home</i> atas nama " . $nama . " di sistem SAINTEK Online.<br/>
+        Silahkan klik tombol dibawah ini untuk melakukan verifikasi surat di website SAINTEK Online<br/>
+        <br/>
+        <a href='https://saintek.uin-malang.ac.id/online/' style=' background-color: #0045CE;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;'>Website</a><br/>
+        <br/>
+        atau klik URL berikut ini <a href='https://saintek.uin-malang.ac.id/online/'>https://saintek.uin-malang.ac.id/online/</a> apabila tombol diatas tidak berfungsi.<br/>
+        <br/>
+        Wassalamualaikum wr. wb.
+		<br/>
+        <br/>
+        <b>SAINTEK Online</b>";
+	sendmail($emailkaprodi, $namakaprodi, $subject, $pesan);
 	header("location:index.php");
 } else {
-	echo "error " . mysqli_error($dbsurat);
+	echo "ERROR!! Laporkan ke mailto:saintekonline@gmail.com";
+	//echo "error " . mysqli_error($dbsurat);
 }
