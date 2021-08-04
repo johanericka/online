@@ -32,6 +32,15 @@ function namadosen($conn, $nip)
     return $nama;
 }
 
+function nipdosen($conn, $iduser)
+{
+    require_once('../system/dbconn.php');
+    $qdosen = mysqli_query($conn, "SELECT * FROM pengguna WHERE user='$iduser'");
+    $ddosen = mysqli_fetch_array($qdosen);
+    $nip = $ddosen['nip'];
+    return $nip;
+}
+
 function semester($tanggal)
 {
     $pecahkan = explode('-', $tanggal);
