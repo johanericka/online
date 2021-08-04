@@ -160,7 +160,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="profile.php" class="nav-link">
+                    <a href="userprofile-tampil.php" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Ubah Profile
