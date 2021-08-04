@@ -14,7 +14,7 @@ $qsql = mysqli_query($dbsurat, "DELETE FROM wfh");
 
 //baca isi data tabel wfh lama
 $nodata = 1;
-$qsql2 = mysqli_query($dbold, "SELECT * FROM wfh limit 10");
+$qsql2 = mysqli_query($dbold, "SELECT * FROM wfh");
 while ($dsql2 = mysqli_fetch_array($qsql2)) {
     $no = $dsql2['no'];
     $fakultas = $dsql2['fakultas'];
@@ -45,14 +45,13 @@ while ($dsql2 = mysqli_fetch_array($qsql2)) {
     $tglverifikasifakultas = $dsql2['tglverifikasifakultas'];
     $keterangan = $dsql2['keterangan'];
 
-    //$qwfhbaru = mysqli_query($dbsurat, "INSERT INTO wfh (no, fakultas,prodi,tglsurat,iduser,nip,nama,jabatan,tglwfh1,kegiatan1,tglwfh2,kegiatan2,tglwfh3,kegiatan3,tglwfh4,kegiatan4,tglwfh5,kegiatan5,verifikatorprodi,verifikasiprodi,tglverifikasiprodi,verifikatorfakultas,verifikasifakultas,tglverifikasifakultas,keterangan)
-    //                                    VALUES('$no','$fakultas','$jurusan','$tglsurat','$iduser2','$nip','$nama','$jabatan','$tglwfh1','$kegiatan1','$tglwfh2','$kegiatan2','$tglwfh3','$kegiatan3','$tglwfh4','$kegiatan4','$tglwfh5','$kegiatan5','$verifikatorjurusan2','$verifikasiprodi','$tglverifikasijurusan','$verifikatorfakultas2','$verifikasifakultas','$tglverifikasifakultas','$keterangan'");
+    $sql = "INSERT INTO wfh (no, fakultas,prodi,tglsurat,iduser,nip,nama,jabatan,tglwfh1,kegiatan1,tglwfh2,kegiatan2,tglwfh3,kegiatan3,tglwfh4,kegiatan4,tglwfh5,kegiatan5,verifikatorprodi,verifikasiprodi,tglverifikasiprodi,verifikatorfakultas,verifikasifakultas,tglverifikasifakultas,keterangan) 
+            VALUES('$no','$fakultas','$jurusan','$tglsurat','$iduser2','$nip','$nama','$jabatan','$tglwfh1','$kegiatan1','$tglwfh2','$kegiatan2','$tglwfh3','$kegiatan3','$tglwfh4','$kegiatan4','$tglwfh5','$kegiatan5','$verifikatorjurusan2','$verifikasijurusan','$tglverifikasijurusan','$verifikatorfakultas2','$verifikasifakultas','$tglverifikasifakultas','$keterangan')";
+    $qwfhbaru = mysqli_query($dbsurat, $sql);
 
-    echo "ID User = " . $iduser . "<br/>";
-    echo "NIP User = " . $iduser2 . "<br/>";
-    echo "Verifikator Jruusan = " . $verifikatorjurusan . "<br/>";
-    echo "NIP Verifikator Jurusan = " . $verifikatorjurusan2 . "<br/>";
-    echo "Verifikator Fakultas = " . $verifikatorfakultas . "<br/>";
-    echo "NIP Verifikator Fakultas = " . $verifikatorfakultas2 . "<br/>";
-    echo "<br/>";
+    if (!$qwfhbaru) {
+        echo mysqli_error($qwfhbaru);
+    };
+
+    echo "Inserting data " . $nama . "<br/>";
 }
