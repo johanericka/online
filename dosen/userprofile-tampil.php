@@ -66,8 +66,9 @@ $nip = $_SESSION['nip'];
                 $nip = $dhasil['nip'];
                 $nohp = $dhasil['nohp'];
                 $email = $dhasil['email'];
-                $jurusan = $dhasil['jurusan'];
+                $prodi = $dhasil['prodi'];
                 $user = $dhasil['user'];
+                $pass = $dhasil['pass'];
                 ?>
                 <form action="userprofile-update.php" method="POST">
                     <label>Nama</label>
@@ -109,12 +110,12 @@ $nip = $_SESSION['nip'];
                     <label>Program Studi</label>
                     <div class="form-group">
                         <select class="form-control" name="jurusan">
-                            <option value="<?= $jurusan; ?>"><?= $jurusan; ?></option>
+                            <option value="<?= $prodi; ?>"><?= $prodi; ?></option>
                             <?php
-                            $query = mysqli_query($dbsurat, "SELECT * FROM jurusan GROUP BY jurusan");
+                            $query = mysqli_query($dbsurat, "SELECT * FROM prodi GROUP BY prodi");
                             while ($data = mysqli_fetch_array($query)) {
                             ?>
-                                <option value="<?= $data['jurusan']; ?>"><?= $data['jurusan']; ?></option>
+                                <option value="<?= $data['prodi']; ?>"><?= $data['prodi']; ?></option>
                             <?php
                             }
                             ?>
@@ -132,7 +133,7 @@ $nip = $_SESSION['nip'];
                     </div>
                     <label>Password</label>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="password" name="password" required>
+                        <input type="password" class="form-control" placeholder="password" name="password" value="<?= $pass; ?>" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -146,7 +147,7 @@ $nip = $_SESSION['nip'];
                         $angka2 = rand(1, 5);
                         $kunci = $angka1 + $angka2;
                         ?>
-                        Berapakah <?= $angka1; ?> ditambah <?= $angka2; ?>
+                        Berapakah <b><?= $angka1; ?> ditambah <?= $angka2; ?></b>
                         <input type="hidden" name="kunci" value="<?= $kunci; ?>">
                         <input type="number" class="form-control" placeholder="" name="jawaban" required>
 

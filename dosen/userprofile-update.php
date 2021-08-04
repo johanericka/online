@@ -5,7 +5,7 @@ $nama = mysqli_real_escape_string($dbsurat, $_POST['nama']);
 $nip = mysqli_real_escape_string($dbsurat, $_POST['nip']);
 $nohp = mysqli_real_escape_string($dbsurat, $_POST['nohp']);
 $email = mysqli_real_escape_string($dbsurat, $_POST['email']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_POST['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_POST['prodi']);
 $fakultas = 'Sains dan Teknologi';
 $username = mysqli_real_escape_string($dbsurat, $_POST['username']);
 $password = mysqli_real_escape_string($dbsurat, $_POST['password']);
@@ -19,13 +19,13 @@ if ($kunci == $jawaban) {
             nip=?, 
             nohp=?, 
             email=?, 
-            jurusan=?, 
+            prodi=?, 
             fakultas=?, 
             user=?, 
             pass=?,
             token=?
             WHERE nip=?");
-    $stmt->bind_param("ssssssssss", $nama, $nip, $nohp, $email, $jurusan, $fakultas, $username, $password, $token, $nip);
+    $stmt->bind_param("ssssssssss", $nama, $nip, $nohp, $email, $jurusan, $prodi, $username, $password, $token, $nip);
     $stmt->execute();
     header("location:index.php?pesan=success");
 } else {
