@@ -1,5 +1,5 @@
 <?php
-require('../system/dbconn.php');
+require('dbconn.php');
 
 function tgl_indo($tanggal)
 {

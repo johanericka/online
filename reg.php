@@ -5,7 +5,7 @@ $nama = mysqli_real_escape_string($dbsurat, $_POST['nama']);
 $nip = mysqli_real_escape_string($dbsurat, $_POST['nip']);
 $nohp = mysqli_real_escape_string($dbsurat, $_POST['nohp']);
 $email = mysqli_real_escape_string($dbsurat, $_POST['email']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_POST['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_POST['prodi']);
 $fakultas = 'Sains dan Teknologi';
 $username = mysqli_real_escape_string($dbsurat, $_POST['username']);
 $password = mysqli_real_escape_string($dbsurat, $_POST['password']);
@@ -23,8 +23,8 @@ if ($kunci == $jawaban) {
         header('location:daftar.php?pesan=registered');
     } else {
         $hakakses = 'mahasiswa';
-        $stmt = $dbsurat->prepare("INSERT INTO pengguna (nama, nip, nohp, email, jurusan, fakultas, user, pass,hakakses,token) VALUES (?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssssssss", $nama, $nip, $nohp, $email, $jurusan, $fakultas, $username, $password, $hakakses, $token);
+        $stmt = $dbsurat->prepare("INSERT INTO pengguna (nama, nip, nohp, email, prodi, fakultas, user, pass,hakakses,token) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssssss", $nama, $nip, $nohp, $email, $prodi, $fakultas, $username, $password, $hakakses, $token);
         $stmt->execute();
         header("location:index.php?pesan=success");
     }

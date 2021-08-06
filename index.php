@@ -80,6 +80,27 @@
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<strong>ERROR! </strong> penjumlahan salah
 						</div>
+					<?php
+					} else if ($_GET['pesan'] == "email") {
+					?>
+						<div class="alert alert-success alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>CEK EMAIL ANDA </strong> untuk mereset password
+						</div>
+					<?php
+					} else if ($_GET['pesan'] == "token") {
+					?>
+						<div class="alert alert-error alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>ERROR!! </strong> token expired. silahkan klik lupa password
+						</div>
+					<?php
+					} else if ($_GET['pesan'] == "resetok") {
+					?>
+						<div class="alert alert-success alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>RESET PASSWORD BERHASIL </strong> silahkan login dengan password baru anda
+						</div>
 				<?php
 					}
 				}
@@ -129,10 +150,10 @@
 				</form>
 				<br />
 				<p class="mb-0" align="center">
-					<a href="daftar.php" class="text-center" target="_blank"> DAFTAR PENGGUNA BARU DISINI </a>
+					<a href="daftar.php" class="text-center"> DAFTAR PENGGUNA BARU DISINI </a>
 				</p>
 				<p class="mb-0" align="center">
-					<small><a href="lupa/index.php" class="text-center" target="_blank">Lupa Password ? Klik disini</a></small>
+					<small><a href="lupa.php" class="text-center">Lupa Password ? Klik disini</a></small>
 				</p>
 
 			</div>

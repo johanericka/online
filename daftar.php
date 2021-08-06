@@ -85,12 +85,12 @@ require('system/myfunc.php');
 					</div>
 					<label>Program Studi</label>
 					<div class="form-group">
-						<select class="form-control" name="jurusan">
+						<select class="form-control" name="prodi" required>
 							<?php
-							$query = mysqli_query($dbsurat, "SELECT * FROM jurusan GROUP BY jurusan");
+							$query = mysqli_query($dbsurat, "SELECT distinct(namaprodi) FROM prodi");
 							while ($data = mysqli_fetch_array($query)) {
 							?>
-								<option value="<?= $data['jurusan']; ?>"><?= $data['jurusan']; ?></option>
+								<option value="<?= $data['namaprodi']; ?>"><?= $data['namaprodi']; ?></option>
 							<?php
 							}
 							?>
@@ -121,7 +121,7 @@ require('system/myfunc.php');
 						$angka2 = rand(1, 5);
 						$kunci = $angka1 + $angka2;
 						?>
-						Berapakah <?= $angka1; ?> ditambah <?= $angka2; ?>
+						Berapakah <b><?= $angka1; ?> ditambah <?= $angka2; ?> </b>
 						<input type="hidden" name="kunci" value="<?= $kunci; ?>">
 						<input type="number" class="form-control" placeholder="" name="jawaban" required>
 
