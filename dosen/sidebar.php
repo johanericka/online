@@ -23,15 +23,6 @@ require('../system/dbconn.php');
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="userprofile-tampil.php" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Profile User
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="index.php" class="nav-link">
                         <i class="nav-icon fas fa-tv"></i>
                         <p>
@@ -151,6 +142,7 @@ require('../system/dbconn.php');
                 <?php
                 }
                 ?>
+                <!--
                 <li class="nav-item">
                     <a href="notifikasi-isi.php" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn"></i>
@@ -160,6 +152,7 @@ require('../system/dbconn.php');
                         </p>
                     </a>
                 </li>
+                -->
                 <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-file"></i>
@@ -192,6 +185,15 @@ require('../system/dbconn.php');
                         }
                         ?>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="userprofile-tampil.php" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Profile User
+                            <span class="right badge badge-danger"><small>baru</small></span>
+                        </p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="https://wa.me/6281234302099" class="nav-link">

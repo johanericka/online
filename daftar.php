@@ -40,13 +40,13 @@ require('system/myfunc.php');
 				?>
 						<div class="alert alert-danger alert-dismissible fade show">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>ERROR!</strong> NIM / NIP / NIPT terdaftar
+							<strong>ERROR!</strong> NIM / NIP / NIPT / EMail / UserID telah terdaftar
 						</div>
 				<?php
 					}
 				}
 				?>
-				<form action="reg.php" method="POST">
+				<form action="daftar-reg.php" method="POST">
 					<label>Nama</label>
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="Nama" name="nama" required>

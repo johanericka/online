@@ -20,11 +20,12 @@ if ($kunci == $jawaban) {
         if ($jhasil > 0) {
             $dhasil = $result->fetch_assoc();
             $nama = $dhasil['nama'];
+            $nip = $dhasil['nip'];
             $email = $dhasil['email'];
 
             //update password & token
-            $stmt = $dbsurat->prepare('UPDATE pengguna SET pass=?, token=?');
-            $stmt->bind_param('ss', $pass1, $token2);
+            $stmt = $dbsurat->prepare('UPDATE pengguna SET pass=?, token=? WHERE nip=?');
+            $stmt->bind_param('sss', $pass1, $token2, $nip);
             $stmt->execute();
             $result = $stmt->get_result();
 

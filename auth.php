@@ -8,7 +8,7 @@ $kunci = mysqli_real_escape_string($dbsurat, $_POST['kunci']);
 $antibot = mysqli_real_escape_string($dbsurat, $_POST['antibot']);
 
 if ($kunci == $antibot) {
-    $stmt = $dbsurat->prepare("SELECT * FROM pengguna WHERE user=? AND upper(pass)=? ");
+    $stmt = $dbsurat->prepare("SELECT * FROM pengguna WHERE user=? AND upper(pass)=? AND aktif='1'");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -42,9 +42,7 @@ if ($kunci == $antibot) {
         $_SESSION['prodi'] = $prodi;
         $_SESSION['hakakses'] = $hakakses;
         $_SESSION['jabatan'] = $jabatan;
-        echo $nip;
-        echo $jabatan;
-        echo $jhasil;
+
 
         if ($hakakses == 'dosen') {
             header('location:dosen/index.php');

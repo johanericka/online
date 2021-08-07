@@ -35,7 +35,7 @@
 				?>
 						<div class="alert alert-danger alert-dismissible fade show">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>ERROR!</strong> ID / Password salah!!
+							<strong>ERROR!</strong> ID / Password salah atau <b>user belum aktif</b>
 						</div>
 					<?php
 					} else if ($_GET['pesan'] == "logout") {
@@ -62,9 +62,9 @@
 					<?php
 					} else if ($_GET['pesan'] == "success") {
 					?>
-						<div class="alert alert-info alert-dismissible fade show">
+						<div class="alert alert-success alert-dismissible fade show">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>Info : </strong> pendaftaran berhasil.
+							<strong>Info : </strong> pendaftaran berhasil. <br />Mohon menunggu proses aktivasi akun anda.
 						</div>
 					<?php
 					} else if ($_GET['pesan'] == "noaccess") {
@@ -174,7 +174,7 @@
 			$(".alert").fadeTo(500, 0).slideUp(500, function() {
 				$(this).remove();
 			});
-		}, 1000);
+		}, 2000);
 	</script>
 
 	<script>

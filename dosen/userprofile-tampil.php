@@ -82,7 +82,7 @@ $nip = $_SESSION['nip'];
                     </div>
                     <label>NIM / NIP / NIPT</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="NIM / NIP / NIPT" name="nip" value="<?= $nip; ?>" required>
+                        <input type="number" class="form-control" placeholder="NIM / NIP / NIPT" name="nip" value="<?= $nip; ?>" readonly>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
