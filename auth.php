@@ -6,10 +6,11 @@ $username = mysqli_real_escape_string($dbsurat, $_POST['username']);
 $password = mysqli_real_escape_string($dbsurat, strtoupper($_POST['password']));
 $kunci = mysqli_real_escape_string($dbsurat, $_POST['kunci']);
 $antibot = mysqli_real_escape_string($dbsurat, $_POST['antibot']);
+$aktif = '1';
 
 if ($kunci == $antibot) {
-    $stmt = $dbsurat->prepare("SELECT * FROM pengguna WHERE user=? AND upper(pass)=? AND aktif='1'");
-    $stmt->bind_param("ss", $username, $password);
+    $stmt = $dbsurat->prepare("SELECT * FROM pengguna WHERE user=? AND upper(pass)=? AND aktif=?");
+    $stmt->bind_param("sss", $username, $password, $aktif);
     $stmt->execute();
     $result = $stmt->get_result();
     $jhasil = $result->num_rows;
