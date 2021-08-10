@@ -166,10 +166,10 @@ require('../system/dbconn.php');
                             if ($cekdata == 0) {
                         ?>
                                 <li class="nav-item">
-                                    <a href="cetakkhs-isi.php" class="nav-link">
+                                    <a href="cetakkhs.php" class="nav-link">
                                         <i class="nav-icon fa fa-file"></i>
                                         <p>
-                                            Surat Keterangan Cetak KHS
+                                            Cetak KHS
                                             <span class="right badge badge-danger"></span>
                                         </p>
                                     </a>

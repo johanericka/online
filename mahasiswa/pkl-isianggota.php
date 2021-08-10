@@ -4,7 +4,7 @@ if ($_SESSION['hakakses'] != "mahasiswa") {
     header("location:../deauth.php");
 }
 require('../system/dbconn.php');
-include('../system/myfunc.php');
+//include('../system/myfunc.php');
 
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
@@ -72,10 +72,12 @@ $telepon = $dsql['nohp'];
                             <h3>Pengajuan Surat Pengantar PKL / Magang</h3>
                         </div>
                     </div>
+                    <!--
                     <div class="alert alert-warning alert-dismissible fade show">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>PERHATIAN!!</strong> saat ini tidak diijinkan PKL Berkelompok
                     </div>
+-->
                 </div>
             </section>
 
@@ -107,7 +109,7 @@ $telepon = $dsql['nohp'];
                                                         <th>NO</th>
                                                         <th>NIM</th>
                                                         <th>NAMA</th>
-                                                        <th>No HP</th>
+                                                        <th>No Telepon</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -156,6 +158,11 @@ $telepon = $dsql['nohp'];
                                                     ?>
                                                 </tbody>
                                             </table>
+                                            <div class="alert alert-warning alert-dismissible fade show">
+                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                <strong>KETERANGAN : </strong><br />
+                                                Apabila no. telepon tidak tampil, silahkan melengkapi data pada menu user profile anda
+                                            </div>
                                         </div>
                                     </div>
                                     <a href="pkl-isilampiran.php?nodata=<?= $nodata; ?>" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Isi Lampiran <i class="fa fa-arrow-right"></i></a>

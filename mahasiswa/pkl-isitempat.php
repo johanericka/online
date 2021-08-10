@@ -4,7 +4,7 @@ if ($_SESSION['hakakses'] != "mahasiswa") {
     header("location:../deauth.php");
 }
 require('../system/dbconn.php');
-include('../system/myfunc.php');
+//include('../system/myfunc.php');
 
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
@@ -103,11 +103,11 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                             <div class="row">
                                                 <div class="col-6">
                                                     Tgl. Mulai
-                                                    <input type="date" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
+                                                    <input type="date" id="tglmulai" class="form-control" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
                                                 </div>
                                                 <div class="col-6">
                                                     Tgl. Selesai
-                                                    <input type="date" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
+                                                    <input type="date" id="tglselesai" class="form-control" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,10 +122,12 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                                 <label class="form-check-label">Offline / Luring</label>
                                             </div>
                                         </div>
-                                        <p style="color: red;"> <b>Keterangan : </b><br />
-                                            <b>PKL Online / Daring</b> dapat diajukan mulai sekarang,<br />
-                                            <b>PKL Offline / luring</b> pelaksanaan harus setelah tanggal 17 Agustus 2021 dengan mengunggah bukti vaksin minimal tahap 1
-                                        </p>
+                                        <div class="alert alert-warning alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>KETERANGAN : </strong><br />
+                                            <b>PKL Online / Daring</b> dapat diajukan mulai sekarang<br />
+                                            <b>PKL Offline / Luring</b> dapat diajukan mulai sekarang namun tanggal pelaksanaan harus setelah tanggal 17 Agustus 2021 dengan mengunggah bukti vaksin terakhir (minimal tahap 1)
+                                        </div>
                                         <br />
                                         <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Upload Lampiran <i class="fa fa-arrow-right"></i></button>
                                     </form>

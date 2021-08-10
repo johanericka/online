@@ -82,6 +82,10 @@ require('../system/myfunc.php');
 			$alamat = $row['alamat'];
 			$tglmulai = $row['tglmulai'];
 			$tglselesai = $row['tglselesai'];
+			$validator1 = $row['validator1'];
+			$tglvalidasi1 = $row['tglvalidasi1'];
+			$validator2 = $row['validator2'];
+			$tglvalidasi2 = $row['tglvalidasi2'];
 			?>
 
 			<!-- Main content -->
@@ -134,7 +138,10 @@ require('../system/myfunc.php');
 												<input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
 											</div>
 										</div>
-										<br />
+										<hr />
+										Telah disetujui oleh Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> pada tanggal <?= tgljam_indo($tglvalidasi1); ?> <br />
+										Telah disetujui oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> pada tanggal <?= tgljam_indo($tglvalidasi2); ?>
+										<hr />
 										<form role="form" method="POST">
 											<input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
 											<div class="row">

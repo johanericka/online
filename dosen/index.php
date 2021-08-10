@@ -113,7 +113,7 @@ if ($nohp == null or $email == null) {
 											<thead>
 												<tr>
 													<th width="5%" style="text-align:center">No</th>
-													<th width="10%" style="text-align:center">PRODI</th>
+													<th width="20%" style="text-align:center">PRODI</th>
 													<th style="text-align:center">Nama</th>
 													<th style="text-align:center">Surat</th>
 													<th width="15%" colspan="2" style="text-align:center">Aksi</th>
