@@ -15,43 +15,33 @@
 <?php
 session_start();
 $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
-$iduser = $_SESSION['iduser'];
-$nim = $_SESSION['nim'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$jurusan = $_SESSION['jurusan'];
-$jabatan = $_SESSION['role'];
+
 ?>
 
 <?php
-$datasurat = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE id='$nodata'");
+$datasurat = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE no='$nodata'");
 $rowsurat = mysqli_fetch_array($datasurat);
 $nosurat = $rowsurat['keterangan'];
 $nim = $rowsurat['nim'];
-$kdjurusan = $rowsurat['kdjurusan'];
+$prodi = $rowsurat['prodi'];
 $instansi = $rowsurat['instansi'];
 $tempatpkl = $rowsurat['tempatpkl'];
 $alamat = $rowsurat['alamat'];
 $tglmulai = date('Y-m-d', strtotime($rowsurat['tglmulai']));
 $tglselesai = date('Y-m-d', strtotime($rowsurat['tglselesai']));
-$idkoordinator = $rowsurat['validatorkoor'];
-$tglvalidasifakultas = $rowsurat['tglvalidasifakultas'];
-$validatorfakultas = $rowsurat['validatorfakultas'];
-$validasifakultas = $rowsurat['validasifakultas'];
-$tglsurat = date('Y-m-d', strtotime($tglvalidasifakultas));
-
-//data jurusan
-$datajurusan = mysqli_query($dbsurat, "SELECT * FROM jurusan WHERE kdjurusan = '$kdjurusan'");
-$rowjurusan = mysqli_fetch_array($datajurusan);
-$jurusan = $rowjurusan['jurusan'];
+$idkoordinator = $rowsurat['validator1'];
+$tglvalidasi3 = $rowsurat['tglvalidasi3'];
+$validator3 = $rowsurat['validator3'];
+$validasi3 = $rowsurat['validasi3'];
+$tglsurat = date('Y-m-d', strtotime($tglvalidasi3));
 
 //data koordinator PKL jurusan
-$datakoor = mysqli_query($dbsurat, "select nama from pejabat where iddosen='$idkoordinator'");
+$datakoor = mysqli_query($dbsurat, "SELECT nama FROM pejabat WHERE nip='$idkoordinator'");
 $rowkoor = mysqli_fetch_row($datakoor);
 $koordinator = $rowkoor[0];
 
 //data wd
-$datawd = mysqli_query($dbsurat, "select * from pejabat where iddosen='$validatorfakultas'");
+$datawd = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip='$validator3'");
 $rowwd = mysqli_fetch_array($datawd);
 $idwd = $rowwd['iddosen'];
 $nipwd = $rowwd['nip'];
@@ -126,7 +116,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td colspan="3">Sehubungan dengan persiapan pelaksanaan Praktek Kerja Lapangan (PKL) / Magang Mahasiswa Program Studi <?php echo $jurusan; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, maka dengan ini kami mengajukan permohonan untuk menerima penempatan mahasiswa kami di <?php echo $instansi; ?> pada <?php echo $tempatpkl ?> dengan waktu pelaksanaan mulai tanggal <?php echo tgl_indo($tglmulai); ?> sampai dengan tanggal <?php echo tgl_indo($tglselesai); ?>. </td>
+				<td colspan="3">Sehubungan dengan persiapan pelaksanaan Praktek Kerja Lapangan (PKL) / Magang Mahasiswa Program Studi <?= $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, maka dengan ini kami mengajukan permohonan untuk menerima penempatan mahasiswa kami di <?php echo $instansi; ?> pada <?php echo $tempatpkl ?> dengan waktu pelaksanaan mulai tanggal <?php echo tgl_indo($tglmulai); ?> sampai dengan tanggal <?php echo tgl_indo($tglselesai); ?>. </td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
@@ -151,7 +141,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			</tr>
 			<?php
 			// data peserta observasi
-			$dataanggota = mysqli_query($dbsurat, "select * from pklanggota where nimketua='$nim'");
+			$dataanggota = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimketua='$nim'");
 			$jmlanggota = mysqli_num_rows($dataanggota);
 			while ($rowanggota = mysqli_fetch_array($dataanggota)) {
 				$nimanggota = $rowanggota['nimanggota'];
@@ -159,9 +149,9 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				$telepon = $rowanggota['telepon'];
 			?>
 				<tr>
-					<td width="20%" align="center"><?php echo $nimanggota; ?></td>
-					<td width="50%" align="left"><?php echo $namaanggota; ?></td>
-					<td width="30%" align="center"><?php echo $telepon; ?></td>
+					<td width="20%" align="center"><?= $nimanggota; ?></td>
+					<td width="50%" align="left"><?= $namaanggota; ?></td>
+					<td width="30%" align="center"><?= $telepon; ?></td>
 				</tr>
 			<?php
 			}
@@ -172,7 +162,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 		<tbody>
 			<tr>
 				<td>&nbsp;</td>
-				<td colspan="3">Koordinator PKL / Magang Program Studi <?php echo $jurusan ?> <?php echo $koordinator; ?></td>
+				<td colspan="3">Koordinator PKL / Magang Program Studi <?= $prodi ?> <?= $koordinator; ?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
@@ -220,9 +210,12 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<?php
-				if ($validasifakultas == 1) {
+				if ($validasi3 == 1) {
+					$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$validator3'");
+					$hasil = mysqli_fetch_array($sql);
+					$ttd = $hasil['ttd'];
 				?>
-					<td style="text-align:center"><img src="../ttd/imamtazi.jpg" width="400" /></td>
+					<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300" /></td>
 				<?php
 				}
 				?>

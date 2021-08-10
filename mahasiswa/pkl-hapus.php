@@ -11,6 +11,8 @@ $query3 = mysqli_query($dbsurat, "DELETE FROM pkl WHERE nim = '$nim'");
 $query4 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE no = '$nodata'");
 $data = mysqli_fetch_array($query4);
 $namafile = $data['lampiran'];
+$namafile2 = $data['buktivaksin'];
 unlink($namafile);
+unlink($namafile2);
 
 header("location:index.php");

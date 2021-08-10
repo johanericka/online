@@ -13,6 +13,10 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 if (isset($_GET['nodata'])) {
     $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 }
+//cari no telepon
+$sql = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$nim'");
+$dsql = mysqli_fetch_array($sql);
+$telepon = $dsql['nohp'];
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +74,7 @@ if (isset($_GET['nodata'])) {
                     </div>
                     <div class="alert alert-warning alert-dismissible fade show">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>PERHATIAN!!</strong> Cukup ketua kelompok yang mengajukan
+                        <strong>PERHATIAN!!</strong> saat ini tidak diijinkan PKL Berkelompok
                     </div>
                 </div>
             </section>
@@ -82,9 +86,10 @@ if (isset($_GET['nodata'])) {
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Anggota PKL / Magang</h3>
+                                    <h3 class="card-title">Data Peserta PKL / Magang</h3>
                                 </div>
                                 <div class="card-body">
+                                    <!--
                                     <form role="form" method="post" action="pkl-anggotatambah.php">
                                         <div class="form-group">
                                             NIM
@@ -93,6 +98,7 @@ if (isset($_GET['nodata'])) {
                                             <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Tambah</button>
                                         </div>
                                     </form>
+                                    -->
                                     <div class="box">
                                         <div class="box-body">
                                             <table class="table table-bordered" id="tabel">
@@ -101,7 +107,7 @@ if (isset($_GET['nodata'])) {
                                                         <th>NO</th>
                                                         <th>NIM</th>
                                                         <th>NAMA</th>
-                                                        <th>AKSI</th>
+                                                        <th>No HP</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -110,8 +116,8 @@ if (isset($_GET['nodata'])) {
                                                     $qcari = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota = '$nim'");
                                                     $data = mysqli_num_rows($qcari);
                                                     if ($data == 0) {
-                                                        $qtambah = "INSERT into pklanggota (nimketua, nimanggota, nama) 
-																		values('" . $nim . "','" . $nim . "','" . $nama . "')";
+                                                        $qtambah = "INSERT into pklanggota (nimketua, nimanggota, nama, telepon) 
+																		values('$nim','$nim','$nama','$telepon')";
                                                         $sql =  mysqli_query($dbsurat, $qtambah);
                                                     }
                                                     ?>
@@ -139,13 +145,11 @@ if (isset($_GET['nodata'])) {
                                                         $telepon = $q['telepon'];
                                                     ?>
                                                         <tr>
-                                                            <td><?php echo $no++; ?></td>
+                                                            <td><?= $no++; ?></td>
                                                             <?php $id; ?>
                                                             <td><?= $nimanggota; ?></td>
                                                             <td><?= $nama; ?></td>
-                                                            <td>
-                                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" href="pkl-anggotahapus.php?nodata=<?= $nodata; ?>&nimanggota=<?= $q['nimanggota']; ?>"><i class="fa fa-trash-alt"></i></a>
-                                                            </td>
+                                                            <td><?= $telepon; ?></td>
                                                         </tr>
                                                     <?php
                                                     }

@@ -321,7 +321,15 @@ require('../system/dbconn.php');
 
                     </ul>
                 </li>
-
+                <li class="nav-item">
+                    <a href="userprofile-tampil.php" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Profile User
+                            <span class="right badge badge-danger"><small>baru</small></span>
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-file-pdf"></i>
@@ -346,15 +354,6 @@ require('../system/dbconn.php');
 								</li>
 								-->
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="notifikasi-isi.php" class="nav-link">
-                        <i class="nav-icon fas fa-bullhorn"></i>
-                        <p>
-                            Kirim Notifikasi
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="mailto:saintekonline@gmail.com" class="nav-link">

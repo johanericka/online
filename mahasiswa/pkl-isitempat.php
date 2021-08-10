@@ -65,10 +65,12 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                             <h3>Pengajuan Surat Pengantar PKL / Magang</h3>
                         </div>
                     </div>
+                    <!--
                     <div class="alert alert-warning alert-dismissible fade show">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>PERHATIAN!!</strong> Cukup ketua kelompok yang mengajukan
                     </div>
+                    -->
                 </div>
             </section>
 
@@ -83,18 +85,18 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                 </div>
                                 <div class="card-body">
                                     <label>Nama</label>
-                                    <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly /></input>
+                                    <input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
                                     <label>NIM</label>
-                                    <input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly /></input>
+                                    <input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly /></input>
                                     <label>Program Studi</label>
-                                    <input type="text" class="form-control" name="prodi" value="<?php echo $prodi ?>" readonly /></input>
+                                    <input type="text" class="form-control" name="prodi" value="<?= $prodi; ?>" readonly /></input>
                                     <form role="form" method="post" action="pkl-isitempat-simpan.php">
                                         <label>Instansi tujuan PKL / Magang </label>
                                         <input type="text" class="form-control" name="instansi" placeholder="nama Instansi" required /></input>
                                         <label>Tempat PKL / Magang </label>
                                         <input type="text" class="form-control" name="tempatpkl" placeholder="Bagian / Divisi Instansi tujuan PKL / Magang" required /></input>
                                         <label>Alamat </label>
-                                        <textarea class="form-control" rows="3" name="alamat" placeholder="alamat instansi" required></textarea>
+                                        <input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required></input>
                                         <br />
                                         <label>Tanggal</label>
                                         <div class="form-group">
@@ -109,8 +111,23 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                                 </div>
                                             </div>
                                         </div>
+                                        <label>Jenis PKL</label>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jenispkl" value="Online" checked>
+                                                <label class="form-check-label">Online / Daring</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jenispkl" value="Offline">
+                                                <label class="form-check-label">Offline / Luring</label>
+                                            </div>
+                                        </div>
+                                        <p style="color: red;"> <b>Keterangan : </b><br />
+                                            <b>PKL Online / Daring</b> dapat diajukan mulai sekarang,<br />
+                                            <b>PKL Offline / luring</b> pelaksanaan harus setelah tanggal 17 Agustus 2021 dengan mengunggah bukti vaksin minimal tahap 1
+                                        </p>
                                         <br />
-                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Isi Anggota <i class="fa fa-arrow-right"></i></button>
+                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Upload Lampiran <i class="fa fa-arrow-right"></i></button>
                                     </form>
                                     <br />
                                 </div>

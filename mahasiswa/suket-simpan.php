@@ -22,7 +22,7 @@ $dhasil = $result->fetch_assoc();
 $nipkaprodi = $dhasil['nip'];
 
 //cari nip wd-1
-$jabatan = 'wadek1';
+$jabatan = 'wadek3';
 $stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
 $stmt->bind_param("s", $jabatan);
 $stmt->execute();

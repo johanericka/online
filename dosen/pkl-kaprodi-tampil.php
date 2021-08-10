@@ -81,6 +81,8 @@ require('../system/myfunc.php');
             $tglmulai = $row['tglmulai'];
             $tglselesai = $row['tglselesai'];
             $lampiran = $row['lampiran'];
+            $buktivaksin = $row['buktivaksin'];
+            $jenispkl = $row['jenispkl'];
             ?>
 
             <!-- Main content -->
@@ -118,6 +120,10 @@ require('../system/myfunc.php');
                                             <input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
                                         </div>
                                     </div>
+                                    Jenis PKL / Magang
+                                    <input type="text" class="form-control" name="jenispkl" value="<?= $jenispkl; ?>" readonly>
+
+                                    <!--
                                     Anggota Kelompok PKL / Magang
                                     <table class="table table-bordered">
                                         <thead>
@@ -144,19 +150,42 @@ require('../system/myfunc.php');
                                             ?>
                                         </tbody>
                                     </table>
+                                        -->
                                     <br />
-                                    Lampiran <br />
-                                    <?php
-                                    if ($lampiran == '') {
-                                    ?>
-                                        <img src="../img/noimage.gif" width="400px" class="img-fluid"></img>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <a href="../lampiran/<?= $lampiran; ?>" target="_blank"><img src="../lampiran/<?= $lampiran; ?>" width="400px" class="img-fluid"></img></a>
-                                    <?php
-                                    }
-                                    ?>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col">
+                                                <?php
+                                                if ($lampiran == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lampiran;
+                                                }
+                                                ?>
+                                                Pakta Integritas
+                                                <br />
+                                                <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+                                            </div>
+                                            <?php
+                                            if ($jenispkl == 'Offline') {
+                                            ?>
+                                                <div class="col">
+                                                    <?php
+                                                    if ($buktivaksin == '') {
+                                                        $namafile2 = 'noimage.gif';
+                                                    } else {
+                                                        $namafile2 = $buktivaksin;
+                                                    }
+                                                    ?>
+                                                    Bukti Vaksin
+                                                    <br />
+                                                    <a href="../img/<?= $namafile2; ?>" target="_blank"><img src="../img/<?= $namafile2; ?>" class="img-fluid"></img></a>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
                                     <br />
                                     <small>Klik pada gambar untuk memperbesar</small>
                                     <br />

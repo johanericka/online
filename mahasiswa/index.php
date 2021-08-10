@@ -269,7 +269,6 @@ if ($nohp == null or $email == null) {
 										<tr>
 											<td><?php echo $no++; ?></td>
 											<td>Surat Pengantar PKL <br />
-												Ketua <?= $namaketua; ?>
 											</td>
 											<td>
 												<?php
@@ -334,8 +333,10 @@ if ($nohp == null or $email == null) {
 												if ($statussurat == -1) {
 												?>
 													<a class="btn btn-info btn-sm" href="pkl-isianggota.php?nodata=<?php echo $nodata; ?>">
-														<i class="fas fa-file"></i>
-														Lengkapi
+														<i class="fas fa-file"></i> Lengkapi
+													</a>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="pkl-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Batalkan
 													</a>
 												<?php
 												} elseif ($statussurat == 1) {

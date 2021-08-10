@@ -66,8 +66,9 @@ $nip = $_SESSION['nip'];
                 $nip = $dhasil['nip'];
                 $nohp = $dhasil['nohp'];
                 $email = $dhasil['email'];
-                $jurusan = $dhasil['jurusan'];
+                $prodi = $dhasil['prodi'];
                 $user = $dhasil['user'];
+                $password = $dhasil['pass'];
                 ?>
                 <form action="userprofile-update.php" method="POST">
                     <label>Nama</label>
@@ -108,14 +109,14 @@ $nip = $_SESSION['nip'];
                     </div>
                     <label>Program Studi</label>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="jurusan" name="jurusan" value="<?= $jurusan; ?>" readonly>
+                        <input type="email" class="form-control" name="prodi" value="<?= $prodi; ?>" readonly>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-graduation-cap"></span>
                             </div>
                         </div>
                     </div>
-                    <label>ID SIAKAD</label>
+                    <label>User ID</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="username" name="username" value="<?= $user; ?>" required>
                         <div class="input-group-append">
@@ -126,7 +127,7 @@ $nip = $_SESSION['nip'];
                     </div>
                     <label>Password</label>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="password" name="password" required>
+                        <input type="password" class="form-control" placeholder="password" name="password" value="<?= $password; ?>" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

@@ -62,10 +62,12 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 					<div class="row mb-2">
 						<div class="col-sm-12">
 							<h3>Pengajuan Surat Pengantar PKL / Magang</h3>
+							<!--
 							<div class="alert alert-warning alert-dismissible fade show">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<strong>PERHATIAN!!</strong> Cukup ketua kelompok yang mengajukan
 							</div>
+							-->
 						</div>
 
 					</div>
@@ -132,9 +134,15 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 								}
 							}
 							?>
+							<?php
+							//cek jenis PKL
+							$sql = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE no='$nodata'");
+							$dsql = mysqli_fetch_array($sql);
+							$jenispkl = $dsql['jenispkl'];
+							?>
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Lampiran Pakta Integritass</h3>
+									<h3 class="card-title">Upload Lampiran </h3>
 								</div>
 								<div class="card-body">
 									<b>Lampiran 1 - Pakta Integritas</b>
@@ -148,12 +156,31 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 										<input type="hidden" name="nodata" value="<?= $nodata; ?>" />
 										<button class="btn btn-block btn-primary btn-upload" name="fileToUpload" value="fileToUpload"><i class="fa fa-file-upload"></i> Upload Pakta Integritas PKL / Magang</button>
 									</form>
+									<hr />
+									<?php
+									if ($jenispkl == 'Offline') {
+									?>
+										<b>Lampiran 2 - Bukti Vaksin</b>
+										<br />
+										Upload bukti vaksin terakhir anda (minimal vaksin pertama)
+										<br />
+										<form action="pkl-isilampiran2-upload.php" enctype="multipart/form-data" class="form-horizontal" method="post">
+											<input type="file" name="fileToUpload" class="form-control" />
+											<small style="color:blue"><i>*) Ukuran file maksimal 1MB format JPEG / JPG</i></small>
+											<br />
+											<input type="hidden" name="nodata" value="<?= $nodata; ?>" />
+											<button class="btn btn-block btn-primary btn-upload" name="fileToUpload" value="fileToUpload"><i class="fa fa-file-upload"></i> Upload Bukti Vaksin</button>
+										</form>
+									<?php
+									}
+									?>
 									<br />
 									<!--tampilkan lampiran-->
 									<?php
 									$qlampiran = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE no='$nodata' AND nim='$nim'");
 									$dlampiran = mysqli_fetch_array($qlampiran);
 									$lampiran = $dlampiran['lampiran'];
+									$buktivaksin = $dlampiran['buktivaksin'];
 									?>
 									<div class="container-fluid">
 										<div class="row">
@@ -165,15 +192,33 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 													$namafile = $lampiran;
 												}
 												?>
-												Lampiran
+												Pakta Integritas
 												<br />
 												<a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
 											</div>
+											<?php
+											if ($jenispkl == 'Offline') {
+											?>
+												<div class="col">
+													<?php
+													if ($buktivaksin == '') {
+														$namafile2 = 'noimage.gif';
+													} else {
+														$namafile2 = $buktivaksin;
+													}
+													?>
+													Bukti Vaksin
+													<br />
+													<a href="../img/<?= $namafile2; ?>" target="_blank"><img src="../img/<?= $namafile2; ?>" class="img-fluid"></img></a>
+												</div>
+											<?php
+											}
+											?>
 										</div>
 									</div>
 									<br />
-
 									<br />
+
 									<?php
 									if ($lampiran <> '') {
 									?>
