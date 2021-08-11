@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('../system/dbconn.php');
-include('../system/phpmailer/sendmail.php');
+require('../system/phpmailer/sendmail.php');
 
 $nodata = mysqli_real_escape_string($dbsurat, $_POST['nodata']);
 $nip = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
