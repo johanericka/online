@@ -81,6 +81,10 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
             $instansi = $dsql['instansi'];
             $alamat = $dsql['alamat'];
             $tglpelaksanaan = $dsql['tglpelaksanaan'];
+            $validator1 = $dsql['validator1'];
+            $tglvalidasi1 = $dsql['tglvalidasi1'];
+            $validator2 = $dsql['validator2'];
+            $tglvalidasi2 = $dsql['tglvalidasi2'];
             ?>
             <!-- Main content -->
             <div class="content">
@@ -134,6 +138,10 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                                             ?>
                                         </tbody>
                                     </table>
+                                    <hr>
+                                    Keterangan : <br />
+                                    Telah disetujui oleh Dosen Pengajar <?= namadosen($dbsurat, $validator1); ?> pada <?= tgljam_indo($tglvalidasi1); ?> <br />
+                                    Telah disetujui ole Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> pada <?= tgljam_indo($tglvalidasi2); ?>
                                     <hr>
                                     <form role="form" method="POST">
                                         <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>

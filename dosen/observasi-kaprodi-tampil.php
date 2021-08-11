@@ -81,6 +81,8 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
             $instansi = $dsql['instansi'];
             $alamat = $dsql['alamat'];
             $tglpelaksanaan = $dsql['tglpelaksanaan'];
+            $validator1 = $dsql['validator1'];
+            $tglvalidasi1 = $dsql['tglvalidasi1'];
             ?>
             <!-- Main content -->
             <div class="content">
@@ -134,6 +136,9 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                                             ?>
                                         </tbody>
                                     </table>
+                                    <hr>
+                                    Keterangan : <br />
+                                    Telah disetujui oleh Dosen Pengajar <?= namadosen($dbsurat, $validator1); ?> pada <?= tgljam_indo($tglvalidasi1); ?>
                                     <hr>
                                     <form role="form" method="POST">
                                         <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
@@ -204,30 +209,3 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 </body>
 
 </html>
-
-<!-- cari dosen -->
-<script src="../system/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.search-box input[type="text"]').on("keyup input", function() {
-            /* Get input value on change */
-            var inputVal = $(this).val();
-            var resultDropdown = $(this).siblings(".result");
-            if (inputVal.length) {
-                $.get("cari-proses.php", {
-                    term: inputVal
-                }).done(function(data) {
-                    // Display the returned data in browser
-                    resultDropdown.html(data);
-                });
-            } else {
-                resultDropdown.empty();
-            }
-        });
-        // Set search input value on click of result item
-        $(document).on("click", ".result p", function() {
-            $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-            $(this).parent(".result").empty();
-        });
-    });
-</script>

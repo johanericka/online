@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('../system/dbconn.php');
+include('../system/phpmailer/sendmail.php');
 
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
@@ -20,18 +21,19 @@ $dhasil = $result->fetch_assoc();
 $nipdosen = $dhasil['nip'];
 
 //cari nip kajur
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan='kajur'");
-$stmt->bind_param("s", $prodi);
+$kdjabatan = 'kaprodi';
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan=?");
+$stmt->bind_param("ss", $prodi, $kdjabatan);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
 $nipkaprodi = $dhasil['nip'];
 
 //cari nip wd-1
-$jabatan = 'wakildekan';
+$jabatan = 'wadek1';
 $level = 4;
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=? AND level=?");
-$stmt->bind_param("si", $jabatan, $level);
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
+$stmt->bind_param("s", $jabatan);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
@@ -41,19 +43,39 @@ $statussurat = 0;
 
 $qupdate = mysqli_query($dbsurat, "UPDATE observasi SET validator1='$nipdosen', validator2='$nipkaprodi', validator3='$nipwd', statussurat='0' WHERE nim='$nim' and statussurat=-1");
 if ($qupdate) {
-	echo "sukses";
+    echo "sukses";
 } else {
-	echo "gagal";
+    echo "gagal";
 }
 
-/*
-$stmt = $dbsurat->prepare("UPDATE pkl 
-                                SET validator1=?,
-                                    validator2=?,
-                                    validator3=?,
-                                    statussurat=? 
-                                WHERE no=?");
-$stmt->bind_param("sssii", $nipkoor, $nipkaprodi, $nipwd, $statussurat, $nodata);
-$stmt->execute();
-*/
+//kirim email ke dosen pembimbing
+//cari email dosen dari NIP
+$sql3 = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$nipdosen'");
+$dsql3 = mysqli_fetch_array($sql3);
+$namadosen = $dsql3['nama'];
+$emaildosen = $dsql3['email'];
+
+//kirim email
+$surat = 'Ijin Observasi';
+$subject = "Pengajuan Surat " . $surat . "";
+$pesan = "Yth. " . $namadosen . "<br/>
+        <br/>
+		Assalamualaikum wr. wb.
+        <br />
+		<br />
+		Dengan hormat,
+		<br />
+        Terdapat pengajuan surat " . $surat . " atas nama " . $nama . " di sistem SAINTEK Online.<br/>
+        Silahkan klik tombol dibawah ini untuk melakukan verifikasi surat di website SAINTEK Online<br/>
+        <br/>
+        <a href='https://saintek.uin-malang.ac.id/online/' style=' background-color: #0045CE;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;'>Website</a><br/>
+        <br/>
+        atau klik URL berikut ini <a href='https://saintek.uin-malang.ac.id/online/'>https://saintek.uin-malang.ac.id/online/</a> apabila tombol diatas tidak berfungsi.<br/>
+        <br/>
+        Wassalamualaikum wr. wb.
+		<br/>
+        <br/>
+        <b>SAINTEK Online</b>";
+sendmail($emaildosen, $namadosen, $subject, $pesan);
+
 header("location:index.php");
