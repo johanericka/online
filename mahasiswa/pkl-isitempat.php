@@ -126,7 +126,8 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                             <strong>KETERANGAN : </strong><br />
                                             <b>PKL Online / Daring</b> dapat diajukan mulai sekarang<br />
-                                            <b>PKL Offline / Luring</b> dapat diajukan mulai sekarang namun tanggal pelaksanaan harus setelah tanggal 17 Agustus 2021 dengan mengunggah bukti vaksin terakhir (minimal tahap 1)
+                                            <b>PKL Offline / Luring</b> dapat diajukan mulai sekarang namun tanggal pelaksanaan harus setelah tanggal 17 Agustus 2021 dengan mengunggah bukti vaksin (minimal tahap 1) dalam 1 file<br />
+                                            Bagi penyintas Covid-19 dapat mengganti bukti vaksin dengan <b>Swab Test</b> dengan hasil <b>POSITIF</b> (ketika terinfeksi Covid-19) dan <b>Swab Test</b> dengan hasil <b>NEGATIF</b> (setelah sembuh) dalam 1 file
                                         </div>
                                         <br />
                                         <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Upload Lampiran <i class="fa fa-arrow-right"></i></button>
