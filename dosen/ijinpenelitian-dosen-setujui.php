@@ -1,5 +1,6 @@
 <?php
-require_once('../system/dbconn.php');
+require('../system/dbconn.php');
+include('../system/phpmailer/sendmail.php');
 
 $nodata = mysqli_real_escape_string($dbsurat, $_POST['nodata']);
 date_default_timezone_set("Asia/Jakarta");
