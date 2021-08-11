@@ -35,6 +35,8 @@ if (in_array($fileExtension, $allowedfileExtensions)) {
                 $stmt = $dbsurat->prepare("UPDATE ijinlab SET lamp6=? WHERE no=?");
             } elseif ($lampiran == 'lamp7') {
                 $stmt = $dbsurat->prepare("UPDATE ijinlab SET lamp7=? WHERE no=?");
+            } elseif ($lampiran == 'lamp8') {
+                $stmt = $dbsurat->prepare("UPDATE ijinlab SET lamp8=? WHERE no=?");
             };
             $stmt->bind_param("si", $dest_path, $nodata);
             $stmt->execute();

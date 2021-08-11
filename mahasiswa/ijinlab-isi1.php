@@ -90,44 +90,33 @@ if ($jhasil > 0) {
                                     <form role="form" method="POST" action="ijinlab-isi1-simpan.php">
                                         <label>Nama </label><br />
                                         <input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
-                                        <br />
                                         <label>NIM </label> <br />
                                         <input type="number" class="form-control" name="nim" value="<?= $nim; ?>" readonly /></input>
-                                        <br />
                                         <label>Program Studi </label><br />
-                                        <input type="text" class="form-control" name="jurusan" value="<?php echo $prodi; ?>" readonly /></input>
-                                        <br />
+                                        <input type="text" class="form-control" name="prodi" value="<?= $prodi; ?>" readonly /></input>
                                         <label>Tempat / Tgl. Lahir </label><small style="color:red">*</small><br />
-                                        <input type="text" class="form-control" name="ttl" placeholder="Tempat / Tgl. Lahir" required>
-                                        </input>
-                                        <br />
+                                        <input type="text" class="form-control" name="ttl" required></input>
                                         <label>Alamat Asal </label><small style="color:red">*</small><br />
-                                        <textarea class="form-control" rows="3" id="alamatasal" name="alamatasal" required></textarea>
-                                        <br />
+                                        <input type="text" class="form-control" id="alamatasal" name="alamatasal" required>
                                         <label>Alamat Di Malang </label><small style="color:red">*</small><br />
-                                        <textarea class="form-control" rows="3" id="alamatmalang" name="alamatmalang" required></textarea>
+                                        <input type="text" class="form-control" id="alamatmalang" name="alamatmalang" required>
                                         <small style="color:red"><i> tuliskan <b>TIDAK ADA</b> apabila tidak tinggal di Malang </i></small>
                                         <br />
                                         <label>No. HP </label><small style="color:red">*</small><br />
-                                        <input type="number" class="form-control" name="nohp" required>
-                                        </input>
-                                        <br />
+                                        <input type="number" class="form-control" name="nohp" required></input>
                                         <label>No. HP Orang Tua / Wali </label><small style="color:red">*</small><br />
-                                        <input type="number" class="form-control" name="nohportu" required>
-                                        </input>
-                                        <br />
+                                        <input type="number" class="form-control" name="nohportu" required></input>
                                         <label>Riwayat Penyakit </label><small style="color:red">*</small><br />
-                                        <textarea class="form-control" rows="3" id="riwayatpenyakit" name="riwayatpenyakit" required></textarea>
+                                        <input type="text" class="form-control" id="riwayatpenyakit" name="riwayatpenyakit" required>
                                         <small style="color:red"><i> tuliskan <b>TIDAK ADA</b> apabila tidak pernah sakit </i></small>
                                         <br />
                                         <label>Posisi saat mendaftar </label><small style="color:red">* </small><br />
                                         <input type="radio" id="asal" name="posisi" value="Alamat Asal" checked> Alamat Asal<br />
                                         <input type="radio" id="malang" name="posisi" value="Alamat di malang"> Alamat di Malang<br />
-                                        <br />
                                         <label>Nama Laboratorium </label><br />
-                                        <select name="namalab">
+                                        <select name="namalab" class="form-control">
                                             <?php
-                                            $sql = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE jurusan like '%$jurusan'");
+                                            $sql = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE jurusan like '%$prodi'");
                                             $jmldata = mysqli_num_rows($sql);
                                             //echo "Jumlah data = ".$jmldata;
                                             while ($data = mysqli_fetch_array($sql)) {
@@ -139,12 +128,11 @@ if ($jhasil > 0) {
                                             }
                                             ?>
                                         </select>
-                                        <br />
                                         <small style="color:red"><i>Apabila nama lab. tidak ada berarti kapasitas lab. sudah penuh.</i></small>
                                         <br />
                                         <label>Dosen Pembimbing </label><br />
                                         <div class="search-box">
-                                            <input type="text" autocomplete="off" placeholder="cari dosen" name="dosen" required>
+                                            <input type="text" class="form-control" autocomplete="off" placeholder="cari dosen" name="dosen" required>
                                             </input>
                                             <div class="result"></div>
                                         </div>
@@ -155,11 +143,11 @@ if ($jhasil > 0) {
                                             <div class="row">
                                                 <div class="col-6">
                                                     Tgl. Mulai
-                                                    <input type="date" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
+                                                    <input type="date" class="form-control" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
                                                 </div>
                                                 <div class="col-6">
                                                     Tgl. Selesai
-                                                    <input type="date" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
+                                                    <input type="date" class="form-control" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
                                                 </div>
                                             </div>
                                             <small style="color:red"><i>Maksimal 1 bulan </i></small>
