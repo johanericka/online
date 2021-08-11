@@ -963,7 +963,7 @@ if ($nohp == null or $email == null) {
 														<?php
 														} elseif ($statussurat == 1) {
 														?>
-															<a class="btn btn-success btn-sm" href="observasi-cetak.php?nodata=<?php echo $nodata; ?>">
+															<a class="btn btn-success btn-sm" href="observasi-cetak.php?nodata=<?php echo $nodata; ?>" target="_blank">
 																<i class="fas fa-print"></i>
 																Cetak
 															</a>

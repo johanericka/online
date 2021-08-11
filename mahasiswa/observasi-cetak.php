@@ -24,26 +24,25 @@
 <?php
 $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
 // ambil data dari record
-$datasurat = mysqli_query($dbsurat, "select * from observasi where id='$nodata'");
+$datasurat = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE no='$nodata'");
 $rowsurat = mysqli_fetch_array($datasurat);
 $nosurat = $rowsurat['keterangan'];
 $nim = $rowsurat['nim'];
-$jurusan = $rowsurat['jurusan'];
+$prodi = $rowsurat['prodi'];
 $matakuliah = $rowsurat['matakuliah'];
-$namadosen = $rowsurat['namadosen'];
+$dosen = $rowsurat['dosen'];
 $instansi = $rowsurat['instansi'];
 $alamat = $rowsurat['alamat'];
 $tglpelaksanaan = date('Y-m-d', strtotime($rowsurat['tglpelaksanaan']));
-$tglvalidasifakultas = $rowsurat['tglvalidasifakultas'];
-$validatorfakultas = $rowsurat['validatorfakultas'];
-$validasifakultas = $rowsurat['validasifakultas'];
-$tglsurat = date('Y-m-d', strtotime($tglvalidasifakultas));
+$tglvalidasi3 = $rowsurat['tglvalidasi3'];
+$validator3 = $rowsurat['validator3'];
+$validasi3 = $rowsurat['validasi3'];
+$tglsurat = date('Y-m-d', strtotime($tglvalidasi3));
 
 
 //data wd
-$datawd = mysqli_query($dbsurat, "select * from pejabat where iddosen='$validatorfakultas'");
+$datawd = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip='$validator3'");
 $rowwd = mysqli_fetch_array($datawd);
-$iddosen = $rowwd['iddosen'];
 $nip = $rowwd['nip'];
 $namawd = $rowwd['nama'];
 $jabatan = $rowwd['jabatan'];
@@ -111,12 +110,12 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td colspan="3">Yth. <?php echo $instansi; ?></td>
+					<td colspan="3">Yth. <?= $instansi; ?></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td colspan="3"><?php echo $alamat; ?></td>
+					<td colspan="3"><?= $alamat; ?></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -136,7 +135,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td colspan="3">Sehubungan dengan tugas mata kuliah <?php echo $matakuliah; ?> mahasiswa jurusan <?php echo $jurusan; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang dengan nama - nama sebagai berikut :</td>
+					<td colspan="3">Sehubungan dengan tugas mata kuliah <?= $matakuliah; ?> mahasiswa jurusan <?= $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang dengan nama - nama sebagai berikut :</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -153,16 +152,16 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				</tr>
 				<?php
 				// data peserta observasi
-				$dataanggota = mysqli_query($dbsurat, "select * from observasianggota where nimketua='$nim'");
+				$dataanggota = mysqli_query($dbsurat, "SELECT * FROM observasianggota WHERE nimketua='$nim'");
 				while ($rowanggota = mysqli_fetch_row($dataanggota)) {
 					$nimanggota = $rowanggota[2];
 					$namaanggota = $rowanggota[3];
 				?>
 					<tr>
 						<td>&nbsp;</td>
-						<td align="center"><?php echo $nimanggota; ?></td>
-						<td align="left"><?php echo $namaanggota; ?></td>
-						<td align="center"><?php echo $namadosen; ?></td>
+						<td align="center"><?= $nimanggota; ?></td>
+						<td align="left"><?= $namaanggota; ?></td>
+						<td align="center"><?= $dosen; ?></td>
 						<td>&nbsp;</td>
 					</tr>
 				<?php
@@ -213,20 +212,12 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td style="text-align:center">Malang, <?php echo tgl_indo($tglsurat); ?></td>
+					<td style="text-align:center">Malang, <?php echo tgl_indo($tgl); ?></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td style="text-align:center"></td>
+					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td style="text-align:center">a.n Dekan</td>
@@ -234,7 +225,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td style="text-align:center">
+					<td>
 						<small><i>Scan QRCode ini </i></small><br />
 						<img src="../qrcode/<?php echo $namafile; ?>.png" width="80" /><br />
 						<small><i>untuk verifikasi surat</i></small>
@@ -242,9 +233,12 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<?php
-					if ($validasifakultas == 1) {
+					if ($validasi3 == 1) {
+						$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$validator3'");
+						$hasil = mysqli_fetch_array($sql);
+						$ttd = $hasil['ttd'];
 					?>
-						<td style="text-align:center"><img src="../ttd/antonprasetyo.jpg" width="300" /></td>
+						<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300" /></td>
 					<?php
 					}
 					?>
@@ -252,10 +246,19 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td style="text-align:center"></td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
-					<!--<td style="text-align:center"><u><//?php echo $namawd; ?></u></td>-->
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -263,11 +266,11 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
-					<!--<td style="text-align:center">NIP. <//?php echo $nip; ?></td>-->
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
+					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -275,8 +278,8 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					<td>&nbsp;</td>
 				</tr>
 			</tbody>
+		</table>
 	</font>
-	</table>
 </body>
 
 <?php
