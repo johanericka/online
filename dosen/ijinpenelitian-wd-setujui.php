@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once('../system/dbconn.php');
+require('../system/dbconn.php');
+require('../system/phpmailer/sendmail.php');
 $nodata = mysqli_real_escape_string($dbsurat, $_POST['nodata']);
 $nip = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
