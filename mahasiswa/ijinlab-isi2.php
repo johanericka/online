@@ -12,6 +12,10 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 if (isset($_GET['nodata'])) {
     $nodata = $_GET['nodata'];
+} else {
+    $sql = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' AND statuspengajuan='-1'");
+    $dsql = mysqli_fetch_array($sql);
+    $nodata = $dsql['no'];
 };
 ?>
 

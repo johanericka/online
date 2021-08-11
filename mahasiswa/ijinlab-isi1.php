@@ -4,6 +4,7 @@ if ($_SESSION['hakakses'] != "mahasiswa") {
     header("location:../index.php?pesan=noaccess");
 }
 require('../system/dbconn.php');
+require('../system/myfunc.php');
 $nim = mysqli_real_escape_string($dbsurat, $_SESSION['nip']);
 $nama = mysqli_real_escape_string($dbsurat, $_SESSION['nama']);
 $prodi = mysqli_real_escape_string($dbsurat, $_SESSION['prodi']);
@@ -220,33 +221,5 @@ if ($jhasil > 0) {
                             });
                         });
                     </script>
-
-                    <!-- cari dosen -->
-                    <script src="../system/js/jquery-1.12.4.min.js"></script>
-                    <script type="text/javascript">
-                        $(document).ready(function() {
-                            $('.search-box input[type="text"]').on("keyup input", function() {
-                                /* Get input value on change */
-                                var inputVal = $(this).val();
-                                var resultDropdown = $(this).siblings(".result");
-                                if (inputVal.length) {
-                                    $.get("cari-proses.php", {
-                                        term: inputVal
-                                    }).done(function(data) {
-                                        // Display the returned data in browser
-                                        resultDropdown.html(data);
-                                    });
-                                } else {
-                                    resultDropdown.empty();
-                                }
-                            });
-                            // Set search input value on click of result item
-                            $(document).on("click", ".result p", function() {
-                                $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-                                $(this).parent(".result").empty();
-                            });
-                        });
-                    </script>
-
 
 </html>

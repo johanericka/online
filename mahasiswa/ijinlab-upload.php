@@ -42,10 +42,10 @@ if (in_array($fileExtension, $allowedfileExtensions)) {
             $stmt->execute();
             header("location:ijinlab-isi2.php?nodata=$nodata&pesan=success");
         } else {
-            header("location:ijinlab-isi2.php?nodata=$nodata&pesan=filesize");
+            header("location:ijinlab-isi2.php?nodata=$nodata&pesan=gagal");
         };
     } else {
-        header("location:ijinlab-isi2.php?nodata=$nodata&pesan=gagal");
+        header("location:ijinlab-isi2.php?nodata=$nodata&pesan=filesize");
     };
 } else {
     header("location:ijinlab-isi2.php?nodata=$nodata&pesan=extention");
