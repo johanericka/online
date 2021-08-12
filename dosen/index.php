@@ -213,7 +213,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- ijin lab sebagai dosbing-->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator1='$nip' AND validasi1 = 0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator0='$nip' AND validasi0 = 0");
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
@@ -247,6 +247,43 @@ if ($nohp == null or $email == null) {
 												}
 												?>
 												<!-- /.ijin lab sebagai dosbing -->
+
+												<!-- ijin lab sebagai kalab-->
+												<?php
+												$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator1='$nip' AND validasi1 = 0 AND validasi0 = 1");
+												$jmldata = mysqli_num_rows($query);
+												while ($data = mysqli_fetch_array($query)) {
+													$nodata = $data['no'];
+													$prodimhs = $data['prodi'];
+													$nama = $data['nama'];
+													$surat = 'Ijin Penggunaan Laboratorium';
+													$verifikasi1 = $data['validasi1'];
+													$verifikasi2 = $data['validasi2'];
+													$verifikasi3 = $data['validasi3'];
+												?>
+													<tr>
+														<td><?= $no; ?></td>
+														<td><?= $prodimhs; ?></td>
+														<td><?= $nama; ?></td>
+														<td><?= $surat; ?></td>
+														<td>
+															<?php
+															if ($verifikasi1 == 0) {
+															?>
+																<a class="btn btn-info btn-sm" href="ijinlab-kalab-tampil.php?nodata=<?php echo $nodata; ?>">
+																	<i class="fas fa-search"></i>
+																	Lihat
+																</a>
+															<?php
+															};
+															?>
+														</td>
+													</tr>
+												<?php
+													$no++;
+												}
+												?>
+												<!-- /.ijin lab sebagai kalab -->
 
 												<!-- ijin lab sebagai kaprodi-->
 												<?php

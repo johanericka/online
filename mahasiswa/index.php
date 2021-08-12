@@ -154,7 +154,7 @@ if ($nohp == null or $email == null) {
 													?>
 														Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?><br />
 													<?php
-													} elseif ($validasi1 == 0) {
+													} elseif ($validasi0 == 1) {
 													?>
 														Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> <br />
 													<?php
@@ -228,7 +228,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												} elseif ($statussurat == 1) {
 												?>
-													<a class="btn btn-success btn-sm" href="ijinlab-cetak.php?nodata=<?php echo $nodata; ?>">
+													<a class="btn btn-success btn-sm" href="ijinlab-cetak.php?nodata=<?php echo $nodata; ?>" target="_blank">
 														<i class="fas fa-print"></i>
 														Cetak
 													</a>

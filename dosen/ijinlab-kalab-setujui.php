@@ -10,27 +10,37 @@ $nama = mysqli_real_escape_string($dbsurat, $_POST['nama']);
 $namalab = mysqli_real_escape_string($dbsurat, $_POST['namalab']);
 $prodi = mysqli_real_escape_string($dbsurat, $_POST['prodi']);
 
-//update status validasi dosen pembimbing
-$sql = mysqli_query($dbsurat, "UPDATE ijinlab
-					SET tglvalidasi2 = '$tgl', 
-					validasi2 = '1'
+//cek kapasitas lab
+$sql3 = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE namalab='$namalab'");
+$dlab = mysqli_fetch_array($sql3);
+$kapasitas = $dlab['kapasitas'];
+if ($kapasitas > 0) {
+	//update status validasi dosen pembimbing
+	$sql = mysqli_query($dbsurat, "UPDATE ijinlab
+					SET tglvalidasi1 = '$tgl', 
+					validasi1 = '1'
 					WHERE no = '$nodata'");
 
-//kirim email ke wadek1
-//cari email wadek dari NIP
-$sql2 = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE no='$nodata'");
-$dsql2 = mysqli_fetch_array($sql2);
-$nama = $dsql2['nama'];
-$nipwadek1 = $dsql2['validator3'];
-$sql3 = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$nipwadek1'");
-$dsql3 = mysqli_fetch_array($sql3);
-$namawadek1 = $dsql3['nama'];
-$emailwadek1 = $dsql3['email'];
+	//update kapasitas lab
+	$sql2 = mysqli_query($dbsurat, "UPDATE laboratorium
+					SET kapasitas = kapasitas-1 
+					WHERE namalab = '$namalab'");
 
-//kirim email
-$surat = 'Ijin Penggunaan Lab.';
-$subject = "Pengajuan Surat " . $surat;
-$pesan = "Yth. " . $namawadek1 . "<br/>
+	//kirim email ke kajur
+	//cari email kajur dari NIP
+	$sql2 = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE no='$nodata'");
+	$dsql2 = mysqli_fetch_array($sql2);
+	$nama = $dsql2['nama'];
+	$nipkajur = $dsql2['validator2'];
+	$sql3 = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip='$nipkajur'");
+	$dsql3 = mysqli_fetch_array($sql3);
+	$namakajur = $dsql3['nama'];
+	$emailkajur = $dsql3['email'];
+
+	//kirim email
+	$surat = 'Ijin Penggunaan Lab.';
+	$subject = "Pengajuan Surat " . $surat;
+	$pesan = "Yth. " . $namakajur . "<br/>
         <br/>
 		Assalamualaikum wr. wb.
         <br />
@@ -48,6 +58,9 @@ $pesan = "Yth. " . $namawadek1 . "<br/>
 		<br/>
         <br/>
         <b>SAINTEK Online</b>";
-sendmail($emailwadek1, $namawadek1, $subject, $pesan);
+	sendmail($emailkajur, $namakajur, $subject, $pesan);
 
-header("location:index.php");
+	header("location:index.php");
+} else {
+	header("location:ijinlab-dosbing-tampil.php?nodata=$nodata&pesan=penuh");
+}
