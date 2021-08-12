@@ -186,7 +186,7 @@ if (isset($_GET['nodata'])) {
                                                 <td>6.</td>
                                                 <td><b>Lampiran 8-</b>Surat persetujuan orang tua bermaterai</td>
                                                 <td>
-
+                                                    <a href="../doc/Lampiran8.docx">Download Lampiran 8</a>
                                                 </td>
                                             </tr>
                                             <tr>

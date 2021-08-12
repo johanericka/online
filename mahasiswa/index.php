@@ -72,17 +72,18 @@ if ($nohp == null or $email == null) {
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h3>Dashboard </h3>
 						</div>
+					</div>
+					<div class="alert alert-danger alert-dismissible fade show">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>PERHATIAN! </strong> segera Lengkapi data pada menu User Profile.
 					</div>
 				</div><!-- /.container-fluid -->
 			</section>
 
-			<div class="alert alert-warning alert-dismissible fade show">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>PERHATIAN! </strong> segera Lengkapi data pada menu User Profile.
-			</div>
+
 
 			<!-- pengajuan surat mahasiswa -->
 			<section class="content">
