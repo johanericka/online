@@ -290,7 +290,7 @@ require('../system/myfunc.php');
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <?php
-                                                            if ($kapasitas > 0) {
+                                                            if ($kapasitas >= 0) {
                                                             ?>
                                                                 <button name="aksi" value="setujui" type="submit" formaction="ijinlab-wd-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
                                                             <?php

@@ -245,7 +245,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												} elseif ($statussurat == 2) {
 												?>
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="lab-hapus.php?nodata=<?php echo $nodata; ?>">
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="ijinlab-hapus.php?nodata=<?php echo $nodata; ?>">
 														<i class="fas fa-trash"></i> Hapus
 													</a>
 												<?php
