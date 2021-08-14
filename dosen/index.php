@@ -957,7 +957,7 @@ if ($nohp == null or $email == null) {
 			</section>
 
 			<!-- pengajuan surat bawahan -->
-			<?php if ($jabatan == 'dekan' or $jabatan == 'wadek1' or $jabatan == 'wadek2' or $jabatan == 'wadek3' or $jabatan == 'kaprodi' or $jabatan == 'kabag') { ?>
+			<?php if ($jabatan == 'wadek2' or $jabatan == 'kaprodi' or $jabatan == 'kabag') { ?>
 				<section class="content">
 					<div class="container-fluid">
 						<div class="row">
