@@ -68,44 +68,49 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 			<!-- Main content -->
 			<section class="content">
-				<div class="col-12 col-sm-6 col-lg-12">
-					<div class="card card-success card-tabs">
-						<form role="form" method="post" action="pengambilandata-simpan.php">
-							NIM <br />
-							<input type="text" class="form-control" name="nim" value="<?= $nim ?>" readonly />
-							Nama <br />
-							<input type="text" class="form-control" name="nama" value="<?= $nama ?>" readonly />
-							Judul Skripsi / penelitian <br />
-							<input type="text" class="form-control" name="judulskripsi" placeholder="judul skripsi / penelitian" required>
-							Dosen Pembimbing <br />
-							<small><i>Pilih dari daftar nama dosen yang tampil</i></small>
-							<div class="form-group">
-								<div class="search-box">
-									<input type="text" autocomplete="off" class="form-control" placeholder="ketikkan nama dosen" name="dosen" required>
-									<div class="result"></div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Identitas Diri</h3>
+								</div>
+								<div class="card-body">
+									NIM <br />
+									<input type="text" class="form-control" name="nim" value="<?= $nim ?>" readonly />
+									Nama <br />
+									<input type="text" class="form-control" name="nama" value="<?= $nama ?>" readonly />
+									<form role="form" method="post" action="pengambilandata-simpan.php">
+										Judul Skripsi / penelitian <br />
+										<input type="text" class="form-control" name="judulskripsi" placeholder="judul skripsi / penelitian" required>
+										Dosen Pembimbing <br />
+										<small><i>Pilih dari daftar nama dosen yang tampil</i></small>
+										<div class="form-group">
+											<div class="search-box">
+												<input type="text" autocomplete="off" class="form-control" placeholder="ketikkan nama dosen" name="dosen" required>
+												<div class="result"></div>
+											</div>
+										</div>
+										<label>Instansi</label>
+										<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required>
+										<label>Alamat</label>
+										<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required>
+										<label>Tanggal Pelaksanaan</label><br />
+										<input type="date" class="form-control" id="tglpelaksanaan" name="tglpelaksanaan" required>
+										<label>Data / sample :</label>
+										<input type="text" class="form-control" name="datadiperlukan" placeholder="data / sample yang dibutuhkan" required></textarea>
+										<hr>
+										<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-check"></i> Ajukan</button>
+									</form>
 								</div>
 							</div>
-							<label>Instansi</label>
-							<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required>
-							<label>Alamat</label>
-							<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required>
-							<label>Tanggal Pelaksanaan</label><br />
-							<input type="date" id="tglpelaksanaan" name="tglpelaksanaan" value="<?php echo date('Y-m-d'); ?>" required><br />
-							<label>Data / sample :</label>
-							<input type="text" class="form-control" name="datadiperlukan" placeholder="data / sample yang dibutuhkan" required></textarea>
-							<hr>
-							<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-check"></i> Ajukan</button>
-						</form>
+						</div>
 					</div>
 				</div>
-
 				<div class="content">
 					<div class="container-fluid">
 					</div>
 					<!-- /.form group -->
-
-
-
 				</div><!-- /.container-fluid -->
 			</section>
 			<!-- /.content -->
