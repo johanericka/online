@@ -239,13 +239,13 @@ if ($nohp == null or $email == null) {
 													<a class="btn btn-secondary btn-sm" disabled>
 														<i class="fas fa-spinner"></i> Proses
 													</a>
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="ijinlab-hapus.php?nodata=<?php echo $nodata; ?>">
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="ijinlab-hapus.php?nodata=<?= $nodata; ?>">
 														<i class="fas fa-trash"></i> Batalkan
 													</a>
 												<?php
 												} elseif ($statussurat == 2) {
 												?>
-													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="ijinlab-hapus.php?nodata=<?php echo $nodata; ?>">
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="ijinlab-hapus.php?nodata=<?= $nodata; ?>">
 														<i class="fas fa-trash"></i> Hapus
 													</a>
 												<?php
@@ -859,7 +859,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												if ($statussurat == 1) {
 												?>
-													<a class="btn btn-success btn-sm" href="peminjamanalat-cetak.php?nodata='.$nodata.'" target="_blank">
+													<a class="btn btn-success btn-sm" href="pengambilandata-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
 														<i class="fas fa-print"></i> Cetak
 													</a>
 												<?php
