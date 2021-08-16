@@ -95,6 +95,8 @@ require('../system/myfunc.php');
 				$lamp6 = $data['lamp6'];
 				$lamp7 = $data['lamp7'];
 				$lamp8 = $data['lamp8'];
+				$validator0 = $data['validator0'];
+				$tglvalidasi0 = $data['tglvalidasi0'];
 			}
 			?>
 
@@ -174,7 +176,6 @@ require('../system/myfunc.php');
 												?>
 												<label>Laboratorium </label>
 												<input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
-												<p style="color:red">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
 												<label>Dosen Pembimbing</label><br />
 												<input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
 												<label>Waktu Penggunaan</label>
@@ -274,6 +275,11 @@ require('../system/myfunc.php');
 														</div>
 													</div>
 												</div>
+												<hr>
+												Keterangan : <br />
+												<p style="color:red;">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
+												Telah disetujui oleh Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> pada <?= tgljam_indo($tglvalidasi0); ?>
+												<hr>
 												<form role="form" method="POST">
 													<input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
 													<input type="hidden" name="prodi" value="<?php echo $prodi; ?>"></input>
@@ -285,11 +291,11 @@ require('../system/myfunc.php');
 															<?php
 															if ($kapasitas > 0) {
 															?>
-																<button name="aksi" value="setujui" type="submit" formaction="ijinlab-dosbing-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
+																<button name="aksi" value="setujui" type="submit" formaction="ijinlab-kalab-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
 															<?php
 															} else {
 															?>
-																<button name="aksi" value="setujui" type="submit" formaction="ijinlab-dosbing-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')" disabled> <i class="fa fa-check"></i> Setujui</button>
+																<button name="aksi" value="setujui" type="submit" formaction="ijinlab-kalab-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')" disabled> <i class="fa fa-check"></i> Setujui</button>
 															<?php
 															}
 															?>

@@ -72,11 +72,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 	<tbody>
 		<tr>
 			<td>&nbsp;</td>
-			<td colspan="4">&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
 			<td colspan="4" align="center">
 				<h1>SURAT IJIN PENGGUNAAN LABORATORIUM</h1>
 			</td>
@@ -216,7 +211,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
-				<td style="text-align:center">Malang, <?= tgljam_indo($tglvalidasi3); ?></td>
+				<td style="text-align:center">Malang, <?= tgl_indo($tglvalidasi3); ?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>

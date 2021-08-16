@@ -12,7 +12,7 @@ server with default setting (user 'root' with no password) */
 
 if (isset($_REQUEST["term"])) {
     // Prepare a select statement
-    $sql = "SELECT * FROM pengguna WHERE length(user)=5 and upper(nama) LIKE ?";
+    $sql = "SELECT * FROM pengguna WHERE hakakses='dosen' and upper(nama) LIKE ?";
 
     if ($stmt = mysqli_prepare($dbsurat, $sql)) {
         // Bind variables to the prepared statement as parameters

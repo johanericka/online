@@ -94,6 +94,13 @@ require('../system/myfunc.php');
                 $lamp5 = $data['lamp5'];
                 $lamp6 = $data['lamp6'];
                 $lamp7 = $data['lamp7'];
+                $lamp8 = $data['lamp8'];
+                $validator0 = $data['validator0'];
+                $tglvalidasi0 = $data['tglvalidasi0'];
+                $validator1 = $data['validator1'];
+                $tglvalidasi1 = $data['tglvalidasi1'];
+                $validator2 = $data['validator2'];
+                $tglvalidasi2 = $data['tglvalidasi2'];
             }
             ?>
 
@@ -267,6 +274,13 @@ require('../system/myfunc.php');
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <hr>
+                                                Keterangan : <br />
+                                                <p style="color:red;">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
+                                                Telah disetujui oleh Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> pada <?= tgljam_indo($tglvalidasi0); ?><br />
+                                                Telah disetujui oleh Kepala Lab. <?= $namalab; ?> <?= namadosen($dbsurat, $validator1); ?> pada <?= tgljam_indo($tglvalidasi1); ?><br />
+                                                Telah disetujui oleh Ketua Program Studi <?= $prodi; ?> <?= namadosen($dbsurat, $validator2); ?> pada <?= tgljam_indo($tglvalidasi2); ?>
+                                                <hr>
                                                 <form role="form" method="POST">
                                                     <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
                                                     <input type="hidden" name="prodi" value="<?php echo $prodi; ?>"></input>
@@ -275,7 +289,17 @@ require('../system/myfunc.php');
                                                     <input type="hidden" name="namalab" value="<?php echo $namalab; ?>"></input>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <button name="aksi" value="setujui" type="submit" formaction="ijinlab-wd-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin menyetujui pengajuan ini ?')"> <i class="fa fa-check"></i> Setujui</button>
+                                                            <?php
+                                                            if ($kapasitas >= 0) {
+                                                            ?>
+                                                                <button name="aksi" value="setujui" type="submit" formaction="ijinlab-wd-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')"> <i class="fa fa-check"></i> Setujui</button>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <button name="aksi" value="setujui" type="submit" formaction="ijinlab-wd-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan sanggup untuk mengawasi mahasiswa tersebut untuk mematuhi protokol kesehatan COVID-19 selama mahasiswa bekerja di laboratorium')" disabled> <i class="fa fa-check"></i> Setujui</button>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tolak" class="btn btn-danger btn-block"> <i class="fa fa-times"></i> Tolak</button>

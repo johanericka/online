@@ -12,6 +12,10 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 if (isset($_GET['nodata'])) {
     $nodata = $_GET['nodata'];
+} else {
+    $sql = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE nim='$nim' AND statuspengajuan='-1'");
+    $dsql = mysqli_fetch_array($sql);
+    $nodata = $dsql['no'];
 };
 ?>
 
@@ -178,6 +182,20 @@ if (isset($_GET['nodata'])) {
                                                     <a href="../doc/Lampiran7.docx">Download Lampiran 7</a>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>6.</td>
+                                                <td><b>Lampiran 8-</b>Surat persetujuan orang tua bermaterai</td>
+                                                <td>
+                                                    <a href="../doc/Lampiran8.docx">Download Lampiran 8</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>7.</td>
+                                                <td><b>Lampiran 9-</b>Bukti vaksin terakhir</td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -200,6 +218,8 @@ if (isset($_GET['nodata'])) {
                                                 <option value="lamp5">Lampiran-5 Kesanggupan menerapkan protokol kesehatan</option>
                                                 <option value="lamp6">Lampiran-6 Kesanggupan dosen mengawasi mahasiswa</option>
                                                 <option value="lamp7">Lampiran-7 Kesediaan Karantina Mandiri</option>
+                                                <option value="lamp8">Lampiran-8 Surat Persetujuan Orang Tua</option>
+                                                <!--<option value="lamp9">Lampiran-9 Bukti Vaksin</option>-->
                                             </select>
                                             <br />
                                             <label>File</label>
@@ -226,6 +246,8 @@ if (isset($_GET['nodata'])) {
                                     $lamp5 = $dhasil['lamp5'];
                                     $lamp6 = $dhasil['lamp6'];
                                     $lamp7 = $dhasil['lamp7'];
+                                    $lamp8 = $dhasil['lamp8'];
+                                    $lamp9 = $dhasil['lamp9'];
                                     ?>
                                     <div class="container-fluid">
                                         <div class="row">
@@ -284,12 +306,36 @@ if (isset($_GET['nodata'])) {
                                                 <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
                                                 <p class="text-center">Lampiran-7</p>
                                             </div>
+                                            <div class="col">
+                                                <?php
+                                                if ($lamp8 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp8;
+                                                }
+                                                ?>
+                                                <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+                                                <p class="text-center">Lampiran-8</p>
+                                            </div>
+                                            <!--
+                                            <div class="col">
+                                                <?php
+                                                if ($lamp9 == '') {
+                                                    $namafile = 'noimage.gif';
+                                                } else {
+                                                    $namafile = $lamp9;
+                                                }
+                                                ?>
+                                                <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
+                                                <p class="text-center">Lampiran-9</p>
+                                            </div>
+                                            -->
                                         </div>
                                     </div>
                                     <form action="ijinlab-final.php" method="post">
                                         <input type="hidden" name="nodata" value="<?= $nodata; ?>">
                                         <?php
-                                        if ($lamp1 <> '' and $lamp4 <> '' and $lamp5 <> '' and $lamp6 <> '' and $lamp7 <> '') {
+                                        if ($lamp1 <> '' and $lamp4 <> '' and $lamp5 <> '' and $lamp6 <> '' and $lamp7 <> '' and $lamp8 <> '') {
                                         ?>
                                             <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa lampiran yang saya upload adalah benar')"> <i class="fa fa-upload" aria-hidden="true"></i> Ajukan </button>
                                         <?php

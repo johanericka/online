@@ -12,8 +12,8 @@ $keterangan = mysqli_real_escape_string($dbsurat, $_POST['keterangan']);
 
 //update status validasi dosen pembimbing
 $sql = mysqli_query($dbsurat, "UPDATE ijinlab
-					SET tglvalidasi1 = '$tgl', 
-					validasi1 = '2',
+					SET tglvalidasi0 = '$tgl', 
+					validasi0 = '2',
                     keterangan='$keterangan',
                     statuspengajuan=2
 					WHERE no = '$nodata'");

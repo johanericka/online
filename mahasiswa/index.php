@@ -72,12 +72,18 @@ if ($nohp == null or $email == null) {
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<h3>Dashboard </h3>
 						</div>
 					</div>
+					<div class="alert alert-danger alert-dismissible fade show">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>PERHATIAN! </strong> segera Lengkapi data pada menu User Profile.
+					</div>
 				</div><!-- /.container-fluid -->
 			</section>
+
+
 
 			<!-- pengajuan surat mahasiswa -->
 			<section class="content">
@@ -87,12 +93,7 @@ if ($nohp == null or $email == null) {
 						<h3 class="card-title">Pengajuan surat mahasiswa </h3>
 						<!-- card minimize -->
 						<div class="card-tools">
-							<!-- This will cause the card to maximize when clicked 
-							<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>-->
-							<!-- This will cause the card to collapse when clicked -->
 							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-							<!-- This will cause the card to be removed when clicked
-							<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
 						</div>
 					</div>
 					<!-- /.card-header -->
@@ -120,6 +121,9 @@ if ($nohp == null or $email == null) {
 										$nim = $data['nim'];
 										$nama = $data['nama'];
 										$surat = 'Ijin Penggunaan Laboratorium';
+										$validator0 = $data['validator0'];
+										$validasi0 = $data['validasi0'];
+										$tglvalidasi0 = tgl_indo($data['tglvalidasi0']);
 										$validator1 = $data['validator1'];
 										$validasi1 = $data['validasi1'];
 										$tglvalidasi1 = tgl_indo($data['tglvalidasi1']);
@@ -147,17 +151,33 @@ if ($nohp == null or $email == null) {
 												?>
 													<!-- dosen pembimbing -->
 													<?php
-													if ($validasi1 == 0) {
+													if ($validasi0 == 0) {
 													?>
-														Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?><br />
+														Menunggu verifikasi Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?><br />
 													<?php
-													} elseif ($validasi1 == 1) {
+													} elseif ($validasi0 == 1) {
 													?>
-														Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> <br />
+														Telah disetujui Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> <br />
 													<?php
 													} else {
 													?>
-														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
+														Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
+													<?php
+													};
+													?>
+													<!-- kepala lab -->
+													<?php
+													if ($validasi1 == 0) {
+													?>
+														Menunggu verifikasi Kepala Lab. <?= namadosen($dbsurat, $validator1); ?><br />
+													<?php
+													} elseif ($validasi1 == 1) {
+													?>
+														Telah disetujui Kepala Lab. <?= namadosen($dbsurat, $validator1); ?> <br />
+													<?php
+													} else {
+													?>
+														Ditolak Kepala Lab. <?= namadosen($dbsurat, $validator1); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 													<?php
 													};
 													?>
@@ -203,10 +223,13 @@ if ($nohp == null or $email == null) {
 														<i class="fas fa-file"></i>
 														Lengkapi
 													</a>
+													<a class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus pengajuan ini ?')" href="ijinlab-hapus.php?nodata=<?php echo $nodata; ?>">
+														<i class="fas fa-trash"></i> Batalkan
+													</a>
 												<?php
 												} elseif ($statussurat == 1) {
 												?>
-													<a class="btn btn-success btn-sm" href="ijinlab-cetak.php?nodata=<?php echo $nodata; ?>">
+													<a class="btn btn-success btn-sm" href="ijinlab-cetak.php?nodata=<?php echo $nodata; ?>" target="_blank">
 														<i class="fas fa-print"></i>
 														Cetak
 													</a>
