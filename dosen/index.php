@@ -220,6 +220,7 @@ if ($nohp == null or $email == null) {
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
+													$verifikasi0 = $data['validasi0'];
 													$verifikasi1 = $data['validasi1'];
 													$verifikasi2 = $data['validasi2'];
 													$verifikasi3 = $data['validasi3'];
@@ -231,9 +232,9 @@ if ($nohp == null or $email == null) {
 														<td><?= $surat; ?></td>
 														<td>
 															<?php
-															if ($verifikasi1 == 0) {
+															if ($verifikasi0 == 0) {
 															?>
-																<a class="btn btn-info btn-sm" href="ijinlab-dosbing-tampil.php?nodata=<?php echo $nodata; ?>">
+																<a class="btn btn-info btn-sm" href="ijinlab-dosbing-tampil.php?nodata=<?= $nodata; ?>">
 																	<i class="fas fa-search"></i>
 																	Lihat
 																</a>
