@@ -23,7 +23,7 @@ $kegiatan5 = mysqli_real_escape_string($dbsurat, $_POST['kegiatan5']);
 //kaprodi keatas verifikasi wd2
 if ($prodi == 'SAINTEK') {
 	//tendik fakutlas yang ttd kabag
-	$kdjabatan = 'kabag';
+	$kdjabatan = 'kabag-aupk';
 	$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan=?");
 	$stmt->bind_param("ss", $prodi, $kdjabatan);
 	$stmt->execute();
