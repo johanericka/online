@@ -113,10 +113,11 @@ if ($nohp == null or $email == null) {
 											<thead>
 												<tr>
 													<th width="5%" style="text-align:center">No</th>
-													<th width="20%" style="text-align:center">PRODI</th>
+													<th width="15%" style="text-align:center">Tgl. Pengajuan</th>
+													<th width="15%" style="text-align:center">PRODI</th>
 													<th style="text-align:center">Nama</th>
 													<th style="text-align:center">Surat</th>
-													<th width="15%" colspan="2" style="text-align:center">Aksi</th>
+													<th width="10%" colspan="2" style="text-align:center">Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -127,6 +128,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Pengantar PKL / Magang';
@@ -136,6 +138,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -157,6 +160,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Pengantar PKL / Magang';
@@ -166,6 +170,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -187,6 +192,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Pengantar PKL / Magang';
@@ -196,6 +202,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -217,6 +224,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
@@ -227,6 +235,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -255,6 +264,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
@@ -264,6 +274,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -292,6 +303,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
@@ -301,6 +313,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -328,6 +341,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penggunaan Laboratorium';
@@ -337,6 +351,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -363,6 +378,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
@@ -372,6 +388,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -392,6 +409,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
@@ -401,6 +419,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -421,6 +440,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Penelitian';
@@ -430,6 +450,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -450,6 +471,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
@@ -459,6 +481,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -479,6 +502,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
@@ -488,6 +512,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -508,6 +533,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Peminjaman Alat';
@@ -517,6 +543,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -537,6 +564,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
@@ -546,6 +574,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodi; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -566,6 +595,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = ['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
@@ -575,6 +605,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -595,6 +626,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Observasi';
@@ -604,6 +636,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -624,6 +657,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
@@ -633,6 +667,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -653,6 +688,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator2='$nip' AND validasi2 = 0 AND validasi1=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
@@ -662,6 +698,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -682,6 +719,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Ijin Pengambilan Data';
@@ -691,6 +729,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -711,6 +750,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator1='$nip' AND validasi1 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
@@ -720,6 +760,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -740,6 +781,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator2='$nip' AND validasi2 = 0");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
@@ -749,6 +791,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -769,6 +812,7 @@ if ($nohp == null or $email == null) {
 												$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validator3='$nip' AND validasi3 = 0 AND validasi2=1");
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = $data['jenissurat'];
@@ -778,6 +822,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -800,6 +845,7 @@ if ($nohp == null or $email == null) {
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
 														$nodata = $data['no'];
+														$tanggal = $data['tanggal'];
 														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
@@ -809,6 +855,7 @@ if ($nohp == null or $email == null) {
 												?>
 														<tr>
 															<td><?= $no; ?></td>
+															<td><?= tgljam_indo($tanggal); ?></td>
 															<td><?= $prodimhs; ?></td>
 															<td><?= $nama; ?></td>
 															<td><?= $surat; ?></td>
@@ -832,6 +879,7 @@ if ($nohp == null or $email == null) {
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
 														$nodata = $data['no'];
+														$tanggal = $data['tanggal'];
 														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
@@ -841,6 +889,7 @@ if ($nohp == null or $email == null) {
 												?>
 														<tr>
 															<td><?= $no; ?></td>
+															<td><?= tgljam_indo($tanggal); ?></td>
 															<td><?= $nim; ?></td>
 															<td><?= $nama; ?></td>
 															<td><?= $surat; ?></td>
@@ -864,6 +913,7 @@ if ($nohp == null or $email == null) {
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
 														$nodata = $data['no'];
+														$tanggal = $data['tanggal'];
 														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
@@ -873,6 +923,7 @@ if ($nohp == null or $email == null) {
 												?>
 														<tr>
 															<td><?= $no; ?></td>
+															<td><?= tgljam_indo($tanggal); ?></td>
 															<td><?= $prodimhs; ?></td>
 															<td><?= $nama; ?></td>
 															<td><?= $surat; ?></td>
@@ -895,6 +946,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$surat = 'Permohonan Cetak KHS';
@@ -903,6 +955,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -924,6 +977,7 @@ if ($nohp == null or $email == null) {
 												$jmldata = mysqli_num_rows($query);
 												while ($data = mysqli_fetch_array($query)) {
 													$nodata = $data['no'];
+													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
 													$prodi = $data['prodi'];
@@ -933,6 +987,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
+														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -958,7 +1013,7 @@ if ($nohp == null or $email == null) {
 			</section>
 
 			<!-- pengajuan surat bawahan -->
-			<?php if ($jabatan == 'wadek2' or $jabatan == 'kaprodi' or $jabatan == 'kabag') { ?>
+			<?php if ($jabatan == 'wadek2' or $jabatan == 'kaprodi' or $jabatan == 'kabag-aupk') { ?>
 				<section class="content">
 					<div class="container-fluid">
 						<div class="row">

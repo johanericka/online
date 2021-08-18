@@ -75,6 +75,7 @@ require('../system/myfunc.php');
 			$cek = mysqli_num_rows($query);
 			if ($cek > 0) {
 				$data = mysqli_fetch_array($query);
+				$tanggal = $data['tanggal'];
 				$nama = $data['nama'];
 				$nim = $data['nim'];
 				$ttl = $data['ttl'];
@@ -86,7 +87,7 @@ require('../system/myfunc.php');
 				$posisi = $data['posisi'];
 				$prodi = $data['prodi'];
 				$namalab = $data['namalab'];
-				$dosen = $data['dosen'];
+				$dosen = stripslashes($data['dosen']);
 				$tglmulai = $data['tglmulai'];
 				$tglselesai = $data['tglselesai'];
 				$lamp1 = $data['lamp1'];
@@ -97,7 +98,6 @@ require('../system/myfunc.php');
 				$lamp8 = $data['lamp8'];
 			}
 			?>
-
 			<!-- Main content -->
 			<section class="content">
 				<div class="container-fluid">
@@ -131,7 +131,8 @@ require('../system/myfunc.php');
 										?>
 										<div class="tab-content" id="custom-tabs-one-tabContent">
 											<div class="tab-pane fade show active" id="custom-tabs-one-datadiri" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-
+												<label>Tgl Pengajuan</label> <br />
+												<input type="text" class="form-control" name="nama" value="<?= tgljam_indo($tanggal); ?>" readonly></input>
 												<label>Nama</label> <br />
 												<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly></input>
 												<label>NIM</label><br />
@@ -188,7 +189,7 @@ require('../system/myfunc.php');
 														<input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
 													</div>
 												</div>
-												<br />
+												<hr>
 												<?php
 												if (isset($_GET['respon'])) {
 													$respon = mysqli_real_escape_string($dbsurat, $_GET['respon']);
@@ -274,12 +275,13 @@ require('../system/myfunc.php');
 														</div>
 													</div>
 												</div>
+												<hr>
 												<form role="form" method="POST">
-													<input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
-													<input type="hidden" name="prodi" value="<?php echo $prodi; ?>"></input>
-													<input type="hidden" name="nim" value="<?php echo $nim; ?>"></input>
-													<input type="hidden" name="nama" value="<?php echo $nama; ?>"></input>
-													<input type="hidden" name="namalab" value="<?php echo $namalab; ?>"></input>
+													<input type="hidden" name="nodata" value="<?= $nodata; ?>"></input>
+													<input type="hidden" name="prodi" value="<?= $prodi; ?>"></input>
+													<input type="hidden" name="nim" value="<?= $nim; ?>"></input>
+													<input type="hidden" name="nama" value="<?= $nama; ?>"></input>
+													<input type="hidden" name="namalab" value="<?= $namalab; ?>"></input>
 													<div class="row">
 														<div class="col-lg-6">
 															<?php

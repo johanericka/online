@@ -76,6 +76,7 @@ require('../system/myfunc.php');
 			if ($cek > 0) {
 				$data = mysqli_fetch_array($query);
 				$nama = $data['nama'];
+				$tanggal = $data['tanggal'];
 				$nim = $data['nim'];
 				$ttl = $data['ttl'];
 				$alamatasal = $data['alamatasal'];
@@ -133,7 +134,8 @@ require('../system/myfunc.php');
 										?>
 										<div class="tab-content" id="custom-tabs-one-tabContent">
 											<div class="tab-pane fade show active" id="custom-tabs-one-datadiri" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-
+												<label>Tanggal Pengajuan</label> <br />
+												<input type="text" class="form-control" name="tanggal" value="<?= tgljam_indo($tanggal); ?>" readonly></input>
 												<label>Nama</label> <br />
 												<input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly></input>
 												<label>NIM</label><br />

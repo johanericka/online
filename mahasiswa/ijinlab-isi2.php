@@ -189,6 +189,7 @@ if (isset($_GET['nodata'])) {
                                                     <a href="../doc/Lampiran8.docx">Download Lampiran 8</a>
                                                 </td>
                                             </tr>
+                                            <!--
                                             <tr>
                                                 <td>7.</td>
                                                 <td><b>Lampiran 9-</b>Bukti vaksin terakhir</td>
@@ -196,6 +197,7 @@ if (isset($_GET['nodata'])) {
 
                                                 </td>
                                             </tr>
+                                            -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -354,9 +356,6 @@ if (isset($_GET['nodata'])) {
                             <!-- /.footer -->
                         </div>
                         <!-- /.content-wrapper -->
-
-
-
                         <!-- Control Sidebar -->
                         <aside class="control-sidebar control-sidebar-dark">
                             <!-- Control sidebar content goes here -->
@@ -364,8 +363,6 @@ if (isset($_GET['nodata'])) {
                         <!-- /.control-sidebar -->
                     </div>
                     <!-- ./wrapper -->
-
-
 
                     <!-- jQuery -->
                     <script src="../system/plugins/jquery/jquery.min.js"></script>

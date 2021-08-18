@@ -13,7 +13,7 @@ $stmt->bind_param("i", $nodata);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
-$dosen = $dhasil['dosen'];
+$dosen = stripslashes($dhasil['dosen']);
 $namalab = $dhasil['namalab'];
 $prodi = $dhasil['prodi'];
 

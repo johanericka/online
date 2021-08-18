@@ -76,6 +76,7 @@ require('../system/myfunc.php');
             if ($cek > 0) {
                 $data = mysqli_fetch_array($query);
                 $nama = $data['nama'];
+                $tanggal = $data['tanggal'];
                 $nim = $data['nim'];
                 $ttl = $data['ttl'];
                 $alamatasal = $data['alamatasal'];
@@ -86,7 +87,7 @@ require('../system/myfunc.php');
                 $posisi = $data['posisi'];
                 $prodi = $data['prodi'];
                 $namalab = $data['namalab'];
-                $dosen = $data['dosen'];
+                $dosen = stripslashes($data['dosen']);
                 $tglmulai = $data['tglmulai'];
                 $tglselesai = $data['tglselesai'];
                 $lamp1 = $data['lamp1'];
@@ -101,7 +102,6 @@ require('../system/myfunc.php');
                 $tglvalidasi1 = $data['tglvalidasi1'];
             }
             ?>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -123,68 +123,52 @@ require('../system/myfunc.php');
                                     <div class="card-body">
                                         <div class="tab-content" id="custom-tabs-one-tabContent">
                                             <div class="tab-pane fade show active" id="custom-tabs-one-datadiri" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                                <label>Tanggal Pengajuan</label> <br />
+                                                <input type="text" class="form-control" name="tanggal" value="<?= tgljam_indo($tanggal); ?>" readonly></input>
                                                 <label>Nama</label> <br />
                                                 <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly></input>
-                                                <br />
                                                 <label>NIM</label><br />
                                                 <input type="text" class="form-control" name="nim" value="<?php echo $nim; ?>" readonly></input>
-                                                <br />
                                                 <label>Tempat / Tgl. Lahir </label><br />
                                                 <input type="text" class="form-control" name="ttl" value="<?php echo $ttl; ?>" readonly></input>
-                                                <br />
                                                 <label>Alamat Asal </label><br />
                                                 <textarea class="form-control" rows="3" id="alamatasal" name="alamatasal" readonly><?php echo $alamatasal; ?></textarea>
-                                                <br />
+                                                <label>Nama</label> <br />
+                                                <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" readonly></input>
                                                 <label>Alamat Di Malang </label><br />
                                                 <textarea class="form-control" rows="3" id="alamatmalang" name="alamatmalang" readonly><?php echo $alamatmalang; ?></textarea>
-                                                <br />
                                                 <label>No. HP</label><br />
                                                 <input type="text" class="form-control" name="nohp" value="<?php echo $nohp; ?>" readonly></input>
-                                                <br />
                                                 <label>No. HP Orang Tua / Wali</label><br />
                                                 <input type="text" class="form-control" name="nohportu" value="<?php echo $nohportu; ?>" readonly></input>
-                                                <br />
                                                 <label>Riwayat Penyakit</label><br />
                                                 <textarea class="form-control" rows="3" id="riwayatpenyakit" name="riwayatpenyakit" readonly><?php echo $riwayatpenyakit; ?></textarea>
-                                                <br />
                                                 <label>Posisi saat mendaftar</label><br />
                                                 <?php
                                                 if ($posisi == 'Alamat Asal') {
                                                 ?>
                                                     <input type="radio" id="asal" name="posisi" value="Alamat Asal" checked readonly> Alamat Asal<br />
                                                     <input type="radio" id="malang" name="posisi" value="Alamat di malang" readonly> Alamat di Malang<br />
-                                                    <br />
                                                 <?php
                                                 } else {
                                                 ?>
                                                     <input type="radio" id="asal" name="posisi" value="Alamat Asal" readonly> Alamat Asal<br />
                                                     <input type="radio" id="malang" name="posisi" value="Alamat di malang" checked readonly> Alamat di Malang<br />
-                                                    <br />
                                                 <?php
                                                 }
                                                 ?>
                                                 <label>Program Studi </label><br />
                                                 <input type="text" class="form-control" name="prodi" value="<?php echo $prodi; ?>" readonly></input>
-                                                <br />
                                                 <?php
                                                 //kapasitas lab
                                                 $query2 = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE namalab = '$namalab'");
                                                 $data2 = mysqli_fetch_array($query2);
                                                 $kapasitas = $data2['kapasitas'];
                                                 ?>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <label>Laboratorium </label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-
-                                                    </div>
-                                                </div>
+                                                <label>Laboratorium </label>
                                                 <input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
-                                                <br />
                                                 <label>Dosen Pembimbing</label><br />
                                                 <input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
-                                                <br />
                                                 <label>Waktu Penggunaan</label>
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -196,7 +180,6 @@ require('../system/myfunc.php');
                                                         <input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
                                                     </div>
                                                 </div>
-                                                <br />
                                                 <?php
                                                 if (isset($_GET['respon'])) {
                                                     $respon = mysqli_real_escape_string($dbsurat, $_GET['respon']);
