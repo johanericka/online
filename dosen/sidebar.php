@@ -68,6 +68,28 @@ require('../system/dbconn.php');
                 }
                 ?>
                 <?php
+                $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Pengguna Lab.'");
+                $dmenu = mysqli_fetch_array($qmenu);
+                $statussurat = $dmenu['status'];
+                if ($statussurat == 1) {
+                    $sql = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE kalab='$nip'");
+                    $jsql = mysqli_num_rows($sql);
+                    if ($jsql > 0) {
+                ?>
+                        <li class="nav-item">
+                            <a href="ijinlab-kalab-penggunalab-tampil.php" class="nav-link">
+                                <i class="nav-icon fas fa-search"></i>
+                                <p>
+                                    Pengguna Lab.
+                                    <span class="right badge badge-danger"></span>
+                                </p>
+                            </a>
+                        </li>
+                <?php
+                    }
+                }
+                ?>
+                <?php
                 $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Pengajuan WFH'");
                 $dmenu = mysqli_fetch_array($qmenu);
                 $statussurat = $dmenu['status'];

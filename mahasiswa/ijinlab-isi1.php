@@ -28,8 +28,8 @@ if ($jhasil > 0) {
 <!-- cek kapasitas lab dulu -->
 <?php
 $tglsekarang = date('Y-m-d');
-
-//get list of lab name
+/*
+//cek kapasitas lab
 $sql_namalab = mysqli_query($dbsurat, "SELECT namalab, kapasitas, digunakan FROM laboratorium");
 while ($data = mysqli_fetch_array($sql_namalab)) {
     $namalab = $data['namalab'];
@@ -40,6 +40,7 @@ while ($data = mysqli_fetch_array($sql_namalab)) {
     $kosong = $kapasitas - $mhsaktif;
     $sql_mhsaktif = mysqli_query($dbsurat, "UPDATE laboratorium SET kapasitas = '$kosong' WHERE namalab='$namalab'");
 }
+*/
 ?>
 
 <!DOCTYPE html>

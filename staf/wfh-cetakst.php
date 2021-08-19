@@ -69,7 +69,7 @@ if (date($tglwfh5) != 0) {
 }
 
 //get data wd
-$datawd = mysqli_query($dbsurat, "select * from pejabat where iddosen='62007'");
+$datawd = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan='wadek2'");
 $rowwd = mysqli_fetch_array($datawd);
 $iddosen = $rowwd['iddosen'];
 $nipwd = $rowwd['nip'];
@@ -233,11 +233,16 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 			<td>&nbsp;</td>
 			<?php
 			if ($verifikasifakultas == 1) {
-				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan = 'wadek2'");
-				$hasil = mysqli_fetch_array($sql);
-				$ttd = $hasil['ttd'];
+				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan='wadek2'");
+				$dsql = mysqli_fetch_array($sql);
+				$ttd = $dsql['ttd'];
 			?>
-				<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300px"></td>
+				<td style="text-align:center">
+					<?= $jabatan; ?><br />
+					<img src="../ttd/<?= $ttd; ?>" width="100px"><br />
+					<u><?= $namawd; ?></u><br />
+					NIP. <?= $nipwd; ?>
+				</td>
 			<?php
 			}
 			?>

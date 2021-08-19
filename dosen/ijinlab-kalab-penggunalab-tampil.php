@@ -1,5 +1,8 @@
 <?php
 session_start();
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+
 $user = $_SESSION['user'];
 $nip = $_SESSION['nip'];
 $nama = $_SESSION['nama'];
@@ -7,18 +10,14 @@ $prodi = $_SESSION['prodi'];
 $hakakses = $_SESSION['hakakses'];
 $jabatan = $_SESSION['jabatan'];
 //cek apakah kalab
+
 $sql = mysqli_query($dbsurat, "SELECT * FROM laboratorium WHERE kalab='$nip'");
 $jsql = mysqli_num_rows($sql);
-if ($jsql > 0) {
-    while ($dsql = mysqli_fetch_array($sql)) {
-        //tampilkan semua lab
-        $namalab = $dsql['namalab'];
-    }
-} else {
+if ($jsql == 0) {
     header("location:../deauth.php");
 }
-require('../system/dbconn.php');
-require('../system/myfunc.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -85,11 +84,12 @@ require('../system/myfunc.php');
                                     <thead>
                                         <tr>
                                             <th width="5%">No.</th>
-                                            <th width="15%">Nama Lab.</th>
-                                            <th width="20%">Nama</th>
-                                            <th width="25%">Tgl. Mulai</th>
-                                            <th width="20%">Tgl. Selesai</th>
-                                            <th width="5%">Status</th>
+                                            <th width="25%">Nama Lab.</th>
+                                            <th width="10%">Tgl. Mulai</th>
+                                            <th width="10%">Tgl. Selesai</th>
+                                            <th>Nama</th>
+                                            <th width="10%">Status</th>
+                                            <th width="5%">Cek</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,24 +97,40 @@ require('../system/myfunc.php');
 
                                         <!-- ijin lab -->
                                         <?php
-                                        $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE prodi='$jurusan' AND validasifakultas=1 ORDER BY prodi");
+                                        $query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validator1='$nip' ORDER BY namalab asc, tglmulai asc");
                                         while ($data = mysqli_fetch_array($query)) {
                                             $nodata = $data['no'];
+                                            $namalab = $data['namalab'];
+                                            $tglmulai = $data['tglmulai'];
+                                            $tglselesai = $data['tglselesai'];
+                                            $nim = $data['nim'];
                                             $nama = $data['nama'];
-                                            $jurusan = $data['prodi'];
-                                            $jenissurat = 'Ijin Penggunaan Laboratorium';
-                                            $validasifakultas = $data['validasifakultas'];
-                                            $keterangan = $data['keterangan'];
+                                            $statuspengajuan = $data['statuspengajuan'];
                                         ?>
                                             <tr>
-                                                <td><?php echo $no; ?></td>
-                                                <td><?php echo $jurusan; ?></td>
-                                                <td><?php echo $nama; ?></td>
-                                                <td><?php echo $jenissurat; ?></td>
-                                                <td><?php echo $keterangan; ?></td>
+                                                <td><?= $no; ?></td>
+                                                <td><?= $namalab; ?></td>
+                                                <td><?= tgl_indo($tglmulai); ?></td>
+                                                <td><?= tgl_indo($tglselesai); ?></td>
+                                                <td><?= $nama; ?></td>
                                                 <td>
-                                                    <a class="btn btn-success btn-sm" href="../mahasiswa/lab-cetak.php?<?= $nodata; ?>" target="_blank">
-                                                        <i class="fas fa-print"></i>
+                                                    <?php
+                                                    if ($statuspengajuan == -1) {
+                                                        echo "Persyaratan belum lengkap";
+                                                    } elseif ($statuspengajuan == 0) {
+                                                        echo "Dalam proses verifikasi";
+                                                    } elseif ($statuspengajuan == 1) {
+                                                        echo "Aktif";
+                                                    } elseif ($statuspengajuan == 2) {
+                                                        echo "Ditolak";
+                                                    } elseif ($statuspengajuan == 3) {
+                                                        echo "Selesai";
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-success btn-sm" href="ijinlab-kalab-penggunalab-detail.php?nodata=<?= $nodata; ?>" target="_blank">
+                                                        <i class="fas fa-search"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -145,7 +161,7 @@ require('../system/myfunc.php');
         <!-- ./wrapper -->
 
         <!-- footer -->
-        <?php include '../system/footerdsn.html' ?>
+        <?php include 'footerdsn.php' ?>
         <!-- /.footer -->
 
         <!-- jQuery -->
