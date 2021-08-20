@@ -195,14 +195,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td style="text-align:center"></td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td style="text-align:center">a.n. Dekan</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
 				<td style="text-align:center"><small><i>Scan QRCode ini </i><br />
 						<img src="../qrcode/<?php echo $namafile; ?>.png" width="80" /><br />
 						<small><i>untuk verifikasi surat</i></small>
@@ -216,10 +208,10 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					$ttd = $hasil['ttd'];
 				?>
 					<td style="text-align:center"><br />
-						<?= $jabatan; ?><br />
-						<img src="../ttd/<?= $ttd; ?>" width="100" /><br />
-						<u><?= $namawd; ?></u><br />
-						NIP. <?= $nipwd; ?>
+						<!--<?= $jabatan; ?><br />-->
+						<img src="../ttd/<?= $ttd; ?>" width="300" /><br />
+						<!--<u><?= $namawd; ?></u><br />
+						NIP. <?= $nipwd; ?>-->
 					</td>
 				<?php
 				}
