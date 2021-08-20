@@ -30,7 +30,8 @@ $namamhs = $dsql3['nama'];
 $emailmhs = $dsql3['email'];
 
 //kirim email
-$subject = "Pengajuan Ijin WFH";
+$surat = "Pengantar PKl / Magang";
+$subject = "Pengajuan Surat " . $surat;
 $pesan = "Yth. " . $namamhs . "<br/>
         <br/>
 		Assalamualaikum wr. wb.
@@ -38,7 +39,7 @@ $pesan = "Yth. " . $namamhs . "<br/>
 		<br />
 		Dengan hormat,
 		<br />
-        Pengajuan Surat Pengantar PKL / Magang anda telah disetujui.<br/>
+        Pengajuan Surat " . $surat . " anda telah disetujui.<br/>
         Silahkan klik tombol dibawah ini mencetak Surat Pengantar tersebut<br/>
         <br/>
         <a href='https://saintek.uin-malang.ac.id/online/mahasiswa/pkl-cetak.php?nodata=$nodata' style=' background-color: #0045CE;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;'>Cetak Surat Pengantar PKL</a><br/>

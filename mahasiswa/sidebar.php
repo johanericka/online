@@ -118,7 +118,7 @@ require('../system/dbconn.php');
 
                         <!-- surat pengantar PKL -->
                         <?php
-                        //cek status menu ijinlab
+                        //cek status menu pkl
                         $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Surat Pengantar PKL'");
                         $dmenu = mysqli_fetch_array($qmenu);
                         $statussurat = $dmenu['status'];
@@ -133,6 +133,15 @@ require('../system/dbconn.php');
                                 $jpkl2 = mysqli_num_rows($qpkl2);
                                 if ($jpkl2 == 0) {
                         ?>
+                                    <li class="nav-item">
+                                        <a href="pkl-isitempat.php" class="nav-link">
+                                            <i class="nav-icon fas fa-users"></i>
+                                            <p>Surat Pengantar PKL</p>
+                                        </a>
+                                    </li>
+                                <?php
+                                } else {
+                                ?>
                                     <li class="nav-item">
                                         <a href="pkl-isitempat.php" class="nav-link">
                                             <i class="nav-icon fas fa-users"></i>

@@ -215,7 +215,12 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					$hasil = mysqli_fetch_array($sql);
 					$ttd = $hasil['ttd'];
 				?>
-					<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300" /></td>
+					<td style="text-align:center"><br />
+						<?= $jabatan; ?><br />
+						<img src="../ttd/<?= $ttd; ?>" width="100" /><br />
+						<u><?= $namawd; ?></u><br />
+						NIP. <?= $nipwd; ?>
+					</td>
 				<?php
 				}
 				?>
