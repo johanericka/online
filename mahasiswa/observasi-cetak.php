@@ -41,7 +41,8 @@ $tglsurat = date('Y-m-d', strtotime($tglvalidasi3));
 
 
 //data wd
-$datawd = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip='$validator3'");
+$kdjabatan = 'wadek3';
+$datawd = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan='$kdjabatan'");
 $rowwd = mysqli_fetch_array($datawd);
 $nip = $rowwd['nip'];
 $namawd = $rowwd['nama'];
@@ -217,14 +218,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td style="text-align:center">a.n Dekan</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
 					<td>
 						<small><i>Scan QRCode ini </i></small><br />
 						<img src="../qrcode/<?php echo $namafile; ?>.png" width="80" /><br />
@@ -234,7 +227,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					<td>&nbsp;</td>
 					<?php
 					if ($validasi3 == 1) {
-						$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$validator3'");
+						$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan='wadek3'");
 						$hasil = mysqli_fetch_array($sql);
 						$ttd = $hasil['ttd'];
 					?>

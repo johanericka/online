@@ -574,7 +574,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
-														<td><?= tgljam_indo($tanggal); ?></td>
+														<td><?= tgl_indo($tanggal); ?></td>
 														<td><?= $prodi; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -605,7 +605,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
-														<td><?= tgljam_indo($tanggal); ?></td>
+														<td><?= tgl_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
@@ -636,7 +636,7 @@ if ($nohp == null or $email == null) {
 												?>
 													<tr>
 														<td><?= $no; ?></td>
-														<td><?= tgljam_indo($tanggal); ?></td>
+														<td><?= tgl_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
 														<td><?= $surat; ?></td>
