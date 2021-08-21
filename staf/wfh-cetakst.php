@@ -215,14 +215,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td style="text-align:center">a.n. Dekan</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
 			<td class="text-center">
 				<small><i>Scan QRCode ini </i></small><br />
 				<img src="../qrcode/<?php echo $namafile; ?>.png" width="70" /><br />
@@ -238,10 +230,10 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 				$ttd = $dsql['ttd'];
 			?>
 				<td style="text-align:center">
-					<?= $jabatan; ?><br />
-					<img src="../ttd/<?= $ttd; ?>" width="100px"><br />
-					<u><?= $namawd; ?></u><br />
-					NIP. <?= $nipwd; ?>
+					<!--<?= $jabatan; ?><br />-->
+					<img src="../ttd/<?= $ttd; ?>" width="300px"><br />
+					<!--<u><?= $namawd; ?></u><br />
+					NIP. <?= $nipwd; ?>-->
 				</td>
 			<?php
 			}
