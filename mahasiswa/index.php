@@ -844,7 +844,7 @@ if ($nohp == null or $email == null) {
 												?>
 													Menunggu verifikasi Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?><br />
 												<?php
-												} elseif ($validator3 == 1) {
+												} elseif ($validasi3 == 1) {
 												?>
 													Telah disetujui Wakil Dekan Bidang Akademik <?= namadosen($dbsurat, $validator3); ?> <br />
 												<?php
