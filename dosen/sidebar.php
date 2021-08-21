@@ -57,7 +57,7 @@ require('../system/dbconn.php');
                 ?>
                     <li class="nav-item">
                         <a href="datasurat-tampil.php" class="nav-link">
-                            <i class="nav-icon fas fa-envelope-open"></i>
+                            <i class="nav-icon fas fa-edit"></i>
                             <p>
                                 Riwayat Surat
                                 <span class="right badge badge-danger"></span>
