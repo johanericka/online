@@ -68,48 +68,57 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 
 			<!-- Main content -->
 			<section class="content">
-				<div class="col-12 col-sm-6 col-lg-12">
-					<div class="card card-success card-tabs">
-						<form role="form" method="post" action="peminjamanalat-simpan.php">
-							<label>Nama </label><br />
-							<input type="text" class="form-control" name="nama" value="<?= $nama ?>" readonly />
-							<label>NIM </label><br />
-							<input type="text" class="form-control" name="nim" value="<?= $nim ?>" readonly />
-							<label>Judul Skripsi / penelitian </label><br />
-							<input type="text" class="form-control" name="judulskripsi" placeholder="judul skripsi / penelitian" required>
-							<label>Dosen Pembimbing </label><br />
-							<small> Pilih dari nama dosen yang tampil</small><br />
-							<div class="form-group">
-								<div class="search-box">
-									<input type="text" class="form-control" autocomplete="off" placeholder="ketikkan nama dosen" name="dosen" required>
-									<div class="result"></div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Identitas Diri</h3>
+								</div>
+								<div class="card-body">
+									<form role="form" method="post" action="peminjamanalat-simpan.php">
+										<label>Nama </label><br />
+										<input type="text" class="form-control" name="nama" value="<?= $nama ?>" readonly />
+										<label>NIM </label><br />
+										<input type="text" class="form-control" name="nim" value="<?= $nim ?>" readonly />
+										<label>Judul Skripsi / penelitian </label><br />
+										<input type="text" class="form-control" name="judulskripsi" placeholder="judul skripsi / penelitian" required>
+										<label>Dosen Pembimbing </label><br />
+										<small> Pilih dari nama dosen yang tampil</small><br />
+										<div class="form-group">
+											<div class="search-box">
+												<input type="text" class="form-control" autocomplete="off" placeholder="ketikkan nama dosen" name="dosen" required>
+												<div class="result"></div>
+											</div>
+										</div>
+										<label>Nama Pimpinan Instansi</label>
+										<input type="text" class="form-control" name="pimpinaninstansi" placeholder="pimpinan instansi" required>
+										<label>Nama Instansi</label>
+										<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required>
+										<label>Alamat</label>
+										<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required>
+										<label>Nama & spesifikasi alat</label>
+										<input type="text" class="form-control" name="namaalat" placeholder="nama & spesifikasi alat" required>
+										<label>Jumlah alat</label>
+										<input type="number" class="form-control" name="jumlahalat" placeholder="1" required>
+										<label>Tanggal Peminjaman</label>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-6">
+													Tgl. Mulai
+													<input type="date" class="form-control" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
+												</div>
+												<div class="col-6">
+													Tgl. Selesai
+													<input type="date" class="form-control" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
+												</div>
+											</div>
+										</div>
+										<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class=" fa fa-check"></i> Ajukan</button>
+									</form>
 								</div>
 							</div>
-							<label>Nama Pimpinan Instansi</label>
-							<input type="text" class="form-control" name="pimpinaninstansi" placeholder="pimpinan instansi" required>
-							<label>Nama Instansi</label>
-							<input type="text" class="form-control" name="instansi" placeholder="nama instansi" required>
-							<label>Alamat</label>
-							<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required>
-							<label>Nama & spesifikasi alat</label>
-							<input type="text" class="form-control" name="namaalat" placeholder="nama & spesifikasi alat" required>
-							<label>Jumlah alat</label>
-							<input type="number" class="form-control" name="jumlahalat" placeholder="1" required>
-							<label>Tanggal Peminjaman</label>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-6">
-										Tgl. Mulai
-										<input type="date" class="form-control" id="tglmulai" name="tglmulai" value="<?php echo $tglmulai; ?>" required>
-									</div>
-									<div class="col-6">
-										Tgl. Selesai
-										<input type="date" class="form-control" id="tglselesai" name="tglselesai" value="<?php echo $tglselesai; ?>" required>
-									</div>
-								</div>
-							</div>
-							<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class=" fa fa-check"></i> Ajukan</button>
-						</form>
+						</div>
 					</div>
 				</div>
 
@@ -117,9 +126,6 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 					<div class="container-fluid">
 					</div>
 					<!-- /.form group -->
-
-
-
 				</div><!-- /.container-fluid -->
 			</section>
 			<!-- /.content -->
@@ -145,60 +151,6 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 	<!-- AdminLTE App -->
 	<script src="../system/dist/js/adminlte.min.js"></script>
 </body>
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
-
-<!-- alert upload file -->
-<?php
-if (isset($_GET['error'])) {
-	if ($_GET['error'] == 0) {
-?>
-		<div class="alert alert-info alert-dismissible fade show">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>Info : </strong> File berhasil di upload.
-		</div>
-	<?php
-	} else if ($_GET['error'] == 1) {
-	?>
-		<div class="alert alert-danger alert-dismissible fade show">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>ERROR : </strong> ukuran file maksimal 1MB.
-		</div>
-	<?php
-	} else if ($_GET['error'] == 2) {
-	?>
-		<div class="alert alert-danger alert-dismissible fade show">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>ERROR : </strong> ketika upload file.
-		</div>
-	<?php
-	} else if ($_GET['error'] == 3) {
-	?>
-		<div class="alert alert-danger alert-dismissible fade show">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>ERROR : </strong> hanya menerima file .JPG / .JPEG.
-		</div>
-<?php
-	}
-}
-?>
-<!-- timer untuk alert -->
-<script>
-	window.setTimeout(function() {
-		$(".alert").fadeTo(500, 0).slideUp(500, function() {
-			$(this).remove();
-		});
-	}, 1000);
-</script>
 
 <!-- cari dosen -->
 <script src="../system/js/jquery-1.12.4.min.js"></script>

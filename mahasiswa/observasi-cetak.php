@@ -9,7 +9,10 @@
 </script>
 
 <!-- connect to db -->
-<?php require_once('../system/dbconn.php'); ?>
+<?php
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+?>
 <!-- ./db -->
 
 <!-- session -->
@@ -237,69 +240,9 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 					?>
 					<td>&nbsp;</td>
 				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
 			</tbody>
 		</table>
 	</font>
 </body>
-
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari',
-		'Februari',
-		'Maret',
-		'April',
-		'Mei',
-		'Juni',
-		'Juli',
-		'Agustus',
-		'September',
-		'Oktober',
-		'November',
-		'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-
-	// variabel pecahkan 0 = tahun
-	// variabel pecahkan 1 = bulan
-	// variabel pecahkan 2 = tanggal
-
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
 
 </html>

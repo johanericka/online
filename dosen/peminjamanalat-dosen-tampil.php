@@ -85,72 +85,81 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
             ?>
             <!-- Main content -->
             <section class="content">
-                <div class="col-12 col-sm-6 col-lg-12">
-                    <div class="card card-success card-tabs">
-                        <label>Nama </label>
-                        <input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly />
-                        <label>NIM </label>
-                        <input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly />
-                        <label>Judul Skripsi / penelitian </label>
-                        <input type="text" class="form-control" name="judulskripsi" value="<?= $judulskripsi; ?>" readonly>
-                        <label>Dosen Pembimbing </label>
-                        <input type="text" class="form-control" name="dosen" value="<?= $dosen; ?>" readonly>
-                        <label>Nama Pimpinan Instansi</label>
-                        <input type="text" class="form-control" name="pimpinaninstansi" value="<?= $pimpinaninstansi; ?>" readonly>
-                        <label>Nama Instansi</label>
-                        <input type="text" class="form-control" name="instansi" value="<?= $instansi; ?>" readonly>
-                        <label>Alamat</label>
-                        <input type="text" class="form-control" name="alamat" value="<?= $alamat; ?>" readonly>
-                        <label>Nama & spesifikasi alat</label>
-                        <input type="text" class="form-control" name="namaalat" value="<?= $namaalat; ?>" readonly>
-                        <label>Jumlah alat</label>
-                        <input type="text" class="form-control" name="jumlahalat" value="<?= $jumlahalat; ?>" readonly>
-                        <label>Tanggal Peminjaman</label>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    Tgl. Mulai
-                                    <input type="text" class="form-control" id="tglmulai" name="tglmulai" value="<?= tgl_indo($tglmulai); ?>" readonly>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Identitas Diri</h3>
                                 </div>
-                                <div class="col-6">
-                                    Tgl. Selesai
-                                    <input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" readonly>
+                                <div class="card-body">
+                                    <label>Nama </label>
+                                    <input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly />
+                                    <label>NIM </label>
+                                    <input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly />
+                                    <label>Judul Skripsi / penelitian </label>
+                                    <input type="text" class="form-control" name="judulskripsi" value="<?= $judulskripsi; ?>" readonly>
+                                    <label>Dosen Pembimbing </label>
+                                    <input type="text" class="form-control" name="dosen" value="<?= $dosen; ?>" readonly>
+                                    <label>Nama Pimpinan Instansi</label>
+                                    <input type="text" class="form-control" name="pimpinaninstansi" value="<?= $pimpinaninstansi; ?>" readonly>
+                                    <label>Nama Instansi</label>
+                                    <input type="text" class="form-control" name="instansi" value="<?= $instansi; ?>" readonly>
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control" name="alamat" value="<?= $alamat; ?>" readonly>
+                                    <label>Nama & spesifikasi alat</label>
+                                    <input type="text" class="form-control" name="namaalat" value="<?= $namaalat; ?>" readonly>
+                                    <label>Jumlah alat</label>
+                                    <input type="text" class="form-control" name="jumlahalat" value="<?= $jumlahalat; ?>" readonly>
+                                    <label>Tanggal Peminjaman</label>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Tgl. Mulai
+                                                <input type="text" class="form-control" id="tglmulai" name="tglmulai" value="<?= tgl_indo($tglmulai); ?>" readonly>
+                                            </div>
+                                            <div class="col-6">
+                                                Tgl. Selesai
+                                                <input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form role="form" method="POST">
+                                        <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <button name="aksi" value="setujui" type="submit" formaction="peminjamanalat-dosen-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin akan MENYETUJUI pengajuan ini ?')"> <i class="fa fa-check"></i> Setujui</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tolak" class="btn btn-danger btn-block"> <i class="fa fa-times"></i> Tolak</button>
+                                            </div>
+                                        </div>
+                                        <!-- modal tolak -->
+                                        <div class="modal fade" id="modal-tolak">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Alasan Penolakan</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <textarea class="form-control" rows="3" name="keterangan"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                                        <button name="aksi" value="tolak" type="submit" formaction="peminjamanalat-dosen-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan MENOLAK pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- ./modal tolak-->
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        <form role="form" method="POST">
-                            <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <button name="aksi" value="setujui" type="submit" formaction="peminjamanalat-dosen-setujui.php" class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin akan MENERIMA pengajuan ini ?')"> <i class="fa fa-check"></i> Setujui</button>
-                                </div>
-                                <div class="col-lg-6">
-                                    <button name="aksi" value="tolak" type="button" data-toggle="modal" data-target="#modal-tolak" class="btn btn-danger btn-block"> <i class="fa fa-times"></i> Tolak</button>
-                                </div>
-                            </div>
-                            <!-- modal tolak -->
-                            <div class="modal fade" id="modal-tolak">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Alasan Penolakan</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <textarea class="form-control" rows="3" name="keterangan"></textarea>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                            <button name="aksi" value="tolak" type="submit" formaction="peminjamanalat-dosen-tolak.php" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan MENOLAK pengajuan ini ?')"> <i class="fa fa-times"></i> Tolak</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ./modal tolak-->
-                        </form>
                     </div>
                 </div>
 
@@ -158,9 +167,6 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                     <div class="container-fluid">
                     </div>
                     <!-- /.form group -->
-
-
-
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
