@@ -4,7 +4,7 @@ require_once('../system/phpmailer/sendmail.php');
 
 $nama = mysqli_real_escape_string($dbsurat, $_POST['nama']);
 $nim = mysqli_real_escape_string($dbsurat, $_POST['nim']);
-$jurusan = mysqli_real_escape_string($dbsurat, $_POST['jurusan']);
+$prodi = mysqli_real_escape_string($dbsurat, $_POST['prodi']);
 $dosen = mysqli_real_escape_string($dbsurat, $_POST['dosen']);
 
 if (empty($dosen)) {
@@ -12,23 +12,24 @@ if (empty($dosen)) {
 }
 
 //cari kode dosen dari nama dosen
-$sql1 = mysqli_query($dbsurat, "SELECT kode FROM useraccount2 WHERE nama = '$dosen'");
+$sql1 = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nama = '$dosen'");
 if (mysqli_num_rows($sql1) == 0) {
 	header("location:skpi-rekap.php?pesan=gagal");
 } else {
-	$row = mysqli_fetch_row($sql1);
-	$kddosen = $row[0];
+	$row = mysqli_fetch_array($sql1);
+	$nipdosen = $row['nip'];
 };
 
 //cari kajur
-$sql2 = mysqli_query($dbsurat, "select iddosen from pejabat where level = 5 and jurusan = '$jurusan'");
-$row2 = mysqli_fetch_row($sql2);
-$kdkajur = $row2[0];
+echo $prodi;
+$sql2 = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE prodi = '$prodi' AND kdjabatan='kaprodi'");
+$row2 = mysqli_fetch_array($sql2);
+$nipkajur = $row2['nip'];
 
 //cari wd1
-$sql = mysqli_query($dbsurat, "select iddosen from pejabat where level = 2 and jurusan = 'SAINTEK'");
-$data = mysqli_fetch_row($sql);
-$kdwd = $data[0];
+$sql = mysqli_query($dbsurat, "SELECT * from pejabat WHERE kdjabatan = 'wadek1'");
+$data = mysqli_fetch_array($sql);
+$nipwd = $data['nip'];
 /*
 	echo "Nama = ".$nama."<br/>";
 	echo "NIM = ".$nim."<br/>";
@@ -43,33 +44,31 @@ $qcari = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE ni
 $cekdata = mysqli_num_rows($qcari);
 if ($cekdata > 0) {
 	$qsimpan = mysqli_query($dbsurat, "UPDATE skpi_prestasipenghargaan SET 
-																		verifikator1='$kddosen',
-																		verifikator2='$kdkajur',
-																		verifikator3='$kdwd'
+																		verifikator1='$nipdosen',
+																		verifikator2='$nipkajur',
+																		verifikator3='$nipwd'
 																		WHERE nim='$nim'");
 
 	//cari email dosen wali
-	$sql3 = mysqli_query($dbsurat, "SELECT * FROM notifikasi WHERE iduser = '$kddosen'");
+	$sql3 = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip = '$nipdosen'");
 	$ceksql3 = mysqli_num_rows($sql3);
 	if ($ceksql3 > 0) {
 		$data3 = mysqli_fetch_array($sql3);
 		$email = $data3['email'];
-		$kirimemail = $data3['kirimemail'];
 
-		if ($kirimemail > 0) {
-			$subject = "Notifikasi Pengajuan Surat Keterangan Pendamping Ijazah";
-			$pesan = "Yth. " . $dosen . "
+		$subject = "Pengajuan Surat Keterangan Pendamping Ijazah";
+		$pesan = "Yth. " . $dosen . "
 									<br/>
+									Assalamualaikum wr. wb.
 									<br/>
 									Terdapat pengajuan <b>Surat Keterangan Pendamping Ijazah</b> atas nama " . $nama . ".
 									<br/>
 									Silahkan akses sistem perijinan online <a href='https://saintek.uin-malang.ac.id/online' target='_blank'><b>di sini</b></a> untuk melakukan verifikasi.
 									<br/>
-									<small><i>email notifikasi ini dapat di non-aktifkan dari menu Notifikasi pada program <a href='https://saintek.uin-malang.ac.id/online' target='_blank'>SAINTEK Online</a>.</i></small>";
+									Wassalamualaikum wr. wb.";
 
-			//kirim email
-			sendmail($email, $nama, $subject, $pesan);
-		}
+		//kirim email
+		sendmail($email, $nama, $subject, $pesan);
 	}
 }
 header("location:skpi-rekap.php");

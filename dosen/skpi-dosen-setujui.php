@@ -14,18 +14,18 @@ date_default_timezone_set("Asia/Jakarta");
 $tgl = date('Y-m-d H:i:s');
 
 //cari nip kajur
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan='kajur'");
-$stmt->bind_param("s", $prodi);
+$kdjabatan = 'kaprodi';
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE prodi=? AND kdjabatan=?");
+$stmt->bind_param("ss", $prodi, $kdjabatan);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
 $nipkaprodi = $dhasil['nip'];
 
 //cari nip wd-1
-$jabatan = 'wakildekan';
-$level = 2;
-$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=? AND level=?");
-$stmt->bind_param("si", $jabatan, $level);
+$jabatan = 'wadek1';
+$stmt = $dbsurat->prepare("SELECT * FROM pejabat WHERE kdjabatan=?");
+$stmt->bind_param("s", $jabatan);
 $stmt->execute();
 $result = $stmt->get_result();
 $dhasil = $result->fetch_assoc();
@@ -71,8 +71,8 @@ if (!empty($kemampuantambahan_ind)) {
 
 //setujui sertifikat
 $qsimpan5 = mysqli_query($dbsurat, "UPDATE skpi_prestasipenghargaan 
-																		SET verifikasi1=1,
-																				tglverifikasi1='$tgl'
-																		WHERE nim='$nim'");
+										SET verifikasi1=1,
+											tglverifikasi1='$tgl'
+										WHERE nim='$nim'");
 
 header("location:index.php");

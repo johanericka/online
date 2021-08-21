@@ -1019,7 +1019,7 @@ if ($nohp == null or $email == null) {
 
 									<!-- SKPI -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim'");
+									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim' group by nim");
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['no'];
 										$verifikasi1 = $q['verifikasi1'];

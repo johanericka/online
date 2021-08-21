@@ -190,7 +190,7 @@ require('../system/myfunc.php');
 
 													<input type="hidden" name="nim" value="<?= $nim; ?>" />
 													<input type="hidden" name="nama" value="<?= $nama; ?>" />
-													<input type="hidden" name="jurusan" value="<?= $jurusan; ?>" />
+													<input type="hidden" name="prodi" value="<?= $prodi; ?>" />
 													<?php
 													if (empty($dosenpa)) {
 													?>

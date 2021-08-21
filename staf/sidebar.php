@@ -15,7 +15,7 @@
                 <a href="#" class="d-block"><?= $nama; ?></a>
                 <a href="#" class="d-block">NIP : <?= $nip; ?></a>
                 <a href="#" class="d-block">Tempat Tugas : <?= $prodi; ?></a>
-                <a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>
+                <!--<a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>-->
             </div>
         </div>
 

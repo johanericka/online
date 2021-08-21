@@ -840,7 +840,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0 GROUP BY nim");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -848,6 +848,7 @@ if ($nohp == null or $email == null) {
 														$tanggal = $data['tanggal'];
 														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
+														$nim = $data['nim'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
 														$verifikasi1 = $data['verifikasi1'];
 														$verifikasi2 = $data['verifikasi2'];
@@ -874,7 +875,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as kaprodi -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1 GROUP BY nim");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -882,6 +883,7 @@ if ($nohp == null or $email == null) {
 														$tanggal = $data['tanggal'];
 														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
+														$nim = $data['nim'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
 														$verifikasi1 = $data['verifikasi1'];
 														$verifikasi2 = $data['verifikasi2'];
@@ -890,7 +892,7 @@ if ($nohp == null or $email == null) {
 														<tr>
 															<td><?= $no; ?></td>
 															<td><?= tgljam_indo($tanggal); ?></td>
-															<td><?= $nim; ?></td>
+															<td><?= $prodimhs; ?></td>
 															<td><?= $nama; ?></td>
 															<td><?= $surat; ?></td>
 															<td>
@@ -908,7 +910,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as WD -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1 GROUP BY nim");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -916,6 +918,7 @@ if ($nohp == null or $email == null) {
 														$tanggal = $data['tanggal'];
 														$prodimhs = $data['prodi'];
 														$nama = $data['nama'];
+														$nim = $data['nim'];
 														$surat = "Surat Keterangan Pendamping Ijazah";
 														$verifikasi1 = $data['verifikasi1'];
 														$verifikasi2 = $data['verifikasi2'];
