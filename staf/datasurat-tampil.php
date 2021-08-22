@@ -1,3 +1,21 @@
+<?php
+session_start();
+$user = $_SESSION['user'];
+$nip = $_SESSION['nip'];
+$nama = $_SESSION['nama'];
+$prodi = $_SESSION['prodi'];
+$hakakses = $_SESSION['hakakses'];
+$jabatan = $_SESSION['jabatan'];
+if ($_SESSION['jabatan'] != "kasubag-akademik") {
+	header("location:../deauth.php");
+}
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+if (isset($nodata)) {
+	$nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,10 +28,6 @@
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="../system/plugins/fontawesome-free/css/all.min.css">
-	<!-- DataTables -->
-	<link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-	<link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- icheck bootstrap -->
@@ -24,43 +38,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<!-- location sharing -->
-<?php
-$lokasi = "coming soon ...";
-?>
-
-<!-- akses ke database -->
-<?php require_once('../system/dbconn.php'); ?>
-
-
-<!-- cek session -->
-<?php
-session_start();
-//if($_SESSION['role']!="wakildekan"){
-//	header("location:../index.php?pesan=belum_login");
-//}
-?>
-<?php
-$iduser = $_SESSION['iduser'];
-$nip = $_SESSION['nip'];
-$nama = $_SESSION['nama'];
-$status = $_SESSION['status'];
-$jurusan = $_SESSION['jurusan'];
-if ($iduser == '63007') {
-	$jabatan = "Wakil Dekan Bidang Akademik";
-}
-if ($iduser == '62007') {
-	$jabatan = "Wakil Dekan Bidang AUPK";
-}
-if ($iduser == '64005') {
-	$jabatan = "Wakil Dekan Bidang Kemahasiswaan & Kerja Sama";
-}
-$fakultas = "Sains dan Teknologi";
-//$jurusan = $fakultas;
-if ($iduser == '55022') {
-	$jurusan = "Teknik Informatika";
-}
-?>
 
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
@@ -77,60 +54,9 @@ if ($iduser == '55022') {
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<a href="../../system/index3.html" class="brand-link">
-				<img src="../system/uin-malang-logo.png" alt="../../system Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">UIN Malang</span>
-			</a>
-
-			<!-- Sidebar -->
-			<div class="sidebar">
-				<!-- Sidebar user (optional)-->
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info">
-						<a href="#" class="d-block"><?php echo $nama; ?></a>
-						<a href="#" class="d-block">NIP : <?php echo $nip; ?></a>
-						<a href="#" class="d-block"><?php echo $jurusan; ?></a>
-					</div>
-				</div>
-
-				<!-- Sidebar Menu -->
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="index.php" class="nav-link">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Dashboard
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="https://wa.me/6281234302099" class="nav-link">
-								<i class="nav-icon fas fa-question-circle"></i>
-								<p>
-									Bantuan
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="../logout.php" class="nav-link">
-								<i class="nav-icon fas fa-user"></i>
-								<p>
-									Keluar
-									<span class="right badge badge-danger"></span>
-								</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
+		<?php
+		require('sidebar.php');
+		?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -160,302 +86,495 @@ if ($iduser == '55022') {
 									<thead>
 										<tr>
 											<th width="5%">No.</th>
-											<th width="15%">Program Studi</th>
-											<th width="20%">Nama</th>
-											<th width="25%">Jenis Surat</th>
+											<th width="15%">Prodi</th>
+											<th width="25%">Nama</th>
+											<th width="20%">Jenis Surat</th>
+											<th width="10%">Status</th>
 											<th width="20%">No. Surat</th>
-											<th width="5%">Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php $no = 1; ?>
 
-										<!-- cetak KHS -->
+										<!-- PKL Koordinator-->
 										<?php
-										if ($jurusan == 'SAINTEK') {
-											$query = mysqli_query($dbsurat, "SELECT * FROM cetakkhs WHERE validasifakultas=1 ORDER BY jurusan");
-										} else {
-											$query = mysqli_query($dbsurat, "SELECT * FROM cetakkhs WHERE jurusan='$jurusan' AND validasifakultas=1 ORDER BY jurusan");
-										}
-
+										$query = mysqli_query($dbsurat, "SELECT * FROM pkl ORDER BY prodi");
+										$jmldata = mysqli_num_rows($query);
 										while ($data = mysqli_fetch_array($query)) {
-											$nodata = $data['id'];
+											$nodata = $data['no'];
+											$nim = $data['nim'];
 											$nama = $data['nama'];
-											$jurusan = $data['jurusan'];
-											$jenissurat = 'Permohonan Cetak KHS';
-											$validasifakultas = $data['validasifakultas'];
+											$prodi = $data['prodi'];
+											$surat = 'Ijin PKL';
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
 											$keterangan = $data['keterangan'];
 										?>
 											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
 												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/cetakkhs-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
-														<i class="fas fa-print"></i>
-													</a>
+													<?php
+													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/pkl-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan ?>
+														</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
 												</td>
 											</tr>
 										<?php
 											$no++;
 										}
 										?>
-										<!-- /cetak KHS -->
+										<!-- /. PKL koordinator-->
 
 										<!-- ijin lab -->
 										<?php
-										if ($jurusan == 'SAINTEK') {
-											$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE validasifakultas=1 ORDER BY prodi");
-										} else {
-											$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab WHERE prodi='$jurusan' AND validasifakultas=1 ORDER BY prodi");
-										}
+										$query = mysqli_query($dbsurat, "SELECT * FROM ijinlab ORDER BY prodi");
+										$jmldata = mysqli_num_rows($query);
 										while ($data = mysqli_fetch_array($query)) {
 											$nodata = $data['no'];
+											$nim = $data['nim'];
 											$nama = $data['nama'];
-											$jurusan = $data['prodi'];
-											$jenissurat = 'Ijin Penggunaan Laboratorium';
-											$validasifakultas = $data['validasifakultas'];
+											$prodi = $data['prodi'];
+											$surat = 'Ijin Penggunaan Laboratorium';
+											$validasi0 = $data['validasi0'];
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
 											$keterangan = $data['keterangan'];
 										?>
 											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi0 == 1 and $validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi0 == 2 or $validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
 												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/lab-cetak.php?<?= $nodata; ?>" target="_blank">
-														<i class="fas fa-print"></i>
-													</a>
+													<?php
+													if ($validasi0 == 1 and $validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/ijinlab-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan; ?>
+														</a>
+													<?php
+													} elseif ($validasi0 == 2 or $validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
 												</td>
 											</tr>
 										<?php
 											$no++;
 										}
 										?>
-										<!-- /ijin lab -->
+										<!-- /.ijin lab -->
 
 										<!-- ijin penelitian -->
 										<?php
-										if ($jurusan == 'SAINTEK') {
-											$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE validasifakultas=1 ORDER BY kdjurusan ");
-										} else {
-											//cari kode jurusan
-											$qjurusan = mysqli_query($dbsurat, "SELECT kdjurusan FROM jurusan WHERE jurusan='$jurusan'");
-											while ($djurusan = mysqli_fetch_array($qjurusan)) {
-												$kdjurusan = $djurusan['kdjurusan'];
-												$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian WHERE kdjurusan='$kdjurusan' AND validasifakultas=1 ORDER BY kdjurusan ");
-											}
-											while ($data = mysqli_fetch_array($query)) {
-												$nodata = $data['id'];
-												$nama = $data['nama'];
-												$kdjurusan = $data['kdjurusan'];
-												$jenissurat = 'Ijin Penelitian';
-												$validasifakultas = $data['validasifakultas'];
-												$keterangan = $data['keterangan'];
-
-												//cari nama jurusan
-												$query2 = mysqli_query($dbsurat, "SELECT * FROM jurusan WHERE kdjurusan='$kdjurusan'");
-												$data2 = mysqli_fetch_array($query2);
-												$jurusan = $data2['jurusan'];
+										$query = mysqli_query($dbsurat, "SELECT * FROM ijinpenelitian ORDER BY prodi");
+										while ($data = mysqli_fetch_array($query)) {
+											$nodata = $data['no'];
+											$nim = $data['nim'];
+											$nama = $data['nama'];
+											$prodi = $data['prodi'];
+											$surat = 'Ijin Penelitian';
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
+											$keterangan = $data['keterangan'];
 										?>
-												<tr>
-													<td><?php echo $no; ?></td>
-													<td><?php echo $jurusan; ?></td>
-													<td><?php echo $nama; ?></td>
-													<td><?php echo $jenissurat; ?></td>
-													<td><?php echo $keterangan; ?></td>
-													<td>
-														<a class="btn btn-success btn-sm" href="../mahasiswa/ijinpenelitian-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+											<tr>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
+												<td>
+													<?php
+													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/ijinpenelitian-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan; ?>
+														</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
+												</td>
+											</tr>
+										<?php
+											$no++;
+										}
+										?>
+										<!-- /.ijin penelitian -->
+
+										<!-- peminjaman alat -->
+										<?php
+										$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat ORDER BY prodi");
+										while ($data = mysqli_fetch_array($query)) {
+											$nodata = $data['no'];
+											$nim = $data['nim'];
+											$nama = $data['nama'];
+											$prodi = $data['prodi'];
+											$surat = 'Ijin Peminjaman Alat';
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
+											$keterangan = $data['keterangan'];
+										?>
+											<tr>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
+												<td>
+													<?php
+													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/peminjamanalat-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan; ?>
+														</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
+												</td>
+											</tr>
+										<?php
+											$no++;
+										}
+										?>
+										<!-- /peminjaman alat -->
+
+										<!-- Observasi -->
+										<?php
+										$query = mysqli_query($dbsurat, "SELECT * FROM observasi ORDER BY prodi");
+										while ($data = mysqli_fetch_array($query)) {
+											$nodata = $data['no'];
+											$nim = $data['nim'];
+											$nama = $data['nama'];
+											$prodi = $data['prodi'];
+											$surat = 'Ijin Observasi';
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
+											$keterangan = $data['keterangan'];
+										?>
+											<tr>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
+												<td>
+													<?php
+													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/observasi-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan; ?>
+														</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
+												</td>
+											</tr>
+										<?php
+											$no++;
+										}
+										?>
+										<!-- /Observasi -->
+
+										<!-- pengambilandata -->
+										<?php
+										$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata ORDER BY prodi");
+										while ($data = mysqli_fetch_array($query)) {
+											$nodata = $data['no'];
+											$prodi = $data['prodi'];
+											$nama = $data['nama'];
+											$surat = 'Ijin Pengambilan Data';
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
+											$keterangan = $data['keterangan'];
+										?>
+											<tr>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
+												<td>
+													<?php
+													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/pengambilandata-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan; ?>
+														</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
+												</td>
+											</tr>
+										<?php
+											$no++;
+										}
+										?>
+										<!-- /pengambilandata -->
+
+										<!-- Surat Keterangan -->
+										<?php
+										$query = mysqli_query($dbsurat, "SELECT * FROM suket ORDER BY prodi");
+										while ($data = mysqli_fetch_array($query)) {
+											$nodata = $data['no'];
+											$nim = $data['nim'];
+											$prodi = $data['prodi'];
+											$nama = $data['nama'];
+											$surat = $data['jenissurat'];
+											$validasi1 = $data['validasi1'];
+											$validasi2 = $data['validasi2'];
+											$validasi3 = $data['validasi3'];
+											$keterangan = $data['keterangan'];
+										?>
+											<tr>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($validasi2 == 1 and $validasi3 == 1) {
+															echo 'Disetujui';
+														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
+												<td>
+													<?php
+													if ($validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a href="../mahasiswa/suket-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
+															<?= $keterangan; ?>
+														</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
+												</td>
+											</tr>
+										<?php
+											$no++;
+										}
+										?>
+										<!-- /Surat Keterangan -->
+
+										<!-- SKPI -->
+										<?php
+										$query = mysqli_query($dbsurat, "SELECT * FROM skpi GROUP BY nim ORDER BY jurusan");
+										while ($data = mysqli_fetch_array($query)) {
+											$nodata = $data['no'];
+											$nim = $data['nim'];
+											$prodi = $data['jurusan'];
+											$nama = $data['nama'];
+											$surat = 'SKPI';
+											$verifikasi1 = $data['verifikasi1'];
+											$verifikasi2 = $data['verifikasi2'];
+											$verifikasi3 = $data['verifikasi3'];
+											$keterangan = $data['keterangan'];
+										?>
+											<tr>
+												<td><?= $no; ?></td>
+												<td><?= $prodi; ?></td>
+												<td><?= $nama; ?></td>
+												<td><?= $surat; ?></td>
+												<td> <?php
+														if ($verifikasi1 == 1 and $verifikasi2 == 1 and $verifikasi2 == 1) {
+															echo 'Disetujui';
+														} elseif ($verifikasi1 == 2 or $verifikasi2 == 2 or $verifikasi2 == 2) {
+															echo 'Ditolak';
+														} else {
+															echo 'Proses';
+														}
+														?>
+												</td>
+												<td>
+													<?php
+													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													?>
+														<a class="btn btn-success btn-sm" href="../staf/skpi-tampil.php?nodata=<?= $nodata; ?>" target="_blank">
 															<i class="fas fa-print"></i>
 														</a>
-													</td>
-												</tr>
-										<?php
-												$no++;
-											}
-										}
-										?>
-										<!-- /ijin penelitian -->
-
-										<!-- ijin observasi -->
-										<?php
-										$query = mysqli_query($dbsurat, "SELECT * FROM observasi WHERE validasifakultas=1 ORDER BY jurusan");
-										while ($data = mysqli_fetch_array($query)) {
-											$nodata = $data['id'];
-											$nim = $data['nim'];
-											$jurusan = $data['jurusan'];
-											$jenissurat = 'Ijin Observasi';
-											$validasifakultas = $data['validasifakultas'];
-											$keterangan = $data['keterangan'];
-
-											//cari nama mahasiswa
-											$query3 = mysqli_query($dbsurat, "SELECT * FROM useraccount2 WHERE kode='$nim'");
-											$data3 = mysqli_fetch_array($query3);
-											$nama = $data3['nama'];
-										?>
-											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
-												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/observasi-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
-														<i class="fas fa-print"></i>
-													</a>
+													<?php
+													} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
+													?>
+														<a class="btn btn-danger btn-sm" onclick="return alert('<?= $keterangan; ?>')">
+															<i class="fas fa-ban"></i>
+														</a>
+													<?php
+													} else {
+													?>
+														<a class="btn btn-secondary btn-sm" onclick="return alert('Dalam proses verifikasi')">
+															<i class="fas fa-spinner"></i>
+														</a>
+													<?php
+													}
+													?>
 												</td>
 											</tr>
 										<?php
 											$no++;
 										}
 										?>
-										<!-- /ijin observasi -->
-
-										<!-- ijin peminjaman alat -->
-										<?php
-										$query = mysqli_query($dbsurat, "SELECT * FROM peminjamanalat WHERE validasifakultas=1 ORDER BY jurusan");
-										while ($data = mysqli_fetch_array($query)) {
-											$nodata = $data['id'];
-											$nim = $data['nim'];
-											$nama = $data['nama'];
-											$jurusan = $data['jurusan'];
-											$jenissurat = 'Ijin Peminjaman Alat';
-											$validasifakultas = $data['validasifakultas'];
-											$keterangan = $data['keterangan'];
-										?>
-											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
-												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/peminjamanalat-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
-														<i class="fas fa-print"></i>
-													</a>
-												</td>
-											</tr>
-										<?php
-											$no++;
-										}
-										?>
-										<!-- /ijin peminjaman alat -->
-
-										<!-- ijin pengambilan data-->
-										<?php
-										$query = mysqli_query($dbsurat, "SELECT * FROM pengambilandata WHERE validasifakultas=1 ORDER BY jurusan");
-										while ($data = mysqli_fetch_array($query)) {
-											$nodata = $data['id'];
-											$nim = $data['nim'];
-											$nama = $data['nama'];
-											$jurusan = $data['jurusan'];
-											$jenissurat = 'Ijin Pengambilan Data';
-											$validasifakultas = $data['validasifakultas'];
-											$keterangan = $data['keterangan'];
-										?>
-											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
-												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/pengambilandata-cetak.php?nodata=<?= $nodata; ?>">
-														<i class="fas fa-print"></i>
-													</a>
-												</td>
-											</tr>
-										<?php
-											$no++;
-										}
-										?>
-										<!-- /ijin pengambilan data -->
-
-										<!-- Surat Pengantar PKL-->
-										<?php
-										$query = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE validasifakultas=1 ORDER BY kdjurusan ");
-										while ($data = mysqli_fetch_array($query)) {
-											$nodata = $data['id'];
-											$nim = $data['nim'];
-											$nama = $data['nama'];
-											$kdjurusan = $data['kdjurusan'];
-											$jenissurat = 'Surat Pengantar PKL';
-											$validasifakultas = $data['validasifakultas'];
-											$keterangan = $data['keterangan'];
-
-											//cari nama jurusan
-											$query2 = mysqli_query($dbsurat, "SELECT * FROM jurusan WHERE kdjurusan='$kdjurusan'");
-											$data2 = mysqli_fetch_array($query2);
-											$jurusan = $data2['jurusan'];
-
-										?>
-											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
-												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/pkl-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
-														<i class="fas fa-print"></i>
-													</a>
-												</td>
-											</tr>
-										<?php
-											$no++;
-										}
-										?>
-										<!-- /Surat Pengantar PKL -->
-
-										<!-- Surat Keterangan-->
-										<?php
-										$query = mysqli_query($dbsurat, "SELECT * FROM suket WHERE validasifakultas=1 ORDER BY kdjurusan, jenissurat");
-										while ($data = mysqli_fetch_array($query)) {
-											$nodata = $data['id'];
-											$nim = $data['nim'];
-											$nama = $data['nama'];
-											$kdjurusan = $data['kdjurusan'];
-											$jenissurat = $data['jenissurat'];
-											$validasifakultas = $data['validasifakultas'];
-											$keterangan = $data['keterangan'];
-
-											//cari nama jurusan
-											$query2 = mysqli_query($dbsurat, "SELECT * FROM jurusan WHERE kdjurusan='$kdjurusan'");
-											$data2 = mysqli_fetch_array($query2);
-											$jurusan = $data2['jurusan'];
-
-										?>
-											<tr>
-												<td><?php echo $no; ?></td>
-												<td><?php echo $jurusan; ?></td>
-												<td><?php echo $nama; ?></td>
-												<td><?php echo $jenissurat; ?></td>
-												<td><?php echo $keterangan; ?></td>
-												<td>
-													<a class="btn btn-success btn-sm" href="../mahasiswa/suket-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
-														<i class="fas fa-print"></i>
-													</a>
-												</td>
-											</tr>
-										<?php
-											$no++;
-										}
-										?>
-										<!-- /Surat Keterangan-- -->
-
+										<!-- /SKPI -->
 									</tbody>
 								</table>
 							</div>
-							<!-- /.card-body -->
 						</div>
-						<!-- /.card -->
 					</div>
-					<!-- /.col -->
 				</div>
-				<!-- /.row -->
 			</section>
 
 
@@ -468,7 +587,7 @@ if ($iduser == '55022') {
 		<!-- ./wrapper -->
 
 		<!-- footer -->
-		<?php include '../system/footerdsn.html' ?>
+		<?php include 'footerdsn.php' ?>
 		<!-- /.footer -->
 
 		<!-- jQuery -->
@@ -480,19 +599,6 @@ if ($iduser == '55022') {
 		<script src="../system/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 		<!-- Bootstrap 4 -->
 		<script src="../system/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<!-- DataTables  & Plugins -->
-		<script src="../system/plugins/datatables/jquery.dataTables.min.js"></script>
-		<script src="../system/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-		<script src="../system/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-		<script src="../system/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-		<script src="../system/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-		<script src="../system/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-		<script src="../system/plugins/jszip/jszip.min.js"></script>
-		<script src="../system/plugins/pdfmake/pdfmake.min.js"></script>
-		<script src="../system/plugins/pdfmake/vfs_fonts.js"></script>
-		<script src="../system/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-		<script src="../system/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-		<script src="../system/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 		<!-- AdminLTE App -->
 		<script src="../system/dist/js/adminlte.min.js"></script>
 		<!-- page script -->
@@ -500,10 +606,8 @@ if ($iduser == '55022') {
 			$(function() {
 				$("#example1").DataTable({
 					"responsive": true,
-					"lengthChange": false,
 					"autoWidth": false,
-					"buttons": ["copy", "csv", "excel", "pdf", "print"]
-				}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+				});
 				$('#example2').DataTable({
 					"paging": true,
 					"lengthChange": false,
@@ -516,17 +620,6 @@ if ($iduser == '55022') {
 			});
 		</script>
 </body>
-<!-- tanggal indonesia -->
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
 
 <!-- timer untuk alert -->
 <script>

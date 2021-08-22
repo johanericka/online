@@ -6,7 +6,7 @@ $nama = $_SESSION['nama'];
 $prodi = $_SESSION['prodi'];
 $hakakses = $_SESSION['hakakses'];
 $jabatan = $_SESSION['jabatan'];
-if ($_SESSION['hakakses'] != "dosen") {
+if ($_SESSION['jabatan'] != "dosen") {
 	header("location:../deauth.php");
 }
 require('../system/dbconn.php');
@@ -472,7 +472,7 @@ if (isset($nodata)) {
 												<td><?= $nama; ?></td>
 												<td><?= $surat; ?></td>
 												<td> <?php
-														if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+														if ($validasi2 == 1 and $validasi3 == 1) {
 															echo 'Disetujui';
 														} elseif ($validasi1 == 2 or $validasi2 == 2 or $validasi3 == 2) {
 															echo 'Ditolak';
@@ -483,7 +483,7 @@ if (isset($nodata)) {
 												</td>
 												<td>
 													<?php
-													if ($validasi1 == 1 and $validasi2 == 1 and $validasi3 == 1) {
+													if ($validasi2 == 1 and $validasi3 == 1) {
 													?>
 														<a class="btn btn-success btn-sm" href="../mahasiswa/suket-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
 															<i class="fas fa-print"></i>

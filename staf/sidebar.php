@@ -14,8 +14,8 @@
             <div class="info">
                 <a href="#" class="d-block"><?= $nama; ?></a>
                 <a href="#" class="d-block">NIP : <?= $nip; ?></a>
-                <a href="#" class="d-block">Tempat Tugas : <?= $prodi; ?></a>
-                <!--<a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>-->
+                <!--<a href="#" class="d-block">Tempat Tugas : <?= $prodi; ?></a>
+                <a href="#" class="d-block">Jabatan : <?= strtoupper($jabatan); ?></a>-->
             </div>
         </div>
 
@@ -79,15 +79,6 @@
                 <?php
                 }
                 ?>
-                <li class="nav-item">
-                    <a href="notifikasi-isi.php" class="nav-link">
-                        <i class="nav-icon fas fa-bullhorn"></i>
-                        <p>
-                            Kirim Notifikasi
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
-                </li>
 
                 <!-- menu khusus kasubag akademik -->
                 <?php
