@@ -225,9 +225,14 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 			<td>&nbsp;</td>
 			<?php
 			if ($verifikasifakultas == 1) {
-				$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan='wadek2'");
-				$dsql = mysqli_fetch_array($sql);
-				$ttd = $dsql['ttd'];
+				if (strtotime($tglverifikasifakultas) > 1629046800) {
+					$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE kdjabatan='wadek2'");
+					$dsql = mysqli_fetch_array($sql);
+					$ttd = $dsql['ttd'];
+				} else {
+					$ttd = 'dwisuheriyanto.jpg';
+				}
+
 			?>
 				<td style="text-align:center">
 					<!--<?= $jabatan; ?><br />-->
@@ -238,22 +243,6 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 			<?php
 			}
 			?>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td></td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
 	</tbody>

@@ -364,7 +364,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												} elseif ($statussurat == 1) {
 												?>
-													<a class="btn btn-success btn-sm" href="pkl-cetak.php?nodata=<?= $nodata; ?>">
+													<a class="btn btn-success btn-sm" href="pkl-cetak.php?nodata=<?= $nodata; ?>" target="_blank">
 														<i class="fas fa-print"></i>
 														Cetak
 													</a>
@@ -1019,7 +1019,7 @@ if ($nohp == null or $email == null) {
 
 									<!-- SKPI -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim' group by nim");
+									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim' GROUP BY nim");
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['no'];
 										$verifikasi1 = $q['verifikasi1'];

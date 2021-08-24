@@ -9,13 +9,15 @@
 </script>
 
 <!-- connect to db -->
-<?php require_once('../system/dbconn.php'); ?>
+<?php
+require('../system/dbconn.php');
+require('../system/myfunc.php');
+?>
 <!-- ./db -->
 
 <?php
 session_start();
 $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
-
 ?>
 
 <?php
@@ -204,8 +206,14 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				<?php
 				if ($validasi3 == 1) {
 					$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$validator3'");
-					$hasil = mysqli_fetch_array($sql);
-					$ttd = $hasil['ttd'];
+					$jdata = mysqli_num_rows($sql);
+					if ($jdata > 0) {
+						$hasil = mysqli_fetch_array($sql);
+						$ttd = $hasil['ttd'];
+					} else {
+						$ttd = 'imamtazi.jpg';
+					}
+
 				?>
 					<td style="text-align:center"><br />
 						<!--<?= $jabatan; ?><br />-->
@@ -218,59 +226,8 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				?>
 				<td>&nbsp;</td>
 			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td style="text-align:center"></td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
 		</tbody>
 	</table>
 </body>
-
-<?php
-function tgl_indo($tanggal)
-{
-	$bulan = array(
-		1 =>   'Januari',
-		'Februari',
-		'Maret',
-		'April',
-		'Mei',
-		'Juni',
-		'Juli',
-		'Agustus',
-		'September',
-		'Oktober',
-		'November',
-		'Desember'
-	);
-	$pecahkan = explode('-', $tanggal);
-
-	// variabel pecahkan 0 = tahun
-	// variabel pecahkan 1 = bulan
-	// variabel pecahkan 2 = tanggal
-
-	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-?>
 
 </html>

@@ -308,8 +308,13 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				<?php
 				if ($validasi3 == 1) {
 					$sql = mysqli_query($dbsurat, "SELECT * FROM pejabat WHERE nip = '$validator3'");
-					$hasil = mysqli_fetch_array($sql);
-					$ttd = $hasil['ttd'];
+					$jdata = mysqli_num_rows($sql);
+					if ($jdata > 0) {
+						$hasil = mysqli_fetch_array($sql);
+						$ttd = $hasil['ttd'];
+					} else {
+						$ttd = 'imamtazi.jpg';
+					}
 				?>
 					<td style="text-align:center"><img src="../ttd/<?= $ttd; ?>" width="300" /></td>
 				<?php
