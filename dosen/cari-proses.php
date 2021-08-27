@@ -12,13 +12,14 @@ server with default setting (user 'root' with no password) */
 
 if (isset($_REQUEST["term"])) {
     // Prepare a select statement
-    $sql = "SELECT * FROM masterdosen WHERE dos_nama LIKE ?";
+    $sql = "SELECT * FROM pengguna WHERE hakakses='dosen' OR hakakses='tendik' AND upper(nama) LIKE ?";
+
     if ($stmt = mysqli_prepare($dbsurat, $sql)) {
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "s", $param_term);
 
         // Set parameters
-        $param_term = '%' . $_REQUEST["term"] . '%';
+        $param_term = '%' . strtoupper($_REQUEST["term"]) . '%';
 
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
@@ -28,7 +29,7 @@ if (isset($_REQUEST["term"])) {
             if (mysqli_num_rows($result) > 0) {
                 // Fetch result rows as an associative array
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    echo "<p>" . $row["DOS_GELARDEPAN"] . $row["DOS_NAMA"] . $row["DOS_GELARBELAKANG"] . "</p>";
+                    echo "<p>" . $row["nama"] . "</p>";
                 }
             } else {
                 echo "<p>Data tidak ditemukan</p>";
