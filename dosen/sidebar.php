@@ -89,6 +89,16 @@ require('../system/dbconn.php');
                     }
                 }
                 ?>
+                <!-- cek kapasitas lab-->
+                <li class="nav-item">
+                    <a href="lab-cekkapasitas.php" class="nav-link">
+                        <i class="nav-icon fas fa-search"></i>
+                        <p>
+                            Kapasitas Lab.
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
                 <?php
                 $qmenu = mysqli_query($dbsurat, "SELECT * FROM jenissurat WHERE namasurat='Pengajuan WFH'");
                 $dmenu = mysqli_fetch_array($qmenu);
