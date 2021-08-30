@@ -596,6 +596,7 @@ if ($nohp == null or $email == null) {
 										$validator3 = $q['validator3'];
 										$tglvalidasi3 = $q['tglvalidasi3'];
 										$statussurat = $q['statussurat'];
+										$keterangan = $q['keterangan'];
 									?>
 										<tr>
 											<td><?php echo $no++; ?></td>
@@ -613,7 +614,7 @@ if ($nohp == null or $email == null) {
 												<?php
 												} else {
 												?>
-													Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <?= $keterangan; ?><br />
+													Ditolak Dosen Pembimbing <?= namadosen($dbsurat, $validator1); ?> dengan alasan <b><?= $keterangan; ?></b><br />
 												<?php
 												};
 												?>
@@ -623,13 +624,13 @@ if ($nohp == null or $email == null) {
 												?>
 													Menunggu verifikasi Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?><br />
 												<?php
-												} elseif ($validasi1 == 1) {
+												} elseif ($validasi2 == 1) {
 												?>
 													Telah disetujui Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> <br />
 												<?php
 												} else {
 												?>
-													Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <?= $keterangan; ?><br />
+													Ditolak oleh Ketua Program Studi <?= namadosen($dbsurat, $validator2); ?> dengan alasan <b><?= $keterangan; ?></b><br />
 												<?php
 												};
 												?>
