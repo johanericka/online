@@ -175,7 +175,7 @@ require('../system/dbconn.php');
                 }
                 ?>
                 <?php
-                if ($nip = '198312132019031004') {
+                if ($nip == '198312132019031004') {
                 ?>
                     <li class="nav-item">
                         <a href="pejabat-tampil.php" class="nav-link">
