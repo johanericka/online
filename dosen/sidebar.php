@@ -174,17 +174,40 @@ require('../system/dbconn.php');
                 <?php
                 }
                 ?>
+                <?php
+                if ($nip = '198312132019031004') {
+                ?>
+                    <li class="nav-item">
+                        <a href="pejabat-tampil.php" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Manajemen Pejabat
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kontrolmenu-tampil.php" class="nav-link">
+                            <i class="nav-icon fas fa-envelope"></i>
+                            <p>
+                                Menu Persuratan
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="lab-cekkapasitas2.php" class="nav-link">
+                            <i class="nav-icon fas fa-flask"></i>
+                            <p>
+                                Kontrol Kapasitas Lab.
+                                <span class="right badge badge-danger"></span>
+                            </p>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
                 <!--
-                <li class="nav-item">
-                    <a href="notifikasi-isi.php" class="nav-link">
-                        <i class="nav-icon fas fa-bullhorn"></i>
-                        <p>
-                            Kirim Notifikasi
-                            <span class="right badge badge-danger"></span>
-                        </p>
-                    </a>
-                </li>
-                -->
                 <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-file"></i>
@@ -218,6 +241,7 @@ require('../system/dbconn.php');
                         ?>
                     </ul>
                 </li>
+                    -->
                 <li class="nav-item">
                     <a href="userprofile-tampil.php" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>

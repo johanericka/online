@@ -90,7 +90,7 @@ require('../system/myfunc.php');
                                             <select name="prodi" class="form-control">
                                                 <option value="SAINTEK">SAINTEK</option>
                                                 <?php
-                                                $qprodi = mysqli_query($dbsurat, "SELECT * FROM prodi GROUP BY namaprodi");
+                                                $qprodi = mysqli_query($dbsurat, "SELECT * FROM prodi");
                                                 while ($dprodi = mysqli_fetch_array($qprodi)) {
                                                     $namaprodi = $dprodi['namaprodi'];
                                                 ?>
@@ -105,8 +105,9 @@ require('../system/myfunc.php');
                                                 <option value="wadek1">Wakil Dekan 1</option>
                                                 <option value="wadek2">Wakil Dekan 2</option>
                                                 <option value="wadek3">Wakil Dekan 3</option>
-                                                <option value="kaprodi">Kaprodi</option>
-                                                <option value="sekprodi">Sekprodi</option>
+                                                <option value="kaprodi">Ketua Program Studi</option>
+                                                <option value="sekprodi">Sekretaris Program Studi</option>
+                                                <option value="koorpkl">Koordinator PKL</option>
                                                 <option value="kabag-tu">Kabag. TU</option>
                                                 <option value="kasubag-pak">Kasubag PAK</option>
                                                 <option value="kasubag-akademik">Kasubag Akademik</option>
