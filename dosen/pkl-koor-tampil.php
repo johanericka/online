@@ -83,6 +83,7 @@ require('../system/myfunc.php');
             $lampiran = $row['lampiran'];
             $buktivaksin = $row['buktivaksin'];
             $jenispkl = $row['jenispkl'];
+            $pklmagang = $row['pklmagang'];
             ?>
 
             <!-- Main content -->
@@ -97,19 +98,19 @@ require('../system/myfunc.php');
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    Nama <br />
+                                    <label>Nama</label>
                                     <input type="text" class="form-control" name="nama" value="<?= $nama; ?>" readonly /></input>
-                                    NIM <br />
+                                    <label>NIM</label>
                                     <input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly /></input>
-                                    Program Studi <br />
+                                    <label>Program Studi</label>
                                     <input type="text" class="form-control" name="jurusan" value="<?= $prodi; ?>" readonly /></input>
-                                    Instansi <br />
+                                    <label>Instansi</label>
                                     <input type="text" class="form-control" name="instansi" value="<?= $instansi; ?>" readonly /></input>
-                                    Tempat PKL / Magang <br />
+                                    <label> PKL / Magang </label>
                                     <input type="text" class="form-control" name="tempatpkl" value="<?= $tempatpkl; ?>" readonly /></input>
-                                    Alamat <br />
+                                    <label>Alamat</label>
                                     <input type="text" class="form-control" name="alamat" value="<?= $alamat; ?>" readonly /></input>
-                                    Waktu Pelaksanaan
+                                    <label>Waktu Pelaksanaan</label>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             Tanggal Mulai<br />
@@ -120,75 +121,75 @@ require('../system/myfunc.php');
                                             <input type="text" class="form-control" id="tglselesai" name="tglselesai" value="<?= tgl_indo($tglselesai); ?>" disabled></input>
                                         </div>
                                     </div>
-                                    Jenis PKL / Magang
-                                    <input type="text" class="form-control" name="jenispkl" value="<?= $jenispkl; ?>" readonly>
-
-                                    <!--
-                                    Anggota Kelompok PKL / Magang
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <td style="text-align:center" width="5%">No.</td>
-                                                <td style="text-align:center">Nama</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $no = 1;
-                                            $qanggota = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimketua='$nim'");
-                                            while ($danggota = mysqli_fetch_array($qanggota)) {
-                                                $namaanggota = $danggota['nama'];
-                                            ?>
-                                                <tr>
-                                                    <td><?= $no; ?></td>
-                                                    <td><?= $namaanggota; ?></td>
-                                                </tr>
-
-                                            <?php
-                                                $no++;
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                        -->
-                                    <br />
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col">
-                                                <?php
-                                                if ($lampiran == '') {
-                                                    $namafile = 'noimage.gif';
-                                                } else {
-                                                    $namafile = $lampiran;
-                                                }
-                                                ?>
-                                                Pakta Integritas
-                                                <br />
-                                                <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid"></img></a>
-                                            </div>
-                                            <?php
-                                            if ($jenispkl == 'Offline') {
-                                            ?>
-                                                <div class="col">
-                                                    <?php
-                                                    if ($buktivaksin == '') {
-                                                        $namafile2 = 'noimage.gif';
-                                                    } else {
-                                                        $namafile2 = $buktivaksin;
-                                                    }
-                                                    ?>
-                                                    Bukti Vaksin
-                                                    <br />
-                                                    <a href="../img/<?= $namafile2; ?>" target="_blank"><img src="../img/<?= $namafile2; ?>" class="img-fluid"></img></a>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
+                                    <label>Jenis Kegiatan</label>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            Surat Pengantar
+                                            <input type="text" class="form-control" name="pklmagang" value="<?= $pklmagang; ?>" readonly>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            Jenis <?= $pklmagang; ?>
+                                            <input type="text" class="form-control" name="jenispkl" value="<?= $jenispkl; ?>" readonly>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <!-- pakta Integritas -->
+                                    <?php
+                                    if ($lampiran == '') {
+                                        $namafile = 'noimage.gif';
+                                    } else {
+                                        $namafile = $lampiran;
+                                    }
+                                    ?>
+                                    <label>Pakta Integritas</label>
                                     <br />
-                                    <small>Klik pada gambar untuk memperbesar</small>
+                                    <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid" width="50%"></img></a>
                                     <br />
+                                    <!-- tabel lampiran -->
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <table class="table table-bordered" id="tabel">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="5%">No.</th>
+                                                        <th width="10%">NIM</th>
+                                                        <th width="35%">NAMA</th>
+                                                        <th>Bukti Vaksin</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- tabel anggota -->
+                                                    <?php
+                                                    $dataanggota = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimketua='$nim'");
+                                                    $no = 1;
+                                                    while ($q = mysqli_fetch_array($dataanggota)) {
+                                                        $id = $q['id'];
+                                                        $nimanggota = $q['nimanggota'];
+                                                        $nama = $q['nama'];
+                                                        $buktivaksin = $q['buktivaksin'];
+                                                        if ($jenispkl == 'Offline' and $buktivaksin == '') {
+                                                            $namafile2 = 'noimage.gif';
+                                                        } elseif ($jenispkl == 'Offline' and $buktivaksin <> '') {
+                                                            $namafile2 = $buktivaksin;
+                                                        } elseif ($jenispkl == 'Online') {
+                                                            $namafile2 = 'online.png';
+                                                        }
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= $no++; ?></td>
+                                                            <?php $id; ?>
+                                                            <td><?= $nimanggota; ?></td>
+                                                            <td><?= $nama; ?></td>
+                                                            <td><a href="../img/<?= $namafile2; ?>" target="_blank"><img src="../img/<?= $namafile2; ?>" class="img-fluid" width="20%"></img></a></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            <small>Klik pada gambar untuk memperbesar</small>
+                                        </div>
+                                    </div>
                                     <hr>
                                     <form role="form" method="POST">
                                         <input type="hidden" name="nodata" value="<?php echo $nodata; ?>"></input>

@@ -51,7 +51,7 @@ $namakoor = $dsql3['nama'];
 $emailkoor = $dsql3['email'];
 
 //kirim email
-$subject = "Pengajuan Ijin WFH";
+$subject = "Pengajuan Ijin PKL / Magang";
 $pesan = "Yth. " . $namakoor . "<br/>
         <br/>
 		Assalamualaikum wr. wb.

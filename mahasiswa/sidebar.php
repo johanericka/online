@@ -123,25 +123,18 @@ require('../system/dbconn.php');
                         $dmenu = mysqli_fetch_array($qmenu);
                         $statussurat = $dmenu['status'];
                         if ($statussurat == 1) {
+                            //kalo menu diaktifkan
                             $qpkl = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota='$nim'");
                             $jpkl = mysqli_num_rows($qpkl);
                             if ($jpkl > 0) {
                                 $dpkl = mysqli_fetch_array($qpkl);
                                 $nimketua = $dpkl['nimketua'];
 
-                                $qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND validasi3=0");
+                                $qpkl2 = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nimketua' AND statussurat>0");
                                 $jpkl2 = mysqli_num_rows($qpkl2);
-                                if ($jpkl2 == 0) {
+                                if ($jpkl2 > 0) {
+                                    //jika ada surat pkl yang sudah disetujui / ditolak boleh mengajukan ulang
                         ?>
-                                    <li class="nav-item">
-                                        <a href="pkl-isitempat.php" class="nav-link">
-                                            <i class="nav-icon fas fa-users"></i>
-                                            <p>Surat Pengantar PKL</p>
-                                        </a>
-                                    </li>
-                                <?php
-                                } else {
-                                ?>
                                     <li class="nav-item">
                                         <a href="pkl-isitempat.php" class="nav-link">
                                             <i class="nav-icon fas fa-users"></i>
@@ -151,6 +144,7 @@ require('../system/dbconn.php');
                                 <?php
                                 }
                             } else {
+                                //jika belum mengajukan surat ijin PKL
                                 ?>
                                 <li class="nav-item">
                                     <a href="pkl-isitempat.php" class="nav-link">

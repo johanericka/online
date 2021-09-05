@@ -57,14 +57,11 @@ $telepon = $dsql['nohp'];
         </nav>
         <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
         <?php
         require('sidebar.php');
         ?>
 
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -72,12 +69,6 @@ $telepon = $dsql['nohp'];
                             <h3>Pengajuan Surat Pengantar PKL / Magang</h3>
                         </div>
                     </div>
-                    <!--
-                    <div class="alert alert-warning alert-dismissible fade show">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>PERHATIAN!!</strong> saat ini tidak diijinkan PKL Berkelompok
-                    </div>
--->
                 </div>
             </section>
 
@@ -91,7 +82,7 @@ $telepon = $dsql['nohp'];
                                     <h3 class="card-title">Data Peserta PKL / Magang</h3>
                                 </div>
                                 <div class="card-body">
-                                    <!--
+
                                     <form role="form" method="post" action="pkl-anggotatambah.php">
                                         <div class="form-group">
                                             NIM
@@ -100,16 +91,17 @@ $telepon = $dsql['nohp'];
                                             <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Tambah</button>
                                         </div>
                                     </form>
-                                    -->
+
                                     <div class="box">
                                         <div class="box-body">
                                             <table class="table table-bordered" id="tabel">
                                                 <thead>
                                                     <tr>
-                                                        <th>NO</th>
+                                                        <th width="5%">No.</th>
                                                         <th>NIM</th>
                                                         <th>NAMA</th>
                                                         <th>No Telepon</th>
+                                                        <th width="5%">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -118,20 +110,27 @@ $telepon = $dsql['nohp'];
                                                     $qcari = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimanggota = '$nim'");
                                                     $data = mysqli_num_rows($qcari);
                                                     if ($data == 0) {
-                                                        $qtambah = "INSERT into pklanggota (nimketua, nimanggota, nama, telepon) 
-																		values('$nim','$nim','$nama','$telepon')";
+                                                        $qtambah = "INSERT into pklanggota (nodata,nimketua, nimanggota, nama, telepon) 
+																		values('$nodata','$nim','$nim','$nama','$telepon')";
                                                         $sql =  mysqli_query($dbsurat, $qtambah);
                                                     }
                                                     ?>
                                                     <!--baca status -->
                                                     <?php
                                                     if (isset($_GET['ket'])) {
-                                                        $status = mysqli_real_escape_string($dbsurat, $_GET['ket']);
-                                                        if ($status == 'notfound') {
+                                                        $ket = mysqli_real_escape_string($dbsurat, $_GET['ket']);
+                                                        if ($ket == 'notfound') {
                                                     ?>
                                                             <div class="alert alert-danger alert-dismissible fade show">
                                                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                                 <strong>ERROR!</strong> Data tidak ditemukan.
+                                                            </div>
+                                                        <?php
+                                                        } elseif ($ket == 'used') {
+                                                        ?>
+                                                            <div class="alert alert-danger alert-dismissible fade show">
+                                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                                <strong>ERROR!</strong> Anggota sudah terdaftar pada kelompok lain.
                                                             </div>
                                                     <?php
                                                         }
@@ -152,6 +151,12 @@ $telepon = $dsql['nohp'];
                                                             <td><?= $nimanggota; ?></td>
                                                             <td><?= $nama; ?></td>
                                                             <td><?= $telepon; ?></td>
+                                                            <td>
+                                                                <form action="pkl-anggotahapus.php" method="POST">
+                                                                    <input type="hidden" name="id" value="<?= $id; ?>">
+                                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm ('Yakin menghapus anggota ini ?');"><i class="fa fa-trash"></i></button>
+                                                                </form>
+                                                            </td>
                                                         </tr>
                                                     <?php
                                                     }
@@ -161,7 +166,7 @@ $telepon = $dsql['nohp'];
                                             <div class="alert alert-warning alert-dismissible fade show">
                                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                 <strong>KETERANGAN : </strong><br />
-                                                Apabila no. telepon tidak tampil, silahkan melengkapi data pada menu user profile anda
+                                                Apabila no. telepon tidak tampil, silahkan melengkapi data pada menu user profile anda dan ulangi proses penambahan anggota kelompok
                                             </div>
                                         </div>
                                     </div>

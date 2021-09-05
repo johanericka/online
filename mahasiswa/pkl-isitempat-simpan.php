@@ -13,11 +13,12 @@ $alamat = mysqli_real_escape_string($dbsurat, $_POST['alamat']);
 $tglmulai = $_POST['tglmulai'];
 $tglselesai = $_POST['tglselesai'];
 $jenispkl = $_POST['jenispkl'];
+$pklmagang = $_POST['pklmagang'];
 
 
 //masukin data
-$stmt = $dbsurat->prepare("INSERT INTO pkl (tanggal, prodi, nim, nama, instansi, tempatpkl, alamat, tglmulai, tglselesai, jenispkl) VALUES (?,?,?,?,?,?,?,?,?,?)");
-$stmt->bind_param("ssssssssss", $tanggal, $prodi, $nim, $nama, $instansi, $tempatpkl, $alamat, $tglmulai, $tglselesai, $jenispkl);
+$stmt = $dbsurat->prepare("INSERT INTO pkl (tanggal, prodi, nim, nama, instansi, tempatpkl, alamat, tglmulai, tglselesai, pklmagang, jenispkl) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+$stmt->bind_param("sssssssssss", $tanggal, $prodi, $nim, $nama, $instansi, $tempatpkl, $alamat, $tglmulai, $tglselesai, $pklmagang, $jenispkl);
 $stmt->execute();
 
 $qpkl = mysqli_query($dbsurat, "SELECT * FROM pkl WHERE nim='$nim' and statussurat=-1");

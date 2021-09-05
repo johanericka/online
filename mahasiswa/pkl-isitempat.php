@@ -111,8 +111,19 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                                 </div>
                                             </div>
                                         </div>
+                                        <label>PKL / Magang</label>
+                                        <div class="form-group1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pklmagang" value="pkl" checked>
+                                                <label class="form-check-label">PKL</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pklmagang" value="magang">
+                                                <label class="form-check-label">Magang</label>
+                                            </div>
+                                        </div>
                                         <label>Jenis PKL</label>
-                                        <div class="form-group">
+                                        <div class="form-group2">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenispkl" value="Online" checked>
                                                 <label class="form-check-label">Online / Daring</label>
@@ -125,12 +136,12 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                         <div class="alert alert-warning alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                             <strong>KETERANGAN : </strong><br />
-                                            <b>PKL Online / Daring</b> dapat diajukan mulai sekarang<br />
-                                            <b>PKL Offline / Luring</b> dapat diajukan mulai sekarang namun tanggal pelaksanaan harus setelah tanggal 17 Agustus 2021 dengan mengunggah bukti vaksin (minimal tahap 1) dalam 1 file<br />
-                                            Bagi penyintas Covid-19 dapat mengganti bukti vaksin dengan <b>Swab Test</b> dengan hasil <b>POSITIF</b> (ketika terinfeksi Covid-19) dan <b>Swab Test</b> dengan hasil <b>NEGATIF</b> (setelah sembuh) dalam 1 file
+                                            <b>PKL Online / Daring</b> harus mengunggah pakta integritas (<a href="../doc/paktaintegritaspkl.docx">klik disini </a>) oleh ketua kelompok<br />
+                                            <b>PKL Offline / Luring</b> harus mengunggah pakta integritas (<a href="../doc/paktaintegritaspkl.docx">klik disini </a>) dan bukti vaksin (semua anggota kelompok) oleh ketua kelompok<br />
+                                            <i>Bagi penyintas Covid-19 dapat mengganti bukti vaksin dengan <b>Swab Test</b> dengan hasil <b>POSITIF</b> (ketika terinfeksi Covid-19) dan <b>Swab Test</b> dengan hasil <b>NEGATIF</b> (setelah sembuh) dalam 1 file</i>
                                         </div>
                                         <br />
-                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Upload Lampiran <i class="fa fa-arrow-right"></i></button>
+                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Tambah Anggota <i class="fa fa-arrow-right"></i></button>
                                     </form>
                                     <br />
                                 </div>

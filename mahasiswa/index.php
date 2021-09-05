@@ -287,11 +287,13 @@ if ($nohp == null or $email == null) {
 										$tglvalidasi3 = $q['tglvalidasi3'];
 										$keterangan = $q['keterangan'];
 										$statussurat = $q['statussurat'];
+										$pklmagang = $q['pklmagang'];
 									?>
 
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td>Surat Pengantar PKL <br />
+											<td>Surat Pengantar <?= $pklmagang; ?> <br />
+												Ketua <?= $namaketua; ?>
 											</td>
 											<td>
 												<?php
@@ -313,7 +315,7 @@ if ($nohp == null or $email == null) {
 													<?php
 													} else {
 													?>
-														Ditolak Dosen Koordinator PKL <?= namadosen($dbsurat, $validatovalidator1rkoor); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
+														Ditolak Dosen Koordinator PKL <?= namadosen($dbsurat, $validator1); ?> dengan alasan <b style="color:red"><?= $keterangan; ?></b><br />
 													<?php
 													};
 													?>
@@ -1020,7 +1022,7 @@ if ($nohp == null or $email == null) {
 
 									<!-- SKPI -->
 									<?php
-									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim' GROUP BY nim");
+									$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE nim = '$nim'");
 									while ($q = mysqli_fetch_array($query)) {
 										$nodata = $q['no'];
 										$verifikasi1 = $q['verifikasi1'];

@@ -131,7 +131,7 @@ if ($nohp == null or $email == null) {
 													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
-													$surat = 'Pengantar PKL / Magang';
+													$surat = $data['pklmagang'];
 													$validasi1 = $data['validasi1'];
 													$validasi2 = $data['validasi2'];
 													$validasi3 = $data['validasi3'];
@@ -141,7 +141,7 @@ if ($nohp == null or $email == null) {
 														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
-														<td><?= $surat; ?></td>
+														<td><?= 'Surat Pengantar ' . $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pkl-koor-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -163,7 +163,7 @@ if ($nohp == null or $email == null) {
 													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
-													$surat = 'Pengantar PKL / Magang';
+													$surat = $data['pklmagang'];
 													$validasi1 = $data['validasi1'];
 													$validasi2 = $data['validasi2'];
 													$validasi3 = $data['validasi3'];
@@ -173,7 +173,7 @@ if ($nohp == null or $email == null) {
 														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
-														<td><?= $surat; ?></td>
+														<td><?= 'Surat Pengantar ' . $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pkl-kaprodi-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -195,7 +195,7 @@ if ($nohp == null or $email == null) {
 													$tanggal = $data['tanggal'];
 													$prodimhs = $data['prodi'];
 													$nama = $data['nama'];
-													$surat = 'Pengantar PKL / Magang';
+													$surat = $data['pklmagang'];
 													$validasi1 = $data['validasi1'];
 													$validasi2 = $data['validasi2'];
 													$validasi3 = $data['validasi3'];
@@ -205,7 +205,7 @@ if ($nohp == null or $email == null) {
 														<td><?= tgljam_indo($tanggal); ?></td>
 														<td><?= $prodimhs; ?></td>
 														<td><?= $nama; ?></td>
-														<td><?= $surat; ?></td>
+														<td><?= 'Surat Pengantar ' . $surat; ?></td>
 														<td>
 															<a class="btn btn-info btn-sm" href="pkl-wd-tampil.php?nodata=<?php echo $nodata; ?>">
 																<i class="fas fa-search"></i> Lihat
@@ -840,7 +840,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as Dosen PA -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip'AND verifikasi1=0 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator1='$nip' AND verifikasi1='0'");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -875,7 +875,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as kaprodi -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator2='$nip'AND verifikasi2=0 AND verifikasi1=1");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {
@@ -910,7 +910,7 @@ if ($nohp == null or $email == null) {
 
 												<!-- SKPI as WD -->
 												<?php
-												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1 GROUP BY nim");
+												$query = mysqli_query($dbsurat, "SELECT * FROM skpi_prestasipenghargaan WHERE verifikator3='$nip'AND verifikasi3=0 AND verifikasi2=1");
 												$jdata = mysqli_num_rows($query);
 												if ($jdata > 0) {
 													while ($data = mysqli_fetch_array($query)) {

@@ -36,6 +36,7 @@ $tglvalidasi3 = $rowsurat['tglvalidasi3'];
 $validator3 = $rowsurat['validator3'];
 $validasi3 = $rowsurat['validasi3'];
 $tglsurat = date('Y-m-d', strtotime($tglvalidasi3));
+$pklmagang = $rowsurat['pklmagang'];
 
 //data koordinator PKL jurusan
 $datakoor = mysqli_query($dbsurat, "SELECT nama FROM pejabat WHERE nip='$idkoordinator'");
@@ -87,7 +88,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			<tr>
 				<td>&nbsp;</td>
 				<td>Hal </td>
-				<td>: Izin PKL / Magang</td>
+				<td>: Izin <?= $pklmagang; ?></td>
 				<td></td>
 				<td>&nbsp;</td>
 			</tr>
@@ -118,7 +119,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td colspan="3">Sehubungan dengan persiapan pelaksanaan Praktek Kerja Lapangan (PKL) / Magang Mahasiswa Program Studi <?= $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, maka dengan ini kami mengajukan permohonan untuk menerima penempatan mahasiswa kami di <?php echo $instansi; ?> pada <?php echo $tempatpkl ?> dengan waktu pelaksanaan mulai tanggal <?php echo tgl_indo($tglmulai); ?> sampai dengan tanggal <?php echo tgl_indo($tglselesai); ?>. </td>
+				<td colspan="3" align="justify">Sehubungan dengan persiapan pelaksanaan <?= $pklmagang; ?> Mahasiswa Program Studi <?= $prodi; ?> Fakultas Sains dan Teknologi UIN Maulana Malik Ibrahim Malang, maka dengan ini kami mengajukan permohonan untuk menerima penempatan mahasiswa kami di <?php echo $instansi; ?> pada <?php echo $tempatpkl ?> dengan waktu pelaksanaan mulai tanggal <?php echo tgl_indo($tglmulai); ?> sampai dengan tanggal <?php echo tgl_indo($tglselesai); ?>. </td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
@@ -164,7 +165,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 		<tbody>
 			<tr>
 				<td>&nbsp;</td>
-				<td colspan="3">Koordinator PKL / Magang Program Studi <?= $prodi ?> <?= $koordinator; ?></td>
+				<td colspan="3">Koordinator <?= $pklmagang; ?> Program Studi <?= $prodi ?> <?= $koordinator; ?></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
@@ -217,7 +218,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", "L", 4, 4);
 				?>
 					<td style="text-align:center"><br />
 						<!--<?= $jabatan; ?><br />-->
-						<img src="../ttd/<?= $ttd; ?>" width="300" /><br />
+						<img src="../ttd/<?= $ttd; ?>" width="350" /><br />
 						<!--<u><?= $namawd; ?></u><br />
 						NIP. <?= $nipwd; ?>-->
 					</td>
