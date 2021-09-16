@@ -166,14 +166,6 @@ require('../system/myfunc.php');
                                                 $data2 = mysqli_fetch_array($query2);
                                                 $kapasitas = $data2['kapasitas'];
                                                 ?>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <label>Laboratorium </label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <!--<p style="color:red">Kapasitas Lab. <?= //$namalab; ?> saat ini <?= //$kapasitas; ?> </p>-->
-                                                    </div>
-                                                </div>
                                                 <input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
                                                 <label>Dosen Pembimbing</label><br />
                                                 <input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
@@ -265,7 +257,6 @@ require('../system/myfunc.php');
                                                 </div>
                                                 <hr>
                                                 Keterangan : <br />
-                                                <p style="color:red;">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
                                                 Telah disetujui oleh Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> pada <?= tgljam_indo($tglvalidasi0); ?><br />
                                                 Telah disetujui oleh Kepala Lab. <?= $namalab; ?> <?= namadosen($dbsurat, $validator1); ?> pada <?= tgljam_indo($tglvalidasi1); ?><br />
                                                 Telah disetujui oleh Ketua Program Studi <?= $prodi; ?> <?= namadosen($dbsurat, $validator2); ?> pada <?= tgljam_indo($tglvalidasi2); ?>

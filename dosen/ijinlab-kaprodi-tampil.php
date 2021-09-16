@@ -267,7 +267,6 @@ require('../system/myfunc.php');
                                                 </div>
                                                 <hr>
                                                 Keterangan : <br />
-                                                <!--<p style="color:red;">Kapasitas Lab. <?= //$namalab; ?> saat ini <?= //$kapasitas; ?> </p>-->
                                                 Telah disetujui oleh Dosen Pembimbing <?= namadosen($dbsurat, $validator0); ?> pada <?= tgljam_indo($tglvalidasi0); ?><br />
                                                 Telah disetujui oleh Kepala Lab. <?= $namalab; ?> <?= namadosen($dbsurat, $validator1); ?> pada <?= tgljam_indo($tglvalidasi1); ?>
                                                 <hr>

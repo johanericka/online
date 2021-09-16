@@ -175,7 +175,6 @@ require('../system/myfunc.php');
 												?>
 												<label>Laboratorium </label>
 												<input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
-												<!--<p style="color:red">Kapasitas Lab. <?= //$namalab; ?> saat ini <?= //$kapasitas; ?> </p>-->
 												<label>Dosen Pembimbing</label><br />
 												<input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
 												<label>Waktu Penggunaan</label>
