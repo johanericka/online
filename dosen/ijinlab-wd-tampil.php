@@ -171,7 +171,7 @@ require('../system/myfunc.php');
                                                         <label>Laboratorium </label>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <p style="color:red">Kapasitas Lab. <?= $namalab; ?> saat ini <?= $kapasitas; ?> </p>
+                                                        <!--<p style="color:red">Kapasitas Lab. <?= //$namalab; ?> saat ini <?= //$kapasitas; ?> </p>-->
                                                     </div>
                                                 </div>
                                                 <input type="text" class="form-control" name="namalab" value="<?php echo $namalab; ?>" readonly></input>
