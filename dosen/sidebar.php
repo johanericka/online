@@ -177,32 +177,52 @@ require('../system/dbconn.php');
                 <?php
                 if ($nip == '198312132019031004') {
                 ?>
-                    <li class="nav-item">
-                        <a href="pejabat-tampil.php" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                    <li class="nav-item has-treeview menu-close">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-lock"></i>
                             <p>
-                                Manajemen Pejabat
-                                <span class="right badge badge-danger"></span>
+                                Menu admin
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="kontrolmenu-tampil.php" class="nav-link">
-                            <i class="nav-icon fas fa-envelope"></i>
-                            <p>
-                                Menu Persuratan
-                                <span class="right badge badge-danger"></span>
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="lab-cekkapasitas2.php" class="nav-link">
-                            <i class="nav-icon fas fa-flask"></i>
-                            <p>
-                                Kontrol Kapasitas Lab.
-                                <span class="right badge badge-danger"></span>
-                            </p>
-                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="pejabat-tampil.php" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Manajemen Pejabat
+                                        <span class="right badge badge-danger"></span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="lab-cekkapasitas2.php" class="nav-link">
+                                    <i class="nav-icon fas fa-flask"></i>
+                                    <p>
+                                        Kontrol Kapasitas Lab.
+                                        <span class="right badge badge-danger"></span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="kontrolmenu-tampil.php" class="nav-link">
+                                    <i class="nav-icon fas fa-envelope"></i>
+                                    <p>
+                                        Menu Persuratan
+                                        <span class="right badge badge-danger"></span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="loginas.php" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Login As
+                                        <span class="right badge badge-danger"></span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 <?php
                 }
