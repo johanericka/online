@@ -81,7 +81,12 @@ require('../system/myfunc.php');
                                 <div class="card-body p-0">
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-hover">
+                                        <form action="loginas.php" method="POST">
+                                            <label>NIP / NIM / Nama</label>
+                                            <input type="text" class="form-control" name="nipnimnama">
+                                            <input type="submit" class="btn btn-success btn-block">
+                                        </form>
+                                        <table class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
                                                     <th width="5%" style="text-align:center">No</th>
@@ -94,30 +99,33 @@ require('../system/myfunc.php');
                                             <tbody>
                                                 <!-- Daftar Pengguna-->
                                                 <?php
-                                                $query = mysqli_query($dbsurat, "SELECT * FROM pengguna ORDER BY nip,prodi");
-                                                $jmldata = mysqli_num_rows($query);
-                                                while ($data = mysqli_fetch_array($query)) {
-                                                    $nodata = $data['no'];
-                                                    $nip = $data['nip'];
-                                                    $nama = $data['nama'];
-                                                    $prodi = $data['prodi'];
-                                                    $user = $data['user'];
-                                                    $pass = $data['pass'];
+                                                $nipnimnama = $_POST['nipnimnama'];
+                                                if (isset($nipnimnama)) {
+                                                    $query = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE nip like '%$nipnimnama%' OR nama like '%$nipnimnama%' ORDER BY nip,nama");
+                                                    $jmldata = mysqli_num_rows($query);
+                                                    while ($data = mysqli_fetch_array($query)) {
+                                                        $nodata = $data['no'];
+                                                        $nip = $data['nip'];
+                                                        $nama = $data['nama'];
+                                                        $prodi = $data['prodi'];
+                                                        $user = $data['user'];
+                                                        $pass = $data['pass'];
                                                 ?>
-                                                    <tr>
-                                                        <td><?= $no; ?></td>
-                                                        <td><?= $nip; ?></td>
-                                                        <td><?= $nama; ?></td>
-                                                        <td><?= $prodi; ?></td>
-                                                        <td>
-                                                            <form action="../auth.php" method="POST">
-                                                                <input type="hidden" name="username" value="<?= $user; ?>">
-                                                                <input type="hidden" name="password" value="<?= $pass; ?>">
-                                                                <input type="submit" class="btn btn-danger btn-sm" value="Log In" name="loginas" onclick="return confirm ('Login As <?= $nama; ?> ?');">
-                                                            </form>
-                                                        </td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td><?= $no; ?></td>
+                                                            <td><?= $nip; ?></td>
+                                                            <td><?= $nama; ?></td>
+                                                            <td><?= $prodi; ?></td>
+                                                            <td>
+                                                                <form action="../auth.php" method="POST">
+                                                                    <input type="hidden" name="username" value="<?= $user; ?>">
+                                                                    <input type="hidden" name="password" value="<?= $pass; ?>">
+                                                                    <input type="submit" class="btn btn-danger btn-sm" value="Log In" name="loginas" onclick="return confirm ('Login As <?= $nama; ?> ?');">
+                                                                </form>
+                                                            </td>
+                                                        </tr>
                                                 <?php
+                                                    }
                                                     $no++;
                                                 }
                                                 ?>
