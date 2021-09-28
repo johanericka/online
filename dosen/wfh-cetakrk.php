@@ -63,12 +63,18 @@ $jabatankajur = $row['kdjabatan'];
 //buat qrcode
 include "../system/phpqrcode/qrlib.php";
 $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-//echo $actual_link;
 $codeContents = $actual_link;
 $tgl = date('Y-m-d');
 $jam = date('H-m-s');
 $namafile = $nip . "_" . $tgl . "_" . $jam;
+$ttdkaprodi = $nip . "-WFH-" . $nodata;
 QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
+
+//buat qrcode ttd
+$ttd = "https://$_SERVER[HTTP_HOST]/online/dosen/wfh-ttd.php?nodata=$nodata";
+$codeContents2 = $ttd;
+$ttdkaprodi = $nip . "-WFH-" . $nodata;
+QRcode::png($codeContents2, "../qrcode/$ttdkaprodi.png", 'L', 4, 4);
 ?>
 
 <table table style="width:80%; margin-left:auto;margin-right:auto;" cellspacing="0" border="0">
@@ -284,7 +290,7 @@ QRcode::png($codeContents, "../qrcode/$namafile.png", 'L', 4, 4);
 						$ttd = $hasil['ttd'];
 					?>
 						Ketua Program Studi <?= ucwords($prodi); ?>,<br />
-						<img src="../ttd/<?= $ttd; ?>" width="70" /><br />
+						<img src="../qrcode/<?= $ttdkaprodi; ?>.png" width="70" /><br />
 						<u><?= $namakajur; ?></u><br />
 						NIP. <?= $nipkajur; ?>
 					<?php
