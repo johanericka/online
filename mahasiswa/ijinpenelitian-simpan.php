@@ -17,10 +17,12 @@ $tglmulai = $_POST['tglmulai'];
 $tglselesai = $_POST['tglselesai'];
 
 //hitung jumlah hari
+/*
 $jmlhari = (strtotime($tglselesai) - strtotime($tglmulai)) / 60 / 60 / 24;
 if ($jmlhari > 30) {
     $tglselesai = date('Y-m-d', strtotime($tglmulai . " +1 month"));
 }
+*/
 
 //cari nip dosen
 $stmt = $dbsurat->prepare("SELECT * FROM pengguna WHERE nama=?");

@@ -79,13 +79,13 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 								</div>
 								<div class="card-body">
 									<form role="form" method="post" action="ijinpenelitian-simpan.php">
-										Nama <br />
+										<label>Nama</label>
 										<input type="text" class="form-control" name="nama" value="<?php echo $nama ?>" readonly /></input>
-										NIM <br />
+										<label>NIM</label>
 										<input type="text" class="form-control" name="nim" value="<?php echo $nim ?>" readonly /></input>
-										Judul Skripsi / penelitian <br />
+										<label>Judul Skripsi / penelitian</label>
 										<input type="text" class="form-control" name="judulskripsi" placeholder="judul skripsi / penelitian" required></input>
-										Dosen Pembimbing <br />
+										<label>Dosen Pembimbing</label>
 										<small><i>(pilih dari nama dosen yang tampil)</i></small><br />
 										<div class="form-group">
 											<div class="search-box">
@@ -98,19 +98,17 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
 										<label>Alamat</label>
 										<input type="text" class="form-control" name="alamat" placeholder="alamat instansi" required></input>
 										<label>Tanggal pelaksanaan</label>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-6">
-													Tgl. Mulai
-													<input type="date" id="tglmulai" name="tglmulai" value="<?= $tglmulai; ?>" required>
-												</div>
-												<div class="col-6">
-													Tgl. Selesai
-													<input type="date" id="tglselesai" name="tglselesai" value="<?= $tglselesai; ?>" required>
-												</div>
+										<div class="row">
+											<div class="col-6">
+												Tgl. Mulai
+												<input type="date" id="tglmulai" name="tglmulai" value="<?= $tglmulai; ?>" required>
 											</div>
-											<small style="color:red"><i>Maksimal 1 bulan </i></small>
+											<div class="col-6">
+												Tgl. Selesai
+												<input type="date" id="tglselesai" name="tglselesai" value="<?= $tglselesai; ?>" required>
+											</div>
 										</div>
+										<br />
 										<button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-check"></i> Ajukan</button>
 									</form>
 								</div>
