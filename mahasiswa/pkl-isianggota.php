@@ -170,7 +170,7 @@ $telepon = $dsql['nohp'];
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="pkl-isilampiran.php?nodata=<?= $nodata; ?>" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Isi Lampiran <i class="fa fa-arrow-right"></i></a>
+                                    <a href="pkl-isilampiran.php?nodata=<?= $nodata; ?>" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-file"></i> Isi Lampiran <i class="fa fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>

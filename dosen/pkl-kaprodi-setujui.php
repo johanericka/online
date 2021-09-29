@@ -26,7 +26,7 @@ $namawadek3 = $dsql3['nama'];
 $emailwadek3 = $dsql3['email'];
 
 //kirim email
-$subject = "Pengajuan Ijin WFH";
+$subject = "Pengajuan Pengantar PKL / Magang";
 $pesan = "Yth. " . $namawadek3 . "<br/>
         <br/>
 		Assalamualaikum wr. wb.

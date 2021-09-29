@@ -141,7 +141,7 @@ $hakakses = mysqli_real_escape_string($dbsurat, $_SESSION['hakakses']);
                                             <i>Bagi penyintas Covid-19 dapat mengganti bukti vaksin dengan <b>Swab Test</b> dengan hasil <b>POSITIF</b> (ketika terinfeksi Covid-19) dan <b>Swab Test</b> dengan hasil <b>NEGATIF</b> (setelah sembuh) dalam 1 file</i>
                                         </div>
                                         <br />
-                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-arrow-right"></i> Tambah Anggota <i class="fa fa-arrow-right"></i></button>
+                                        <button type="submit" class="btn btn-success btn-block" onclick="return confirm('Dengan ini saya menyatakan bahwa data yang saya isi adalah benar')"> <i class="fa fa-users"></i> Anggota Kelompok <i class="fa fa-arrow-right"></i></button>
                                     </form>
                                     <br />
                                 </div>

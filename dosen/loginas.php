@@ -6,8 +6,8 @@ $nama = $_SESSION['nama'];
 $prodi = $_SESSION['prodi'];
 $hakakses = $_SESSION['hakakses'];
 $jabatan = $_SESSION['jabatan'];
-if ($_SESSION['nip'] != "198312132019031004") {
-    //header("location:../deauth.php");
+if ($nip != "198312132019031004") {
+    header("location:../deauth.php");
 }
 require('../system/dbconn.php');
 require('../system/myfunc.php');

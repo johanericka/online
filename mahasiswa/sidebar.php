@@ -152,7 +152,7 @@ require('../system/dbconn.php');
                             <li class="nav-item">
                                 <a href="pkl-isitempat.php" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
-                                    <p>Surat Pengantar PKL</p>
+                                    <p>Pengantar PKL / Magang</p>
                                 </a>
                             </li>
                         <?php

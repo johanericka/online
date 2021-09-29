@@ -141,10 +141,6 @@ require('../system/myfunc.php');
                                         $namafile = $lampiran;
                                     }
                                     ?>
-                                    <label>Pakta Integritas</label>
-                                    <br />
-                                    <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid" width="50%"></img></a>
-                                    <br />
                                     <!-- tabel lampiran -->
                                     <div class="container-fluid">
                                         <div class="row">
@@ -153,15 +149,29 @@ require('../system/myfunc.php');
                                                     <tr>
                                                         <th width="5%">No.</th>
                                                         <th width="10%">NIM</th>
-                                                        <th width="35%">NAMA</th>
-                                                        <th>Bukti Vaksin</th>
+                                                        <th width="25%">NAMA</th>
+                                                        <th width="20%">LAMPIRAN</th>
+                                                        <th>FILE</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <!-- tabel anggota -->
+                                                    <?php $no = 1; ?>
+                                                    <!-- tampilkan pakta Integritas -->
+                                                    <tr>
+                                                        <td><?= $no++; ?></td>
+                                                        <?php $id; ?>
+                                                        <td><?= $nim; ?></td>
+                                                        <td><?= $nama; ?></td>
+                                                        <td>Pakta Integritas</td>
+                                                        <td>
+                                                            <a href="../img/<?= $namafile; ?>" target="_blank"><img src="../img/<?= $namafile; ?>" class="img-fluid" width="50%"></img></a>
+                                                            <br />
+                                                            <small style="color: red;">Klik pada gambar untuk memperbesar</small>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- tampilkan bukti vaksin -->
                                                     <?php
                                                     $dataanggota = mysqli_query($dbsurat, "SELECT * FROM pklanggota WHERE nimketua='$nim'");
-                                                    $no = 1;
                                                     while ($q = mysqli_fetch_array($dataanggota)) {
                                                         $id = $q['id'];
                                                         $nimanggota = $q['nimanggota'];
@@ -180,14 +190,18 @@ require('../system/myfunc.php');
                                                             <?php $id; ?>
                                                             <td><?= $nimanggota; ?></td>
                                                             <td><?= $nama; ?></td>
-                                                            <td><a href="../img/<?= $namafile2; ?>" target="_blank"><img src="../img/<?= $namafile2; ?>" class="img-fluid" width="20%"></img></a></td>
+                                                            <td>Bukti Vaksin</td>
+                                                            <td>
+                                                                <a href="../img/<?= $namafile2; ?>" target="_blank"><img src="../img/<?= $namafile2; ?>" class="img-fluid" width="50%"></img></a>
+                                                                <br />
+                                                                <small style="color: red;">Klik pada gambar untuk memperbesar</small>
+                                                            </td>
                                                         </tr>
                                                     <?php
                                                     }
                                                     ?>
                                                 </tbody>
                                             </table>
-                                            <small>Klik pada gambar untuk memperbesar</small>
                                         </div>
                                     </div>
                                     <hr>

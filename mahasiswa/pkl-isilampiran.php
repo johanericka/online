@@ -62,16 +62,16 @@ $nodata = mysqli_real_escape_string($dbsurat, $_GET['nodata']);
                     <div class="row mb-2">
                         <div class="col-sm-12">
                             <h3>Pengajuan Surat Pengantar PKL / Magang</h3>
-                            <!--
-							<div class="alert alert-warning alert-dismissible fade show">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<strong>PERHATIAN!!</strong> Cukup ketua kelompok yang mengajukan
-							</div>
-							-->
                         </div>
-
                     </div>
-                </div><!-- /.container-fluid -->
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>KETERANGAN : </strong><br />
+                        <b>PKL Online / Daring</b> harus mengunggah pakta integritas (<a href="../doc/paktaintegritaspkl.docx">klik disini </a>) oleh ketua kelompok<br />
+                        <b>PKL Offline / Luring</b> harus mengunggah pakta integritas (<a href="../doc/paktaintegritaspkl.docx">klik disini </a>) dan bukti vaksin (semua anggota kelompok) oleh ketua kelompok<br />
+                        <i>Bagi penyintas Covid-19 dapat mengganti bukti vaksin dengan <b>Swab Test</b> dengan hasil <b>POSITIF</b> (ketika terinfeksi Covid-19) dan <b>Swab Test</b> dengan hasil <b>NEGATIF</b> (setelah sembuh) dalam 1 file</i>
+                    </div>
+                </div>
             </section>
 
             <!-- Main content -->
@@ -312,14 +312,5 @@ if (isset($_GET['error'])) {
     }
 }
 ?>
-
-<!-- timer untuk alert -->
-<script>
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 1000);
-</script>
 
 </html>
