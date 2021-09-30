@@ -90,6 +90,105 @@ if ($nohp == null or $email == null) {
 				}
 			}
 			?>
+
+			<!-- verifikasi pengguna baru -->
+			<?php if ($nip == '198312132019031004') { ?>
+				<section class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<!-- Default box -->
+								<div class="card card-danger">
+									<div class="card-header">
+										<h3 class="card-title">Pendaftaran Akun baru </h3>
+										<!-- card minimize -->
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+										</div>
+									</div>
+									<!-- /.card-header -->
+									<?php $no = 1; ?>
+									<div class="card-body p-0">
+										<!-- /.card-header -->
+										<div class="card-body">
+											<table class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th width="5%" style="text-align:center">No</th>
+														<th width="20%" style="text-align:center">PRODI</th>
+														<th style="text-align:center">Nama</th>
+														<th style="text-align:center">NIM</th>
+														<th width="15%" colspan="2" style="text-align:center">Aksi</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- pendaftar baru-->
+													<?php
+													$query = mysqli_query($dbsurat, "SELECT * FROM pengguna WHERE aktif=0");
+													$jmldata = mysqli_num_rows($query);
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$prodi = $data['prodi'];
+														$nim = $data['nip'];
+														$nama = $data['nama'];
+													?>
+														<tr>
+															<td><?= $no; ?></td>
+															<td><?= $prodi; ?></td>
+															<td><?= $nama; ?></td>
+															<td><?= $nim; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="pengguna-tampil.php?nodata=<?= $nodata; ?>">
+																	<i class="fas fa-search"></i>Lihat
+																</a>
+															</td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+													<!-- /verifikasi WFH as kajur-->
+
+													<!-- verifikasi WFH as WD-->
+													<?php
+													$query = mysqli_query($dbsurat, "SELECT * FROM wfh WHERE verifikatorfakultas='$nip' and verifikasifakultas=0 and verifikasiprodi=1");
+													$jmldata = mysqli_num_rows($query);
+													while ($data = mysqli_fetch_array($query)) {
+														$nodata = $data['no'];
+														$prodistaf = $data['prodi'];
+														$nipstaf = $data['nip'];
+														$namastaf = $data['nama'];
+														$verifikasiprodi = $data['verifikasiprodi'];
+														$verifikasifakultas = $data['verifikasifakultas'];
+														$surat = 'Ijin WFH';
+													?>
+														<tr>
+															<td><?= $no; ?></td>
+															<td><?= $prodistaf; ?></td>
+															<td><?= $namastaf; ?></td>
+															<td><?= $surat; ?></td>
+															<td>
+																<a class="btn btn-info btn-sm" href="wfh-wd-tampil.php?nodata=<?= $nodata; ?>">
+																	<i class="fas fa-search"></i> Lihat
+																</a>
+															</td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+													<!-- /verifikasi WFH as WD-->
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			<?php }; ?>
+
 			<!-- pengajuan surat mahasiswa -->
 			<section class="content">
 				<div class="container-fluid">
