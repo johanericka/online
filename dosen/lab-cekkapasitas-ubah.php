@@ -16,4 +16,4 @@ $nipkalab = $dhasil['nip'];
 
 //update data kapasitas lab 	
 $query1 = mysqli_query($dbsurat, "UPDATE laboratorium SET kapasitas = '$kapasitas', kalab='$nipkalab' WHERE no = '$nodata'");
-header("location:lab-cekkapasitas.php");
+header("location:lab-cekkapasitas2.php");
