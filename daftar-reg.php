@@ -50,7 +50,7 @@ if ($kunci == $jawaban) {
         <b>SAINTEK Online</b>";
         sendmail($email, $nama, $subject, $pesan);
 
-        /*
+
         //kirim email admin
         $namaadmin = 'Admin SAINTEK Online';
         $emailadmin = 'saintekonline@gmail.com';
@@ -69,7 +69,7 @@ if ($kunci == $jawaban) {
         <br/>
         <b>SAINTEK Online</b>";
         sendmail($emailadmin, $namaadmin, $subject, $pesan);
-        */
+
         header("location:index.php?pesan=success");
     }
 }
