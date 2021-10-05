@@ -181,16 +181,21 @@ require('../system/myfunc.php');
                                                 <label>Dosen Pembimbing</label><br />
                                                 <input type="text" class="form-control" name="nohp" value="<?php echo $dosen; ?>" readonly></input>
                                                 <label>Waktu Penggunaan</label>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        Tanggal Mulai<br />
-                                                        <input type="date" class="form-control" id="tglmulai" name="tglmulai" value="<?= $tglmulai; ?>"></input>
+                                                <form action="ijinlab-kalab-penggunalab-perpanjangan.php" method="POST">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            Tanggal Mulai<br />
+                                                            <input type="date" class="form-control" id="tglmulai" name="tglmulai" value="<?= $tglmulai; ?>"></input>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            Tanggal Selesai<br />
+                                                            <input type="date" class="form-control" id="tglselesai" name="tglselesai" value="<?= $tglselesai; ?>"></input>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        Tanggal Selesai<br />
-                                                        <input type="date" class="form-control" id="tglselesai" name="tglselesai" value="<?= $tglselesai; ?>"></input>
-                                                    </div>
-                                                </div>
+                                                    <input type="hidden" name="nodata" value="<?= $nodata; ?>">
+                                                    <br />
+                                                    <button name="aksi" value="perpanjangan" type="submit" class="btn btn-warning btn-block" onclick="return confirm('Yakin mengubah waktu penelitian ini ?')"> <i class="fa fa-clock"></i> UBAH TANGGAL</button>
+                                                </form>
                                                 <br />
                                                 <label>Lampiran</label> <br />
                                                 <small style="color:red">Klik pada gambar untuk memperbesar</small>
